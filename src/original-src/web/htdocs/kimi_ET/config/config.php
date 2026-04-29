@@ -1,7 +1,7 @@
 <?php
-define("CONF_MYSQL_SERVER", "localhost");
+define("CONF_MYSQL_SERVER", "db");
 define("CONF_MYSQL_USER", "sql_kimi_et");
-define("CONF_MYSQL_PASSWORD", "NS889Hs4bhL1aub7HyEH6AjdYpYAlx");
+define("CONF_MYSQL_PASSWORD", "password");
 define("CONF_MYSQL_DB", "kimi_et");
 define("CONF_PORTAL_MENU_COLUMNS", 5);
 define("CONF_PORTAL_LINE_PER_SITE", 20);
@@ -33,9 +33,9 @@ define("CONF_SKBUCH_ENABLE_BTN_NRATE", "8888");
 define("CONF_SKBUCH_ENABLE_BTN_MAHNGEB", "4234,4270,4235,4242,4244,7000,2255,4770,4237");
 
 //20140420 - Verbindung zum Archiv
-define("CONF_MYSQL_SERVER_ARCHIV", "localhost");
+define("CONF_MYSQL_SERVER_ARCHIV", "db");
 define("CONF_MYSQL_USER_ARCHIV", "kimi");
-define("CONF_MYSQL_PASSWORD_ARCHIV", "KimiPlus@13");
+define("CONF_MYSQL_PASSWORD_ARCHIV", "password");
 define("CONF_MYSQL_DB_ARCHIV", "kimi_archiv");
 
 // Akte 

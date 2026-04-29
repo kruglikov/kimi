@@ -1,0 +1,35 @@
+version: '3.8'
+
+services:
+  db:
+    image: mariadb:10.5
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: kimi_et
+      MYSQL_USER: sql_kimi_et
+      MYSQL_PASSWORD: password
+    volumes:
+      - db_data:/var/lib/mysql
+      - ./src/original-src/docker/mariadb/init:/docker-entrypoint-initdb.d
+    ports:
+      - "3306:3306"
+    healthcheck:
+      test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  web:
+    build: ./src/original-src/docker/php
+    restart: unless-stopped
+    ports:
+      - "8080:80"
+    volumes:
+      - ./src/original-src/web/htdocs:/var/www/html
+    depends_on:
+      db:
+        condition: service_healthy
+
+volumes:
+  db_data:
