@@ -1,0 +1,120 @@
+TICKET_SERVICE_EMAIL 20220212122256: Ticket-ID=, TicketNr=, HauptticketNr=, Parameter=;;zahlungshilfe@sberbank-collections.de;zahlungshilfe@sberbank-collections.de
+TICKET_SERVICE_EMAIL 20220212122449: Ticket-ID=kontaktid, TicketNr=, HauptticketNr=, Parameter=aktnr;ueberfaelligeraussenstand;zahlungshilfe@sberbank-collections.de;zahlungshilfe@sberbank-collections.de
+TICKET_SERVICE_EMAIL 20220212122449: Ticket-ID=1408856, TicketNr=189002, HauptticketNr=189000, Parameter='49-9-1234567890-550;453.07;zahlungshilfe@sberbank-collections.de;zahlungshilfe@sberbank-collections.de
+TICKET_SERVICE_EMAIL 20220212122449: Ticket-ID=1408857, TicketNr=190002, HauptticketNr=190000, Parameter='49-9-1234567890-552;414.45;zahlungshilfe@sberbank-collections.de;zahlungshilfe@sberbank-collections.de
+TICKET_SERVICE_EMAIL 20220212122449: Ticket-ID=1408858, TicketNr=191002, HauptticketNr=191000, Parameter='49-9-1234567890-553;345.99;zahlungshilfe@sberbank-collections.de;zahlungshilfe@sberbank-collections.de
+TICKET_SERVICE_EMAIL 20220212130122: Ticket-ID=kontaktid, TicketNr=, HauptticketNr=, Parameter=aktnr;ueberfaelligeraussenstand;zahlungshilfe@sberbank-collections.de;zahlungshilfe@sberbank-collections.de
+TICKET_SERVICE_EMAIL 20220212130122: Ticket-ID=1408856, TicketNr=189002, HauptticketNr=189000, Parameter='49-9-1234567890-550;453.07;zahlungshilfe@sberbank-collections.de;zahlungshilfe@sberbank-collections.de
+TICKET_SERVICE_EMAIL 20220212130122: Ticket-ID=1408857, TicketNr=190002, HauptticketNr=190000, Parameter='49-9-1234567890-552;414.45;zahlungshilfe@sberbank-collections.de;zahlungshilfe@sberbank-collections.de
+TICKET_SERVICE_EMAIL 20220212130122: Ticket-ID=1408858, TicketNr=191002, HauptticketNr=191000, Parameter='49-9-1234567890-553;345.99;zahlungshilfe@sberbank-collections.de;zahlungshilfe@sberbank-collections.de
+TICKET_SERVICE_EMAIL 20220212131548: Ticket-ID=kontaktid, TicketNr=, HauptticketNr=, Parameter=aktnr;ueberfaelligeraussenstand;email;;anrede;nachname;nachname
+TICKET_SERVICE_EMAIL 20220212131548: Ticket-ID=1408856, TicketNr=189002, HauptticketNr=189000, Parameter='49-9-1234567890-550;453.07;test@nomail.de;;Frau;Female Test;Female Test
+TICKET_SERVICE_EMAIL 20220212131548: Ticket-ID=1408857, TicketNr=190002, HauptticketNr=190000, Parameter='49-9-1234567890-552;414.45;test@nomail.de;;Herr;Male Test;Male Test
+TICKET_SERVICE_EMAIL 20220212131548: Ticket-ID=1408858, TicketNr=191002, HauptticketNr=191000, Parameter='49-9-1234567890-553;345.99;test@nomail.de;;Herr / Frau;Male Test Female Test;Male Test Female Test
+TICKET_SERVICE_EMAIL 20220212131844: Ticket-ID=kontaktid, TicketNr=, HauptticketNr=, Parameter=aktnr;ueberfaelligeraussenstand;email;;anrede;nachname;nachname
+TICKET_SERVICE_EMAIL 20220212131844: Ticket-ID=1408856, TicketNr=189002, HauptticketNr=189000, Parameter='49-9-1234567890-550;453.07;test@nomail.de;;Frau;Female Test;Female Test
+TICKET_SERVICE_EMAIL 20220212131844: Ticket-ID=1408857, TicketNr=190002, HauptticketNr=190000, Parameter='49-9-1234567890-552;414.45;test@nomail.de;;Herr;Male Test;Male Test;r
+TICKET_SERVICE_EMAIL 20220212131844: Ticket-ID=1408858, TicketNr=191002, HauptticketNr=191000, Parameter='49-9-1234567890-553;345.99;test@nomail.de;;Herr / Frau;Male Test Female Test;Male Test Female Test;r
+TICKET_SERVICE_EMAIL 20220212131940: Ticket-ID=kontaktid, TicketNr=, HauptticketNr=, Parameter=aktnr;ueberfaelligeraussenstand;email;;(r);anrede;nachname;nachname
+TICKET_SERVICE_EMAIL 20220212131940: Ticket-ID=1408856, TicketNr=189002, HauptticketNr=189000, Parameter='49-9-1234567890-550;453.07;test@nomail.de;;;Frau;Female Test;Female Test
+TICKET_SERVICE_EMAIL 20220212131940: Ticket-ID=1408857, TicketNr=190002, HauptticketNr=190000, Parameter='49-9-1234567890-552;414.45;test@nomail.de;;r;Herr;Male Test;Male Test
+TICKET_SERVICE_EMAIL 20220212131940: Ticket-ID=1408858, TicketNr=191002, HauptticketNr=191000, Parameter='49-9-1234567890-553;345.99;test@nomail.de;;(r);Herr / Frau;Male Test Female Test;Male Test Female Test
+TICKET_SERVICE_EMAIL 20220212133643: Ticket-ID=kontaktid, TicketNr=, HauptticketNr=, Parameter=aktnr;ueberfaelligeraussenstand;email;;(r);anrede;nachname;nachname
+TICKET_SERVICE_EMAIL 20220212133643: Ticket-ID=1408856, TicketNr=189002, HauptticketNr=189000, Parameter='49-9-1234567890-550;453.07;test@nomail.de;;;Frau;Female Test;Female Test
+TICKET_SERVICE_EMAIL 20220212133643: Ticket-ID=1408857, TicketNr=190002, HauptticketNr=190000, Parameter='49-9-1234567890-552;414.45;test@nomail.de;;r;Herr;Male Test;Male Test
+TICKET_SERVICE_EMAIL 20220212133643: Ticket-ID=1408858, TicketNr=191002, HauptticketNr=191000, Parameter='49-9-1234567890-553;345.99;test@nomail.de;;(r);Herr / Frau;Male Test Female Test;Male Test Female Test
+TICKET_SERVICE_EMAIL 20220212133946: Ticket-ID=kontaktid, TicketNr=, HauptticketNr=, Parameter=aktnr;ueberfaelligeraussenstand;email;;(r);anrede;nachname;nachname
+TICKET_SERVICE_EMAIL 20220212133946: Ticket-ID=1408856, TicketNr=189002, HauptticketNr=189000, Parameter='49-9-1234567890-550;453.07;test@nomail.de;;;Frau;Female Test;Female Test
+TICKET_SERVICE_EMAIL 20220212133946: Ticket-ID=1408857, TicketNr=190002, HauptticketNr=190000, Parameter='49-9-1234567890-552;414.45;test@nomail.de;;r;Herr;Male Test;Male Test
+TICKET_SERVICE_EMAIL 20220212133946: Ticket-ID=1408858, TicketNr=191002, HauptticketNr=191000, Parameter='49-9-1234567890-553;345.99;test@nomail.de;;(r);Herr / Frau;Male Test Female Test;Male Test Female Test
+TICKET_SERVICE_EMAIL 20220212134153: Ticket-ID=kontaktid, TicketNr=, HauptticketNr=, Parameter=aktnr;ueberfaelligeraussenstand;email;;(r);anrede;nachname;nachname
+TICKET_SERVICE_EMAIL 20220212134153: Ticket-ID=1408856, TicketNr=189002, HauptticketNr=189000, Parameter='49-9-1234567890-550;453.07;test@nomail.de;;;Frau;Female Test;Female Test
+TICKET_SERVICE_EMAIL 20220212134153: Ticket-ID=1408857, TicketNr=190002, HauptticketNr=190000, Parameter='49-9-1234567890-552;414.45;test@nomail.de;;r;Herr;Male Test;Male Test
+TICKET_SERVICE_EMAIL 20220212134153: Ticket-ID=1408858, TicketNr=191002, HauptticketNr=191000, Parameter='49-9-1234567890-553;345.99;test@nomail.de;;(r);Herr / Frau;Male Test Female Test;Male Test Female Test
+TICKET_SERVICE_EMAIL 20220212134227: Ticket-ID=kontaktid, TicketNr=, HauptticketNr=, Parameter=aktnr;ueberfaelligeraussenstand;email;;(r);anrede;nachname;nachname
+TICKET_SERVICE_EMAIL 20220212134312: Ticket-ID=kontaktid, TicketNr=, HauptticketNr=, Parameter=aktnr;ueberfaelligeraussenstand;email;;(r);anrede;nachname;nachname
+TICKET_SERVICE_EMAIL 20220212134801: Ticket-ID=kontaktid, TicketNr=, HauptticketNr=, Parameter=aktnr;ueberfaelligeraussenstand;email;;(r);anrede;nachname;nachname
+TICKET_SERVICE_EMAIL 20220212134801: Ticket-ID=1408856, TicketNr=189002, HauptticketNr=189000, Parameter='49-9-1234567890-550;453.07;test@nomail.de;;;Frau;Female Test;Female Test
+TICKET_SERVICE_EMAIL 20220212134801: Ticket-ID=1408857, TicketNr=190002, HauptticketNr=190000, Parameter='49-9-1234567890-552;414.45;test@nomail.de;;r;Herr;Male Test;Male Test
+TICKET_SERVICE_EMAIL 20220212134801: Ticket-ID=1408858, TicketNr=191002, HauptticketNr=191000, Parameter='49-9-1234567890-553;345.99;test@nomail.de;;(r);Herr / Frau;Male Test Female Test;Male Test Female Test
+TICKET_SERVICE_EMAIL 20220212134849: Ticket-ID=kontaktid, TicketNr=, HauptticketNr=, Parameter=aktnr;ueberfaelligeraussenstand;email;;(r);anrede;nachname;nachname
+TICKET_SERVICE_EMAIL 20220212134849: Ticket-ID=1408856, TicketNr=189002, HauptticketNr=189000, Parameter='49-9-1234567890-550;453.07;test@nomail.de;;;Frau;Female Test;Female Test
+TICKET_SERVICE_EMAIL 20220212134849: Ticket-ID=1408857, TicketNr=190002, HauptticketNr=190000, Parameter='49-9-1234567890-552;414.45;test@nomail.de;;r;Herr;Male Test;Male Test
+TICKET_SERVICE_EMAIL 20220212134849: Ticket-ID=1408858, TicketNr=191002, HauptticketNr=191000, Parameter='49-9-1234567890-553;345.99;test@nomail.de;;(r);Herr / Frau;Male Test Female Test;Male Test Female Test
+TICKET_SERVICE_EMAIL 20220212134927: Ticket-ID=kontaktid, TicketNr=, HauptticketNr=, Parameter=aktnr;ueberfaelligeraussenstand;email;;(r);anrede;nachname;nachname
+TICKET_SERVICE_EMAIL 20220212135031: Ticket-ID=kontaktid, TicketNr=, HauptticketNr=, Parameter=aktnr;ueberfaelligeraussenstand;email;;(r);anrede;nachname;nachname
+TICKET_SERVICE_EMAIL 20220212135128: Ticket-ID=kontaktid, TicketNr=, HauptticketNr=, Parameter=aktnr;ueberfaelligeraussenstand;email;;(r);anrede;nachname;nachname
+TICKET_SERVICE_EMAIL 20220212135128: Ticket-ID=1408856, TicketNr=189002, HauptticketNr=189000, Parameter='49-9-1234567890-550;453.07;test@nomail.de;;;Frau;Female Test;Female Test
+TICKET_SERVICE_EMAIL 20220212135128: Ticket-ID=1408857, TicketNr=190002, HauptticketNr=190000, Parameter='49-9-1234567890-552;414.45;test@nomail.de;;r;Herr;Male Test;Male Test
+TICKET_SERVICE_EMAIL 20220212135128: Ticket-ID=1408858, TicketNr=191002, HauptticketNr=191000, Parameter='49-9-1234567890-553;345.99;test@nomail.de;;(r);Herr / Frau;Male Test Female Test;Male Test Female Test
+TICKET_SERVICE_EMAIL 20220212135608: Ticket-ID=kontaktid, TicketNr=, HauptticketNr=, Parameter=aktnr;ueberfaelligeraussenstand;email;;(r);anrede;nachname;nachname
+TICKET_SERVICE_EMAIL 20220212135608: Ticket-ID=1408856, TicketNr=189002, HauptticketNr=189000, Parameter='49-9-1234567890-550;453.07;test@nomail.de;;;Frau;Female Test;Female Test
+TICKET_SERVICE_EMAIL 20220212135608: Ticket-ID=1408857, TicketNr=190002, HauptticketNr=190000, Parameter='49-9-1234567890-552;414.45;test@nomail.de;;r;Herr;Male Test;Male Test
+TICKET_SERVICE_EMAIL 20220212135608: Ticket-ID=1408858, TicketNr=191002, HauptticketNr=191000, Parameter='49-9-1234567890-553;345.99;test@nomail.de;;(r);Herr / Frau;Male Test Female Test;Male Test Female Test
+TICKET_SERVICE_EMAIL 20220212135705: Ticket-ID=kontaktid, TicketNr=, HauptticketNr=, Parameter=aktnr;ueberfaelligeraussenstand;email;;(r);anrede;nachname;nachname
+TICKET_SERVICE_EMAIL 20220212140038: Ticket-ID=kontaktid, TicketNr=, HauptticketNr=, Parameter=aktnr;ueberfaelligeraussenstand;email;;(r);anrede;nachname;nachname
+TICKET_SERVICE_EMAIL 20220212140038: Ticket-ID=1408856, TicketNr=189002, HauptticketNr=189000, Parameter='49-9-1234567890-550;453.07;test@nomail.de;;;Frau;Female Test;Female Test
+TICKET_SERVICE_EMAIL 20220212140038: Ticket-ID=1408857, TicketNr=190002, HauptticketNr=190000, Parameter='49-9-1234567890-552;414.45;test@nomail.de;;r;Herr;Male Test;Male Test
+TICKET_SERVICE_EMAIL 20220212140038: Ticket-ID=1408858, TicketNr=191002, HauptticketNr=191000, Parameter='49-9-1234567890-553;345.99;test@nomail.de;;(r);Herr / Frau;Male Test Female Test;Male Test Female Test
+TICKET_SERVICE_EMAIL 20220212140137: Ticket-ID=kontaktid, TicketNr=, HauptticketNr=, Parameter=aktnr;ueberfaelligeraussenstand;email;;(r);anrede;nachname;nachname
+TICKET_SERVICE_EMAIL 20220212140137: Ticket-ID=1408856, TicketNr=189002, HauptticketNr=189000, Parameter='49-9-1234567890-550;453.07;test@nomail.de;;;Frau;Female Test;Female Test
+TICKET_SERVICE_EMAIL 20220212140137: Ticket-ID=1408857, TicketNr=190002, HauptticketNr=190000, Parameter='49-9-1234567890-552;414.45;test@nomail.de;;r;Herr;Male Test;Male Test
+TICKET_SERVICE_EMAIL 20220212140137: Ticket-ID=1408858, TicketNr=191002, HauptticketNr=191000, Parameter='49-9-1234567890-553;345.99;test@nomail.de;;(r);Herr / Frau;Male Test Female Test;Male Test Female Test
+TICKET_SERVICE_EMAIL 20220212140259: Ticket-ID=kontaktid, TicketNr=, HauptticketNr=, Parameter=aktnr;ueberfaelligeraussenstand;email;;(r);anrede;nachname;nachname
+TICKET_SERVICE_EMAIL 20220212140259: Ticket-ID=1408856, TicketNr=189002, HauptticketNr=189000, Parameter='49-9-1234567890-550;453.07;test@nomail.de;;;Frau;Female Test;Female Test
+TICKET_SERVICE_EMAIL 20220212140259: Ticket-ID=1408857, TicketNr=190002, HauptticketNr=190000, Parameter='49-9-1234567890-552;414.45;test@nomail.de;;r;Herr;Male Test;Male Test
+TICKET_SERVICE_EMAIL 20220212140259: Ticket-ID=1408858, TicketNr=191002, HauptticketNr=191000, Parameter='49-9-1234567890-553;345.99;test@nomail.de;;(r);Herr / Frau;Male Test Female Test;Male Test Female Test
+TICKET_SERVICE_EMAIL 20220212140356: Ticket-ID=kontaktid, TicketNr=, HauptticketNr=, Parameter=aktnr;ueberfaelligeraussenstand;email;;(r);anrede;nachname;nachname
+TICKET_SERVICE_EMAIL 20220212140356: Ticket-ID=1408856, TicketNr=189002, HauptticketNr=189000, Parameter='49-9-1234567890-550;453.07;test@nomail.de;;;Frau;Female Test;Female Test
+TICKET_SERVICE_EMAIL 20220212140356: Ticket-ID=1408857, TicketNr=190002, HauptticketNr=190000, Parameter='49-9-1234567890-552;414.45;test@nomail.de;;r;Herr;Male Test;Male Test
+TICKET_SERVICE_EMAIL 20220212140356: Ticket-ID=1408858, TicketNr=191002, HauptticketNr=191000, Parameter='49-9-1234567890-553;345.99;test@nomail.de;;(r);Herr / Frau;Male Test Female Test;Male Test Female Test
+TICKET_SERVICE_EMAIL 20220212140500: Ticket-ID=kontaktid, TicketNr=, HauptticketNr=, Parameter=aktnr;ueberfaelligeraussenstand;email;;(r);anrede;nachname;nachname
+TICKET_SERVICE_EMAIL 20220212140500: Ticket-ID=1408856, TicketNr=189002, HauptticketNr=189000, Parameter='49-9-1234567890-550;453.07;test@nomail.de;;;Frau;Female Test;Female Test
+TICKET_SERVICE_EMAIL 20220212140500: Ticket-ID=1408857, TicketNr=190002, HauptticketNr=190000, Parameter='49-9-1234567890-552;414.45;test@nomail.de;;r;Herr;Male Test;Male Test
+TICKET_SERVICE_EMAIL 20220212140500: Ticket-ID=1408858, TicketNr=191002, HauptticketNr=191000, Parameter='49-9-1234567890-553;345.99;test@nomail.de;;(r);Herr / Frau;Male Test Female Test;Male Test Female Test
+TICKET_SERVICE_EMAIL 20220212140558: Ticket-ID=kontaktid, TicketNr=, HauptticketNr=, Parameter=aktnr;ueberfaelligeraussenstand;email;;(r);anrede;nachname;nachname
+TICKET_SERVICE_EMAIL 20220212141015: Ticket-ID=kontaktid, TicketNr=, HauptticketNr=, Parameter=aktnr;ueberfaelligeraussenstand;email;;(r);anrede;nachname;nachname
+TICKET_SERVICE_EMAIL 20220212141215: Ticket-ID=kontaktid, TicketNr=, HauptticketNr=, Parameter=aktnr;ueberfaelligeraussenstand;email;;(r);anrede;nachname;nachname
+TICKET_SERVICE_EMAIL 20220212141215: Ticket-ID=1408856, TicketNr=189002, HauptticketNr=189000, Parameter='49-9-1234567890-550;453.07;test@nomail.de;;;Frau;Female Test;Female Test
+TICKET_SERVICE_EMAIL 20220212141215: Ticket-ID=1408857, TicketNr=190002, HauptticketNr=190000, Parameter='49-9-1234567890-552;414.45;test@nomail.de;;r;Herr;Male Test;Male Test
+TICKET_SERVICE_EMAIL 20220212141215: Ticket-ID=1408858, TicketNr=191002, HauptticketNr=191000, Parameter='49-9-1234567890-553;345.99;test@nomail.de;;(r);Herr / Frau;Male Test Female Test;Male Test Female Test
+TICKET_SERVICE_EMAIL 20220212142553: Ticket-ID=kontaktid, TicketNr=, HauptticketNr=, Parameter=aktnr;ueberfaelligeraussenstand;email;;;;;;
+   Templateinhalt: 
+Sehr geehrte  ,
+
+bitte kontaktieren Sie uns zu Ihrer Verbindlichkeit zum KK:aktnr - email 
+
+Mit freundlichen Grüßen
+
+
+
+TICKET_SERVICE_EMAIL 20220212142553: Ticket-ID=1408856, TicketNr=189002, HauptticketNr=189000, Parameter='49-9-1234567890-550;453.07;test@nomail.de;;;Frau;Female Test;Female Test;
+   Templateinhalt: 
+Sehr geehrte Frau Female Test,
+
+bitte kontaktieren Sie uns zu Ihrer Verbindlichkeit zum KK:'49-9-1234567890-550 - test@nomail.de 
+
+Mit freundlichen Grüßen
+
+
+
+TICKET_SERVICE_EMAIL 20220212142553: Ticket-ID=1408857, TicketNr=190002, HauptticketNr=190000, Parameter='49-9-1234567890-552;414.45;test@nomail.de;;r;Herr;Male Test;Male Test;
+   Templateinhalt: 
+Sehr geehrter Herr Male Test,
+
+bitte kontaktieren Sie uns zu Ihrer Verbindlichkeit zum KK:'49-9-1234567890-552 - test@nomail.de 
+
+Mit freundlichen Grüßen
+
+
+
+TICKET_SERVICE_EMAIL 20220212142553: Ticket-ID=1408858, TicketNr=191002, HauptticketNr=191000, Parameter='49-9-1234567890-553;345.99;test@nomail.de;;;Herr / Frau;Male Test Female Test;Male Test Female Test;
+   Templateinhalt: 
+Sehr geehrte Herr / Frau Male Test Female Test,
+
+bitte kontaktieren Sie uns zu Ihrer Verbindlichkeit zum KK:'49-9-1234567890-553 - test@nomail.de 
+
+Mit freundlichen Grüßen
+
+
+

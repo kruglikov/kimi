@@ -1,0 +1,417 @@
+html,
+body {
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    height: 100%;
+    text-align: center;
+    font-family: Arial, Verdana, sans-serif;
+    line-height: 1.3em;
+    background-color: white;
+}
+
+#mainframe {
+    min-height: 100%;
+    position: relative;
+}
+
+.linear-list {
+    list-style: none;
+    padding-left: 0;
+}
+.linear-list li {
+    display: inline-block;
+    padding: 5px;
+}
+
+textarea {
+    font-family: Arial, Verdana, sans-serif;
+    line-height: 1.4em;
+    width: 100%;
+    margin-top: 10px;
+}
+
+
+#footer {
+    position: absolute;
+    bottom: 0;
+    left:0;
+    text-align: center;
+    width: 100%;
+    color: white;
+    background-color: windowframe;
+    border: none;
+}
+
+div.inline {
+    display: inline-block;
+}
+
+input.inline {
+    display: inline;
+}
+
+#header {
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 980;
+    background-color: white;
+}
+
+#header img {
+    height: 100px;
+    margin: 0;
+}
+
+.img-holder {
+    width: 768px;
+    margin: 0 auto;
+    text-align: left;
+    padding: 0;
+}
+
+.img-holder-portal {
+    text-align: left;
+    margin-left: 10%;
+    margin-right: 10%;
+    padding: 0;
+}
+
+a img {
+    border: none;
+}
+
+#header div.menu a.active-menu-main {
+    background-color: white;
+    font-weight: bold;
+    padding: 15px;
+}
+#header div.menu a.active-menu {
+    background-color: rgb(1, 176, 241);
+    color: red;
+    padding:15px;
+}
+
+a {
+    color: gray;
+}
+a:hover {
+    color :black;
+}
+
+#header div.menu a {
+    text-decoration: none;
+    padding: 15px;
+    color: black;
+}
+
+#header {
+    border-radius: 0px 0px 5px 5px;
+    border: 1px solid black;
+    border-top: 0px;
+    border-left: 0px;
+    border-right: 0px;
+}
+
+.portal-menu  {
+    text-align: left;
+    margin-left: 10%;
+    margin-right: 10%;
+}
+
+.buttonset {
+    margin-top: 10px;
+}
+
+.ui-state-highlight,
+.ui-state-error {
+    padding: 5px;
+}
+
+#cms-text {
+    height: 50%;
+    overflow: auto;
+}
+
+#header div.menu {
+    background-color: white;
+}
+
+#header div.menu a:hover {
+    text-decoration: underline;
+    color: gray;
+}
+
+#header div.menu a:active {
+    text-decoration: none;
+}
+
+#header div.menu ul {
+    vertical-align: middle;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    line-height: 50px;
+    width: 100%;
+    background-color: white;
+    color: white;
+}
+
+#header div.menu ul li {
+    display: inline-block;
+}
+
+
+#content {
+    width: 768px;
+    margin: 0 auto;
+    text-align: left;
+    font-weight: lighter;
+    padding-top: 120px;
+    padding-bottom: 100px;
+}
+
+#content-portal {
+    margin-left: 10%;
+    margin-right: 10%;
+    padding-top: 120px;
+    text-align: left;
+    font-weight: lighter;
+    font-size: small;
+}
+
+div.container {
+    background-color: #ffffff;
+    padding: 10px 20px;
+}
+
+#header table {
+    margin-top: -2px;
+}
+#header table td {
+    padding: 0;
+}
+#header table td a {
+    color: #333;
+}
+
+.border {
+    border: 1px solid black;
+}
+
+.news p.date {
+    color: gray;
+}
+
+#browser-warning {
+    position: fixed;
+    z-index: 999;
+    background-color: #880000;
+    border: 1px solid red;
+    top: 0;
+    left: 0;
+    color: white;
+    width: 100%;
+}
+
+.hidden {
+    display: none;
+}
+
+.checked-list {
+    list-style: none;
+    font-size: larger;
+    padding-left: 0;
+}
+
+.checked-list li:before {
+    display: inline-block;
+    content: "";
+    background-image: url(../images/hackerl.jpg);
+    background-size: 25px 25px;
+    width: 25px;
+    height: 25px;
+}
+
+#information-classic {
+    float: right;
+    background-color: white;
+    padding: 20px;
+}
+
+#information-classic ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+#information-classic ul a {
+    text-decoration: none;
+}
+
+ul.clean-list {
+    list-style: none;
+}
+
+.min-width {
+    min-width: 200px;
+}
+
+#information {
+    position: fixed;
+    background-color: white;
+    right: 10px;
+    top: 90px;
+    padding: 0px 20px;
+}
+
+#information ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+#information ul a {
+    text-decoration: none;
+}
+
+.service-entry img {
+    float: left;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    height: 80px;
+    width: 80px;
+}
+
+.service-entry div {
+    margin-left: 90px;
+}
+
+.service-entry:after {
+    content: "";
+    height: 1px;
+    display: block;
+    background-color: black;
+}
+
+.clear {
+    clear: left;
+}
+
+
+.red {
+    color: #ff0000;
+}
+.green {
+    color: #00c000;
+}
+.blue {
+    color: #0000ff;
+}
+
+.center {
+    text-align: center;
+}
+
+.container input[type=text],
+.container input[type=email] {
+    width: 100%;
+}
+
+.contact-part {
+    margin:10px;
+    display: inline-block;
+    width: 30%;
+    vertical-align: top;
+}
+.contact-part textarea {
+    height: 100px;
+}
+
+.contact-part img {
+    width: 100px;
+}
+.no-close .ui-dialog-titlebar-close {display: none }
+
+#login-container {
+    margin:0 auto;
+    margin-top: 15%;
+    width: 300px;
+    background-color: white;
+}
+#login-container input,
+#login-container select {
+    width: 100%;
+}
+#login-container img {
+    width: 100%;
+}
+input {
+    width: 90%;
+    margin: 10px;
+}
+.warning {
+    background-color: #880000;
+    border: 1px solid red;
+    color: white;
+    width: 100%;
+    margin:0;
+    padding: 0;
+}
+
+#login-container h2 {
+    margin: 0;
+    padding: 0;
+
+    padding-top: 10px;
+    padding-bottom: 10px;
+    font-weight: lighter;
+}
+input[type=text].search,
+input[type=email].search,
+a.search,
+input.search {
+    width: 200px;
+}
+
+table.designed {
+    background-color: #DDD;
+    width: 100%;
+}
+
+table.designed th {
+    background-color: #AAA;
+}
+
+table.designed tr:nth-child(even) {
+    background-color: white;
+}
+
+table.designed-last {
+    background-color: #DDD;
+    width: 100%;
+}
+table.designed-last th {
+    background-color: #AAA;
+}
+table.designed-last tr:not(:last-child) {
+    background-color: white;
+}
+table.designed-last tr:last-child {
+    background-color: #AAA;
+}
+
+input,
+select {
+    margin: 5px;
+    margin-left: 10px;
+}
+select {
+}
+
+.column {
+    width: 200px !important;
+}
+.placeholder {
+    width: 10px;
+}

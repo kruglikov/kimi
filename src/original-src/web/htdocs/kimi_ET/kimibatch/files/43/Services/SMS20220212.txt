@@ -1,0 +1,33 @@
+SMS 20220212115420: Ticket-ID=, TicketNr=, HauptticketNr=, Parameter=;;zahlungshilfe@sberbank-collections.de
+SMS 20220212120207: Ticket-ID=kontaktid, TicketNr=, HauptticketNr=, Parameter=aktnr;ueberfaelligeraussenstand;zahlungshilfe@sberbank-collections.de
+SMS 20220212120207: Ticket-ID=1408853, TicketNr=189001, HauptticketNr=189000, Parameter='49-9-1234567890-550;453.07;zahlungshilfe@sberbank-collections.de
+SMS 20220212120207: Ticket-ID=1408854, TicketNr=190001, HauptticketNr=190000, Parameter='49-9-1234567890-552;414.45;zahlungshilfe@sberbank-collections.de
+SMS 20220212120207: Ticket-ID=1408855, TicketNr=191001, HauptticketNr=191000, Parameter='49-9-1234567890-553;345.99;zahlungshilfe@sberbank-collections.de
+SMS 20220212120654: Ticket-ID=kontaktid, TicketNr=, HauptticketNr=, Parameter=aktnr;ueberfaelligeraussenstand;zahlungshilfe@sberbank-collections.de
+SMS 20220212120654: Ticket-ID=1408853, TicketNr=189001, HauptticketNr=189000, Parameter='49-9-1234567890-550;453.07;zahlungshilfe@sberbank-collections.de
+SMS 20220212120654: Ticket-ID=1408854, TicketNr=190001, HauptticketNr=190000, Parameter='49-9-1234567890-552;414.45;zahlungshilfe@sberbank-collections.de
+SMS 20220212120654: Ticket-ID=1408855, TicketNr=191001, HauptticketNr=191000, Parameter='49-9-1234567890-553;345.99;zahlungshilfe@sberbank-collections.de
+SMS 20220212121206: Ticket-ID=kontaktid, TicketNr=, HauptticketNr=, Parameter=aktnr;ueberfaelligeraussenstand;zahlungshilfe@sberbank-collections.de
+SMS 20220212121206: Ticket-ID=1408853, TicketNr=189001, HauptticketNr=189000, Parameter='49-9-1234567890-550;453.07;zahlungshilfe@sberbank-collections.de
+SMS 20220212121206: Ticket-ID=1408854, TicketNr=190001, HauptticketNr=190000, Parameter='49-9-1234567890-552;414.45;zahlungshilfe@sberbank-collections.de
+SMS 20220212121206: Ticket-ID=1408855, TicketNr=191001, HauptticketNr=191000, Parameter='49-9-1234567890-553;345.99;zahlungshilfe@sberbank-collections.de
+SMS 20220212130104: Ticket-ID=kontaktid, TicketNr=, HauptticketNr=, Parameter=aktnr;ueberfaelligeraussenstand;zahlungshilfe@sberbank-collections.de
+SMS 20220212130104: Ticket-ID=1408853, TicketNr=189001, HauptticketNr=189000, Parameter='49-9-1234567890-550;453.07;zahlungshilfe@sberbank-collections.de
+SMS 20220212130104: Ticket-ID=1408854, TicketNr=190001, HauptticketNr=190000, Parameter='49-9-1234567890-552;414.45;zahlungshilfe@sberbank-collections.de
+SMS 20220212130104: Ticket-ID=1408855, TicketNr=191001, HauptticketNr=191000, Parameter='49-9-1234567890-553;345.99;zahlungshilfe@sberbank-collections.de
+SMS 20220212142548: Ticket-ID=kontaktid, TicketNr=, HauptticketNr=, Parameter=aktnr;ueberfaelligeraussenstand;zahlungshilfe@sberbank-collections.de;;;;;
+   Templateinhalt: 
+Bitte kontaktieren Sie uns zu Ihrer Verbindlichkeit zum KK:aktnr - zahlungshilfe@sberbank-collections.de
+
+SMS 20220212142548: Ticket-ID=1408853, TicketNr=189001, HauptticketNr=189000, Parameter='49-9-1234567890-550;453.07;zahlungshilfe@sberbank-collections.de;;Frau;Female Test;;Female Test
+   Templateinhalt: 
+Bitte kontaktieren Sie uns zu Ihrer Verbindlichkeit zum KK:'49-9-1234567890-550 - zahlungshilfe@sberbank-collections.de
+
+SMS 20220212142548: Ticket-ID=1408854, TicketNr=190001, HauptticketNr=190000, Parameter='49-9-1234567890-552;414.45;zahlungshilfe@sberbank-collections.de;r;Herr;Male Test;;Male Test
+   Templateinhalt: 
+Bitte kontaktieren Sie uns zu Ihrer Verbindlichkeit zum KK:'49-9-1234567890-552 - zahlungshilfe@sberbank-collections.de
+
+SMS 20220212142548: Ticket-ID=1408855, TicketNr=191001, HauptticketNr=191000, Parameter='49-9-1234567890-553;345.99;zahlungshilfe@sberbank-collections.de;;Herr / Frau;Male Test Female Test;;Male Test Female Test
+   Templateinhalt: 
+Bitte kontaktieren Sie uns zu Ihrer Verbindlichkeit zum KK:'49-9-1234567890-553 - zahlungshilfe@sberbank-collections.de
+

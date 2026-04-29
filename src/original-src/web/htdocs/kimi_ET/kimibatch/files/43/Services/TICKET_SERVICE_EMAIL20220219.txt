@@ -1,0 +1,794 @@
+TICKET_SERVICE_EMAIL 20220219085312: Ticket-ID=1430606, TicketNr=17002, HauptticketNr=17000, Service-Kontakt=franz.tausch@kimi-plus.at, Parameter='49-9-1644426480-550;602.81;zahlungshilfe@sberbank-collections.de;+49 69 50958953;r;Herr;Roberto Kamberovski;Roberto Kamberovski;TESTNACHRICHT;franz.tausch@kimi-plus.at;ronald.aberl@aberl.at;Ronald Aberl;
+   Templateinhalt: 
+<html>
+
+<body lang=DE link="#0563C1" vlink="#954F72" style='tab-interval:35.4pt;
+word-wrap:break-word'>
+
+<p class=MsoNormal><b><span lang=DE-AT style='font-family:"Arial",sans-serif;
+text-transform:uppercase;mso-ansi-language:DE-AT'>Zahlungsaufforderung</span></b><b><span
+lang=DE-AT style='font-family:"Arial",sans-serif;mso-ansi-language:DE-AT'> -
+Ihre Kreditrate ist leider überfällig! KK: '49-9-1644426480-550</span></b><span
+lang=DE-AT style='mso-ansi-language:DE-AT'><o:p></o:p></span></p>
+
+<p><span lang=DE-AT style='font-family:"Arial",sans-serif;
+mso-ansi-language:DE-AT'>Sehr geehrter Herr Roberto Kamberovski!</span></p>
+
+<p><span lang=DE-AT style='font-family:"Arial",sans-serif;
+mso-ansi-language:DE-AT'><u5:p>&nbsp;</u5:p></span><span lang=DE-AT
+style='mso-ansi-language:DE-AT'><o:p></o:p></span></p>
+
+<p><span lang=DE-AT style='font-family:"Arial",sans-serif;
+mso-ansi-language:DE-AT'>Wir freuen uns, dass Sie sich bei Ihrer Kreditwahl für
+uns entschieden haben.</span></p>
+
+<p><span lang=DE-AT style='font-family:"Arial",sans-serif;
+mso-ansi-language:DE-AT'>Als zuverlässiger Kreditpartner diese kleine
+Erinnerungshilfe. Ihre vereinbarte Kreditrate ist noch nicht eingetroffen. </span></p>
+
+<p><span lang=DE-AT style='font-family:"Arial",sans-serif;
+mso-ansi-language:DE-AT'>Bitte zahlen Sie den überfälligen Betrag von <b>€ 602.81</b> <b>sofort</b>
+auf unser Bankkonto ein<br>&nbsp;</span></p>
+
+
+<p><b><span lang=DE-AT style='font-family:"Arial",sans-serif;
+mso-ansi-language:DE-AT'>Empfänger:
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></b><span lang=DE-AT style='font-family:"Arial",sans-serif;mso-ansi-language:
+DE-AT'>Sberbank Europe AG </span>
+<br><b><span lang=DE-AT style='font-family:"Arial",sans-serif;
+mso-ansi-language:DE-AT'>BIC:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></b><span lang=DE-AT style='font-family:"Arial",sans-serif;mso-ansi-language:
+DE-AT'>#MANDANT_BIC#</span>
+<br><b><span lang=DE-AT style='font-family:"Arial",sans-serif;
+mso-ansi-language:DE-AT'>IBAN:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></b>#MANDANT_IBAN#
+<span lang=DE-AT style='font-family:"Arial",sans-serif;mso-ansi-language:DE-AT'><br>
+<b>Verwendungszweck:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></b>'49-9-1644426480-550<span lang=DE-AT
+style='font-family:"Arial",sans-serif;mso-ansi-language:DE-AT'> (bitte immer
+anführen)</span>
+
+</p>
+
+<p><span lang=DE-AT style='font-family:
+"Arial",sans-serif;mso-ansi-language:DE-AT'>Wir empfehlen Ihnen, eine
+Standardüberweisung durchzuführen, da wir bei Echtzeitüberweisungen leider
+keine reibungslose Abwicklung garantieren können.</span></p>
+
+
+<p><span lang=DE-AT
+style='font-family:"Arial",sans-serif;mso-ansi-language:DE-AT'>Bitte haben Sie
+Verständnis, dass wir die Spesen, welche wir an Ihre Bank bezahlt haben, an Sie
+weiterverrechnen
+müssen.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></p>
+
+<p><span lang=DE-AT
+style='font-family:"Arial",sans-serif;mso-ansi-language:DE-AT'><br>Bei Fragen rufen
+Sie uns gerne an oder schreiben Sie uns eine E-Mail:</span></p>
+
+
+<p><span lang=DE-AT
+style='font-family:"Arial",sans-serif;mso-ansi-language:DE-AT'>
+Email:
+<a
+href="mailto:kundenservice@sberbank-direct.de"><span
+lang=EN-US style='font-family:"Arial",sans-serif;mso-ansi-language:EN-US'>kundenservice@sberbank-direct.de</span></a>
+<br>Tel. Serviceteam: 0151 2145xxxx (MO-FR 8:00-18:00 & SA 8:00-12:00)
+<br><br>
+Sollten Sie Ihre Einzahlung bereits erledigt haben, bedanken wir uns.
+<br><br>
+Freundliche Grüße
+</span></p>
+
+
+
+<p class=MsoNormal style='background:white;vertical-align:baseline'><span
+style='mso-bookmark:_Hlk89854056'><span lang=DE-AT style='font-family:"Calibri Light",sans-serif;
+color:black;mso-ansi-language:DE-AT'>Sberbank Europe AG<br>
+Zweigniederlassung Deutschland<br>
+(auch als Sberbank Direct bezeichnet)<br>
+Gerbermühlstraße 9<br>
+60594 Frankfurt am Main&nbsp;<br>
+<br>
+</span></span><span style='mso-bookmark:_Hlk89854056'><span lang=DE-AT
+style='font-size:9.0pt;font-family:"Calibri Light",sans-serif;color:black;
+mso-ansi-language:DE-AT'>Eingetragen im Handelsregister des Amtsgerichts
+Frankfurt am Main unter der Registernummer HRB 99052.<br>
+Der Sitz der Bank ist Frankfurt am Main<br>
+Umsatzsteueridentifikationsnummer (USt-IdNr):DE 292000110 <br>
+Bankleitzahl (BLZ): 500 200 00 <br>
+BIC-Code: SEZDDEF1<br><br>
+Sitz der Hauptniederlassung:&nbsp;<br>
+Sberbank Europe AG<br>
+Schwarzenbergplatz 3&nbsp;<br>
+1010 Wien&nbsp;<br>
+Österreich&nbsp;<br>
+Firmenbuch FN 161285i<br><br>
+Vorstand:<br>
+Sonja Sarközi, Pavel Barchugov, Alexander Witte, Aleksei Mikhailov
+</span></span></p>
+
+
+<p><span style='mso-bookmark:_Hlk89854056'><span lang=DE-AT
+style='font-family:"Calibri Light",sans-serif;mso-ansi-language:DE-AT'>
+<br>
+</span></span><span style='mso-bookmark:_Hlk89854056'><span lang=DE-AT
+style='font-size:9.0pt;font-family:"Calibri Light",sans-serif;color:gray;
+mso-ansi-language:DE-AT'>Beachten Sie bitte, dass jede Form der unautorisierten
+Nutzung, Veröffentlichung oder Weitergabe des Inhalts dieser E-Mail nicht
+gestattet ist. Diese Nachricht ist ausschließlich für den bezeichneten
+Adressaten oder dessen Vertreter bestimmt. Sollten Sie nicht der vorgesehene
+Adressat dieser E-Mail oder dessen Vertreter sein, so bitten wir Sie, sich mit
+dem Absender der E-Mail in Verbindung zu setzen.</span></span></p>
+
+</div>
+
+</body>
+
+</html>
+
+
+TICKET_SERVICE_EMAIL 20220219085312: Ticket-ID=1430607, TicketNr=18002, HauptticketNr=18000, Service-Kontakt=franz.tausch@kimi-plus.at, Parameter='49-9-1630419580-550;416.47;zahlungshilfe@sberbank-collections.de;+49 69 50958953;r;Herr;Aron Micu;Aron Micu;TESTNACHRICHT;franz.tausch@kimi-plus.at;ronald.aberl@aberl.at;Ronald Aberl;
+   Templateinhalt: 
+<html>
+
+<body lang=DE link="#0563C1" vlink="#954F72" style='tab-interval:35.4pt;
+word-wrap:break-word'>
+
+<p class=MsoNormal><b><span lang=DE-AT style='font-family:"Arial",sans-serif;
+text-transform:uppercase;mso-ansi-language:DE-AT'>Zahlungsaufforderung</span></b><b><span
+lang=DE-AT style='font-family:"Arial",sans-serif;mso-ansi-language:DE-AT'> -
+Ihre Kreditrate ist leider überfällig! KK: '49-9-1630419580-550</span></b><span
+lang=DE-AT style='mso-ansi-language:DE-AT'><o:p></o:p></span></p>
+
+<p><span lang=DE-AT style='font-family:"Arial",sans-serif;
+mso-ansi-language:DE-AT'>Sehr geehrter Herr Aron Micu!</span></p>
+
+<p><span lang=DE-AT style='font-family:"Arial",sans-serif;
+mso-ansi-language:DE-AT'><u5:p>&nbsp;</u5:p></span><span lang=DE-AT
+style='mso-ansi-language:DE-AT'><o:p></o:p></span></p>
+
+<p><span lang=DE-AT style='font-family:"Arial",sans-serif;
+mso-ansi-language:DE-AT'>Wir freuen uns, dass Sie sich bei Ihrer Kreditwahl für
+uns entschieden haben.</span></p>
+
+<p><span lang=DE-AT style='font-family:"Arial",sans-serif;
+mso-ansi-language:DE-AT'>Als zuverlässiger Kreditpartner diese kleine
+Erinnerungshilfe. Ihre vereinbarte Kreditrate ist noch nicht eingetroffen. </span></p>
+
+<p><span lang=DE-AT style='font-family:"Arial",sans-serif;
+mso-ansi-language:DE-AT'>Bitte zahlen Sie den überfälligen Betrag von <b>€ 416.47</b> <b>sofort</b>
+auf unser Bankkonto ein<br>&nbsp;</span></p>
+
+
+<p><b><span lang=DE-AT style='font-family:"Arial",sans-serif;
+mso-ansi-language:DE-AT'>Empfänger:
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></b><span lang=DE-AT style='font-family:"Arial",sans-serif;mso-ansi-language:
+DE-AT'>Sberbank Europe AG </span>
+<br><b><span lang=DE-AT style='font-family:"Arial",sans-serif;
+mso-ansi-language:DE-AT'>BIC:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></b><span lang=DE-AT style='font-family:"Arial",sans-serif;mso-ansi-language:
+DE-AT'>#MANDANT_BIC#</span>
+<br><b><span lang=DE-AT style='font-family:"Arial",sans-serif;
+mso-ansi-language:DE-AT'>IBAN:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></b>#MANDANT_IBAN#
+<span lang=DE-AT style='font-family:"Arial",sans-serif;mso-ansi-language:DE-AT'><br>
+<b>Verwendungszweck:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></b>'49-9-1630419580-550<span lang=DE-AT
+style='font-family:"Arial",sans-serif;mso-ansi-language:DE-AT'> (bitte immer
+anführen)</span>
+
+</p>
+
+<p><span lang=DE-AT style='font-family:
+"Arial",sans-serif;mso-ansi-language:DE-AT'>Wir empfehlen Ihnen, eine
+Standardüberweisung durchzuführen, da wir bei Echtzeitüberweisungen leider
+keine reibungslose Abwicklung garantieren können.</span></p>
+
+
+<p><span lang=DE-AT
+style='font-family:"Arial",sans-serif;mso-ansi-language:DE-AT'>Bitte haben Sie
+Verständnis, dass wir die Spesen, welche wir an Ihre Bank bezahlt haben, an Sie
+weiterverrechnen
+müssen.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></p>
+
+<p><span lang=DE-AT
+style='font-family:"Arial",sans-serif;mso-ansi-language:DE-AT'><br>Bei Fragen rufen
+Sie uns gerne an oder schreiben Sie uns eine E-Mail:</span></p>
+
+
+<p><span lang=DE-AT
+style='font-family:"Arial",sans-serif;mso-ansi-language:DE-AT'>
+Email:
+<a
+href="mailto:kundenservice@sberbank-direct.de"><span
+lang=EN-US style='font-family:"Arial",sans-serif;mso-ansi-language:EN-US'>kundenservice@sberbank-direct.de</span></a>
+<br>Tel. Serviceteam: 0151 2145xxxx (MO-FR 8:00-18:00 & SA 8:00-12:00)
+<br><br>
+Sollten Sie Ihre Einzahlung bereits erledigt haben, bedanken wir uns.
+<br><br>
+Freundliche Grüße
+</span></p>
+
+
+
+<p class=MsoNormal style='background:white;vertical-align:baseline'><span
+style='mso-bookmark:_Hlk89854056'><span lang=DE-AT style='font-family:"Calibri Light",sans-serif;
+color:black;mso-ansi-language:DE-AT'>Sberbank Europe AG<br>
+Zweigniederlassung Deutschland<br>
+(auch als Sberbank Direct bezeichnet)<br>
+Gerbermühlstraße 9<br>
+60594 Frankfurt am Main&nbsp;<br>
+<br>
+</span></span><span style='mso-bookmark:_Hlk89854056'><span lang=DE-AT
+style='font-size:9.0pt;font-family:"Calibri Light",sans-serif;color:black;
+mso-ansi-language:DE-AT'>Eingetragen im Handelsregister des Amtsgerichts
+Frankfurt am Main unter der Registernummer HRB 99052.<br>
+Der Sitz der Bank ist Frankfurt am Main<br>
+Umsatzsteueridentifikationsnummer (USt-IdNr):DE 292000110 <br>
+Bankleitzahl (BLZ): 500 200 00 <br>
+BIC-Code: SEZDDEF1<br><br>
+Sitz der Hauptniederlassung:&nbsp;<br>
+Sberbank Europe AG<br>
+Schwarzenbergplatz 3&nbsp;<br>
+1010 Wien&nbsp;<br>
+Österreich&nbsp;<br>
+Firmenbuch FN 161285i<br><br>
+Vorstand:<br>
+Sonja Sarközi, Pavel Barchugov, Alexander Witte, Aleksei Mikhailov
+</span></span></p>
+
+
+<p><span style='mso-bookmark:_Hlk89854056'><span lang=DE-AT
+style='font-family:"Calibri Light",sans-serif;mso-ansi-language:DE-AT'>
+<br>
+</span></span><span style='mso-bookmark:_Hlk89854056'><span lang=DE-AT
+style='font-size:9.0pt;font-family:"Calibri Light",sans-serif;color:gray;
+mso-ansi-language:DE-AT'>Beachten Sie bitte, dass jede Form der unautorisierten
+Nutzung, Veröffentlichung oder Weitergabe des Inhalts dieser E-Mail nicht
+gestattet ist. Diese Nachricht ist ausschließlich für den bezeichneten
+Adressaten oder dessen Vertreter bestimmt. Sollten Sie nicht der vorgesehene
+Adressat dieser E-Mail oder dessen Vertreter sein, so bitten wir Sie, sich mit
+dem Absender der E-Mail in Verbindung zu setzen.</span></span></p>
+
+</div>
+
+</body>
+
+</html>
+
+
+TICKET_SERVICE_EMAIL 20220219085312: Ticket-ID=1430608, TicketNr=19002, HauptticketNr=19000, Service-Kontakt=franz.tausch@kimi-plus.at, Parameter='49-9-1015904581-550;117.85;zahlungshilfe@sberbank-collections.de;+49 69 50958953;;Herr/Frau;Nicole und Björn Ohm;Nicole und Björn Ohm;TESTNACHRICHT;franz.tausch@kimi-plus.at;ronald.aberl@aberl.at;Ronald Aberl;
+   Templateinhalt: 
+<html>
+
+<body lang=DE link="#0563C1" vlink="#954F72" style='tab-interval:35.4pt;
+word-wrap:break-word'>
+
+<p class=MsoNormal><b><span lang=DE-AT style='font-family:"Arial",sans-serif;
+text-transform:uppercase;mso-ansi-language:DE-AT'>Zahlungsaufforderung</span></b><b><span
+lang=DE-AT style='font-family:"Arial",sans-serif;mso-ansi-language:DE-AT'> -
+Ihre Kreditrate ist leider überfällig! KK: '49-9-1015904581-550</span></b><span
+lang=DE-AT style='mso-ansi-language:DE-AT'><o:p></o:p></span></p>
+
+<p><span lang=DE-AT style='font-family:"Arial",sans-serif;
+mso-ansi-language:DE-AT'>Sehr geehrte Herr/Frau Nicole und Björn Ohm!</span></p>
+
+<p><span lang=DE-AT style='font-family:"Arial",sans-serif;
+mso-ansi-language:DE-AT'><u5:p>&nbsp;</u5:p></span><span lang=DE-AT
+style='mso-ansi-language:DE-AT'><o:p></o:p></span></p>
+
+<p><span lang=DE-AT style='font-family:"Arial",sans-serif;
+mso-ansi-language:DE-AT'>Wir freuen uns, dass Sie sich bei Ihrer Kreditwahl für
+uns entschieden haben.</span></p>
+
+<p><span lang=DE-AT style='font-family:"Arial",sans-serif;
+mso-ansi-language:DE-AT'>Als zuverlässiger Kreditpartner diese kleine
+Erinnerungshilfe. Ihre vereinbarte Kreditrate ist noch nicht eingetroffen. </span></p>
+
+<p><span lang=DE-AT style='font-family:"Arial",sans-serif;
+mso-ansi-language:DE-AT'>Bitte zahlen Sie den überfälligen Betrag von <b>€ 117.85</b> <b>sofort</b>
+auf unser Bankkonto ein<br>&nbsp;</span></p>
+
+
+<p><b><span lang=DE-AT style='font-family:"Arial",sans-serif;
+mso-ansi-language:DE-AT'>Empfänger:
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></b><span lang=DE-AT style='font-family:"Arial",sans-serif;mso-ansi-language:
+DE-AT'>Sberbank Europe AG </span>
+<br><b><span lang=DE-AT style='font-family:"Arial",sans-serif;
+mso-ansi-language:DE-AT'>BIC:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></b><span lang=DE-AT style='font-family:"Arial",sans-serif;mso-ansi-language:
+DE-AT'>#MANDANT_BIC#</span>
+<br><b><span lang=DE-AT style='font-family:"Arial",sans-serif;
+mso-ansi-language:DE-AT'>IBAN:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></b>#MANDANT_IBAN#
+<span lang=DE-AT style='font-family:"Arial",sans-serif;mso-ansi-language:DE-AT'><br>
+<b>Verwendungszweck:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></b>'49-9-1015904581-550<span lang=DE-AT
+style='font-family:"Arial",sans-serif;mso-ansi-language:DE-AT'> (bitte immer
+anführen)</span>
+
+</p>
+
+<p><span lang=DE-AT style='font-family:
+"Arial",sans-serif;mso-ansi-language:DE-AT'>Wir empfehlen Ihnen, eine
+Standardüberweisung durchzuführen, da wir bei Echtzeitüberweisungen leider
+keine reibungslose Abwicklung garantieren können.</span></p>
+
+
+<p><span lang=DE-AT
+style='font-family:"Arial",sans-serif;mso-ansi-language:DE-AT'>Bitte haben Sie
+Verständnis, dass wir die Spesen, welche wir an Ihre Bank bezahlt haben, an Sie
+weiterverrechnen
+müssen.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></p>
+
+<p><span lang=DE-AT
+style='font-family:"Arial",sans-serif;mso-ansi-language:DE-AT'><br>Bei Fragen rufen
+Sie uns gerne an oder schreiben Sie uns eine E-Mail:</span></p>
+
+
+<p><span lang=DE-AT
+style='font-family:"Arial",sans-serif;mso-ansi-language:DE-AT'>
+Email:
+<a
+href="mailto:kundenservice@sberbank-direct.de"><span
+lang=EN-US style='font-family:"Arial",sans-serif;mso-ansi-language:EN-US'>kundenservice@sberbank-direct.de</span></a>
+<br>Tel. Serviceteam: 0151 2145xxxx (MO-FR 8:00-18:00 & SA 8:00-12:00)
+<br><br>
+Sollten Sie Ihre Einzahlung bereits erledigt haben, bedanken wir uns.
+<br><br>
+Freundliche Grüße
+</span></p>
+
+
+
+<p class=MsoNormal style='background:white;vertical-align:baseline'><span
+style='mso-bookmark:_Hlk89854056'><span lang=DE-AT style='font-family:"Calibri Light",sans-serif;
+color:black;mso-ansi-language:DE-AT'>Sberbank Europe AG<br>
+Zweigniederlassung Deutschland<br>
+(auch als Sberbank Direct bezeichnet)<br>
+Gerbermühlstraße 9<br>
+60594 Frankfurt am Main&nbsp;<br>
+<br>
+</span></span><span style='mso-bookmark:_Hlk89854056'><span lang=DE-AT
+style='font-size:9.0pt;font-family:"Calibri Light",sans-serif;color:black;
+mso-ansi-language:DE-AT'>Eingetragen im Handelsregister des Amtsgerichts
+Frankfurt am Main unter der Registernummer HRB 99052.<br>
+Der Sitz der Bank ist Frankfurt am Main<br>
+Umsatzsteueridentifikationsnummer (USt-IdNr):DE 292000110 <br>
+Bankleitzahl (BLZ): 500 200 00 <br>
+BIC-Code: SEZDDEF1<br><br>
+Sitz der Hauptniederlassung:&nbsp;<br>
+Sberbank Europe AG<br>
+Schwarzenbergplatz 3&nbsp;<br>
+1010 Wien&nbsp;<br>
+Österreich&nbsp;<br>
+Firmenbuch FN 161285i<br><br>
+Vorstand:<br>
+Sonja Sarközi, Pavel Barchugov, Alexander Witte, Aleksei Mikhailov
+</span></span></p>
+
+
+<p><span style='mso-bookmark:_Hlk89854056'><span lang=DE-AT
+style='font-family:"Calibri Light",sans-serif;mso-ansi-language:DE-AT'>
+<br>
+</span></span><span style='mso-bookmark:_Hlk89854056'><span lang=DE-AT
+style='font-size:9.0pt;font-family:"Calibri Light",sans-serif;color:gray;
+mso-ansi-language:DE-AT'>Beachten Sie bitte, dass jede Form der unautorisierten
+Nutzung, Veröffentlichung oder Weitergabe des Inhalts dieser E-Mail nicht
+gestattet ist. Diese Nachricht ist ausschließlich für den bezeichneten
+Adressaten oder dessen Vertreter bestimmt. Sollten Sie nicht der vorgesehene
+Adressat dieser E-Mail oder dessen Vertreter sein, so bitten wir Sie, sich mit
+dem Absender der E-Mail in Verbindung zu setzen.</span></span></p>
+
+</div>
+
+</body>
+
+</html>
+
+
+TICKET_SERVICE_EMAIL 20220219085312: Ticket-ID=1430609, TicketNr=20002, HauptticketNr=20000, Service-Kontakt=franz.tausch@kimi-plus.at, Parameter='49-9-341018880-550;378.67;zahlungshilfe@sberbank-collections.de;+49 69 50958953;;Herr/Frau;Lydia Abrams Alexej Abrams;Lydia Abrams Alexej Abrams;TESTNACHRICHT;franz.tausch@kimi-plus.at;ronald.aberl@aberl.at;Ronald Aberl;
+   Templateinhalt: 
+<html>
+
+<body lang=DE link="#0563C1" vlink="#954F72" style='tab-interval:35.4pt;
+word-wrap:break-word'>
+
+<p class=MsoNormal><b><span lang=DE-AT style='font-family:"Arial",sans-serif;
+text-transform:uppercase;mso-ansi-language:DE-AT'>Zahlungsaufforderung</span></b><b><span
+lang=DE-AT style='font-family:"Arial",sans-serif;mso-ansi-language:DE-AT'> -
+Ihre Kreditrate ist leider überfällig! KK: '49-9-341018880-550</span></b><span
+lang=DE-AT style='mso-ansi-language:DE-AT'><o:p></o:p></span></p>
+
+<p><span lang=DE-AT style='font-family:"Arial",sans-serif;
+mso-ansi-language:DE-AT'>Sehr geehrte Herr/Frau Lydia Abrams Alexej Abrams!</span></p>
+
+<p><span lang=DE-AT style='font-family:"Arial",sans-serif;
+mso-ansi-language:DE-AT'><u5:p>&nbsp;</u5:p></span><span lang=DE-AT
+style='mso-ansi-language:DE-AT'><o:p></o:p></span></p>
+
+<p><span lang=DE-AT style='font-family:"Arial",sans-serif;
+mso-ansi-language:DE-AT'>Wir freuen uns, dass Sie sich bei Ihrer Kreditwahl für
+uns entschieden haben.</span></p>
+
+<p><span lang=DE-AT style='font-family:"Arial",sans-serif;
+mso-ansi-language:DE-AT'>Als zuverlässiger Kreditpartner diese kleine
+Erinnerungshilfe. Ihre vereinbarte Kreditrate ist noch nicht eingetroffen. </span></p>
+
+<p><span lang=DE-AT style='font-family:"Arial",sans-serif;
+mso-ansi-language:DE-AT'>Bitte zahlen Sie den überfälligen Betrag von <b>€ 378.67</b> <b>sofort</b>
+auf unser Bankkonto ein<br>&nbsp;</span></p>
+
+
+<p><b><span lang=DE-AT style='font-family:"Arial",sans-serif;
+mso-ansi-language:DE-AT'>Empfänger:
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></b><span lang=DE-AT style='font-family:"Arial",sans-serif;mso-ansi-language:
+DE-AT'>Sberbank Europe AG </span>
+<br><b><span lang=DE-AT style='font-family:"Arial",sans-serif;
+mso-ansi-language:DE-AT'>BIC:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></b><span lang=DE-AT style='font-family:"Arial",sans-serif;mso-ansi-language:
+DE-AT'>#MANDANT_BIC#</span>
+<br><b><span lang=DE-AT style='font-family:"Arial",sans-serif;
+mso-ansi-language:DE-AT'>IBAN:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></b>#MANDANT_IBAN#
+<span lang=DE-AT style='font-family:"Arial",sans-serif;mso-ansi-language:DE-AT'><br>
+<b>Verwendungszweck:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></b>'49-9-341018880-550<span lang=DE-AT
+style='font-family:"Arial",sans-serif;mso-ansi-language:DE-AT'> (bitte immer
+anführen)</span>
+
+</p>
+
+<p><span lang=DE-AT style='font-family:
+"Arial",sans-serif;mso-ansi-language:DE-AT'>Wir empfehlen Ihnen, eine
+Standardüberweisung durchzuführen, da wir bei Echtzeitüberweisungen leider
+keine reibungslose Abwicklung garantieren können.</span></p>
+
+
+<p><span lang=DE-AT
+style='font-family:"Arial",sans-serif;mso-ansi-language:DE-AT'>Bitte haben Sie
+Verständnis, dass wir die Spesen, welche wir an Ihre Bank bezahlt haben, an Sie
+weiterverrechnen
+müssen.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></p>
+
+<p><span lang=DE-AT
+style='font-family:"Arial",sans-serif;mso-ansi-language:DE-AT'><br>Bei Fragen rufen
+Sie uns gerne an oder schreiben Sie uns eine E-Mail:</span></p>
+
+
+<p><span lang=DE-AT
+style='font-family:"Arial",sans-serif;mso-ansi-language:DE-AT'>
+Email:
+<a
+href="mailto:kundenservice@sberbank-direct.de"><span
+lang=EN-US style='font-family:"Arial",sans-serif;mso-ansi-language:EN-US'>kundenservice@sberbank-direct.de</span></a>
+<br>Tel. Serviceteam: 0151 2145xxxx (MO-FR 8:00-18:00 & SA 8:00-12:00)
+<br><br>
+Sollten Sie Ihre Einzahlung bereits erledigt haben, bedanken wir uns.
+<br><br>
+Freundliche Grüße
+</span></p>
+
+
+
+<p class=MsoNormal style='background:white;vertical-align:baseline'><span
+style='mso-bookmark:_Hlk89854056'><span lang=DE-AT style='font-family:"Calibri Light",sans-serif;
+color:black;mso-ansi-language:DE-AT'>Sberbank Europe AG<br>
+Zweigniederlassung Deutschland<br>
+(auch als Sberbank Direct bezeichnet)<br>
+Gerbermühlstraße 9<br>
+60594 Frankfurt am Main&nbsp;<br>
+<br>
+</span></span><span style='mso-bookmark:_Hlk89854056'><span lang=DE-AT
+style='font-size:9.0pt;font-family:"Calibri Light",sans-serif;color:black;
+mso-ansi-language:DE-AT'>Eingetragen im Handelsregister des Amtsgerichts
+Frankfurt am Main unter der Registernummer HRB 99052.<br>
+Der Sitz der Bank ist Frankfurt am Main<br>
+Umsatzsteueridentifikationsnummer (USt-IdNr):DE 292000110 <br>
+Bankleitzahl (BLZ): 500 200 00 <br>
+BIC-Code: SEZDDEF1<br><br>
+Sitz der Hauptniederlassung:&nbsp;<br>
+Sberbank Europe AG<br>
+Schwarzenbergplatz 3&nbsp;<br>
+1010 Wien&nbsp;<br>
+Österreich&nbsp;<br>
+Firmenbuch FN 161285i<br><br>
+Vorstand:<br>
+Sonja Sarközi, Pavel Barchugov, Alexander Witte, Aleksei Mikhailov
+</span></span></p>
+
+
+<p><span style='mso-bookmark:_Hlk89854056'><span lang=DE-AT
+style='font-family:"Calibri Light",sans-serif;mso-ansi-language:DE-AT'>
+<br>
+</span></span><span style='mso-bookmark:_Hlk89854056'><span lang=DE-AT
+style='font-size:9.0pt;font-family:"Calibri Light",sans-serif;color:gray;
+mso-ansi-language:DE-AT'>Beachten Sie bitte, dass jede Form der unautorisierten
+Nutzung, Veröffentlichung oder Weitergabe des Inhalts dieser E-Mail nicht
+gestattet ist. Diese Nachricht ist ausschließlich für den bezeichneten
+Adressaten oder dessen Vertreter bestimmt. Sollten Sie nicht der vorgesehene
+Adressat dieser E-Mail oder dessen Vertreter sein, so bitten wir Sie, sich mit
+dem Absender der E-Mail in Verbindung zu setzen.</span></span></p>
+
+</div>
+
+</body>
+
+</html>
+
+
+TICKET_SERVICE_EMAIL 20220219085312: Ticket-ID=1430629, TicketNr=23002, HauptticketNr=23000, Service-Kontakt=franz.tausch@kimi-plus.at, Parameter='49-9-1670771080-550;197.21;zahlungshilfe@sberbank-collections.de;+49 69 50958953;r;Herr;Stefan Pohl;Stefan Pohl;TESTNACHRICHT;franz.tausch@kimi-plus.at;ronald.aberl@aberl.at;Ronald Aberl;
+   Templateinhalt: 
+<html>
+
+<body lang=DE link="#0563C1" vlink="#954F72" style='tab-interval:35.4pt;
+word-wrap:break-word'>
+
+<p class=MsoNormal><b><span lang=DE-AT style='font-family:"Arial",sans-serif;
+text-transform:uppercase;mso-ansi-language:DE-AT'>Zahlungsaufforderung</span></b><b><span
+lang=DE-AT style='font-family:"Arial",sans-serif;mso-ansi-language:DE-AT'> -
+Ihre Kreditrate ist leider überfällig! KK: '49-9-1670771080-550</span></b><span
+lang=DE-AT style='mso-ansi-language:DE-AT'><o:p></o:p></span></p>
+
+<p><span lang=DE-AT style='font-family:"Arial",sans-serif;
+mso-ansi-language:DE-AT'>Sehr geehrter Herr Stefan Pohl!</span></p>
+
+<p><span lang=DE-AT style='font-family:"Arial",sans-serif;
+mso-ansi-language:DE-AT'><u5:p>&nbsp;</u5:p></span><span lang=DE-AT
+style='mso-ansi-language:DE-AT'><o:p></o:p></span></p>
+
+<p><span lang=DE-AT style='font-family:"Arial",sans-serif;
+mso-ansi-language:DE-AT'>Wir freuen uns, dass Sie sich bei Ihrer Kreditwahl für
+uns entschieden haben.</span></p>
+
+<p><span lang=DE-AT style='font-family:"Arial",sans-serif;
+mso-ansi-language:DE-AT'>Als zuverlässiger Kreditpartner diese kleine
+Erinnerungshilfe. Ihre vereinbarte Kreditrate ist noch nicht eingetroffen. </span></p>
+
+<p><span lang=DE-AT style='font-family:"Arial",sans-serif;
+mso-ansi-language:DE-AT'>Bitte zahlen Sie den überfälligen Betrag von <b>€ 197.21</b> <b>sofort</b>
+auf unser Bankkonto ein<br>&nbsp;</span></p>
+
+
+<p><b><span lang=DE-AT style='font-family:"Arial",sans-serif;
+mso-ansi-language:DE-AT'>Empfänger:
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></b><span lang=DE-AT style='font-family:"Arial",sans-serif;mso-ansi-language:
+DE-AT'>Sberbank Europe AG </span>
+<br><b><span lang=DE-AT style='font-family:"Arial",sans-serif;
+mso-ansi-language:DE-AT'>BIC:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></b><span lang=DE-AT style='font-family:"Arial",sans-serif;mso-ansi-language:
+DE-AT'>#MANDANT_BIC#</span>
+<br><b><span lang=DE-AT style='font-family:"Arial",sans-serif;
+mso-ansi-language:DE-AT'>IBAN:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></b>#MANDANT_IBAN#
+<span lang=DE-AT style='font-family:"Arial",sans-serif;mso-ansi-language:DE-AT'><br>
+<b>Verwendungszweck:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></b>'49-9-1670771080-550<span lang=DE-AT
+style='font-family:"Arial",sans-serif;mso-ansi-language:DE-AT'> (bitte immer
+anführen)</span>
+
+</p>
+
+<p><span lang=DE-AT style='font-family:
+"Arial",sans-serif;mso-ansi-language:DE-AT'>Wir empfehlen Ihnen, eine
+Standardüberweisung durchzuführen, da wir bei Echtzeitüberweisungen leider
+keine reibungslose Abwicklung garantieren können.</span></p>
+
+
+<p><span lang=DE-AT
+style='font-family:"Arial",sans-serif;mso-ansi-language:DE-AT'>Bitte haben Sie
+Verständnis, dass wir die Spesen, welche wir an Ihre Bank bezahlt haben, an Sie
+weiterverrechnen
+müssen.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></p>
+
+<p><span lang=DE-AT
+style='font-family:"Arial",sans-serif;mso-ansi-language:DE-AT'><br>Bei Fragen rufen
+Sie uns gerne an oder schreiben Sie uns eine E-Mail:</span></p>
+
+
+<p><span lang=DE-AT
+style='font-family:"Arial",sans-serif;mso-ansi-language:DE-AT'>
+Email:
+<a
+href="mailto:kundenservice@sberbank-direct.de"><span
+lang=EN-US style='font-family:"Arial",sans-serif;mso-ansi-language:EN-US'>kundenservice@sberbank-direct.de</span></a>
+<br>Tel. Serviceteam: 0151 2145xxxx (MO-FR 8:00-18:00 & SA 8:00-12:00)
+<br><br>
+Sollten Sie Ihre Einzahlung bereits erledigt haben, bedanken wir uns.
+<br><br>
+Freundliche Grüße
+</span></p>
+
+
+
+<p class=MsoNormal style='background:white;vertical-align:baseline'><span
+style='mso-bookmark:_Hlk89854056'><span lang=DE-AT style='font-family:"Calibri Light",sans-serif;
+color:black;mso-ansi-language:DE-AT'>Sberbank Europe AG<br>
+Zweigniederlassung Deutschland<br>
+(auch als Sberbank Direct bezeichnet)<br>
+Gerbermühlstraße 9<br>
+60594 Frankfurt am Main&nbsp;<br>
+<br>
+</span></span><span style='mso-bookmark:_Hlk89854056'><span lang=DE-AT
+style='font-size:9.0pt;font-family:"Calibri Light",sans-serif;color:black;
+mso-ansi-language:DE-AT'>Eingetragen im Handelsregister des Amtsgerichts
+Frankfurt am Main unter der Registernummer HRB 99052.<br>
+Der Sitz der Bank ist Frankfurt am Main<br>
+Umsatzsteueridentifikationsnummer (USt-IdNr):DE 292000110 <br>
+Bankleitzahl (BLZ): 500 200 00 <br>
+BIC-Code: SEZDDEF1<br><br>
+Sitz der Hauptniederlassung:&nbsp;<br>
+Sberbank Europe AG<br>
+Schwarzenbergplatz 3&nbsp;<br>
+1010 Wien&nbsp;<br>
+Österreich&nbsp;<br>
+Firmenbuch FN 161285i<br><br>
+Vorstand:<br>
+Sonja Sarközi, Pavel Barchugov, Alexander Witte, Aleksei Mikhailov
+</span></span></p>
+
+
+<p><span style='mso-bookmark:_Hlk89854056'><span lang=DE-AT
+style='font-family:"Calibri Light",sans-serif;mso-ansi-language:DE-AT'>
+<br>
+</span></span><span style='mso-bookmark:_Hlk89854056'><span lang=DE-AT
+style='font-size:9.0pt;font-family:"Calibri Light",sans-serif;color:gray;
+mso-ansi-language:DE-AT'>Beachten Sie bitte, dass jede Form der unautorisierten
+Nutzung, Veröffentlichung oder Weitergabe des Inhalts dieser E-Mail nicht
+gestattet ist. Diese Nachricht ist ausschließlich für den bezeichneten
+Adressaten oder dessen Vertreter bestimmt. Sollten Sie nicht der vorgesehene
+Adressat dieser E-Mail oder dessen Vertreter sein, so bitten wir Sie, sich mit
+dem Absender der E-Mail in Verbindung zu setzen.</span></span></p>
+
+</div>
+
+</body>
+
+</html>
+
+
+TICKET_SERVICE_EMAIL 20220219085312: Ticket-ID=1430630, TicketNr=24002, HauptticketNr=24000, Service-Kontakt=franz.tausch@kimi-plus.at, Parameter='49-9-1613880580-550;140.49;zahlungshilfe@sberbank-collections.de;+49 69 50958953;r;Herr;Mario Jürgens;Mario Jürgens;TESTNACHRICHT;franz.tausch@kimi-plus.at;ronald.aberl@aberl.at;Ronald Aberl;
+   Templateinhalt: 
+<html>
+
+<body lang=DE link="#0563C1" vlink="#954F72" style='tab-interval:35.4pt;
+word-wrap:break-word'>
+
+<p class=MsoNormal><b><span lang=DE-AT style='font-family:"Arial",sans-serif;
+text-transform:uppercase;mso-ansi-language:DE-AT'>Zahlungsaufforderung</span></b><b><span
+lang=DE-AT style='font-family:"Arial",sans-serif;mso-ansi-language:DE-AT'> -
+Ihre Kreditrate ist leider überfällig! KK: '49-9-1613880580-550</span></b><span
+lang=DE-AT style='mso-ansi-language:DE-AT'><o:p></o:p></span></p>
+
+<p><span lang=DE-AT style='font-family:"Arial",sans-serif;
+mso-ansi-language:DE-AT'>Sehr geehrter Herr Mario Jürgens!</span></p>
+
+<p><span lang=DE-AT style='font-family:"Arial",sans-serif;
+mso-ansi-language:DE-AT'><u5:p>&nbsp;</u5:p></span><span lang=DE-AT
+style='mso-ansi-language:DE-AT'><o:p></o:p></span></p>
+
+<p><span lang=DE-AT style='font-family:"Arial",sans-serif;
+mso-ansi-language:DE-AT'>Wir freuen uns, dass Sie sich bei Ihrer Kreditwahl für
+uns entschieden haben.</span></p>
+
+<p><span lang=DE-AT style='font-family:"Arial",sans-serif;
+mso-ansi-language:DE-AT'>Als zuverlässiger Kreditpartner diese kleine
+Erinnerungshilfe. Ihre vereinbarte Kreditrate ist noch nicht eingetroffen. </span></p>
+
+<p><span lang=DE-AT style='font-family:"Arial",sans-serif;
+mso-ansi-language:DE-AT'>Bitte zahlen Sie den überfälligen Betrag von <b>€ 140.49</b> <b>sofort</b>
+auf unser Bankkonto ein<br>&nbsp;</span></p>
+
+
+<p><b><span lang=DE-AT style='font-family:"Arial",sans-serif;
+mso-ansi-language:DE-AT'>Empfänger:
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></b><span lang=DE-AT style='font-family:"Arial",sans-serif;mso-ansi-language:
+DE-AT'>Sberbank Europe AG </span>
+<br><b><span lang=DE-AT style='font-family:"Arial",sans-serif;
+mso-ansi-language:DE-AT'>BIC:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></b><span lang=DE-AT style='font-family:"Arial",sans-serif;mso-ansi-language:
+DE-AT'>#MANDANT_BIC#</span>
+<br><b><span lang=DE-AT style='font-family:"Arial",sans-serif;
+mso-ansi-language:DE-AT'>IBAN:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></b>#MANDANT_IBAN#
+<span lang=DE-AT style='font-family:"Arial",sans-serif;mso-ansi-language:DE-AT'><br>
+<b>Verwendungszweck:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></b>'49-9-1613880580-550<span lang=DE-AT
+style='font-family:"Arial",sans-serif;mso-ansi-language:DE-AT'> (bitte immer
+anführen)</span>
+
+</p>
+
+<p><span lang=DE-AT style='font-family:
+"Arial",sans-serif;mso-ansi-language:DE-AT'>Wir empfehlen Ihnen, eine
+Standardüberweisung durchzuführen, da wir bei Echtzeitüberweisungen leider
+keine reibungslose Abwicklung garantieren können.</span></p>
+
+
+<p><span lang=DE-AT
+style='font-family:"Arial",sans-serif;mso-ansi-language:DE-AT'>Bitte haben Sie
+Verständnis, dass wir die Spesen, welche wir an Ihre Bank bezahlt haben, an Sie
+weiterverrechnen
+müssen.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></p>
+
+<p><span lang=DE-AT
+style='font-family:"Arial",sans-serif;mso-ansi-language:DE-AT'><br>Bei Fragen rufen
+Sie uns gerne an oder schreiben Sie uns eine E-Mail:</span></p>
+
+
+<p><span lang=DE-AT
+style='font-family:"Arial",sans-serif;mso-ansi-language:DE-AT'>
+Email:
+<a
+href="mailto:kundenservice@sberbank-direct.de"><span
+lang=EN-US style='font-family:"Arial",sans-serif;mso-ansi-language:EN-US'>kundenservice@sberbank-direct.de</span></a>
+<br>Tel. Serviceteam: 0151 2145xxxx (MO-FR 8:00-18:00 & SA 8:00-12:00)
+<br><br>
+Sollten Sie Ihre Einzahlung bereits erledigt haben, bedanken wir uns.
+<br><br>
+Freundliche Grüße
+</span></p>
+
+
+
+<p class=MsoNormal style='background:white;vertical-align:baseline'><span
+style='mso-bookmark:_Hlk89854056'><span lang=DE-AT style='font-family:"Calibri Light",sans-serif;
+color:black;mso-ansi-language:DE-AT'>Sberbank Europe AG<br>
+Zweigniederlassung Deutschland<br>
+(auch als Sberbank Direct bezeichnet)<br>
+Gerbermühlstraße 9<br>
+60594 Frankfurt am Main&nbsp;<br>
+<br>
+</span></span><span style='mso-bookmark:_Hlk89854056'><span lang=DE-AT
+style='font-size:9.0pt;font-family:"Calibri Light",sans-serif;color:black;
+mso-ansi-language:DE-AT'>Eingetragen im Handelsregister des Amtsgerichts
+Frankfurt am Main unter der Registernummer HRB 99052.<br>
+Der Sitz der Bank ist Frankfurt am Main<br>
+Umsatzsteueridentifikationsnummer (USt-IdNr):DE 292000110 <br>
+Bankleitzahl (BLZ): 500 200 00 <br>
+BIC-Code: SEZDDEF1<br><br>
+Sitz der Hauptniederlassung:&nbsp;<br>
+Sberbank Europe AG<br>
+Schwarzenbergplatz 3&nbsp;<br>
+1010 Wien&nbsp;<br>
+Österreich&nbsp;<br>
+Firmenbuch FN 161285i<br><br>
+Vorstand:<br>
+Sonja Sarközi, Pavel Barchugov, Alexander Witte, Aleksei Mikhailov
+</span></span></p>
+
+
+<p><span style='mso-bookmark:_Hlk89854056'><span lang=DE-AT
+style='font-family:"Calibri Light",sans-serif;mso-ansi-language:DE-AT'>
+<br>
+</span></span><span style='mso-bookmark:_Hlk89854056'><span lang=DE-AT
+style='font-size:9.0pt;font-family:"Calibri Light",sans-serif;color:gray;
+mso-ansi-language:DE-AT'>Beachten Sie bitte, dass jede Form der unautorisierten
+Nutzung, Veröffentlichung oder Weitergabe des Inhalts dieser E-Mail nicht
+gestattet ist. Diese Nachricht ist ausschließlich für den bezeichneten
+Adressaten oder dessen Vertreter bestimmt. Sollten Sie nicht der vorgesehene
+Adressat dieser E-Mail oder dessen Vertreter sein, so bitten wir Sie, sich mit
+dem Absender der E-Mail in Verbindung zu setzen.</span></span></p>
+
+</div>
+
+</body>
+
+</html>
+
+
+TICKET_SERVICE_EMAIL 20220219144123: Ticket-ID=1431033, TicketNr=1002, HauptticketNr=1000, Service-Kontakt=franz.tausch@kimi-plus.at, Parameter=49-9-1644426480-550;;zahlungshilfe@sberbank-collections.de;+49 69 50958953;r;Herr;Roberto Kamberovski;Roberto Kamberovski;TESTNACHRICHT;franz.tausch@kimi-plus.at;ronald.aberl@aberl.at;Ronald Aberl;
+
+TICKET_SERVICE_EMAIL 20220219144123: Ticket-ID=1431034, TicketNr=2002, HauptticketNr=2000, Service-Kontakt=franz.tausch@kimi-plus.at, Parameter=49-9-1630419580-550;;zahlungshilfe@sberbank-collections.de;+49 69 50958953;r;Herr;Aron Micu;Aron Micu;TESTNACHRICHT;franz.tausch@kimi-plus.at;ronald.aberl@aberl.at;Ronald Aberl;
+
+TICKET_SERVICE_EMAIL 20220219144123: Ticket-ID=1431035, TicketNr=3002, HauptticketNr=3000, Service-Kontakt=franz.tausch@kimi-plus.at, Parameter=49-9-1015904581-550;;zahlungshilfe@sberbank-collections.de;+49 69 50958953;;Herr/Frau;Nicole und Björn Ohm;Nicole und Björn Ohm;TESTNACHRICHT;franz.tausch@kimi-plus.at;ronald.aberl@aberl.at;Ronald Aberl;
+
+TICKET_SERVICE_EMAIL 20220219144123: Ticket-ID=1431036, TicketNr=4002, HauptticketNr=4000, Service-Kontakt=franz.tausch@kimi-plus.at, Parameter=49-9-341018880-550;;zahlungshilfe@sberbank-collections.de;+49 69 50958953;;Herr/Frau;Lydia Abrams Alexej Abrams;Lydia Abrams Alexej Abrams;TESTNACHRICHT;franz.tausch@kimi-plus.at;ronald.aberl@aberl.at;Ronald Aberl;
+

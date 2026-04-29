@@ -1,0 +1,497 @@
+root { 
+    display: block;
+}
+
+table select.column {
+    width: 100%;
+}
+
+.flip {
+    -moz-transform: scaleX(-1);
+    -o-transform: scaleX(-1);
+    -webkit-transform: scaleX(-1);
+    transform: scaleX(-1);
+    filter: FlipH;
+    -ms-filter: “FlipH”;
+}
+
+table {
+    line-height:20px;
+}
+
+input.column,
+select.column {
+    width: 200px;
+}
+
+input.columnSmall,
+select.columnSmall {
+    width: 62px;
+}
+
+
+html {
+	overflow: hidden !important;
+}
+
+body, html {
+    height: 100%;
+    min-height: 100%;
+    font-family: Helvetica, Arial;
+    font-size: 13px;
+    font-weight: normal;
+    color: #252525;
+    text-size-adjust: none;
+    -ms-text-size-adjust: 100%;
+
+    background-image: url("../images/theme-modern/bg_texture.png");
+    background-repeat: repeat;
+
+    margin: 0;
+    line-height: 30px;
+}
+
+body {
+	overflow: auto !important;
+}
+
+.top-bg {
+    background-image: url("../images/theme-modern/bg_gradient_home_top.png");
+    background-repeat: repeat-x;
+}
+
+.headlines {
+    font-size: 22px;
+    font-weight: bold;
+    color: #252525;
+}
+
+.headlines-subtext {
+    font-size: 18px;
+    font-weight: normal;
+    color: #646363;
+}
+
+.center .headlines-subtext {
+    margin-top: 10px;
+    line-height: 20px;
+}
+
+.tooltip {
+    font-size: 12px;
+    font-weight: normal;
+    color: #505050;
+    text-shadow: 1px 1px 0 #ffffff;
+}
+
+i {
+    font-size: 13px;
+    font-style: italic;
+    color: #7c7c7c;
+}
+
+div.button {
+    font-size: 13px;
+    font-weight: bold;
+    color: #ffffff;
+    text-shadow: 1px 1px 0 #000000;
+    display: inline-block;
+    line-height: 47px;
+    height: 47px;
+    text-align: center;
+    margin: 0;
+
+    margin-left: -3px;
+    margin-right: -4px;
+}
+
+.footer img {
+    vertical-align: middle;
+}
+
+.button-container {
+    background-image: url("../images/theme-modern/btn_middle.png");
+    background-size: auto;
+    background-repeat: repeat-x;
+    width: 150px;
+    text-align: center;
+    line-height: 47px;
+    
+    cursor: pointer;
+    
+    margin-top: 10px;
+    margin-bottom: 20px;
+    margin-left: 10px;
+}
+
+.padding {
+    padding: 10px;
+}
+
+.button-container img {
+    vertical-align: middle;
+    margin-left: 10px;
+}
+
+.button-front {
+    background-image: url("../images/theme-modern/btn_left.png");
+    background-repeat: repeat-x;
+
+    float: left;
+
+    width: 10px; 
+    height: 47px;
+    margin: 0;
+}
+.button-behind {
+    background-image: url("../images/theme-modern/btn_right.png");
+    background-repeat: repeat-x;
+    display: inline-block;
+    float: right;
+    width: 8px;
+    height: 47px;
+    margin: 0;
+}
+
+.hidden {
+    display: none;
+}
+
+#header {
+    position: fixed;
+    width: 100%;
+	left: 0;
+    top: -1px;
+    padding: 1px;
+    z-index: 999;
+}
+
+#header div.bg {
+	position: relative;
+    width: 827px;
+    margin: 0 auto;
+    padding-bottom: 1px;
+	
+    background-image: url("../images/theme-modern/header_bg.png");
+    background-repeat: no-repeat;
+    background-position: bottom left;
+}
+
+a {
+    color: black;
+    text-decoration: none;
+}
+a:hover {
+    text-decoration: underline;
+}
+a.active {
+    font-weight: bold;
+}
+
+#header div.img-holder {
+    text-align: center;
+    background-color: transparent;
+}
+
+.container {
+    padding-bottom: 50px;
+}
+
+#header .login {
+    width: 800px;
+    margin: 0 auto;
+    position: relative;
+    text-align: right;
+}
+#header .login a {
+    margin-right: 20px;
+    line-height: 40px;
+}
+
+#header ul {
+    list-style: none;
+    line-height: 30px;
+    margin-top: 0px;
+    margin-left: 0;
+    padding-left: 0;
+
+}
+#header li {
+    display: inline-block;
+    padding: 0 18px;
+}
+
+#slider {
+    height: 345px;
+}
+.slider {
+    height: 220px;
+    overflow-x: auto;
+}
+
+.content {
+    width: 800px;
+    margin: 0 auto;
+    padding-top: 156px;
+    background-color: white;
+    position: relative;
+}
+
+.content-addon {
+    padding: 10px;
+    width: 800px;
+    margin: 0px auto;
+    position: relative;
+    padding-top: 40px;
+}
+
+.content-main {
+    width: 800px;
+    margin: 0 auto;
+}
+
+.content-addon #logo {
+    background-image: url("../images/theme-modern/kimi_plus_logo_home.png");
+    width: 217px;
+    height: 166px;
+    margin: 0 auto;
+    margin-top: 30px;
+}
+
+.shadow {
+    zoom: 1;
+    -moz-box-shadow: 0 0 15px #666; /*Mozilla-basierte Browser (z.B. Firefox)*/
+    -webkit-box-shadow: 0 0 15px #666; /*WebKit-basierte Browser (z.B. Safari/Chrome)*/
+    box-shadow: 0 0 15px #666; /*CSS3 Standard*/
+    
+    
+    position: relative;
+    margin-top: -10px;
+    z-index: 99;
+    background-color: white;
+    
+    border-bottom: 1px solid #BBB;
+    border-top: 1px solid #BBB;
+    margin-bottom: -1px;
+}
+
+div.column {
+    width: 380px;
+}
+.left {
+    float: left;
+}
+.right {
+    float: right;
+}
+.clear {
+    clear: both;
+}
+.space {
+    height: 20px;
+}
+
+.footer {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 40px;
+    line-height: 40px;
+    background-color: #fff;
+    bottom: -9px;
+}
+.footer div.holder {
+    width: 800px;
+    margin: 0 auto;
+}
+
+.fotter div.holder div.left {
+    display: inline-block;
+    float: left;
+}
+.footer div.holder div.right {
+    float: right;
+    display: inline-block;
+}
+.footer div.holder div.center {
+    text-align: center;
+}
+
+#mainframe {
+    min-height: 100%;
+    position: relative;
+}
+
+.center {
+    text-align: center;
+}
+
+.page-descr {
+    font-size: 36px;
+    font-weight: bold;
+}
+
+.pages ul {
+    list-style: none;
+    padding-left: 0;
+}
+.pages ul li {
+    padding-left: 5px;
+    display: inline-block;
+}
+
+ul.checked-list li {
+    list-style: none;
+    
+    padding-left: 20px;
+    background: url("../images/theme-modern/tick_icon.png") no-repeat 0 7px transparent;
+}
+
+.bold {
+    font-weight: bold;
+}
+
+ul.clear {
+    padding-left: 0;
+}
+
+ul.clear li {
+    list-style: none;
+    padding-left: 0;
+    line-height: 22px;
+}
+
+ul.login-extend {
+    padding-left: 0;
+    padding:0;
+    margin:0;
+    text-align:left;
+}
+ul.login-extend li {
+    display: block !important;
+    padding-left: 0;
+    padding:0 !important;
+    margin:0;
+}
+
+ul.special li {
+    line-height: 18px;
+    padding-top: 10px;
+}
+
+ul.special .headlines {
+    padding-bottom: 5px;
+}
+ul.services {
+    padding-left: 0;
+    cursor: default;
+}
+ul.services li {
+    list-style: none;
+    padding-left: 0;
+    display: inline-block;
+    text-align: center;
+    width: 33%;
+    margin-top: 30px;
+    margin-bottom: 20px;
+    
+    cursor: pointer;
+}
+
+.speakbubble {
+    background-image: url("../images/theme-modern/tool_tip_bg.png");
+    background-repeat: no-repeat;
+    height: 126px;
+    width: 262px;
+    line-height: 28px;
+    
+    padding-top: 20px;
+    position: absolute;
+    display: none;
+}
+
+.portal-link {
+    width: 100%;
+}
+
+.contact-card {
+    line-height: 18px;
+}
+
+input, textarea, select {
+    border-radius: 5px;
+    border: 1px solid #999;
+    padding: 5px;
+    overflow: auto;
+    font-family: Helvetica, Arial;
+    font-size: 13px;
+}
+
+.designed input {
+    max-width: 66px;
+}
+
+input[type=text], input[type=email], input[type=password] {
+    height: 18px;
+}
+
+a.underlined {
+    text-decoration: underline;
+}
+
+div.error {
+    color: #ff0000;
+}
+
+a img {
+    border: none;
+}
+
+#login-container {
+    margin:0 auto;
+    padding-top: 15%;
+    width: 300px;
+}
+
+#login-container input,
+#login-container select {
+    width: 100%;
+}
+
+#login-container img {
+    width: 100%;
+}
+
+a.button {
+    border-radius: 3px !important;
+}
+
+table.designed {
+    background-color: #DDD;
+    width: 100%;
+}
+
+table.designed th {
+    background-color: #AAA;
+}
+
+table.designed tr:nth-child(even) {
+    background-color: white;
+}
+
+table.designed-last {
+    background-color: #DDD;
+    width: 100%;
+}
+
+table.designed-last th {
+    background-color: #AAA;
+}
+
+table.designed-last tr:not(:last-child) {
+    background-color: white;
+}
+
+table.designed-last tr:last-child {
+    background-color: #AAA;
+}

@@ -1,0 +1,8 @@
+SMS 20220218174212: Ticket-ID=986113, TicketNr=88061, HauptticketNr=88061, Service-Kontakt=+436606590009, Parameter=4711;100,90;zahlungshilfe@sberbank-collections.de;0732/12345;TESTNACHRICHT;ronald.aberl@liwest.at;;;;;
+   Templateinhalt: 
+Bitte kontaktieren Sie uns zu Ihrer Verbindlichkeit zum KK:4711 - zahlungshilfe@sberbank-collections.de
+
+SMS 20220218174330: Ticket-ID=986113, TicketNr=88061, HauptticketNr=88061, Service-Kontakt=+436606590009, Parameter=4711;100,90;zahlungshilfe@sberbank-collections.de;0732/12345;TESTNACHRICHT;ronald.aberl@liwest.at;;;;;
+   Templateinhalt: 
+Bitte kontaktieren Sie uns zu Ihrer Verbindlichkeit zum KK:4711 - zahlungshilfe@sberbank-collections.de
+

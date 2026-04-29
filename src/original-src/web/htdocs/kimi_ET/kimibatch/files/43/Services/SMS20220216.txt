@@ -1,0 +1,108 @@
+SMS 20220216141024: Ticket-ID=kontaktid, TicketNr=, HauptticketNr=, Parameter=aktnr;ueberfaelligeraussenstand;zahlungshilfe@sberbank-collections.de;;;;;
+   Templateinhalt: 
+Bitte kontaktieren Sie uns zu Ihrer Verbindlichkeit zum KK:aktnr - zahlungshilfe@sberbank-collections.de
+
+SMS 20220216141024: Ticket-ID=1413572, TicketNr=56001, HauptticketNr=56000, Parameter='49-9-1644426480-550;602.81;zahlungshilfe@sberbank-collections.de;r;Herr;Roberto Kamberovski;;Roberto Kamberovski
+   Templateinhalt: 
+Bitte kontaktieren Sie uns zu Ihrer Verbindlichkeit zum KK:'49-9-1644426480-550 - zahlungshilfe@sberbank-collections.de
+
+SMS 20220216141024: Ticket-ID=1413573, TicketNr=57001, HauptticketNr=57000, Parameter='49-9-1630419580-550;416.47;zahlungshilfe@sberbank-collections.de;r;Herr;Aron Micu;;Aron Micu
+   Templateinhalt: 
+Bitte kontaktieren Sie uns zu Ihrer Verbindlichkeit zum KK:'49-9-1630419580-550 - zahlungshilfe@sberbank-collections.de
+
+SMS 20220216141024: Ticket-ID=1413574, TicketNr=58001, HauptticketNr=58000, Parameter='49-9-1015904581-550;117.85;zahlungshilfe@sberbank-collections.de;;Herr/Frau;Nicole und Björn Ohm;;Nicole und Björn Ohm
+   Templateinhalt: 
+Bitte kontaktieren Sie uns zu Ihrer Verbindlichkeit zum KK:'49-9-1015904581-550 - zahlungshilfe@sberbank-collections.de
+
+SMS 20220216141024: Ticket-ID=1413575, TicketNr=59001, HauptticketNr=59000, Parameter='49-9-341018880-550;378.67;zahlungshilfe@sberbank-collections.de;;Herr/Frau;Lydia Abrams Alexej Abrams;;Lydia Abrams Alexej Abrams
+   Templateinhalt: 
+Bitte kontaktieren Sie uns zu Ihrer Verbindlichkeit zum KK:'49-9-341018880-550 - zahlungshilfe@sberbank-collections.de
+
+SMS 20220216141024: Ticket-ID=1413626, TicketNr=66001, HauptticketNr=66000, Parameter='49-9-1670771080-550;197.21;zahlungshilfe@sberbank-collections.de;r;Herr;Stefan Pohl;;Stefan Pohl
+   Templateinhalt: 
+Bitte kontaktieren Sie uns zu Ihrer Verbindlichkeit zum KK:'49-9-1670771080-550 - zahlungshilfe@sberbank-collections.de
+
+SMS 20220216141024: Ticket-ID=1413627, TicketNr=67001, HauptticketNr=67000, Parameter='49-9-1613880580-550;140.49;zahlungshilfe@sberbank-collections.de;r;Herr;Mario Jürgens;;Mario Jürgens
+   Templateinhalt: 
+Bitte kontaktieren Sie uns zu Ihrer Verbindlichkeit zum KK:'49-9-1613880580-550 - zahlungshilfe@sberbank-collections.de
+
+SMS 20220216142229: Ticket-ID=kontaktid, TicketNr=, HauptticketNr=, Parameter=aktnr;ueberfaelligeraussenstand;zahlungshilfe@sberbank-collections.de;;;;;
+   Templateinhalt: 
+Bitte kontaktieren Sie uns zu Ihrer Verbindlichkeit zum KK:aktnr - zahlungshilfe@sberbank-collections.de
+
+SMS 20220216142229: Ticket-ID=1413572, TicketNr=56001, HauptticketNr=56000, Parameter='49-9-1644426480-550;602.81;zahlungshilfe@sberbank-collections.de;r;Herr;Roberto Kamberovski;;Roberto Kamberovski
+   Templateinhalt: 
+Bitte kontaktieren Sie uns zu Ihrer Verbindlichkeit zum KK:'49-9-1644426480-550 - zahlungshilfe@sberbank-collections.de
+
+SMS 20220216142229: Ticket-ID=1413573, TicketNr=57001, HauptticketNr=57000, Parameter='49-9-1630419580-550;416.47;zahlungshilfe@sberbank-collections.de;r;Herr;Aron Micu;;Aron Micu
+   Templateinhalt: 
+Bitte kontaktieren Sie uns zu Ihrer Verbindlichkeit zum KK:'49-9-1630419580-550 - zahlungshilfe@sberbank-collections.de
+
+SMS 20220216142229: Ticket-ID=1413574, TicketNr=58001, HauptticketNr=58000, Parameter='49-9-1015904581-550;117.85;zahlungshilfe@sberbank-collections.de;;Herr/Frau;Nicole und Björn Ohm;;Nicole und Björn Ohm
+   Templateinhalt: 
+Bitte kontaktieren Sie uns zu Ihrer Verbindlichkeit zum KK:'49-9-1015904581-550 - zahlungshilfe@sberbank-collections.de
+
+SMS 20220216142229: Ticket-ID=1413575, TicketNr=59001, HauptticketNr=59000, Parameter='49-9-341018880-550;378.67;zahlungshilfe@sberbank-collections.de;;Herr/Frau;Lydia Abrams Alexej Abrams;;Lydia Abrams Alexej Abrams
+   Templateinhalt: 
+Bitte kontaktieren Sie uns zu Ihrer Verbindlichkeit zum KK:'49-9-341018880-550 - zahlungshilfe@sberbank-collections.de
+
+SMS 20220216142229: Ticket-ID=1413626, TicketNr=66001, HauptticketNr=66000, Parameter='49-9-1670771080-550;197.21;zahlungshilfe@sberbank-collections.de;r;Herr;Stefan Pohl;;Stefan Pohl
+   Templateinhalt: 
+Bitte kontaktieren Sie uns zu Ihrer Verbindlichkeit zum KK:'49-9-1670771080-550 - zahlungshilfe@sberbank-collections.de
+
+SMS 20220216172641: Ticket-ID=kontaktid, TicketNr=, HauptticketNr=, Parameter=aktnr;ueberfaelligeraussenstand;zahlungshilfe@sberbank-collections.de;;;;;
+   Templateinhalt: 
+Bitte kontaktieren Sie uns zu Ihrer Verbindlichkeit zum KK:aktnr - zahlungshilfe@sberbank-collections.de
+
+SMS 20220216172641: Ticket-ID=1413743, TicketNr=84001, HauptticketNr=84000, Parameter='49-9-1644426480-550;602.81;zahlungshilfe@sberbank-collections.de;r;Herr;Roberto Kamberovski;;Roberto Kamberovski
+   Templateinhalt: 
+Bitte kontaktieren Sie uns zu Ihrer Verbindlichkeit zum KK:'49-9-1644426480-550 - zahlungshilfe@sberbank-collections.de
+
+SMS 20220216172641: Ticket-ID=1413744, TicketNr=85001, HauptticketNr=85000, Parameter='49-9-1630419580-550;416.47;zahlungshilfe@sberbank-collections.de;r;Herr;Aron Micu;;Aron Micu
+   Templateinhalt: 
+Bitte kontaktieren Sie uns zu Ihrer Verbindlichkeit zum KK:'49-9-1630419580-550 - zahlungshilfe@sberbank-collections.de
+
+SMS 20220216172641: Ticket-ID=1413745, TicketNr=86001, HauptticketNr=86000, Parameter='49-9-1015904581-550;117.85;zahlungshilfe@sberbank-collections.de;;Herr/Frau;Nicole und Björn Ohm;;Nicole und Björn Ohm
+   Templateinhalt: 
+Bitte kontaktieren Sie uns zu Ihrer Verbindlichkeit zum KK:'49-9-1015904581-550 - zahlungshilfe@sberbank-collections.de
+
+SMS 20220216172641: Ticket-ID=1413746, TicketNr=87001, HauptticketNr=87000, Parameter='49-9-341018880-550;378.67;zahlungshilfe@sberbank-collections.de;;Herr/Frau;Lydia Abrams Alexej Abrams;;Lydia Abrams Alexej Abrams
+   Templateinhalt: 
+Bitte kontaktieren Sie uns zu Ihrer Verbindlichkeit zum KK:'49-9-341018880-550 - zahlungshilfe@sberbank-collections.de
+
+SMS 20220216172641: Ticket-ID=1413770, TicketNr=90001, HauptticketNr=90000, Parameter='49-9-1670771080-550;197.21;zahlungshilfe@sberbank-collections.de;r;Herr;Stefan Pohl;;Stefan Pohl
+   Templateinhalt: 
+Bitte kontaktieren Sie uns zu Ihrer Verbindlichkeit zum KK:'49-9-1670771080-550 - zahlungshilfe@sberbank-collections.de
+
+SMS 20220216172641: Ticket-ID=1413771, TicketNr=91001, HauptticketNr=91000, Parameter='49-9-1613880580-550;140.49;zahlungshilfe@sberbank-collections.de;r;Herr;Mario Jürgens;;Mario Jürgens
+   Templateinhalt: 
+Bitte kontaktieren Sie uns zu Ihrer Verbindlichkeit zum KK:'49-9-1613880580-550 - zahlungshilfe@sberbank-collections.de
+
+SMS 20220216174142: Ticket-ID=kontaktid, TicketNr=, HauptticketNr=, Parameter=aktnr;ueberfaelligeraussenstand;zahlungshilfe@sberbank-collections.de;;;;;
+   Templateinhalt: 
+Bitte kontaktieren Sie uns zu Ihrer Verbindlichkeit zum KK:aktnr - zahlungshilfe@sberbank-collections.de
+
+SMS 20220216174142: Ticket-ID=1413743, TicketNr=84001, HauptticketNr=84000, Parameter='49-9-1644426480-550;602.81;zahlungshilfe@sberbank-collections.de;r;Herr;Roberto Kamberovski;;Roberto Kamberovski
+   Templateinhalt: 
+Bitte kontaktieren Sie uns zu Ihrer Verbindlichkeit zum KK:'49-9-1644426480-550 - zahlungshilfe@sberbank-collections.de
+
+SMS 20220216174632: Ticket-ID=kontaktid, TicketNr=, HauptticketNr=, Parameter=aktnr;ueberfaelligeraussenstand;zahlungshilfe@sberbank-collections.de;;;;;
+   Templateinhalt: 
+Bitte kontaktieren Sie uns zu Ihrer Verbindlichkeit zum KK:aktnr - zahlungshilfe@sberbank-collections.de
+
+SMS 20220216174632: Ticket-ID=1413743, TicketNr=84001, HauptticketNr=84000, Parameter='49-9-1644426480-550;602.81;zahlungshilfe@sberbank-collections.de;r;Herr;Roberto Kamberovski;;Roberto Kamberovski
+   Templateinhalt: 
+Bitte kontaktieren Sie uns zu Ihrer Verbindlichkeit zum KK:'49-9-1644426480-550 - zahlungshilfe@sberbank-collections.de
+
+SMS 20220216175510: Ticket-ID=1413743, TicketNr=84001, HauptticketNr=84000, Parameter='49-9-1644426480-550;602.81;zahlungshilfe@sberbank-collections.de;r;Herr;Roberto Kamberovski;;Roberto Kamberovski
+   Templateinhalt: 
+Bitte kontaktieren Sie uns zu Ihrer Verbindlichkeit zum KK:'49-9-1644426480-550 - zahlungshilfe@sberbank-collections.de
+
+SMS 20220216180010: Ticket-ID=1413743, TicketNr=84001, HauptticketNr=84000, Parameter='49-9-1644426480-550;602.81;zahlungshilfe@sberbank-collections.de;r;Herr;Roberto Kamberovski;;Roberto Kamberovski
+   Templateinhalt: 
+Bitte kontaktieren Sie uns zu Ihrer Verbindlichkeit zum KK:'49-9-1644426480-550 - zahlungshilfe@sberbank-collections.de
+
+SMS 20220216180423: Ticket-ID=1413743, TicketNr=84001, HauptticketNr=84000, Parameter=49-9-1644426480-550;602.81;zahlungshilfe@sberbank-collections.de;r;Herr;Roberto Kamberovski;;Roberto Kamberovski
+   Templateinhalt: 
+Bitte kontaktieren Sie uns zu Ihrer Verbindlichkeit zum KK:49-9-1644426480-550 - zahlungshilfe@sberbank-collections.de
+

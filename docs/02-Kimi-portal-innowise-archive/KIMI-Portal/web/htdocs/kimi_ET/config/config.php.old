@@ -1,0 +1,25 @@
+<?php
+define("CONF_MYSQL_SERVER", "mysqlsvr18.world4you.com");
+define("CONF_MYSQL_USER", "kimi_plusat");
+define("CONF_MYSQL_PASSWORD", "xm0m9h");
+define("CONF_MYSQL_DB", "kimi_plusatdb2");
+define("CONF_PORTAL_MENU_COLUMNS", 5);
+define("CONF_PORTAL_LINE_PER_SITE", 20);
+define("CONF_PORTAL_MAX_PAGES", 20);
+
+define("CONF_USER_PERMISSION", true);
+
+define("CONF_CONTACT_ADDRESS", "franz.tausch@kimi-plus.at");
+define("CONF_CONTACT_SUBJECT", "Kontaktanfrage KIMI-Plus");
+
+// Tageszinsermittlung
+define("CONF_TGZ_SHOWDETAILS", TRUE);
+define("CONF_TGZ_ZINSSATZ", 1.55);
+define("CONF_TGZ_BUABUGRUMAN_ID_KAPITALISIERT", "4000");
+define("CONF_TGZ_MAX_DAYS", 30);
+
+// Icons
+define("ICON_EDIT", "pencil16x16.png");
+define("ICON_DELETE", "delete.png");
+
+?>

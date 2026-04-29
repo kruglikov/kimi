@@ -1,0 +1,24 @@
+SMS 20220217092120: Ticket-ID=1418555, TicketNr=92001, HauptticketNr=92000, Parameter=49-9-1644426480-550;602.81;zahlungshilfe@sberbank-collections.de;r;Herr;Roberto Kamberovski;;Roberto Kamberovski
+   Templateinhalt: 
+Bitte kontaktieren Sie uns zu Ihrer Verbindlichkeit zum KK:49-9-1644426480-550 - zahlungshilfe@sberbank-collections.de
+
+SMS 20220217092120: Ticket-ID=1418556, TicketNr=93001, HauptticketNr=93000, Parameter=49-9-1630419580-550;416.47;zahlungshilfe@sberbank-collections.de;r;Herr;Aron Micu;;Aron Micu
+   Templateinhalt: 
+Bitte kontaktieren Sie uns zu Ihrer Verbindlichkeit zum KK:49-9-1630419580-550 - zahlungshilfe@sberbank-collections.de
+
+SMS 20220217092120: Ticket-ID=1418557, TicketNr=94001, HauptticketNr=94000, Parameter=49-9-1015904581-550;117.85;zahlungshilfe@sberbank-collections.de;;Herr/Frau;Nicole und Björn Ohm;;Nicole und Björn Ohm
+   Templateinhalt: 
+Bitte kontaktieren Sie uns zu Ihrer Verbindlichkeit zum KK:49-9-1015904581-550 - zahlungshilfe@sberbank-collections.de
+
+SMS 20220217092120: Ticket-ID=1418558, TicketNr=95001, HauptticketNr=95000, Parameter=49-9-341018880-550;378.67;zahlungshilfe@sberbank-collections.de;;Herr/Frau;Lydia Abrams Alexej Abrams;;Lydia Abrams Alexej Abrams
+   Templateinhalt: 
+Bitte kontaktieren Sie uns zu Ihrer Verbindlichkeit zum KK:49-9-341018880-550 - zahlungshilfe@sberbank-collections.de
+
+SMS 20220217092120: Ticket-ID=1418582, TicketNr=98001, HauptticketNr=98000, Parameter=49-9-1670771080-550;197.21;zahlungshilfe@sberbank-collections.de;r;Herr;Stefan Pohl;;Stefan Pohl
+   Templateinhalt: 
+Bitte kontaktieren Sie uns zu Ihrer Verbindlichkeit zum KK:49-9-1670771080-550 - zahlungshilfe@sberbank-collections.de
+
+SMS 20220217092120: Ticket-ID=1418583, TicketNr=99001, HauptticketNr=99000, Parameter=49-9-1613880580-550;140.49;zahlungshilfe@sberbank-collections.de;r;Herr;Mario Jürgens;;Mario Jürgens
+   Templateinhalt: 
+Bitte kontaktieren Sie uns zu Ihrer Verbindlichkeit zum KK:49-9-1613880580-550 - zahlungshilfe@sberbank-collections.de
+
