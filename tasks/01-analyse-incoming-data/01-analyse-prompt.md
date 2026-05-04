@@ -40,22 +40,13 @@ I already created docker compose file (@docker-compose.yml) and created database
 
 See the preliminary report structure: @tasks/01-analyse-incoming-data/04-asessment-report-v01.md
 
-- When I come to page http://localhost:8080/kimi_ET/index.php?site=ticket&ticket_id=1&selected_tickets=1&selected_ticket_index=0
-  I get error:
-  SELECT * FROM janein WHERE mandant_id = 1
-  Table 'kimi_et.janein' doesn't exist
-  SELECT * FROM nummern WHERE mandant_id = 1
-  Table 'kimi_et.nummern' doesn't exist
-  SELECT * FROM dummy_id_referenz WHERE mandant_id = 1 and dummy_id = 1 order by sort, id
-  Table 'kimi_et.dummy_id_referenz' doesn't exist
-  SELECT * FROM dummy_id_referenz WHERE mandant_id = 1 and dummy_id = 2 order by sort, id
-  Table 'kimi_et.dummy_id_referenz' doesn't exist
-  SELECT * FROM dummy_id_referenz WHERE mandant_id = 1 and dummy_id = 3 order by sort, id
-  Table 'kimi_et.dummy_id_referenz' doesn't exist
-  SELECT * FROM dummy_id_referenz WHERE mandant_id = 1 and dummy_id = 4 order by sort, id
-  Table 'kimi_et.dummy_id_referenz' doesn't exist
-  SELECT * FROM dummy_id_referenz WHERE mandant_id = 1 and dummy_id = 5 order by sort, id
-  Table 'kimi_et.dummy_id_referenz' doesn't exist
 
-Please in your final answer provide steps that you have taken to find out the final answer\solution and justify all changes in code
-  Walk me through your reasoning step by step before giving the final answer.
+1. We have a lot of PHP files in the system: @memory-bank/ARCHITECTURE.md hpw can we create tests that help us to 
+Besides scenarios when we open the site in browser, we also have scenarios when we run patch scripts: @AGENTS.md#L58-64
+- How can we create tests for all these files to run simple testing that all of the run ok?
+  Please analyze and provide possible options\directioins
+2. Also we have copy\paste functionality (or batch processing) what approach we should implement to achieve project goals in PHP upgrade to 8.5?
+   Please analyze and provide possible options\directioins
+
+- Please in your final answer provide steps that you have taken to find out the final answer\solution and justify all changes in code
+- Walk me through your reasoning step by step before giving the final answer.

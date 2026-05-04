@@ -27,6 +27,7 @@ services:
       - "8080:80"
     volumes:
       - ./web/htdocs:/var/www/html
+      - ./tests2:/opt/tests2
     depends_on:
       db:
         condition: service_healthy
