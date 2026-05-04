@@ -25,29 +25,44 @@ This document describes the complete architecture of the KIMI Portal system as i
 | Frontend     | jQuery 1.x + jQuery UI 1.10.3 (no modern SPA framework)    |
 | Mailer       | PHPMailer v2.0.4 (legacy) at `src/original-src/web/htdocs/kimi_ET/libs/addons/phpmail/`; Composer PHPMailer 6.x also present at `src/original-src/web/htdocs/vendor/` |
 | Telephony    | Telematica VoIP REST API + Elsbeth dialing system (file-based) |
-| Deployment   | Docker Compose for local dev (see `docker-compose.yml`); originally direct file deployment on production |
+| Deployment   | Docker Compose for local dev (see `src/original-src/docker-compose.yml` or `scripts/up-original.sh`); originally direct file deployment on production |
 | Composer     | Present at `src/original-src/web/htdocs/vendor/` (main app, PHPMailer 6.x) and `src/original-src/web/htdocs/kimi_ET/kimibatch/files/vendor/` (batch, separate context) |
 
 ---
 
+## Source Tree Roles
+
+- `src/original-src/` contains the preserved legacy application, its Docker support files, and the Compose entry point used to run the original stack locally.
+- `src/upgraded-src/` is the intended location for the modernised PHP 8.5-targeted version. It does not own the legacy runtime described in this document.
+
 ## Local Development (Docker)
 
 ```
-docker compose up --build   # first run
-docker compose up -d        # subsequent runs
+./scripts/up-original.sh --build   # first run
+./scripts/up-original.sh -d        # subsequent runs
 ```
 
-| URL | What |
-|-----|------|
-| `http://localhost:8080/kimi_ET/` | Portal application |
-| `http://localhost:8080/` | Marketing landing page |
-| `localhost:3306` | MariaDB (for DBeaver / Adminer) |
+Equivalent direct Compose commands:
+
+```
+docker compose -f src/original-src/docker-compose.yml up --build
+docker compose -f src/original-src/docker-compose.yml up -d
+docker compose -f src/original-src/docker-compose.yml down
+docker compose -f src/original-src/docker-compose.yml logs -f web
+docker compose -f src/original-src/docker-compose.yml logs -f db
+```
+
+| URL                              | What                            |
+|----------------------------------|---------------------------------|
+| `http://localhost:8080/kimi_ET/` | Portal application              |
+| `http://localhost:8080/`         | Marketing landing page          |
+| `localhost:3306`                 | MariaDB (for DBeaver / Adminer) |
 
 **File layout:**
 
 ```
-docker-compose.yml                              ← Compose entry point (project root)
 src/original-src/
+├── docker-compose.yml                          ← Compose entry point for the original stack
 ├── web/                                        ← PHP source (mounted as /var/www/html)
 └── docker/
     ├── php/
@@ -56,20 +71,27 @@ src/original-src/
     └── mariadb/
         └── init/
             ├── 01-init.sql                     ← creates kimi_archiv DB + kimi user
-            └── 02-schema.sql                   ← reverse-engineered draft schema + seed data
+            ├── 02-schema.sql                   ← reverse-engineered draft schema
+            └── 03-dev-seed.sql                 ← local-only login + smoke-test seed data
 ```
 
 `02-schema.sql` is a reverse-engineered draft. Column names are based on the PHP codebase, but data types, lengths, nullability, and defaults still need verification against a production dump; see the file header for current status and caveats.
 
+Use `scripts/up-original.sh` from the repository root to start this legacy stack without depending on the caller's current working directory. The script always targets `src/original-src/docker-compose.yml`.
+
 **Credentials (local only):**
 
-| What | Value |
-|------|-------|
-| MariaDB root password | `password` |
-| `sql_kimi_et` password | `password` |
+| What                      | Value      |
+|---------------------------|------------|
+| MariaDB root password     | `password` |
+| `sql_kimi_et` password    | `password` |
 | `kimi` (archive) password | `password` |
+| Portal user               | `admin`    |
+| Portal password           | `admin123` |
 
 The DB host in `src/original-src/web/htdocs/kimi_ET/config/config.php` is set to `db` (the Compose service name) rather than `localhost`.
+
+The portal credentials are created by `src/original-src/docker/mariadb/init/03-dev-seed.sql`. They are generated from the code by reverce-engeneering. And for local Docker development only. The seed also creates one demo mandant, an admin role with core page permissions, one active campaign, lookup rows, one sample customer, one sample ticket, and minimal financial records for smoke testing.
 
 ---
 

@@ -36,9 +36,26 @@ It's architecture is described in @ARCHITECTURE.md file.
 
 Preliminary plan is stored in @tasks/01-analyse-incoming-data/03-preliminary-plan.md
 
+I already created docker compose file (@docker-compose.yml) and created database schema (see @src/original-src/docker/mariadb/init/ if you need schema files) according to the @tasks/01-analyse-incoming-data/03-preliminary-plan.md
 
-1. See the preliminary report structure: @tasks/01-analyse-incoming-data/04-asessment-report-v01.md
-- Please propose docker file and where I can position it so that locally I could launch the project 
+See the preliminary report structure: @tasks/01-analyse-incoming-data/04-asessment-report-v01.md
 
+- When I come to page http://localhost:8080/kimi_ET/index.php?site=ticket&ticket_id=1&selected_tickets=1&selected_ticket_index=0
+  I get error:
+  SELECT * FROM janein WHERE mandant_id = 1
+  Table 'kimi_et.janein' doesn't exist
+  SELECT * FROM nummern WHERE mandant_id = 1
+  Table 'kimi_et.nummern' doesn't exist
+  SELECT * FROM dummy_id_referenz WHERE mandant_id = 1 and dummy_id = 1 order by sort, id
+  Table 'kimi_et.dummy_id_referenz' doesn't exist
+  SELECT * FROM dummy_id_referenz WHERE mandant_id = 1 and dummy_id = 2 order by sort, id
+  Table 'kimi_et.dummy_id_referenz' doesn't exist
+  SELECT * FROM dummy_id_referenz WHERE mandant_id = 1 and dummy_id = 3 order by sort, id
+  Table 'kimi_et.dummy_id_referenz' doesn't exist
+  SELECT * FROM dummy_id_referenz WHERE mandant_id = 1 and dummy_id = 4 order by sort, id
+  Table 'kimi_et.dummy_id_referenz' doesn't exist
+  SELECT * FROM dummy_id_referenz WHERE mandant_id = 1 and dummy_id = 5 order by sort, id
+  Table 'kimi_et.dummy_id_referenz' doesn't exist
 
-
+Please in your final answer provide steps that you have taken to find out the final answer\solution and justify all changes in code
+  Walk me through your reasoning step by step before giving the final answer.

@@ -16,7 +16,6 @@ TBD: Overview of all affected system areas
 - 
 
 
-
 # Upgrade plan
 
 [] Make the system work:`
@@ -29,6 +28,14 @@ TBD: Overview of all affected system areas
 [] PHP Upgrade to php 8.5
   - 
 [] Run tests
+
+# Security review
+[] Are `hash("sha256", "kimiplus" . $password)` with static salt "kimiplus" good enough from security reasons?  
+[] Are security issues mentioned in ### Session Security Issues in @ARCHITECTURE.md severe\require solving?
+[] Other security checks\review.
+
+# GDPR Review
 [] GDPR Review
+
 
 # Questions
