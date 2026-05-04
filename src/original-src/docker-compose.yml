@@ -11,6 +11,7 @@ services:
       MYSQL_PASSWORD: password
     volumes:
       - db_data:/var/lib/mysql
+      - db_socket:/var/run/mysqld
       - ./docker/mariadb/init:/docker-entrypoint-initdb.d
     ports:
       - "3306:3306"
@@ -28,9 +29,11 @@ services:
     volumes:
       - ./web/htdocs:/var/www/html
       - ./tests2:/opt/tests2
+      - db_socket:/var/run/mysqld
     depends_on:
       db:
         condition: service_healthy
 
 volumes:
   db_data:
+  db_socket:
