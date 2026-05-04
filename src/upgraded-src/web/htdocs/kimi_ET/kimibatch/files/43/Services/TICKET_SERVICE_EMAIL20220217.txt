@@ -1,0 +1,180 @@
+TICKET_SERVICE_EMAIL 20220217080513: Ticket-ID=1413750, TicketNr=84002, HauptticketNr=84000, Parameter='49-9-1644426480-550;602.81;zahlungshilfe@sberbank-collections.de;+49 69 50958953;r;Herr;Roberto Kamberovski;Roberto Kamberovski;
+   Templateinhalt: 
+Sehr geehrter Herr Roberto Kamberovski,
+
+bitte kontaktieren Sie uns zu Ihrer Verbindlichkeit zum KK:'49-9-1644426480-550 - zahlungshilfe@sberbank-collections.de +49 69 50958953
+
+Mit freundlichen Grüßen
+
+
+
+TICKET_SERVICE_EMAIL 20220217080513: Ticket-ID=1413751, TicketNr=85002, HauptticketNr=85000, Parameter='49-9-1630419580-550;416.47;zahlungshilfe@sberbank-collections.de;+49 69 50958953;r;Herr;Aron Micu;Aron Micu;
+   Templateinhalt: 
+Sehr geehrter Herr Aron Micu,
+
+bitte kontaktieren Sie uns zu Ihrer Verbindlichkeit zum KK:'49-9-1630419580-550 - zahlungshilfe@sberbank-collections.de +49 69 50958953
+
+Mit freundlichen Grüßen
+
+
+
+TICKET_SERVICE_EMAIL 20220217080513: Ticket-ID=1413752, TicketNr=86002, HauptticketNr=86000, Parameter='49-9-1015904581-550;117.85;zahlungshilfe@sberbank-collections.de;+49 69 50958953;;Herr/Frau;Nicole und Björn Ohm;Nicole und Björn Ohm;
+   Templateinhalt: 
+Sehr geehrte Herr/Frau Nicole und Björn Ohm,
+
+bitte kontaktieren Sie uns zu Ihrer Verbindlichkeit zum KK:'49-9-1015904581-550 - zahlungshilfe@sberbank-collections.de +49 69 50958953
+
+Mit freundlichen Grüßen
+
+
+
+TICKET_SERVICE_EMAIL 20220217080513: Ticket-ID=1413753, TicketNr=87002, HauptticketNr=87000, Parameter='49-9-341018880-550;378.67;zahlungshilfe@sberbank-collections.de;+49 69 50958953;;Herr/Frau;Lydia Abrams Alexej Abrams;Lydia Abrams Alexej Abrams;
+   Templateinhalt: 
+Sehr geehrte Herr/Frau Lydia Abrams Alexej Abrams,
+
+bitte kontaktieren Sie uns zu Ihrer Verbindlichkeit zum KK:'49-9-341018880-550 - zahlungshilfe@sberbank-collections.de +49 69 50958953
+
+Mit freundlichen Grüßen
+
+
+
+TICKET_SERVICE_EMAIL 20220217080513: Ticket-ID=1413773, TicketNr=90002, HauptticketNr=90000, Parameter='49-9-1670771080-550;197.21;zahlungshilfe@sberbank-collections.de;+49 69 50958953;r;Herr;Stefan Pohl;Stefan Pohl;
+   Templateinhalt: 
+Sehr geehrter Herr Stefan Pohl,
+
+bitte kontaktieren Sie uns zu Ihrer Verbindlichkeit zum KK:'49-9-1670771080-550 - zahlungshilfe@sberbank-collections.de +49 69 50958953
+
+Mit freundlichen Grüßen
+
+
+
+TICKET_SERVICE_EMAIL 20220217080513: Ticket-ID=1413774, TicketNr=91002, HauptticketNr=91000, Parameter='49-9-1613880580-550;140.49;zahlungshilfe@sberbank-collections.de;+49 69 50958953;r;Herr;Mario Jürgens;Mario Jürgens;
+   Templateinhalt: 
+Sehr geehrter Herr Mario Jürgens,
+
+bitte kontaktieren Sie uns zu Ihrer Verbindlichkeit zum KK:'49-9-1613880580-550 - zahlungshilfe@sberbank-collections.de +49 69 50958953
+
+Mit freundlichen Grüßen
+
+
+
+TICKET_SERVICE_EMAIL 20220217092124: Ticket-ID=1418562, TicketNr=92002, HauptticketNr=92000, Parameter='49-9-1644426480-550;602.81;zahlungshilfe@sberbank-collections.de;+49 69 50958953;r;Herr;Roberto Kamberovski;Roberto Kamberovski;
+   Templateinhalt: 
+Sehr geehrter Herr Roberto Kamberovski,
+
+bitte kontaktieren Sie uns zu Ihrer Verbindlichkeit zum KK:'49-9-1644426480-550 - zahlungshilfe@sberbank-collections.de +49 69 50958953
+
+Mit freundlichen Grüßen
+
+
+
+TICKET_SERVICE_EMAIL 20220217092124: Ticket-ID=1418563, TicketNr=93002, HauptticketNr=93000, Parameter='49-9-1630419580-550;416.47;zahlungshilfe@sberbank-collections.de;+49 69 50958953;r;Herr;Aron Micu;Aron Micu;
+   Templateinhalt: 
+Sehr geehrter Herr Aron Micu,
+
+bitte kontaktieren Sie uns zu Ihrer Verbindlichkeit zum KK:'49-9-1630419580-550 - zahlungshilfe@sberbank-collections.de +49 69 50958953
+
+Mit freundlichen Grüßen
+
+
+
+TICKET_SERVICE_EMAIL 20220217092124: Ticket-ID=1418564, TicketNr=94002, HauptticketNr=94000, Parameter='49-9-1015904581-550;117.85;zahlungshilfe@sberbank-collections.de;+49 69 50958953;;Herr/Frau;Nicole und Björn Ohm;Nicole und Björn Ohm;
+   Templateinhalt: 
+Sehr geehrte Herr/Frau Nicole und Björn Ohm,
+
+bitte kontaktieren Sie uns zu Ihrer Verbindlichkeit zum KK:'49-9-1015904581-550 - zahlungshilfe@sberbank-collections.de +49 69 50958953
+
+Mit freundlichen Grüßen
+
+
+
+TICKET_SERVICE_EMAIL 20220217092124: Ticket-ID=1418565, TicketNr=95002, HauptticketNr=95000, Parameter='49-9-341018880-550;378.67;zahlungshilfe@sberbank-collections.de;+49 69 50958953;;Herr/Frau;Lydia Abrams Alexej Abrams;Lydia Abrams Alexej Abrams;
+   Templateinhalt: 
+Sehr geehrte Herr/Frau Lydia Abrams Alexej Abrams,
+
+bitte kontaktieren Sie uns zu Ihrer Verbindlichkeit zum KK:'49-9-341018880-550 - zahlungshilfe@sberbank-collections.de +49 69 50958953
+
+Mit freundlichen Grüßen
+
+
+
+TICKET_SERVICE_EMAIL 20220217092124: Ticket-ID=1418585, TicketNr=98002, HauptticketNr=98000, Parameter='49-9-1670771080-550;197.21;zahlungshilfe@sberbank-collections.de;+49 69 50958953;r;Herr;Stefan Pohl;Stefan Pohl;
+   Templateinhalt: 
+Sehr geehrter Herr Stefan Pohl,
+
+bitte kontaktieren Sie uns zu Ihrer Verbindlichkeit zum KK:'49-9-1670771080-550 - zahlungshilfe@sberbank-collections.de +49 69 50958953
+
+Mit freundlichen Grüßen
+
+
+
+TICKET_SERVICE_EMAIL 20220217092124: Ticket-ID=1418586, TicketNr=99002, HauptticketNr=99000, Parameter='49-9-1613880580-550;140.49;zahlungshilfe@sberbank-collections.de;+49 69 50958953;r;Herr;Mario Jürgens;Mario Jürgens;
+   Templateinhalt: 
+Sehr geehrter Herr Mario Jürgens,
+
+bitte kontaktieren Sie uns zu Ihrer Verbindlichkeit zum KK:'49-9-1613880580-550 - zahlungshilfe@sberbank-collections.de +49 69 50958953
+
+Mit freundlichen Grüßen
+
+
+
+TICKET_SERVICE_EMAIL 20220217092630: Ticket-ID=1418562, TicketNr=92002, HauptticketNr=92000, Parameter='49-9-1644426480-550;602.81;zahlungshilfe@sberbank-collections.de;+49 69 50958953;r;Herr;Roberto Kamberovski;Roberto Kamberovski;
+   Templateinhalt: 
+Sehr geehrter Herr Roberto Kamberovski,
+
+bitte kontaktieren Sie uns zu Ihrer Verbindlichkeit zum KK:'49-9-1644426480-550 - zahlungshilfe@sberbank-collections.de +49 69 50958953
+
+Mit freundlichen Grüßen
+
+
+
+TICKET_SERVICE_EMAIL 20220217092630: Ticket-ID=1418563, TicketNr=93002, HauptticketNr=93000, Parameter='49-9-1630419580-550;416.47;zahlungshilfe@sberbank-collections.de;+49 69 50958953;r;Herr;Aron Micu;Aron Micu;
+   Templateinhalt: 
+Sehr geehrter Herr Aron Micu,
+
+bitte kontaktieren Sie uns zu Ihrer Verbindlichkeit zum KK:'49-9-1630419580-550 - zahlungshilfe@sberbank-collections.de +49 69 50958953
+
+Mit freundlichen Grüßen
+
+
+
+TICKET_SERVICE_EMAIL 20220217092630: Ticket-ID=1418564, TicketNr=94002, HauptticketNr=94000, Parameter='49-9-1015904581-550;117.85;zahlungshilfe@sberbank-collections.de;+49 69 50958953;;Herr/Frau;Nicole und Björn Ohm;Nicole und Björn Ohm;
+   Templateinhalt: 
+Sehr geehrte Herr/Frau Nicole und Björn Ohm,
+
+bitte kontaktieren Sie uns zu Ihrer Verbindlichkeit zum KK:'49-9-1015904581-550 - zahlungshilfe@sberbank-collections.de +49 69 50958953
+
+Mit freundlichen Grüßen
+
+
+
+TICKET_SERVICE_EMAIL 20220217092630: Ticket-ID=1418565, TicketNr=95002, HauptticketNr=95000, Parameter='49-9-341018880-550;378.67;zahlungshilfe@sberbank-collections.de;+49 69 50958953;;Herr/Frau;Lydia Abrams Alexej Abrams;Lydia Abrams Alexej Abrams;
+   Templateinhalt: 
+Sehr geehrte Herr/Frau Lydia Abrams Alexej Abrams,
+
+bitte kontaktieren Sie uns zu Ihrer Verbindlichkeit zum KK:'49-9-341018880-550 - zahlungshilfe@sberbank-collections.de +49 69 50958953
+
+Mit freundlichen Grüßen
+
+
+
+TICKET_SERVICE_EMAIL 20220217092630: Ticket-ID=1418585, TicketNr=98002, HauptticketNr=98000, Parameter='49-9-1670771080-550;197.21;zahlungshilfe@sberbank-collections.de;+49 69 50958953;r;Herr;Stefan Pohl;Stefan Pohl;
+   Templateinhalt: 
+Sehr geehrter Herr Stefan Pohl,
+
+bitte kontaktieren Sie uns zu Ihrer Verbindlichkeit zum KK:'49-9-1670771080-550 - zahlungshilfe@sberbank-collections.de +49 69 50958953
+
+Mit freundlichen Grüßen
+
+
+
+TICKET_SERVICE_EMAIL 20220217092630: Ticket-ID=1418586, TicketNr=99002, HauptticketNr=99000, Parameter='49-9-1613880580-550;140.49;zahlungshilfe@sberbank-collections.de;+49 69 50958953;r;Herr;Mario Jürgens;Mario Jürgens;
+   Templateinhalt: 
+Sehr geehrter Herr Mario Jürgens,
+
+bitte kontaktieren Sie uns zu Ihrer Verbindlichkeit zum KK:'49-9-1613880580-550 - zahlungshilfe@sberbank-collections.de +49 69 50958953
+
+Mit freundlichen Grüßen
+
+
+

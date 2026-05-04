@@ -1,0 +1,1 @@
+<h1><?php echo MSG_NOT_FOUND; ?></h1>

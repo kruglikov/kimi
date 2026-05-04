@@ -1,0 +1,121 @@
+﻿<!DOCTYPE html>
+<html lang="de">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		
+        <title>KiMi Login</title>
+        <style>
+            input[type=text], input[type=password] {
+                height: 30px !important;
+            }
+        </style>
+        <link rel="stylesheet" href="../css/theme-modern.css" />
+        <link rel="stylesheet" href="../css/kimi-blue-modern/jquery-ui-1.10.3.custom.css" />      
+        <script src="./js/jquery.js"></script>
+        <script src="./js/jquery-ui.js"></script>
+        <script type="text/javascript">
+            $(window).load(function() {
+                $("#login-button").click(function(e) {
+                    e.preventDefault();
+                    $("#wrong-credentials").hide();
+                    $.ajax({
+                        url: "index.php?ajax=true&site=check-login",
+                        type: "POST",
+                        data: {
+                            username: $("#email").val(),
+                            password: $("#password").val()
+                        },
+                        statusCode: {
+                            200: function() {
+                                location.reload();
+                            },
+                            403: function() {
+                                $("#wrong-credentials").show();
+                            }
+                        },
+                        xhrFields: {
+                            withCredentials: true
+                        }
+                    });
+                });
+
+                $("input[type=submit], input[type=button], button, .button").button();
+
+                $("#email, #password").keyup(function(e) {
+                    var code = (e.keyCode ? e.keyCode : e.which);
+                    if (code === 13) {
+                        $("#login-button").click();
+                    }
+                });
+
+                $("#email").focus();
+            });
+        </script>
+    </head>
+    <body>
+        <div id="mainframe">
+			<div id="header">
+				<div class="bg">
+					<div class="img-holder">
+						<img src="../images/theme-modern/kimi-plus_logo_nav.png" />
+						<ul style="text-align: left;">
+							<li><a href="../index.html">Homepage</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<div title="Login" id="login-container">
+				<div class="shadow" style="padding:1px 10px; border-radius: 8px">
+					<div id="login-div">
+						<span class="headlines-subtext">LOGIN</span>
+						<hr style="padding:0; margin:0;" />
+						<div class="space"></div>
+						<p id="wrong-credentials" class='warning hidden'>Logininformationen falsch</p>
+						<table>
+							<tr>
+								<td>Benutzername</td>
+								<td><input tabindex="1" type='text' id="email" name='email' placeholder="Benutzername"  /></td>
+							</tr>
+							<tr>
+								<td>Passwort</td>
+								<td><input tabindex="2" type='password' id="password" name='password' placeholder="Passwort" /></td>
+							</tr>
+						</table>
+						<div class="space"></div>
+						<input tabindex="3" type="button" id="login-button" value="Login" />
+						<div style="height:10px"></div>
+					</div>
+					<form class="hidden" action="index.php" id="mandant-form">
+						<span class="headlines-subtext">MANDANTENAUSWAHL</span>
+						<hr style="padding:0; margin:0;" />
+						<div class="space"></div>
+						<table style="text-align:left;">
+							<tr>
+								<td>Benutzername</td>
+								<td><input type='text' id="email-after" name='email' placeholder="E-Mail Adresse" disabled value="" /></td>
+							</tr>
+							<tr>
+								<td>Mandant</td>
+								<td>
+									<select id="mandant" name="mandant">
+																			</select>
+								</td>
+							</tr>
+						</table>
+						<div class="space"></div>
+						<input id="submit-btn" type="submit" value="Auswählen" />
+					</form>
+				</div>
+			</div>
+			<div class="footer shadow" style="bottom:0">
+				<div class="holder">
+					<div class="left">Folge KIMI - plus auf <a href="https://www.xing.com/profiles/Franz_Tausch" target="_blank"><img src="../images/theme-modern/xing_icon.png" /></a> und <a href='https://www.facebook.com/pages/KIMI-Plus/523126284409214' target="_blank"><img src="../images/theme-modern/facebook_icon.png" /></a></div>
+					<div class="right"><a href="../impressum.html" target="_blank">Impressum <img src="../images/theme-modern/impressum_icon.png" /></a></div>
+					<div class="right"><a href="../datenschutz.html" target="_blank">Datenschutz</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;</div>                   
+					<div class="right"><a href="../AGB_Betreiberdienstleistung.pdf" target="_blank">AGB</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;</div>                   
+					<div class="center">&copy; KIMI-Plus</div>
+				</div>
+			</div>
+		</div>
+    </body>
+</html>

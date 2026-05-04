@@ -1,0 +1,1 @@
+drop table sberbank_ticket_folge_anruf

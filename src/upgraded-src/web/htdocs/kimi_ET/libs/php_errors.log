@@ -1,0 +1,4 @@
+[20-Apr-2022 11:11:47 UTC] PHP Fatal error:  Uncaught Error: Failed opening required './libs/entities/user.php' (include_path='.:/usr/share/pear:/usr/share/php:/usr/share/pear:/usr/share/php') in /var/www/html/kimi/kimidev_et/libs/application.php:11
+Stack trace:
+#0 {main}
+  thrown in /var/www/html/kimi/kimidev_et/libs/application.php on line 11
