@@ -3,7 +3,7 @@
   "description": "Upgrade tooling for the modernized KIMI Portal source tree.",
   "type": "project",
   "require": {
-    "php": "^8.5"
+    "php": "^8.4 || ^8.5"
   },
   "require-dev": {
     "dealerdirect/phpcodesniffer-composer-installer": "^1.1",
