@@ -8,7 +8,7 @@ services:
       MYSQL_ROOT_PASSWORD: password
       MYSQL_DATABASE: kimi_et
       MYSQL_USER: sql_kimi_et
-      MYSQL_PASSWORD: password
+      MYSQL_PASSWORD: NS889Hs4bhL1aub7HyEH6AjdYpYAlx
     volumes:
       - db_data:/var/lib/mysql
       - db_socket:/var/run/mysqld
@@ -29,6 +29,7 @@ services:
     volumes:
       - ./web/htdocs:/var/www/html
       - ./tests2:/opt/tests2
+      - ./web/htdocs/kimi_ET/kimibatch/files/vendor:/var/www/html/kimi_ET/kimibatch/vendor:ro
       - db_socket:/var/run/mysqld
     depends_on:
       db:

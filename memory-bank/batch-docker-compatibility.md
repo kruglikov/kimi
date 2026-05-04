@@ -245,36 +245,78 @@ docker compose -f src/original-src/docker-compose.yml up -d --build
 
 ### Confirmed fixed
 
-Both DB access paths work in the rebuilt `web` container:
+Both restored legacy DB access paths work in the rebuilt `web` container:
 
-- GUI path: `mysqli_connect("db", "sql_kimi_et", "password", "kimi_et")`
+- main app path: `mysqli_connect("localhost", "sql_kimi_et", "NS889Hs4bhL1aub7HyEH6AjdYpYAlx", "kimi_et")`
+- archive DB path: `mysqli_connect("localhost", "kimi", "KimiPlus@13", "kimi_archiv")`
 - batch path: `mysqli_connect("localhost", "sql_kimi_et", "NS889Hs4bhL1aub7HyEH6AjdYpYAlx", "kimi_et")`
 
 So the original batch failure in `kimibatch/db.php` is resolved by the environment-only changes.
 
-### New blocker exposed after DB fix
+### Additional environment fix validated
 
-Batch smoke tests now fail later in `kimibatch/kimi_general.php` because it requires:
+`kimibatch/kimi_general.php` requires:
 
 ```php
 ./vendor/phpmailer/phpmailer/src/PHPMailer.php
 ```
 
-from the `kimibatch/` working directory, and that path does not exist in the current local reconstruction.
-
-Observed failure pattern:
+from the `kimibatch/` working directory. In the preserved source tree the dependency actually lives under:
 
 ```text
-Warning: require(./vendor/phpmailer/phpmailer/src/PHPMailer.php): Failed to open stream
-Fatal error: Uncaught Error: Failed opening required './vendor/phpmailer/phpmailer/src/PHPMailer.php'
+kimibatch/files/vendor/phpmailer/phpmailer/src/PHPMailer.php
 ```
 
-This means the DB/bootstrap issue is fixed, but the local Docker/dev environment still does not fully reconstruct the batch dependency layout expected by `kimibatch/`.
+The local Docker stack now mounts:
 
-### Smoke-test baseline after the environment fix
+```text
+./web/htdocs/kimi_ET/kimibatch/files/vendor
+→ /var/www/html/kimi_ET/kimibatch/vendor
+```
+
+so the legacy batch include path resolves without modifying PHP source.
+
+### Smoke-test baseline after credential + vendor-path alignment
 
 - `GuiSmokeTest`: 17/17 passing
-- `BatchSmokeTest`: 115 tests, 114 failures
-- Full suite: 132 tests, 114 failures
+- `BatchSmokeTest`: 115 tests, 46 failures
+- Combined baseline: 132 tests, 46 failures
 
-The remaining failures are no longer dominated by `localhost` DB access. They are now dominated by the missing batch PHPMailer dependency path, plus at least one independent parse error in `coeochdeexptest.php`.
+This is a significant improvement from the prior post-DB-fix baseline of 114 batch failures.
+
+### Remaining failure classes
+
+The remaining batch failures are now real script/runtime issues rather than environment bootstrap issues. Dominant categories observed:
+
+1. Missing expected input/output files under `kimibatch/files/{campaign}/IN|OUT`
+
+Example:
+
+```text
+file(...): Failed to open stream
+fopen(...): Failed to open stream
+fclose(false): TypeError
+```
+
+2. SQL statements referencing missing tables in the reconstructed schema
+
+Example:
+
+```text
+Table 'kimi_et.knp3erledigt' doesn't exist
+mysqli_fetch_array(false, 1): TypeError
+```
+
+3. Legacy `mysql_*` API usage still present in some scripts
+
+Example:
+
+```text
+Call to undefined function mysql_fetch_array()
+```
+
+4. At least one direct parse error remains
+
+```text
+coeochdeexptest.php: Parse error on line 24
+```

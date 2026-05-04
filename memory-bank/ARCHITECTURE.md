@@ -91,12 +91,12 @@ Use `scripts/up-original.sh` from the repository root to start this legacy stack
 | What                      | Value      |
 |---------------------------|------------|
 | MariaDB root password     | `password` |
-| `sql_kimi_et` password    | `password` |
-| `kimi` (archive) password | `password` |
+| `sql_kimi_et` password    | `NS889Hs4bhL1aub7HyEH6AjdYpYAlx` |
+| `kimi` (archive) password | `KimiPlus@13` |
 | Portal user               | `admin`    |
 | Portal password           | `admin123` |
 
-The DB host in `src/original-src/web/htdocs/kimi_ET/config/config.php` is set to `db` (the Compose service name) rather than `localhost`.
+The preserved legacy config in `src/original-src/web/htdocs/kimi_ET/config/config.php` uses `localhost` for both the main DB and archive DB. The local Docker stack accommodates this by mounting the MariaDB Unix socket into the `web` container and setting `mysqli.default_socket` there.
 
 The portal credentials are created by `src/original-src/docker/mariadb/init/03-dev-seed.sql`. They are generated from the code by reverce-engeneering. And for local Docker development only. The seed also creates one demo mandant, an admin role with core page permissions, one active campaign, lookup rows, one sample customer, one sample ticket, and minimal financial records for smoke testing.
 
