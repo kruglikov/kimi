@@ -140,29 +140,33 @@ CREATE TABLE IF NOT EXISTS `country` (
 
 CREATE TABLE IF NOT EXISTS `prioritaet` (
     -- entity file is empty; table confirmed in LEFT JOIN prioritaet p ON p.id = t.prioritaet_id
-    `id`   INT UNSIGNED NOT NULL AUTO_INCREMENT,
-    `text` VARCHAR(100) NOT NULL,
+    `id`         INT UNSIGNED NOT NULL AUTO_INCREMENT,
+    `mandant_id` INT UNSIGNED DEFAULT NULL,  -- inferred: Texte::get() filters by active mandant
+    `text`       VARCHAR(100) NOT NULL,
     PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 CREATE TABLE IF NOT EXISTS `status` (
     -- ticket status; table confirmed in LEFT JOIN status s ON s.id = t.status_id
-    `id`   INT UNSIGNED NOT NULL AUTO_INCREMENT,
-    `text` VARCHAR(100) NOT NULL,
+    `id`         INT UNSIGNED NOT NULL AUTO_INCREMENT,
+    `mandant_id` INT UNSIGNED DEFAULT NULL,  -- inferred: Texte::get() filters by active mandant
+    `text`       VARCHAR(100) NOT NULL,
     PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 CREATE TABLE IF NOT EXISTS `anruf_status` (
     -- call status; table confirmed in LEFT JOIN anruf_status ars ON ars.id = t.anruf_status_id
-    `id`   INT UNSIGNED NOT NULL AUTO_INCREMENT,
-    `text` VARCHAR(100) NOT NULL,
+    `id`         INT UNSIGNED NOT NULL AUTO_INCREMENT,
+    `mandant_id` INT UNSIGNED DEFAULT NULL,  -- inferred: Texte::get() filters by active mandant
+    `text`       VARCHAR(100) NOT NULL,
     PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 CREATE TABLE IF NOT EXISTS `firma` (
     -- company; table confirmed in LEFT JOIN firma f ON f.id = t.firma_id
-    `id`   INT UNSIGNED NOT NULL AUTO_INCREMENT,
-    `text` VARCHAR(255) NOT NULL,
+    `id`         INT UNSIGNED NOT NULL AUTO_INCREMENT,
+    `mandant_id` INT UNSIGNED DEFAULT NULL,  -- inferred: Texte::get() filters by active mandant
+    `text`       VARCHAR(255) NOT NULL,
     PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -188,15 +192,43 @@ CREATE TABLE IF NOT EXISTS `mwst` (
 
 CREATE TABLE IF NOT EXISTS `grund` (
     -- ticket reason lookup; referenced by ticket.grund_id, no direct SELECT found in web code
-    `id`   INT UNSIGNED NOT NULL AUTO_INCREMENT,
-    `text` VARCHAR(255) DEFAULT NULL,  -- inferred
+    `id`         INT UNSIGNED NOT NULL AUTO_INCREMENT,
+    `mandant_id` INT UNSIGNED DEFAULT NULL,  -- inferred: Texte::get() filters by active mandant
+    `text`       VARCHAR(255) DEFAULT NULL,  -- inferred
     PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 CREATE TABLE IF NOT EXISTS `produkt` (
     -- product lookup; referenced by ticket.produkt_id, no direct SELECT found in web code
-    `id`   INT UNSIGNED NOT NULL AUTO_INCREMENT,
-    `text` VARCHAR(255) DEFAULT NULL,  -- inferred
+    `id`         INT UNSIGNED NOT NULL AUTO_INCREMENT,
+    `mandant_id` INT UNSIGNED DEFAULT NULL,  -- inferred: Texte::get() filters by active mandant
+    `text`       VARCHAR(255) DEFAULT NULL,  -- inferred
+    PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+CREATE TABLE IF NOT EXISTS `janein` (
+    -- yes/no lookup; loaded by Texte::get_janein() for ticket form dropdowns
+    `id`         INT UNSIGNED NOT NULL AUTO_INCREMENT,
+    `mandant_id` INT UNSIGNED DEFAULT NULL,
+    `text`       VARCHAR(100) NOT NULL,
+    PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+CREATE TABLE IF NOT EXISTS `nummern` (
+    -- numeric choice lookup; loaded by Texte::get_nummern() for ticket form dropdowns
+    `id`         INT UNSIGNED NOT NULL AUTO_INCREMENT,
+    `mandant_id` INT UNSIGNED DEFAULT NULL,
+    `text`       VARCHAR(100) NOT NULL,
+    PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+CREATE TABLE IF NOT EXISTS `dummy_id_referenz` (
+    -- tenant-scoped option lists for dummy_id1..dummy_id5 fields on ticket screens
+    `id`         INT UNSIGNED NOT NULL AUTO_INCREMENT,
+    `mandant_id` INT UNSIGNED DEFAULT NULL,
+    `dummy_id`   INT UNSIGNED NOT NULL,
+    `sort`       INT          NOT NULL DEFAULT 0,
+    `text`       VARCHAR(255) NOT NULL,
     PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
