@@ -14,6 +14,9 @@ kimi_bootstrap_portal(true, [
     'site' => $moduleName,
 ]);
 
+unset($_SESSION['sd-kunde'], $_GET['kundennummer'], $_REQUEST['kundennummer'], $_GET['kunde'], $_REQUEST['kunde']);
+$kunde = kimi_make_smoke_customer_stub();
+
 if ($type === 'initial') {
     ob_start();
     include $modulePath;

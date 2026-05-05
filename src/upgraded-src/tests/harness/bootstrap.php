@@ -57,3 +57,43 @@ function kimi_bootstrap_portal(bool $withSession = true, array $get = [], array 
     App::$CURRENT->USER = $_SESSION['user'];
     App::$CURRENT->MANDANT = $_SESSION['mandant'];
 }
+
+function kimi_make_smoke_customer_stub(): object
+{
+    return new class {
+        private array $item = [
+            'id' => 1,
+            'kdnr' => '100001',
+            'markt' => 'AT',
+            'mandant_id' => 1,
+            'nachname' => 'Mustermann',
+            'vorname' => 'Max',
+            'strasse' => 'Demo Strasse',
+            'hausnummer' => '10',
+            'plz' => '1010',
+            'ort' => 'Wien',
+            'telefon' => '+43 1 123456',
+            'email' => 'max.mustermann@example.test',
+        ];
+
+        public function get_id()
+        {
+            return $this->item['id'];
+        }
+
+        public function get_kdnr()
+        {
+            return $this->item['kdnr'];
+        }
+
+        public function get_markt()
+        {
+            return $this->item['markt'];
+        }
+
+        public function get_raw_item()
+        {
+            return (object) $this->item;
+        }
+    };
+}
