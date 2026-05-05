@@ -30,15 +30,10 @@ class BatchSmokeTest extends TestCase
         $dir = file_exists('/var/www/html/kimi_ET/kimibatch')
             ? '/var/www/html/kimi_ET/kimibatch'
             : realpath(__DIR__ . '/../../web/htdocs/kimi_ET/kimibatch');
-        $scripts = [];
 
-        foreach (glob($dir . '/*.php') ?: [] as $file) {
-            $contents = file_get_contents($file);
-            if ($contents !== false && str_contains($contents, 'kimi_general.php')) {
-                $scripts[] = [basename($file), $file];
-            }
-        }
-
-        return $scripts;
+        return array_map(
+            fn($f) => [basename($f), $f],
+            glob($dir . '/*.php') ?: []
+        );
     }
 }

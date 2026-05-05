@@ -453,7 +453,18 @@ Important distinction:
 | Top-level excluded web entrypoints | Not covered | `validphone.php`, `phpinfo.php`, `adminer-4.8.1.php` remain outside default smoke scope. |
 | Batch files excluded by current batch rule | Not covered | The 13 files outside the current selector remain not covered. |
 
-## What is covered now
+---
+
+# What is covered now
+
+This section is intentionally split into two explicit parts:
+
+1. what is covered now
+2. what is not covered now
+
+The goal is that the uncovered scope can be reviewed in one grouped place instead of being inferred from scattered notes.
+
+## Covered now
 
 ### 1. GUI routes
 
@@ -466,9 +477,9 @@ Coverage type:
 - direct module include smoke
 - real router smoke through `kimi_ET/index.php?site=<route>`
 
-Result:
+Current status:
 
-- currently covered
+- covered
 - currently passing in both the direct GUI suite and the router suite
 
 ### 2. AJAX handlers
@@ -481,9 +492,9 @@ Coverage type:
 
 - existing direct include smoke through the GUI harness
 
-Result:
+Current status:
 
-- currently covered
+- covered
 - currently passing
 
 ### 3. Initial hooks
@@ -496,13 +507,13 @@ Coverage type:
 
 - dedicated direct include smoke via the new initial-hook harness
 
-Result:
+Current status:
 
-- currently covered
+- covered
 - some are passing
 - some are failing and exposing runtime issues
 
-Currently failing initial-hook files:
+Currently failing covered initial-hook files:
 
 - `bankleitzahl.php`
 - `buchungen.php`
@@ -524,13 +535,13 @@ Coverage type:
 - dedicated direct include smoke via the new menu harness
 - the harness first includes the same-name initial file if present, because the menu files depend on route bootstrap context
 
-Result:
+Current status:
 
-- currently covered
+- covered
 - some are passing
 - some are failing, mostly because their paired initial hook fails first
 
-Currently failing menu files:
+Currently failing covered menu files:
 
 - `bankleitzahl.php`
 - `buchungen.php`
@@ -545,18 +556,19 @@ Currently failing menu files:
 
 Covered by smoke tests:
 
-- `login.php`
-- `getticketurl.php`
-- `setticketcallinfo.php`
-- `xhangup.php`
-- `testpost.php`
+- `src/original-src/web/htdocs/kimi_ET/login.php`
+- `src/original-src/web/htdocs/kimi_ET/getticketurl.php`
+- `src/original-src/web/htdocs/kimi_ET/setticketcallinfo.php`
+- `src/original-src/web/htdocs/kimi_ET/xhangup.php`
+- `src/original-src/web/htdocs/kimi_ET/testpost.php`
 
 Coverage type:
 
 - dedicated top-level entrypoint harness
 
-Current result:
+Current status:
 
+- covered
 - passing:
   - `login.php`
   - `setticketcallinfo.php`
@@ -572,7 +584,13 @@ Covered by smoke tests:
 - 115 files in `src/original-src/web/htdocs/kimi_ET/kimibatch/`
 - selection rule remains: source contains `kimi_general.php`
 
-Current failing covered batch files:
+Current status:
+
+- covered
+- most are passing
+- some are failing
+
+Currently failing covered batch files:
 
 - `coeochdeexptest.php`
 - `inko201604_status_offen_auf_inA_setzen.php`
@@ -581,19 +599,19 @@ Current failing covered batch files:
 - `oko04_status_offen_auf_inA_setzen.php`
 - `oko04_status_offen_vortage_auf_inA_setzen.php`
 
-## What is not covered yet
+## Not covered now
 
-### 1. Top-level web files intentionally still outside default smoke scope
+### 1. Top-level web files intentionally outside default smoke scope
 
 Not covered:
 
-- `validphone.php`
-- `phpinfo.php`
-- `adminer-4.8.1.php`
+- `src/original-src/web/htdocs/kimi_ET/validphone.php` Please cover!
+- `src/original-src/web/htdocs/kimi_ET/phpinfo.php` Please cover!
+- `src/original-src/web/htdocs/kimi_ET/adminer-4.8.1.php`
 
 Reason:
 
-- they were explicitly kept outside the default smoke gate
+- these were intentionally kept outside the default smoke gate
 - `validphone.php` performs live outbound HTTP requests
 - `phpinfo.php` and `adminer-4.8.1.php` are debug/diagnostic/admin tooling paths rather than business runtime routes
 
@@ -601,34 +619,34 @@ Reason:
 
 Not covered:
 
-- `src/original-src/web/htdocs/index.php`
+- `src/original-src/web/htdocs/index.php` Please cover!
 
 Reason:
 
 - this file only redirects to `/kimi_ET/login.php`
-- the meaningful application path is already covered via `kimi_ET/login.php`
+- the meaningful application path is already covered via `src/original-src/web/htdocs/kimi_ET/login.php`
 
 ### 3. Batch-area files excluded by the current batch selector
 
-Still not covered:
+Not covered:
 
-- `db.php`
-- `inkodeexp_new.php`
-- `kimi_general.php`
-- `kimibatchtree.php`
-- `kimiphpinfo.php`
-- `oko_inA_outbound_elsbeth.php`
-- `okoexpzwb.php`
-- `phpinfo.php`
-- `pwgen.php`
-- `substr.php`
-- `telematica_import_callmanager_log.php`
-- `wl.php`
-- `zeichenersetzen.php`
+- `src/original-src/web/htdocs/kimi_ET/kimibatch/db.php`
+- `src/original-src/web/htdocs/kimi_ET/kimibatch/inkodeexp_new.php`
+- `src/original-src/web/htdocs/kimi_ET/kimibatch/kimi_general.php`
+- `src/original-src/web/htdocs/kimi_ET/kimibatch/kimibatchtree.php`
+- `src/original-src/web/htdocs/kimi_ET/kimibatch/kimiphpinfo.php`
+- `src/original-src/web/htdocs/kimi_ET/kimibatch/oko_inA_outbound_elsbeth.php`
+- `src/original-src/web/htdocs/kimi_ET/kimibatch/okoexpzwb.php`
+- `src/original-src/web/htdocs/kimi_ET/kimibatch/phpinfo.php`
+- `src/original-src/web/htdocs/kimi_ET/kimibatch/pwgen.php`
+- `src/original-src/web/htdocs/kimi_ET/kimibatch/substr.php`
+- `src/original-src/web/htdocs/kimi_ET/kimibatch/telematica_import_callmanager_log.php`
+- `src/original-src/web/htdocs/kimi_ET/kimibatch/wl.php`
+- `src/original-src/web/htdocs/kimi_ET/kimibatch/zeichenersetzen.php`
 
 Reason:
 
-- the current batch suite still uses the old selection rule:
+- the current batch suite still uses the existing selection rule:
   - include only files whose source contains `kimi_general.php`
 - these files therefore remain outside automated smoke coverage until they are explicitly classified and either:
   - added to smoke
@@ -683,5 +701,3 @@ This means the remaining decision space is now much narrower:
 1. decide whether any of the still-uncovered excluded files should be brought into smoke
 2. decide how to classify the 13 currently unselected batch-area files
 3. fix the currently failing covered files, if the goal is to make the expanded smoke suite green
-
-# Not covered files list (groupped by groups) and plan what to do with them
