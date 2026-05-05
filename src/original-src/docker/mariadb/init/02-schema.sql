@@ -58,6 +58,7 @@ CREATE TABLE IF NOT EXISTS `benutzer` (
     `default_belegdatum`  DATE         DEFAULT NULL,       -- inferred
     `letzte_kampagne_id`  INT UNSIGNED DEFAULT NULL,       -- last active campaign
     `letzter_mandant_id`  INT UNSIGNED DEFAULT NULL,       -- last active mandant
+    `anrede`              VARCHAR(50)  DEFAULT NULL,       -- salutation; referenced by checktest batch scripts via ben.anrede
     PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -1064,6 +1065,7 @@ CREATE TABLE IF NOT EXISTS `log` (
     `logart`    VARCHAR(50)  DEFAULT NULL,
     `benutzer`  VARCHAR(100) DEFAULT NULL,  -- username string (not FK)
     `timestamp` DATETIME     DEFAULT NULL,
+    `start_id`  INT UNSIGNED DEFAULT NULL,  -- links MAN_END entries back to their MAN_START entry
     PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 

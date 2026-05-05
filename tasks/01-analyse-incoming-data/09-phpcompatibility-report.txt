@@ -1,0 +1,484 @@
+
+FILE: ...ded-src/web/htdocs/kimi_ET/modules/gui/templates/tickets/19/ifsschnupd.php
+--------------------------------------------------------------------------------
+FOUND 18 ERRORS AFFECTING 9 LINES
+--------------------------------------------------------------------------------
+ 48 | ERROR | Function mysql_query() is deprecated since PHP 5.5 and removed
+    |       | since PHP 7.0
+ 48 | ERROR | Extension 'mysql_' is deprecated since PHP 5.5 and removed since
+    |       | PHP 7.0; Use mysqli instead
+ 54 | ERROR | Function mysql_error() is deprecated since PHP 5.5 and removed
+    |       | since PHP 7.0
+ 54 | ERROR | Extension 'mysql_' is deprecated since PHP 5.5 and removed since
+    |       | PHP 7.0; Use mysqli instead
+ 56 | ERROR | Function mysql_query() is deprecated since PHP 5.5 and removed
+    |       | since PHP 7.0
+ 56 | ERROR | Extension 'mysql_' is deprecated since PHP 5.5 and removed since
+    |       | PHP 7.0; Use mysqli instead
+ 62 | ERROR | Function mysql_error() is deprecated since PHP 5.5 and removed
+    |       | since PHP 7.0
+ 62 | ERROR | Extension 'mysql_' is deprecated since PHP 5.5 and removed since
+    |       | PHP 7.0; Use mysqli instead
+ 64 | ERROR | Function mysql_query() is deprecated since PHP 5.5 and removed
+    |       | since PHP 7.0
+ 64 | ERROR | Extension 'mysql_' is deprecated since PHP 5.5 and removed since
+    |       | PHP 7.0; Use mysqli instead
+ 70 | ERROR | Function mysql_error() is deprecated since PHP 5.5 and removed
+    |       | since PHP 7.0
+ 70 | ERROR | Extension 'mysql_' is deprecated since PHP 5.5 and removed since
+    |       | PHP 7.0; Use mysqli instead
+ 72 | ERROR | Function mysql_query() is deprecated since PHP 5.5 and removed
+    |       | since PHP 7.0
+ 72 | ERROR | Extension 'mysql_' is deprecated since PHP 5.5 and removed since
+    |       | PHP 7.0; Use mysqli instead
+ 78 | ERROR | Function mysql_error() is deprecated since PHP 5.5 and removed
+    |       | since PHP 7.0
+ 78 | ERROR | Extension 'mysql_' is deprecated since PHP 5.5 and removed since
+    |       | PHP 7.0; Use mysqli instead
+ 84 | ERROR | Function mysql_close() is deprecated since PHP 5.5 and removed
+    |       | since PHP 7.0
+ 84 | ERROR | Extension 'mysql_' is deprecated since PHP 5.5 and removed since
+    |       | PHP 7.0; Use mysqli instead
+--------------------------------------------------------------------------------
+
+
+FILE: ...ts/kimi-plus.at/src/upgraded-src/web/htdocs/kimi_ET/modules/gui/logout.php
+--------------------------------------------------------------------------------
+FOUND 0 ERRORS AND 1 WARNING AFFECTING 1 LINE
+--------------------------------------------------------------------------------
+ 1 | WARNING | No PHP code was found in this file and short open tags are not
+   |         | allowed by this install of PHP. This file may be using short
+   |         | open tags but PHP does not allow them.
+--------------------------------------------------------------------------------
+
+
+FILE: ...tar/Projects/kimi-plus.at/src/upgraded-src/web/htdocs/kimi_ET/testpost.php
+--------------------------------------------------------------------------------
+FOUND 0 ERRORS AND 2 WARNINGS AFFECTING 2 LINES
+--------------------------------------------------------------------------------
+ 12 | WARNING | Function curl_close() is deprecated since PHP 8.5
+ 41 | WARNING | Function curl_close() is deprecated since PHP 8.5
+--------------------------------------------------------------------------------
+
+
+FILE: ...-src/web/htdocs/kimi_ET/kimibatch/files/vendor/composer/platform_check.php
+--------------------------------------------------------------------------------
+FOUND 0 ERRORS AND 1 WARNING AFFECTING 1 LINE
+--------------------------------------------------------------------------------
+ 24 | WARNING | Passing E_USER_ERROR to trigger_error() is deprecated since
+    |         | 8.4. Throw an exception or call exit with a string message
+    |         | instead.
+--------------------------------------------------------------------------------
+
+
+FILE: ...tdocs/kimi_ET/kimibatch/files/vendor/phpmailer/phpmailer/src/PHPMailer.php
+--------------------------------------------------------------------------------
+FOUND 3 ERRORS AND 3 WARNINGS AFFECTING 6 LINES
+--------------------------------------------------------------------------------
+  861 | WARNING | INI directive 'mbstring.func_overload' is deprecated since
+      |         | PHP 7.2 and removed since PHP 8.0
+ 1196 | ERROR   | Function imap_rfc822_parse_adrlist() is removed since PHP 8.4
+ 1198 | ERROR   | Function imap_errors() is removed since PHP 8.4
+ 1457 | ERROR   | The constant "INTL_IDNA_VARIANT_2003" is deprecated since PHP
+      |         | 7.2 and removed since PHP 8.0
+ 4677 | WARNING | Function openssl_pkey_free() is deprecated since PHP 8.0
+ 4683 | WARNING | Function openssl_pkey_free() is deprecated since PHP 8.0
+--------------------------------------------------------------------------------
+
+
+FILE: ...s/kimi_ET/kimibatch/files/16/Scripts/oko04_status_offen_auf_inA_setzen.php
+--------------------------------------------------------------------------------
+FOUND 3 ERRORS AFFECTING 1 LINE
+--------------------------------------------------------------------------------
+ 23 | ERROR | Function mysql_fetch_array() is deprecated since PHP 5.5 and
+    |       | removed since PHP 7.0
+ 23 | ERROR | Extension 'mysql_' is deprecated since PHP 5.5 and removed since
+    |       | PHP 7.0; Use mysqli instead
+ 23 | ERROR | The constant "MYSQL_ASSOC" is deprecated since PHP 5.5 and
+    |       | removed since PHP 7.0
+--------------------------------------------------------------------------------
+
+
+FILE: ...i_ET/kimibatch/files/16/Scripts/inko201604_status_offen_auf_inA_setzen.php
+--------------------------------------------------------------------------------
+FOUND 3 ERRORS AFFECTING 1 LINE
+--------------------------------------------------------------------------------
+ 23 | ERROR | Function mysql_fetch_array() is deprecated since PHP 5.5 and
+    |       | removed since PHP 7.0
+ 23 | ERROR | Extension 'mysql_' is deprecated since PHP 5.5 and removed since
+    |       | PHP 7.0; Use mysqli instead
+ 23 | ERROR | The constant "MYSQL_ASSOC" is deprecated since PHP 5.5 and
+    |       | removed since PHP 7.0
+--------------------------------------------------------------------------------
+
+
+FILE: ...-src/web/htdocs/kimi_ET/kimibatch/inkode04_status_offen_auf_inA_setzen.php
+--------------------------------------------------------------------------------
+FOUND 3 ERRORS AFFECTING 1 LINE
+--------------------------------------------------------------------------------
+ 23 | ERROR | Function mysql_fetch_array() is deprecated since PHP 5.5 and
+    |       | removed since PHP 7.0
+ 23 | ERROR | Extension 'mysql_' is deprecated since PHP 5.5 and removed since
+    |       | PHP 7.0; Use mysqli instead
+ 23 | ERROR | The constant "MYSQL_ASSOC" is deprecated since PHP 5.5 and
+    |       | removed since PHP 7.0
+--------------------------------------------------------------------------------
+
+
+FILE: ...mi-plus.at/src/upgraded-src/web/htdocs/kimi_ET/kimibatch/kimibatchtree.php
+--------------------------------------------------------------------------------
+FOUND 0 ERRORS AND 1 WARNING AFFECTING 1 LINE
+--------------------------------------------------------------------------------
+ 1 | WARNING | No PHP code was found in this file and short open tags are not
+   |         | allowed by this install of PHP. This file may be using short
+   |         | open tags but PHP does not allow them.
+--------------------------------------------------------------------------------
+
+
+FILE: ...plus.at/src/upgraded-src/web/htdocs/kimi_ET/kimibatch/schlaustromcheck.php
+--------------------------------------------------------------------------------
+FOUND 2 ERRORS AFFECTING 1 LINE
+--------------------------------------------------------------------------------
+ 493 | ERROR | Function mysql_error() is deprecated since PHP 5.5 and removed
+     |       | since PHP 7.0
+ 493 | ERROR | Extension 'mysql_' is deprecated since PHP 5.5 and removed since
+     |       | PHP 7.0; Use mysqli instead
+--------------------------------------------------------------------------------
+
+
+FILE: ...ded-src/web/htdocs/kimi_ET/kimibatch/oko04_status_offen_auf_inA_setzen.php
+--------------------------------------------------------------------------------
+FOUND 3 ERRORS AFFECTING 1 LINE
+--------------------------------------------------------------------------------
+ 23 | ERROR | Function mysql_fetch_array() is deprecated since PHP 5.5 and
+    |       | removed since PHP 7.0
+ 23 | ERROR | Extension 'mysql_' is deprecated since PHP 5.5 and removed since
+    |       | PHP 7.0; Use mysqli instead
+ 23 | ERROR | The constant "MYSQL_ASSOC" is deprecated since PHP 5.5 and
+    |       | removed since PHP 7.0
+--------------------------------------------------------------------------------
+
+
+FILE: ...web/htdocs/kimi_ET/kimibatch/oko04_status_offen_vortage_auf_inA_setzen.php
+--------------------------------------------------------------------------------
+FOUND 3 ERRORS AFFECTING 1 LINE
+--------------------------------------------------------------------------------
+ 23 | ERROR | Function mysql_fetch_array() is deprecated since PHP 5.5 and
+    |       | removed since PHP 7.0
+ 23 | ERROR | Extension 'mysql_' is deprecated since PHP 5.5 and removed since
+    |       | PHP 7.0; Use mysqli instead
+ 23 | ERROR | The constant "MYSQL_ASSOC" is deprecated since PHP 5.5 and
+    |       | removed since PHP 7.0
+--------------------------------------------------------------------------------
+
+
+FILE: ...s/kimi-plus.at/src/upgraded-src/web/htdocs/kimi_ET/kimibatch/okoexpzwb.php
+--------------------------------------------------------------------------------
+FOUND 8 ERRORS AFFECTING 4 LINES
+--------------------------------------------------------------------------------
+ 130 | ERROR | Function mysql_query() is deprecated since PHP 5.5 and removed
+     |       | since PHP 7.0
+ 130 | ERROR | Extension 'mysql_' is deprecated since PHP 5.5 and removed since
+     |       | PHP 7.0; Use mysqli instead
+ 136 | ERROR | Function mysql_error() is deprecated since PHP 5.5 and removed
+     |       | since PHP 7.0
+ 136 | ERROR | Extension 'mysql_' is deprecated since PHP 5.5 and removed since
+     |       | PHP 7.0; Use mysqli instead
+ 144 | ERROR | Function mysql_query() is deprecated since PHP 5.5 and removed
+     |       | since PHP 7.0
+ 144 | ERROR | Extension 'mysql_' is deprecated since PHP 5.5 and removed since
+     |       | PHP 7.0; Use mysqli instead
+ 145 | ERROR | Function mysql_fetch_array() is deprecated since PHP 5.5 and
+     |       | removed since PHP 7.0
+ 145 | ERROR | Extension 'mysql_' is deprecated since PHP 5.5 and removed since
+     |       | PHP 7.0; Use mysqli instead
+--------------------------------------------------------------------------------
+
+
+FILE: ...ded-src/web/htdocs/kimi_ET/kimibatch/telematica_import_callmanager_log.php
+--------------------------------------------------------------------------------
+FOUND 1 ERROR AND 1 WARNING AFFECTING 2 LINES
+--------------------------------------------------------------------------------
+ 116 | WARNING | Function curl_close() is deprecated since PHP 8.5
+ 420 | ERROR   | Using an unparenthesized expression containing a "." before a
+     |         | "+" or "-" has been deprecated in PHP 7.4 and removed in PHP
+     |         | 8.0
+--------------------------------------------------------------------------------
+
+
+FILE: ...mi-plus.at/src/upgraded-src/web/htdocs/kimi_ET/kimibatch/inkodeexp_new.php
+--------------------------------------------------------------------------------
+FOUND 4 ERRORS AFFECTING 2 LINES
+--------------------------------------------------------------------------------
+ 261 | ERROR | Function mysql_query() is deprecated since PHP 5.5 and removed
+     |       | since PHP 7.0
+ 261 | ERROR | Extension 'mysql_' is deprecated since PHP 5.5 and removed since
+     |       | PHP 7.0; Use mysqli instead
+ 263 | ERROR | Function mysql_fetch_array() is deprecated since PHP 5.5 and
+     |       | removed since PHP 7.0
+ 263 | ERROR | Extension 'mysql_' is deprecated since PHP 5.5 and removed since
+     |       | PHP 7.0; Use mysqli instead
+--------------------------------------------------------------------------------
+
+
+FILE: ...kimi-plus.at/src/upgraded-src/web/htdocs/kimi_ET/kimibatch/inkodecheck.php
+--------------------------------------------------------------------------------
+FOUND 2 ERRORS AFFECTING 1 LINE
+--------------------------------------------------------------------------------
+ 475 | ERROR | Function mysql_error() is deprecated since PHP 5.5 and removed
+     |       | since PHP 7.0
+ 475 | ERROR | Extension 'mysql_' is deprecated since PHP 5.5 and removed since
+     |       | PHP 7.0; Use mysqli instead
+--------------------------------------------------------------------------------
+
+
+FILE: ...rc/web/htdocs/kimi_ET/kimibatch/inko201604_status_offen_auf_inA_setzen.php
+--------------------------------------------------------------------------------
+FOUND 3 ERRORS AFFECTING 1 LINE
+--------------------------------------------------------------------------------
+ 23 | ERROR | Function mysql_fetch_array() is deprecated since PHP 5.5 and
+    |       | removed since PHP 7.0
+ 23 | ERROR | Extension 'mysql_' is deprecated since PHP 5.5 and removed since
+    |       | PHP 7.0; Use mysqli instead
+ 23 | ERROR | The constant "MYSQL_ASSOC" is deprecated since PHP 5.5 and
+    |       | removed since PHP 7.0
+--------------------------------------------------------------------------------
+
+
+FILE: ...src/upgraded-src/web/htdocs/kimi_ET/kimibatch/oko_inA_outbound_elsbeth.php
+--------------------------------------------------------------------------------
+FOUND 4 ERRORS AFFECTING 2 LINES
+--------------------------------------------------------------------------------
+ 94 | ERROR | Function mysql_query() is deprecated since PHP 5.5 and removed
+    |       | since PHP 7.0
+ 94 | ERROR | Extension 'mysql_' is deprecated since PHP 5.5 and removed since
+    |       | PHP 7.0; Use mysqli instead
+ 96 | ERROR | Function mysql_fetch_array() is deprecated since PHP 5.5 and
+    |       | removed since PHP 7.0
+ 96 | ERROR | Extension 'mysql_' is deprecated since PHP 5.5 and removed since
+    |       | PHP 7.0; Use mysqli instead
+--------------------------------------------------------------------------------
+
+
+FILE: ...rojects/kimi-plus.at/src/upgraded-src/web/htdocs/kimi_ET/adminer-4.8.1.php
+--------------------------------------------------------------------------------
+FOUND 100 ERRORS AND 6 WARNINGS AFFECTING 49 LINES
+--------------------------------------------------------------------------------
+   10 | WARNING | INI directive 'filter.default' is deprecated since PHP 8.1
+   21 | ERROR   | Function get_magic_quotes_gpc() is deprecated since PHP 7.4
+      |         | and removed since PHP 8.0
+   21 | ERROR   | Function each() is deprecated since PHP 7.2 and removed since
+      |         | PHP 8.0; Use a foreach loop or ArrayIterator instead
+  172 | ERROR   | Function get_magic_quotes_runtime() is deprecated since PHP
+      |         | 7.4 and removed since PHP 8.0
+  172 | ERROR   | Function set_magic_quotes_runtime() is deprecated since PHP
+      |         | 5.3 and removed since PHP 7.0
+  172 | ERROR   | INI directive 'zend.ze1_compatibility_mode' is removed since
+      |         | PHP 5.3
+  174 | ERROR   | Since PHP 7.0, functions inspecting arguments, like
+      |         | func_get_args(), no longer report the original value as
+      |         | passed to a parameter, but will instead provide the current
+      |         | value. The parameter "$v" was changed on line 174.
+  243 | WARNING | Method name "Min_Result::__desctruct" is discouraged; PHP has
+      |         | reserved all method names with a double underscore prefix for
+      |         | future use.
+  246 | ERROR   | Function sqlite_libversion() is removed since PHP 5.4
+  246 | ERROR   | Extension 'sqlite' is removed since PHP 5.4
+  246 | ERROR   | The built-in class SQLiteDatabase is removed since PHP 5.4
+  248 | ERROR   | The constant "SQLITE_BOTH" is removed since PHP 5.4
+  253 | ERROR   | Function sqlite_escape_string() is removed since PHP 5.4
+  253 | ERROR   | Extension 'sqlite' is removed since PHP 5.4
+  259 | ERROR   | The constant "SQLITE_ASSOC" is removed since PHP 5.4
+  262 | ERROR   | The constant "SQLITE_NUM" is removed since PHP 5.4
+  612 | ERROR   | Function oci_new_connect() is removed since PHP 8.4
+  612 | ERROR   | Function oci_server_version() is removed since PHP 8.4
+  613 | ERROR   | Function oci_error() is removed since PHP 8.4
+  618 | ERROR   | Function oci_parse() is removed since PHP 8.4
+  618 | ERROR   | Function oci_error() is removed since PHP 8.4
+  619 | ERROR   | Function oci_execute() is removed since PHP 8.4
+  619 | ERROR   | Function oci_num_fields() is removed since PHP 8.4
+  621 | ERROR   | Function oci_num_rows() is removed since PHP 8.4
+  621 | ERROR   | Function oci_free_statement() is removed since PHP 8.4
+  626 | ERROR   | Function oci_fetch() is removed since PHP 8.4
+  628 | ERROR   | Function oci_result() is removed since PHP 8.4
+  633 | ERROR   | Function oci_fetch_assoc() is removed since PHP 8.4
+  634 | ERROR   | Function oci_fetch_row() is removed since PHP 8.4
+  636 | ERROR   | Function oci_field_name() is removed since PHP 8.4
+  636 | ERROR   | Function oci_field_type() is removed since PHP 8.4
+  637 | ERROR   | Function oci_free_statement() is removed since PHP 8.4
+  777 | ERROR   | Function mssql_connect() is removed since PHP 7.0
+  777 | ERROR   | Extension 'mssql' is removed since PHP 7.0
+  777 | ERROR   | Function mssql_get_last_message() is removed since PHP 7.0
+  777 | ERROR   | Extension 'mssql' is removed since PHP 7.0
+  780 | ERROR   | Function mssql_select_db() is removed since PHP 7.0
+  780 | ERROR   | Extension 'mssql' is removed since PHP 7.0
+  781 | ERROR   | Function mssql_query() is removed since PHP 7.0
+  781 | ERROR   | Extension 'mssql' is removed since PHP 7.0
+  781 | ERROR   | Function mssql_get_last_message() is removed since PHP 7.0
+  781 | ERROR   | Extension 'mssql' is removed since PHP 7.0
+  782 | ERROR   | Function mssql_rows_affected() is removed since PHP 7.0
+  782 | ERROR   | Extension 'mssql' is removed since PHP 7.0
+  789 | ERROR   | Function mssql_next_result() is removed since PHP 7.0
+  789 | ERROR   | Extension 'mssql' is removed since PHP 7.0
+  792 | ERROR   | Function mssql_result() is removed since PHP 7.0
+  792 | ERROR   | Extension 'mssql' is removed since PHP 7.0
+  794 | ERROR   | Function mssql_num_rows() is removed since PHP 7.0
+  794 | ERROR   | Extension 'mssql' is removed since PHP 7.0
+  796 | ERROR   | Function mssql_fetch_assoc() is removed since PHP 7.0
+  796 | ERROR   | Extension 'mssql' is removed since PHP 7.0
+  798 | ERROR   | Function mssql_fetch_row() is removed since PHP 7.0
+  798 | ERROR   | Extension 'mssql' is removed since PHP 7.0
+  800 | ERROR   | Function mssql_num_rows() is removed since PHP 7.0
+  800 | ERROR   | Extension 'mssql' is removed since PHP 7.0
+  801 | ERROR   | Function mssql_fetch_field() is removed since PHP 7.0
+  801 | ERROR   | Extension 'mssql' is removed since PHP 7.0
+  802 | ERROR   | Function mssql_data_seek() is removed since PHP 7.0
+  802 | ERROR   | Extension 'mssql' is removed since PHP 7.0
+  803 | ERROR   | Function mssql_free_result() is removed since PHP 7.0
+  803 | ERROR   | Extension 'mssql' is removed since PHP 7.0
+ 1054 | ERROR   | INI directive 'track_errors' is deprecated since PHP 7.2 and
+      |         | removed since PHP 8.0
+ 1054 | ERROR   | The variable '$php_errormsg' is deprecated since PHP 7.2 and
+      |         | removed since PHP 8.0; Use error_get_last() instead
+ 1257 | ERROR   | Function mysql_connect() is deprecated since PHP 5.5 and
+      |         | removed since PHP 7.0
+ 1257 | ERROR   | Extension 'mysql_' is deprecated since PHP 5.5 and removed
+      |         | since PHP 7.0; Use mysqli instead
+ 1257 | WARNING | INI directive 'mysql.default_host' is removed since PHP 7.0
+ 1257 | WARNING | INI directive 'mysql.default_user' is removed since PHP 7.0
+ 1257 | WARNING | INI directive 'mysql.default_password' is removed since PHP
+      |         | 7.0
+ 1257 | ERROR   | Function mysql_get_server_info() is deprecated since PHP 5.5
+      |         | and removed since PHP 7.0
+ 1257 | ERROR   | Extension 'mysql_' is deprecated since PHP 5.5 and removed
+      |         | since PHP 7.0; Use mysqli instead
+ 1257 | ERROR   | Function mysql_error() is deprecated since PHP 5.5 and
+      |         | removed since PHP 7.0
+ 1257 | ERROR   | Extension 'mysql_' is deprecated since PHP 5.5 and removed
+      |         | since PHP 7.0; Use mysqli instead
+ 1258 | ERROR   | Function mysql_set_charset() is deprecated since PHP 5.5 and
+      |         | removed since PHP 7.0
+ 1258 | ERROR   | Extension 'mysql_' is deprecated since PHP 5.5 and removed
+      |         | since PHP 7.0; Use mysqli instead
+ 1259 | ERROR   | Function mysql_set_charset() is deprecated since PHP 5.5 and
+      |         | removed since PHP 7.0
+ 1259 | ERROR   | Extension 'mysql_' is deprecated since PHP 5.5 and removed
+      |         | since PHP 7.0; Use mysqli instead
+ 1260 | ERROR   | Function mysql_real_escape_string() is deprecated since PHP
+      |         | 5.5 and removed since PHP 7.0
+ 1260 | ERROR   | Extension 'mysql_' is deprecated since PHP 5.5 and removed
+      |         | since PHP 7.0; Use mysqli instead
+ 1262 | ERROR   | Function mysql_select_db() is deprecated since PHP 5.5 and
+      |         | removed since PHP 7.0
+ 1262 | ERROR   | Extension 'mysql_' is deprecated since PHP 5.5 and removed
+      |         | since PHP 7.0; Use mysqli instead
+ 1263 | ERROR   | Function mysql_unbuffered_query() is deprecated since PHP 5.5
+      |         | and removed since PHP 7.0
+ 1263 | ERROR   | Extension 'mysql_' is deprecated since PHP 5.5 and removed
+      |         | since PHP 7.0; Use mysqli instead
+ 1263 | ERROR   | Function mysql_query() is deprecated since PHP 5.5 and
+      |         | removed since PHP 7.0
+ 1263 | ERROR   | Extension 'mysql_' is deprecated since PHP 5.5 and removed
+      |         | since PHP 7.0; Use mysqli instead
+ 1263 | ERROR   | Function mysql_errno() is deprecated since PHP 5.5 and
+      |         | removed since PHP 7.0
+ 1263 | ERROR   | Extension 'mysql_' is deprecated since PHP 5.5 and removed
+      |         | since PHP 7.0; Use mysqli instead
+ 1263 | ERROR   | Function mysql_error() is deprecated since PHP 5.5 and
+      |         | removed since PHP 7.0
+ 1263 | ERROR   | Extension 'mysql_' is deprecated since PHP 5.5 and removed
+      |         | since PHP 7.0; Use mysqli instead
+ 1264 | ERROR   | Function mysql_affected_rows() is deprecated since PHP 5.5
+      |         | and removed since PHP 7.0
+ 1264 | ERROR   | Extension 'mysql_' is deprecated since PHP 5.5 and removed
+      |         | since PHP 7.0; Use mysqli instead
+ 1264 | ERROR   | Function mysql_info() is deprecated since PHP 5.5 and removed
+      |         | since PHP 7.0
+ 1264 | ERROR   | Extension 'mysql_' is deprecated since PHP 5.5 and removed
+      |         | since PHP 7.0; Use mysqli instead
+ 1274 | ERROR   | Function mysql_result() is deprecated since PHP 5.5 and
+      |         | removed since PHP 7.0
+ 1274 | ERROR   | Extension 'mysql_' is deprecated since PHP 5.5 and removed
+      |         | since PHP 7.0; Use mysqli instead
+ 1276 | ERROR   | Function mysql_num_rows() is deprecated since PHP 5.5 and
+      |         | removed since PHP 7.0
+ 1276 | ERROR   | Extension 'mysql_' is deprecated since PHP 5.5 and removed
+      |         | since PHP 7.0; Use mysqli instead
+ 1278 | ERROR   | Function mysql_fetch_assoc() is deprecated since PHP 5.5 and
+      |         | removed since PHP 7.0
+ 1278 | ERROR   | Extension 'mysql_' is deprecated since PHP 5.5 and removed
+      |         | since PHP 7.0; Use mysqli instead
+ 1280 | ERROR   | Function mysql_fetch_row() is deprecated since PHP 5.5 and
+      |         | removed since PHP 7.0
+ 1280 | ERROR   | Extension 'mysql_' is deprecated since PHP 5.5 and removed
+      |         | since PHP 7.0; Use mysqli instead
+ 1281 | ERROR   | Function mysql_fetch_field() is deprecated since PHP 5.5 and
+      |         | removed since PHP 7.0
+ 1281 | ERROR   | Extension 'mysql_' is deprecated since PHP 5.5 and removed
+      |         | since PHP 7.0; Use mysqli instead
+ 1282 | ERROR   | Function mysql_free_result() is deprecated since PHP 5.5 and
+      |         | removed since PHP 7.0
+ 1282 | ERROR   | Extension 'mysql_' is deprecated since PHP 5.5 and removed
+      |         | since PHP 7.0; Use mysqli instead
+ 1774 | WARNING | Function utf8_decode() is deprecated since PHP 8.2; Use
+      |         | mb_convert_encoding(), UConverter::transcode() or iconv
+      |         | instead
+--------------------------------------------------------------------------------
+
+
+FILE: ...rc/upgraded-src/web/htdocs/kimi_ET/libs/addons/phpmail/class.phpmailer.php
+--------------------------------------------------------------------------------
+FOUND 15 ERRORS AND 1 WARNING AFFECTING 15 LINES
+--------------------------------------------------------------------------------
+  470 | ERROR   | Function split() is deprecated since PHP 5.3 and removed
+      |         | since PHP 7.0; Use preg_split(), explode() or str_split()
+      |         | instead
+  473 | WARNING | INI directive 'safe_mode' is deprecated since PHP 5.3 and
+      |         | removed since PHP 5.4
+  592 | ERROR   | Function eregi() is deprecated since PHP 5.3 and removed
+      |         | since PHP 7.0; Use preg_match() (with the i modifier) instead
+  592 | ERROR   | Extension 'ereg' is deprecated since PHP 5.3 and removed
+      |         | since PHP 7.0; Use pcre instead
+ 1217 | ERROR   | Function get_magic_quotes_runtime() is deprecated since PHP
+      |         | 7.4 and removed since PHP 8.0
+ 1218 | ERROR   | Function set_magic_quotes_runtime() is deprecated since PHP
+      |         | 5.3 and removed since PHP 7.0
+ 1222 | ERROR   | Function set_magic_quotes_runtime() is deprecated since PHP
+      |         | 5.3 and removed since PHP 7.0
+ 1384 | ERROR   | Function each() is deprecated since PHP 7.2 and removed since
+      |         | PHP 8.0; Use a foreach loop or ArrayIterator instead
+ 1430 | ERROR   | preg_replace() - /e modifier is deprecated since PHP 5.5 and
+      |         | removed since PHP 7.0
+ 1433 | ERROR   | preg_replace() - /e modifier is deprecated since PHP 5.5 and
+      |         | removed since PHP 7.0
+ 1437 | ERROR   | preg_replace() - /e modifier is deprecated since PHP 5.5 and
+      |         | removed since PHP 7.0
+ 1629 | ERROR   | Global variable '$HTTP_SERVER_VARS' is deprecated since PHP
+      |         | 5.3 and removed since PHP 5.4; Use $_SERVER instead
+ 1630 | ERROR   | Global variable '$HTTP_ENV_VARS' is deprecated since PHP 5.3
+      |         | and removed since PHP 5.4; Use $_ENV instead
+ 1633 | ERROR   | Global variable '$HTTP_SERVER_VARS' is deprecated since PHP
+      |         | 5.3 and removed since PHP 5.4; Use $_SERVER instead
+ 1635 | ERROR   | Global variable '$HTTP_ENV_VARS' is deprecated since PHP 5.3
+      |         | and removed since PHP 5.4; Use $_ENV instead
+ 1723 | ERROR   | Function split() is deprecated since PHP 5.3 and removed
+      |         | since PHP 7.0; Use preg_split(), explode() or str_split()
+      |         | instead
+--------------------------------------------------------------------------------
+
+
+FILE: ....at/src/upgraded-src/web/htdocs/kimi_ET/libs/addons/phpmail/class.smtp.php
+--------------------------------------------------------------------------------
+FOUND 3 ERRORS AND 1 WARNING AFFECTING 4 LINES
+--------------------------------------------------------------------------------
+ 139 | WARNING | Function socket_set_timeout() is deprecated since PHP 8.5; Use
+     |         | stream_set_timeout() instead
+ 342 | ERROR   | Function each() is deprecated since PHP 7.2 and removed since
+     |         | PHP 8.0; Use a foreach loop or ArrayIterator instead
+ 369 | ERROR   | Function each() is deprecated since PHP 7.2 and removed since
+     |         | PHP 8.0; Use a foreach loop or ArrayIterator instead
+ 453 | ERROR   | Function each() is deprecated since PHP 7.2 and removed since
+     |         | PHP 8.0; Use a foreach loop or ArrayIterator instead
+--------------------------------------------------------------------------------
+
+Time: 12.5 secs; Memory: 106.01MB

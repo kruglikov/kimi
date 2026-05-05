@@ -41,14 +41,14 @@ These are non-obvious issues encountered during implementation that the plan mus
 
 All files are **new**. Nothing in existing `src/original-src/` files is modified.
 
-| File | Purpose | Status |
-|---|---|---|
-| `src/original-src/tests/composer.json` | PHPUnit dev dependency | ✅ Done |
-| `src/original-src/tests/phpunit.xml` | PHPUnit config | ✅ Done |
-| `src/original-src/tests/harness/gui_runner.php` | Bootstraps portal app and includes GUI/AJAX module under test | ✅ Done |
-| `src/original-src/tests/SmokeTest/GuiSmokeTest.php` | Data-driven: GUI + AJAX smoke tests | ✅ Done |
+| File                                                  | Purpose | Status |
+|-------------------------------------------------------|---|---|
+| `src/original-src/tests/composer.json`                | PHPUnit dev dependency | ✅ Done |
+| `src/original-src/tests/phpunit.xml`                  | PHPUnit config | ✅ Done |
+| `src/original-src/tests/harness/gui_runner.php`       | Bootstraps portal app and includes GUI/AJAX module under test | ✅ Done |
+| `src/original-src/tests/SmokeTest/GuiSmokeTest.php`   | Data-driven: GUI + AJAX smoke tests | ✅ Done |
 | `src/original-src/tests/SmokeTest/BatchSmokeTest.php` | Data-driven: batch script smoke tests | ✅ Done |
-| `src/original-src/tests/README.md` | How to run | ✅ Done |
+| `src/original-src/tests/README.md`                    | How to run | ✅ Done |
 
 ---
 

@@ -284,7 +284,7 @@ so the legacy batch include path resolves without modifying PHP source.
 
 This is a significant improvement from the prior post-DB-fix baseline of 114 batch failures.
 
-### Remaining failure classes
+### Remaining failure classes (as of 2026-05-04)
 
 The remaining batch failures are now real script/runtime issues rather than environment bootstrap issues. Dominant categories observed:
 
@@ -320,3 +320,43 @@ Call to undefined function mysql_fetch_array()
 ```text
 coeochdeexptest.php: Parse error on line 24
 ```
+
+---
+
+## Schema Completion Round (2026-05-05)
+
+### What was done
+
+Category 2 (missing tables / missing columns) was fully resolved by extending the init SQL files.
+
+**`05-batch-tables.sql`** (new file): created all scratch/staging tables used by `*check*.php` and `*exp*.php` scripts — one set per campaign group (`knp1*`, `knp3*`, `knpdrei*`, `inkode*`, `inko2016*`, `ifs*`, `oko*`), each with a single `ticketnr INT UNSIGNED` column.
+
+**`06-batch-stubs.sql`** (new file): created stub stored functions (`getLogAnrufVorhanden`, `getLogStartGes`, `getLogAgentAnrede/Vorname/Nachname`, `get_log_last_user`) returning empty/zero values, plus campaign import tables (`inkode`, `inko2016`, `oko`, `okozwb`, `schlaustrom`, `quester`, `knp3`, `knp3_out`, …) and empty `ticket_*` views.
+
+**Additional column fixes** (discovered by running failing queries directly against the live DB):
+
+| Table | Column added | Reason |
+|-------|-------------|--------|
+| `benutzer` (`02-schema.sql`) | `anrede VARCHAR(50)` | Referenced as `ben.anrede` in `*checktest.php` scripts via a subquery that LEFT JOINs `benutzer` as alias `ben` |
+| `quester` (`06-batch-stubs.sql`) | `kunde TEXT` | Referenced as `kimi_decrypt(kunde)` in `questerexp20250208.php` export query |
+| `schlaustrom` (`06-batch-stubs.sql`) | `kunde TEXT` | Referenced as `kimi_decrypt(kunde)` in `schlaustromexp*.php` export queries |
+
+All changes were verified by a full `docker compose down -v` + `up -d --build` cycle followed by re-running the test suite.
+
+### Updated test baseline (verified 2026-05-05, clean rebuild)
+
+- `BatchSmokeTest`: **115 tests, 6 failures** (down from 46)
+- `GuiSmokeTest`: 17/17 passing (unchanged)
+
+### Remaining 6 failures — all PHP code issues, deferred to `src/upgraded-src/`
+
+These cannot be fixed by seed data changes. All are in `src/original-src/web/` which is preserved read-only.
+
+| Test # | Script                                             | Error | Root cause |
+|--------|----------------------------------------------------|-------|------------|
+| #26 | `coeochdeexptest.php`                              | Parse error on line 24 | SQL column aliases using double quotes (`"status.text"`) inside a PHP double-quoted string terminate the string prematurely |
+| #45 | `inko201604_status_offen_auf_inA_setzen.php:23`    | `Call to undefined function mysql_fetch_array()` | PHP 5 `mysql_*` extension removed in PHP 7; script was never updated to `mysqli_*` |
+| #60 | `inkode04_status_offen_auf_inA_setzen.php:23`      | `Call to undefined function mysql_fetch_array()` | Same as above |
+| #69 | `inkodeimp2x.php:66`                               | `Call to undefined function bFetchArray()` | Typo — `bFetchArray` instead of `dbFetchArray` |
+| #93 | `oko04_status_offen_auf_inA_setzen.php:23`         | `Call to undefined function mysql_fetch_array()` | Same as #45 |
+| #94 | `oko04_status_offen_vortage_auf_inA_setzen.php:23` | `Call to undefined function mysql_fetch_array()` | Same as #45 |

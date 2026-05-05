@@ -2,15 +2,8 @@
 
 ## Purpose of This Document
 
-This document describes the complete architecture of the KIMI Portal system as it exists in `src/original-src/web/`. It is intended both as human-readable documentation and as an AI-agent context file for migration, analysis, and refactoring tasks.
-
----
-
-## Business Context
-
-**KIMI Plus GmbH** (kimi-plus.at) is an Austrian consulting company that acts as a professional intermediary in payment management — helping businesses communicate with customers about late payments and debt collection, while preserving customer relationships.
-
-**The KIMI Portal** (`kimiportal.at`) is a multi-tenant, browser-based B2B SaaS portal used by call-center agents to manage debt collection campaigns. Call-center agents log in, select a client (Mandant), and work through tickets (Akt/Ticket) — each representing a customer case within a campaign. Agents can view case data, record interactions, make outbound phone calls, and process payments/bookings.
+This document describes the architecture of the KIMI Portal system. 
+It is intended both as human-readable documentation and as an AI-agent context file for migration, analysis, and refactoring tasks.
 
 ---
 
@@ -45,8 +38,7 @@ This document describes the complete architecture of the KIMI Portal system as i
 ## Local Development (Docker)
 
 ```
-./scripts/up-original.sh --build   # first run
-./scripts/up-original.sh -d        # subsequent runs
+./scripts/up-original.sh # Up the local docker containers for original sources (@src/original-src/web/) 
 ```
 
 Equivalent direct Compose commands:
@@ -77,24 +69,35 @@ src/original-src/
     │   └── vhost.conf                          ← Apache virtual host
     └── mariadb/
         └── init/
-            ├── 01-init.sql                     ← creates kimi_archiv DB + kimi user
-            ├── 02-schema.sql                   ← reverse-engineered draft schema
-            └── 03-dev-seed.sql                 ← local-only login + smoke-test seed data
+            ├── 01-init.sql              ← creates kimi_archiv DB + users (kimi, sql_kimi_et)
+            ├── 02-schema.sql            ← reverse-engineered draft schema (all core tables + stored functions)
+            ├── 03-dev-seed.sql          ← local-only seed: admin user, demo mandant, campaign, customer, ticket
+            ├── 05-batch-tables.sql      ← scratch tables used by kimibatch check scripts (knp1/knp3/inkode/ifs/oko/… erledigt/erreicht/…)
+            └── 06-batch-stubs.sql       ← stub stored functions + campaign import tables (inkode, inko2016, oko, schlaustrom, quester, knp3/knp3_out, …)
 ```
 
-`02-schema.sql` is a reverse-engineered draft. Column names are based on the PHP codebase, but data types, lengths, nullability, and defaults still need verification against a production dump; see the file header for current status and caveats.
+**`src/original-src/docker/mariadb/init/` — init file roles:**
+
+Files are executed by MariaDB in alphabetical order on first container start. There is intentionally no `04-*.sql` — the sequence skips 4 to leave room for future insertions between the dev seed and the batch layers.
+
+| File | Role |
+|------|------|
+| `01-init.sql` | Creates `kimi_archiv` database; creates `kimi`, `sql_kimi_et` users with correct grants |
+| `02-schema.sql` | Reverse-engineered schema for `kimi_et`: all core tables (`ticket`, `kunde`, `benutzer`, `mandant`, `log`, …), `kimi_encrypt`/`kimi_decrypt` function stubs |
+| `03-dev-seed.sql` | Local-only seed: one admin login (`admin`/`admin123`), one demo mandant, one active campaign, lookup rows, one sample customer and ticket |
+| `05-batch-tables.sql` | Scratch/staging tables used by kimibatch check scripts. Each batch check script TRUNCATEs these before use, INSERTs matching ticket numbers, then JOINs them for status counting. One set per campaign group: `knp1*`, `knp3*`, `knpdrei*`, `inkode*`, `inko2016*`, `ifs*`, `oko*` |
+| `06-batch-stubs.sql` | Stub stored functions (`getLogAnrufVorhanden`, `getLogStartGes`, `getLogAgentAnrede/Vorname/Nachname`, `get_log_last_user`) that return empty/zero values sufficient for smoke testing. Also defines campaign import tables (`inkode`, `inko2016`, `oko`, `okozwb`, `inkodeurgenz`, `inko2016urgenz`, `schlaustrom`, `knp3`, `knp3_out`, `okoerledigt20220713`, `quester`) and empty ticket_* views (`ticket_inkoinbound`, `ticket_inko2016`, `ticket_inkode`, `ticket_schlaustrom`, `ticket_knp1`, `ticket_knp3`, `ticket_oko`) |
+
+Column names in `02-schema.sql` are derived from the PHP codebase. Data types, nullability, and defaults are best-effort reverse-engineering and still need verification against a production dump. The batch-layer files (`05-`, `06-`) are additive and only need to provide the schema surface required for smoke tests to pass — data integrity is not required.
 
 Use `scripts/up-original.sh` from the repository root to start this legacy stack without depending on the caller's current working directory. The script always targets `src/original-src/docker-compose.yml`.
 
 **Credentials (local only):**
 
-| What                      | Value      |
-|---------------------------|------------|
-| MariaDB root password     | `password` |
-| `sql_kimi_et` password    | `NS889Hs4bhL1aub7HyEH6AjdYpYAlx` |
-| `kimi` (archive) password | `KimiPlus@13` |
-| Portal user               | `admin`    |
-| Portal password           | `admin123` |
+| What                      | Value                            |
+|---------------------------|----------------------------------|
+| Portal user               | `admin`                          |
+| Portal password           | `admin123`                       |
 
 The preserved legacy config in `src/original-src/web/htdocs/kimi_ET/config/config.php` uses `localhost` for both the main DB and archive DB. The local Docker stack accommodates this by mounting the MariaDB Unix socket into the `web` container and setting `mysqli.default_socket` there.
 
@@ -252,24 +255,24 @@ Also loads all 44 entity classes via `require_once` at the top of the file.
 
 Key entities:
 
-| Class | File | Table | Purpose |
-|---|---|---|---|
-| `User` | `src/original-src/web/htdocs/kimi_ET/libs/entities/user.php` | `benutzer` | Portal user (call-center agent) |
-| `Mandant` | `src/original-src/web/htdocs/kimi_ET/libs/entities/mandant.php` | `mandant` | Client/tenant company |
-| `Kampagne` | `src/original-src/web/htdocs/kimi_ET/libs/entities/kampagne.php` | `kampagne` | A debt collection campaign |
-| `Ticket` | `src/original-src/web/htdocs/kimi_ET/libs/entities/ticket.php` | `ticket` | Main work item (a customer case) |
-| `Ticket_Historie` | `src/original-src/web/htdocs/kimi_ET/libs/entities/ticket_historie.php` | `ticket_historie` | Ticket change history |
-| `Stammdaten` | `src/original-src/web/htdocs/kimi_ET/libs/entities/stammdaten.php` | `stammdaten` | Customer master data (name, address, PII) |
-| `Subkonto` | `src/original-src/web/htdocs/kimi_ET/libs/entities/subkonto.php` | `subkonto` | Customer sub-account (financial) |
-| `Buchungen` | `src/original-src/web/htdocs/kimi_ET/libs/entities/buchungen.php` | `buchungen` | Financial bookings/transactions |
+| Class                | File | Table | Purpose |
+|----------------------|---|---|---|
+| `User`               | `src/original-src/web/htdocs/kimi_ET/libs/entities/user.php` | `benutzer` | Portal user (call-center agent) |
+| `Mandant`            | `src/original-src/web/htdocs/kimi_ET/libs/entities/mandant.php` | `mandant` | Client/tenant company |
+| `Kampagne`           | `src/original-src/web/htdocs/kimi_ET/libs/entities/kampagne.php` | `kampagne` | A debt collection campaign |
+| `Ticket`             | `src/original-src/web/htdocs/kimi_ET/libs/entities/ticket.php` | `ticket` | Main work item (a customer case) |
+| `Ticket_Historie`    | `src/original-src/web/htdocs/kimi_ET/libs/entities/ticket_historie.php` | `ticket_historie` | Ticket change history |
+| `Stammdaten`         | `src/original-src/web/htdocs/kimi_ET/libs/entities/stammdaten.php` | `stammdaten` | Customer master data (name, address, PII) |
+| `Subkonto`           | `src/original-src/web/htdocs/kimi_ET/libs/entities/subkonto.php` | `subkonto` | Customer sub-account (financial) |
+| `Buchungen`          | `src/original-src/web/htdocs/kimi_ET/libs/entities/buchungen.php` | `buchungen` | Financial bookings/transactions |
 | `InkassoInformation` | `src/original-src/web/htdocs/kimi_ET/libs/entities/inkassoinformation.php` | `inkassoinformation` | Debt collection details |
-| `Akt` | `src/original-src/web/htdocs/kimi_ET/libs/entities/akt.php` | `akt` | Legal case/act document |
-| `Log` | `src/original-src/web/htdocs/kimi_ET/libs/entities/log.php` | `log` | Interaction / activity log |
-| `Role` | `src/original-src/web/htdocs/kimi_ET/libs/entities/role.php` | `rolle` | RBAC role |
-| `Permission` | `src/original-src/web/htdocs/kimi_ET/libs/entities/permission.php` | `berechtigung` | RBAC permission entry |
-| `Benutzer` | `src/original-src/web/htdocs/kimi_ET/libs/entities/benutzer.php` | `benutzer` | Agent user profile (overlaps with `User`) |
-| `Anrufzeiten` | `src/original-src/web/htdocs/kimi_ET/libs/entities/anrufzeiten.php` | `anrufzeiten` | Call time slots |
-| `Kundenhistorie` | `src/original-src/web/htdocs/kimi_ET/libs/entities/kundenhistorie.php` | `kundenhistorie` | Customer history |
+| `Akt`                | `src/original-src/web/htdocs/kimi_ET/libs/entities/akt.php` | `akt` | Legal case/act document |
+| `Log`                | `src/original-src/web/htdocs/kimi_ET/libs/entities/log.php` | `log` | Interaction / activity log |
+| `Role`               | `src/original-src/web/htdocs/kimi_ET/libs/entities/role.php` | `rolle` | RBAC role |
+| `Permission`         | `src/original-src/web/htdocs/kimi_ET/libs/entities/permission.php` | `berechtigung` | RBAC permission entry |
+| `Benutzer`           | `src/original-src/web/htdocs/kimi_ET/libs/entities/benutzer.php` | `benutzer` | Agent user profile (overlaps with `User`) |
+| `Anrufzeiten`        | `src/original-src/web/htdocs/kimi_ET/libs/entities/anrufzeiten.php` | `anrufzeiten` | Call time slots |
+| `Kundenhistorie`     | `src/original-src/web/htdocs/kimi_ET/libs/entities/kundenhistorie.php` | `kundenhistorie` | Customer history |
 
 ### `src/original-src/web/htdocs/kimi_ET/libs/addons/phpmail/`
 Legacy PHPMailer **v2.0.4** (circa 2010). Entry point: `src/original-src/web/htdocs/kimi_ET/libs/addons/phpmail/class.phpmailer.php`. Incompatible with PHP 8.x. Used by the main app for sending emails from GUI actions (e.g. ticket notifications).
@@ -369,50 +372,9 @@ Additional telephony endpoints:
 
 ---
 
-## Batch Processing System (`src/original-src/web/htdocs/kimi_ET/kimibatch/`)
+## Batch Processing System
 
-The batch system is a **completely separate subsystem** from the web application. Scripts in `src/original-src/web/htdocs/kimi_ET/kimibatch/` are standalone PHP files intended to be run via command line or cron jobs, not through the web server routing.
-
-### Shared batch utilities
-- `src/original-src/web/htdocs/kimi_ET/kimibatch/db.php` — standalone DB connection helper (does NOT use `src/original-src/web/htdocs/kimi_ET/libs/database.php`)
-- `src/original-src/web/htdocs/kimi_ET/kimibatch/kimi_general.php` / `src/original-src/web/htdocs/kimi_ET/kimibatch/kimi_general_sql.php` — shared utility functions
-- `src/original-src/web/htdocs/kimi_ET/kimibatch/kimibatchtree.php` — web-accessible browser/overview of available batch scripts
-- `src/original-src/web/htdocs/kimi_ET/kimibatch/files/vendor/` — independent Composer setup (PHPMailer 6.x) used by batch scripts that send email
-
-### Campaign batch scripts
-Each client/campaign has a set of scripts following a numbered naming pattern:
-- `{campaign}01_` — import telephony data / phone number optimization
-- `{campaign}02_` — prepare data for Elsbeth (generate outbound CSV files)
-- `{campaign}03_` — process Elsbeth output files (import call results)
-- `{campaign}04_` — status updates (mark open tickets as "in progress")
-- `{campaign}05_` — email data preparation
-- `{campaign}check.php` — status/sanity check dashboard
-- `{campaign}report.php` — reporting
-- `{campaign}schnupd.php` — "Schnellupdate" (quick status update)
-- `{campaign}exp.php` — export scripts
-- `{campaign}imp.php` — import scripts
-
-### Campaigns implemented
-
-| Prefix        | Client/Campaign                |
-|---------------|--------------------------------|
-| `coeo`        | COEO (main)                    |
-| `coeoch`      | COEO Switzerland               |
-| `coeochde`    | COEO CH-DE                     |
-| `coeodrei`    | COEO DREI (Drei Austria)       |
-| `inko2016`    | INKO 2016                      |
-| `inkode`      | INKO Germany                   |
-| `inkoSepa`    | INKO SEPA export               |
-| `knp1`        | KNP1                           |
-| `kpis`        | KPI reporting (cross-campaign) |
-| `oko`         | OKO                            |
-| `schlaustrom` | Schlaustrom (energy provider)  |
-| `quester`     | Quester (one-off export)       |
-
-### Per-campaign data files (`src/original-src/web/htdocs/kimi_ET/kimibatch/files/{campaign_id}/`)
-- `Scripts/` — SQL scripts for data maintenance, schema patches, one-off migrations
-- `Services/` (campaign 43 only) — service definition text files
-- `Templates/` (campaign 43 only) — email and SMS templates (`.html`, `.txt`)
+See `memory-bank/batch-processing.md` for the full description of the `kimibatch/` subsystem — utilities, campaign scripts, campaigns list, per-campaign data file layout, and related Docker compatibility notes.
 
 ---
 
@@ -495,6 +457,9 @@ Separate from the application. `src/original-src/web/htdocs/index.php` and `src/
 |--------------|---|---|
 | **Critical** | `src/original-src/web/htdocs/kimi_ET/libs/addons/phpmail/class.phpmailer.php` | PHPMailer v2.0.4 — incompatible with PHP 8.x. Must be replaced with v6.9+ |
 | **High**     | `src/original-src/web/htdocs/kimi_ET/libs/database.php:22,36` | `mysqli_error()` called without connection argument — deprecated PHP 8.1, fatal PHP 8.2 |
+| **High**     | `kimibatch/inko201604_status_offen_auf_inA_setzen.php:23`, `kimibatch/inkode04_status_offen_auf_inA_setzen.php:23`, `kimibatch/oko04_status_offen_auf_inA_setzen.php:23`, `kimibatch/oko04_status_offen_vortage_auf_inA_setzen.php:23` | `mysql_fetch_array(MYSQL_ASSOC)` — `mysql_*` extension removed in PHP 7; scripts call it on a `mysqli_result` returned by `executeSQLQuery()`. Fix: replace with `mysqli_fetch_array($result, MYSQLI_ASSOC)`. Deferred to `src/upgraded-src/` |
+| **High**     | `kimibatch/coeochdeexptest.php:24,27,84,87` | Parse error: SQL column aliases (`"status.text"`) inside a PHP double-quoted `$query` string terminate the string prematurely. Fix: change string delimiter to NOWDOC (`<<<'SQL'`). Deferred to `src/upgraded-src/` |
+| **Medium**   | `kimibatch/inkodeimp2x.php:66` | Typo: `bFetchArray($result)` instead of `dbFetchArray($result)` — fatal "undefined function" at runtime. Deferred to `src/upgraded-src/` |
 | **Medium**   | All entity and batch files | Implicitly nullable parameters (`function f(T $x = null)`) — deprecated PHP 8.4 |
 | **Medium**   | `src/original-src/web/htdocs/kimi_ET/libs/init.php:107` | `session_start()` has no secure cookie flags |
 | **Low**      | Whole codebase | `utf8_encode()` / `utf8_decode()` — deprecated PHP 8.2 |

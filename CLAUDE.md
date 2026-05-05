@@ -6,12 +6,20 @@ This file provides guidance for AI Agent when working with code in this reposito
 
 Migration and modernisation of the **KIMI Portal** — a legacy PHP 8.0 / MariaDB 10.5 B2B SaaS portal for debt-collection call-centre agents.
 
-Full system architecture is documented in `@memory-bank/ARCHITECTURE.md`.
+## Business Context
+
+**KIMI Plus GmbH** (kimi-plus.at) is an Austrian consulting company that acts as a professional intermediary in payment management — helping businesses communicate with customers about late payments and debt collection, while preserving customer relationships.
+
+**The KIMI Portal** (`kimiportal.at`) is a multi-tenant, browser-based B2B SaaS portal used by call-center agents to manage debt collection campaigns. Call-center agents log in, select a client (Mandant), and work through tickets (Akt/Ticket) — each representing a customer case within a campaign. Agents can view case data, record interactions, make outbound phone calls, and process payments/bookings.
+
 
 # AI Agent instruction
 - Change nothing in the codebase without an approve\confirmation!
 - We implement Memory Bank pattern to handle the project information management:
   - See @memory-bank/ folder which consists of @memory-bank/index.md file - please read it to be able to navigate memory bank.
+- when you finish some task or investigation and present the results be descriptive. I.e.: 
+  - Please in your final answer provide steps that you have taken to find out the final answer\solution and justify all changes in code
+  - clear explanation of underlying entities that are included into the final explantion
 
 ## Repository Layout
 

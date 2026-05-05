@@ -18,13 +18,14 @@ TBD: Overview of all affected system areas
 
 # Upgrade plan
 
-[] Make the system work:`
+[done] Make the system work:`
   - Create docker file with app and db container (this change should only add or wrap the current coding base, and do not change its structure )
   - Recreate database dump file from the code and apply it 
   - Create accounts in database to see that it work
   - Create seed data
 [] Cover with tests (How? Scenarios we cover? How to test email sending? In general we only need to check that the filed do not chra)
     [] (How to deal with the copy\paste functionality files?)
+    [] Batch processing tests - The test iterates over every *.php file in kimibatch/ that includes kimi_general.php - is that right? 
 [] PHP Upgrade to php 8.5
   - 
 [] Run tests
