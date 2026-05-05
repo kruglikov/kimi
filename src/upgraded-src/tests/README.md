@@ -16,23 +16,23 @@ docker compose up -d
 `composer` is not in the Docker image. Run on host from the repository root:
 
 ```bash
-composer install --working-dir=src/original-src/tests
+composer install --working-dir=src/upgraded-src/tests
 ```
 
 ## Run all tests
 
 ```bash
-./src/original-src/tests/run-all.sh
+./src/upgraded-src/tests/run-all.sh
 ```
 
 ## Run by suite
 
 ```bash
 # GUI modules + AJAX handlers
-./src/original-src/tests/run-gui.sh
+./src/upgraded-src/tests/run-gui.sh
 
 # Batch scripts (~117 files)
-./src/original-src/tests/run-batch.sh
+./src/upgraded-src/tests/run-batch.sh
 ```
 
 ## Script details
@@ -41,9 +41,9 @@ All runner scripts resolve the repository root automatically, so they can be lau
 working directory:
 
 ```bash
-src/original-src/tests/run-all.sh
-src/original-src/tests/run-gui.sh
-src/original-src/tests/run-batch.sh
+src/upgraded-src/tests/run-all.sh
+src/upgraded-src/tests/run-gui.sh
+src/upgraded-src/tests/run-batch.sh
 ```
 
 ## What is covered

@@ -7,7 +7,7 @@ REPO_ROOT="$(cd "$SCRIPT_DIR/../../.." && pwd)"
 
 cd "$REPO_ROOT"
 
-docker compose -f src/original-src/docker-compose.yml run --rm \
-  -v "$REPO_ROOT/src/original-src/tests:/var/www/tests" \
+docker compose -f src/upgraded-src/docker-compose.yml run --rm \
+  -v "$REPO_ROOT/src/upgraded-src/tests:/var/www/tests" \
   -w /var/www/tests \
   web php vendor/bin/phpunit --testdox --filter BatchSmokeTest

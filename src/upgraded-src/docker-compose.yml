@@ -1,4 +1,4 @@
-name: kimi-plusat
+name: kimi-plus-upgraded
 
 services:
   db:
@@ -14,7 +14,7 @@ services:
       - db_socket:/var/run/mysqld
       - ./docker/mariadb/init:/docker-entrypoint-initdb.d
     ports:
-      - "3306:3306"
+      - "3307:3306"
     healthcheck:
       test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
       interval: 10s
@@ -25,10 +25,10 @@ services:
     build: ./docker/php
     restart: unless-stopped
     ports:
-      - "8080:80"
+      - "8081:80"
     volumes:
       - ./web/htdocs:/var/www/html
-      - ./tests2:/opt/tests2
+      - ./tests:/opt/tests2
       - ./web/htdocs/kimi_ET/kimibatch/files/vendor:/var/www/html/kimi_ET/kimibatch/vendor:ro
       - db_socket:/var/run/mysqld
     depends_on:
