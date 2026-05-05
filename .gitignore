@@ -1,0 +1,21 @@
+# Local IDE and agent artifacts
+.idea/
+claude-logs/
+
+# PHPUnit runtime cache
+src/upgraded-src/tests/.phpunit.result.cache
+
+# Runtime logs
+src/original-src/web/htdocs/kimi_ET/ajax/log/*.log
+src/upgraded-src/web/htdocs/kimi_ET/ajax/log/*.log
+
+# Batch smoke-test generated output and temporary payloads
+src/original-src/web/htdocs/kimi_ET/kimibatch/files/**/*.csv
+src/original-src/web/htdocs/kimi_ET/kimibatch/files/**/*.CSV
+src/original-src/web/htdocs/kimi_ET/kimibatch/files/**/*.txt
+src/original-src/web/htdocs/kimi_ET/kimibatch/files/**/*.txt2
+
+src/upgraded-src/web/htdocs/kimi_ET/kimibatch/files/**/*.csv
+src/upgraded-src/web/htdocs/kimi_ET/kimibatch/files/**/*.CSV
+src/upgraded-src/web/htdocs/kimi_ET/kimibatch/files/**/*.txt
+src/upgraded-src/web/htdocs/kimi_ET/kimibatch/files/**/*.txt2

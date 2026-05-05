@@ -20,7 +20,7 @@ $query_replace[PLACEHOLDER_SQL_DATUM] = "2021-10-22";
 $result = executeSQLQuery($dbconn, $mandant_id, "oko04_select_status_offen_vortage.sql", $query_replace);
 if ($result !== false) {
 		$count = 0;		
-		while ($line = mysql_fetch_array($result, MYSQL_ASSOC)) {
+		while ($line = dbFetchArray($result)) {
 			$count = $count + 1;
 			$lineFile = getCSVLineFromArray( $line )."\n";
 			echo $lineFile;
