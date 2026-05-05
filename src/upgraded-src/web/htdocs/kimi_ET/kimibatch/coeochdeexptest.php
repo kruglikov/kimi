@@ -21,10 +21,10 @@ union
 select  
 --
 curdate(),t.ticketnr,concat('AZ: ',t.dummy_text9), t.status_id,
- case when status.text = 'gemeldet' THEN 'erledigt' ELSE status.text END "status.text",
+ case when status.text = 'gemeldet' THEN 'erledigt' ELSE status.text END 'status.text',
 t.anruf_status_id,
 -- anruf_status.text,
-case when anruf_status.text like '%gemeldet-%' THEN REPLACE(anruf_status.text, 'gemeldet-', '') ELSE anruf_status.text END  "anruf_status.text",
+case when anruf_status.text like '%gemeldet-%' THEN REPLACE(anruf_status.text, 'gemeldet-', '') ELSE anruf_status.text END  'anruf_status.text',
 benutzer.nachname,t.geaendert_am,k.status,
 -- k.beschreibung_positiver_ausgang,
 case when grund.text = 'RÜCKRUF OUTBOUND' then prioritaet.text else k.beschreibung_positiver_ausgang end ,
@@ -81,10 +81,10 @@ UNION
 select  
 --
 curdate(),t.ticketnr,concat('AZ: ',t.dummy_text9), t.status_id,
- case when status.text = 'gemeldet' THEN 'erledigt' ELSE status.text END "status.text",
+ case when status.text = 'gemeldet' THEN 'erledigt' ELSE status.text END 'status.text',
 t.anruf_status_id,
 -- anruf_status.text,
-case when anruf_status.text like '%gemeldet-%' THEN REPLACE(anruf_status.text, 'gemeldet-', '') ELSE anruf_status.text END  "anruf_status.text",
+case when anruf_status.text like '%gemeldet-%' THEN REPLACE(anruf_status.text, 'gemeldet-', '') ELSE anruf_status.text END  'anruf_status.text',
 benutzer.nachname,t.geaendert_am,k.status,
 -- k.beschreibung_positiver_ausgang,
 case when grund.text = 'RÜCKRUF OUTBOUND' then prioritaet.text else k.beschreibung_positiver_ausgang end ,
