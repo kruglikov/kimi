@@ -127,13 +127,13 @@ group by ticket.mandant_id,
 $filename = "files/okoexpzwb".date("Ymdm").".txt";
 $fp = fopen($filename, 'w');
 // Tagesdaten in Zwischenberichtsdatei einspielen
-if (mysql_query($insert_okozwb ))
+if (mysqli_query($dbconn, $insert_okozwb ))
   {
   echo "<br><br>INSERT oko_scb_zwischenberichtsdatei  durchgef&uuml;hrt";
   }
 else
   {
-  echo "<br><br>INSERT oko_scb_zwischenberichtsdatei: " . mysql_error();
+  echo "<br><br>INSERT oko_scb_zwischenberichtsdatei: " . mysqli_error($dbconn);
   }
 // �berschriftszeile
 /*
@@ -141,8 +141,8 @@ $string = 'kundennummer;anrede;titel;vorname;nachname;gebdat;geschlecht;praemie;
 fwrite($fp, $string); // will proccess /n as newline ... 
 fwrite($fp, $string); // will proccess /n as newline ... 
 */
-$result = mysql_query($query);
-while ($line = mysql_fetch_array($result)) { 
+$result = mysqli_query($dbconn, $query);
+while ($line = mysqli_fetch_array($result, MYSQLI_ASSOC)) { 
         //fputcsv($fp, array_keys($line));
         $aktnr = $line['aktnr']; 
 		$vorlage = $line['vorlage']; 

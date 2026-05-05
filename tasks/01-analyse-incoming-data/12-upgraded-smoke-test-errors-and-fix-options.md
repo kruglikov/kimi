@@ -32,14 +32,14 @@ Docker stack:
 - `src/upgraded-src/docker-compose.yml`
 
 Observed result from the latest fully reviewed run on 2026-05-05 after the targeted
-`coeochdeexptest.php` and `inkodeexp_new.php` fixes were implemented and the suite was rerun:
+batch DB API fixes were implemented and the suite was rerun:
 
 - total tests: `219`
-- total failures: `21`
+- total failures: `20`
 
 Suite breakdown:
 
-- `BatchSmokeTest`: `128` tests, `4` failures
+- `BatchSmokeTest`: `128` tests, `3` failures
 - `GuiSmokeTest`: `17` tests, `0` failures
 - `InitialSmokeTest`: `30` tests, `8` failures
 - `MenuSmokeTest`: `25` tests, `8` failures
@@ -91,6 +91,7 @@ The following additional batch failures were resolved by code changes on 2026-05
 - `oko04_status_offen_vortage_auf_inA_setzen.php`
 - `coeochdeexptest.php`
 - `inkodeexp_new.php`
+- `oko_inA_outbound_elsbeth.php`
 
 Verification details:
 
@@ -104,7 +105,9 @@ Interpretation:
 - this confirms the immediate `mysql_fetch_array()` fatals in the four status-update scripts are fixed
 - `coeochdeexptest.php` was fixed by correcting the SQL alias quoting inside the PHP string so the file parses again
 - `inkodeexp_new.php` was fixed by replacing `mysql_query()` and `mysql_fetch_array()` with `mysqli_query()` and `mysqli_fetch_array(..., MYSQLI_ASSOC)`
-- this does not resolve the remaining `mysql_query()` failures in other batch exports
+- `oko_inA_outbound_elsbeth.php` was fixed by the same minimal `mysql_*` to `mysqli_*` migration pattern used in `inkodeexp_new.php`
+- `okoexpzwb.php` still fails, but the root cause has moved past the removed `mysql_query()` fatal and now surfaces as an SQL insert/value-count mismatch followed by a fetch on `false`
+- this does not resolve the remaining batch runtime issues in `inkodeimp2x.php`, `okoexpzwb.php`, and `pwgen.php`
 
 ## Failure Inventory
 
@@ -138,11 +141,13 @@ Fix options:
 
 Observed error:
 
-- call to removed function `mysql_query()`
+- SQL insert/value-count mismatch, followed by `mysqli_fetch_array(false)`
 
 Fix options:
 
-- same remediation as `oko_inA_outbound_elsbeth.php`
+- review the `INSERT INTO okozwb ... SELECT ...` column count against the target table definition and selected values
+- after the insert shape is corrected, validate the select query result before fetching so SQL failures do not become a secondary `mysqli_fetch_array(false)` fatal
+- if this export depends on precomputed daily intermediate rows, separate the insert/build step from the export/read step so each failure mode is easier to diagnose
 
 #### `pwgen.php`
 
@@ -290,7 +295,6 @@ Fix options:
 
 Affected files:
 
-- `oko_inA_outbound_elsbeth.php`
 - `okoexpzwb.php`
 
 Preferred fix direction:
@@ -347,9 +351,10 @@ Preferred fix direction:
 1. Fix the next smallest runtime blocker:
    - `getticketurl.php`
 
-2. Remove the remaining `mysql_*` usage cluster:
-   - `oko_inA_outbound_elsbeth.php`
+2. Fix the remaining batch runtime blockers with the smallest scope:
+   - `inkodeimp2x.php`
    - `okoexpzwb.php`
+   - `pwgen.php`
 
 3. Fix initial-hook null/bootstrap assumptions:
    - `bankleitzahl.php`
