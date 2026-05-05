@@ -198,6 +198,7 @@ CREATE TABLE IF NOT EXISTS inko2016urgenz (
 CREATE TABLE IF NOT EXISTS schlaustrom (
     id                  INT(10) UNSIGNED NOT NULL,
     rg_nr               VARCHAR(100),
+    kunde               TEXT,              -- encrypted customer name; referenced as kimi_decrypt(kunde) in export query
     rg_titel            TEXT,
     kunden_nummer       VARCHAR(100),
     rg_datum            DATE,
@@ -263,6 +264,7 @@ CREATE TABLE IF NOT EXISTS quester (
     id            INT(10) UNSIGNED NOT NULL,
     kunden_nummer VARCHAR(100),
     rg_total      DECIMAL(15,2),
+    kunde         TEXT,              -- encrypted customer name; referenced as kimi_decrypt(kunde) in export query
     PRIMARY KEY (id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 

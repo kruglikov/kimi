@@ -28,6 +28,7 @@ services:
       - "8080:80"
     volumes:
       - ./web/htdocs:/var/www/html
+      - ./tests2:/opt/tests2
       - ./web/htdocs/kimi_ET/kimibatch/files/vendor:/var/www/html/kimi_ET/kimibatch/vendor:ro
       - db_socket:/var/run/mysqld
     depends_on:
