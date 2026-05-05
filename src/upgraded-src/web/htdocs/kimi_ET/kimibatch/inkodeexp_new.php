@@ -258,9 +258,9 @@ $string = $string.'Kontakttel_vw;kontkattel_hw;Email_neu;name_neu;vorname_neu;pl
 $string = $string.'neuetel_vw1;neuetel_hw1;neuetel_vw2;neuetel_hw2;telefon1falsch;telefon2falsch;gebdatum_neu'."\n"; 
 fwrite($fp, $string); // will proccess /n as newline ... 
 */
-$result = mysql_query($query);
+$result = mysqli_query($dbconn, $query);
 // 
-while ($line = mysql_fetch_array($result)) { 
+while ($line = mysqli_fetch_array($result, MYSQLI_ASSOC)) { 
         //fputcsv($fp, array_keys($line));
         /* 
         $string = $line['IndexA'].";".$line['IndexB'].";".$line['IndexC'].";".$line['Name'].";".$line['Vorname'].";".$line['Strasse'].";".$line['Plz'].";".$line['Ort'].";".$line['TelNr'].";"; 

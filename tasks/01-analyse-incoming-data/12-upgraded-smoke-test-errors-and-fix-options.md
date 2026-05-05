@@ -31,15 +31,15 @@ Docker stack:
 
 - `src/upgraded-src/docker-compose.yml`
 
-Observed result from the latest fully reviewed run on 2026-05-05 after the `mysql_fetch_array()`
-batch fixes were implemented and the suite was rerun:
+Observed result from the latest fully reviewed run on 2026-05-05 after the targeted
+`coeochdeexptest.php` and `inkodeexp_new.php` fixes were implemented and the suite was rerun:
 
 - total tests: `219`
-- total failures: `23`
+- total failures: `21`
 
 Suite breakdown:
 
-- `BatchSmokeTest`: `128` tests, `6` failures
+- `BatchSmokeTest`: `128` tests, `4` failures
 - `GuiSmokeTest`: `17` tests, `0` failures
 - `InitialSmokeTest`: `30` tests, `8` failures
 - `MenuSmokeTest`: `25` tests, `8` failures
@@ -89,6 +89,8 @@ The following additional batch failures were resolved by code changes on 2026-05
 - `inkode04_status_offen_auf_inA_setzen.php`
 - `oko04_status_offen_auf_inA_setzen.php`
 - `oko04_status_offen_vortage_auf_inA_setzen.php`
+- `coeochdeexptest.php`
+- `inkodeexp_new.php`
 
 Verification details:
 
@@ -100,35 +102,13 @@ Verification details:
 Interpretation:
 
 - this confirms the immediate `mysql_fetch_array()` fatals in the four status-update scripts are fixed
+- `coeochdeexptest.php` was fixed by correcting the SQL alias quoting inside the PHP string so the file parses again
+- `inkodeexp_new.php` was fixed by replacing `mysql_query()` and `mysql_fetch_array()` with `mysqli_query()` and `mysqli_fetch_array(..., MYSQLI_ASSOC)`
 - this does not resolve the remaining `mysql_query()` failures in other batch exports
 
 ## Failure Inventory
 
 ### 1. Batch script failures
-
-#### `coeochdeexptest.php`
-
-Observed error:
-
-- parse error: unexpected identifier `status`
-
-Fix options:
-
-- repair the broken PHP syntax directly
-- run `php -l` or the smoke test immediately after the edit to confirm the file parses
-- if this file contains a half-finished SQL or string concatenation statement, rewrite that block explicitly instead of trying to patch around the token error
-
-#### `inkodeexp_new.php`
-
-Observed error:
-
-- call to removed function `mysql_query()`
-
-Fix options:
-
-- replace legacy `mysql_*` DB access with `mysqli_*` or an existing DB wrapper
-- add error checks around query execution before result consumption
-- if this export script is business-critical, separate query building from file output so failures can be surfaced earlier and more clearly
 
 #### `inkodeimp2x.php`
 
@@ -310,7 +290,6 @@ Fix options:
 
 Affected files:
 
-- `inkodeexp_new.php`
 - `oko_inA_outbound_elsbeth.php`
 - `okoexpzwb.php`
 
@@ -365,12 +344,10 @@ Preferred fix direction:
 
 ## Recommended Fix Order
 
-1. Fix syntax/runtime blockers with the smallest scope:
-   - `coeochdeexptest.php`
+1. Fix the next smallest runtime blocker:
    - `getticketurl.php`
 
 2. Remove the remaining `mysql_*` usage cluster:
-   - `inkodeexp_new.php`
    - `oko_inA_outbound_elsbeth.php`
    - `okoexpzwb.php`
 
