@@ -65,5 +65,3 @@ class Zahlart {
     }
 
 }
-?>
-

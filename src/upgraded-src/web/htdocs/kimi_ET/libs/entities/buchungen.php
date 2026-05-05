@@ -737,4 +737,3 @@ class Buchung {
 
 }
 
-?>

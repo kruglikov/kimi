@@ -1421,5 +1421,3 @@ class Subkonto {
 
 }
 
-?>
-

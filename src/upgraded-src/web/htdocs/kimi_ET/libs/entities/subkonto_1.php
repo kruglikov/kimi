@@ -1340,4 +1340,3 @@ class Subkonto {
 
 }
 
-?>

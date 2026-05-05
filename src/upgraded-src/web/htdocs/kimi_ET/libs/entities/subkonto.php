@@ -1624,4 +1624,3 @@ and s.sk_lfdnr = (select max(n.sk_lfdnr) from subkonto_neu n
     
 }
 
-?>
