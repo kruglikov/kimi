@@ -140,7 +140,7 @@ function loadCSVData($mandantId, $file, $delm=";", $ansi2Utf8=true, $trim = true
 		}
 		$head = true;
 	} else {
-		$keydata = explode($delm,$csvxrow[0]);
+		$keydata = explode($delm,(string) $csvxrow[0]);
 	}
     $keynumb = count($keydata);
    
@@ -151,7 +151,7 @@ function loadCSVData($mandantId, $file, $delm=";", $ansi2Utf8=true, $trim = true
 			if ($ansi2Utf8) {
 				$csvxrow[$x] = convert2Utf8($csvxrow[$x]);
 			}
-			$csvxrow[$x] = chop($csvxrow[$x]);
+			$csvxrow[$x] = chop((string) $csvxrow[$x]);
 			//$csvxrow[$x] = str_replace($encl,'',$csvxrow[$x]);
 			$csv_data[$x] = explode($delm,$csvxrow[$x]);
 			$i=0;
@@ -172,7 +172,7 @@ function loadCSVData($mandantId, $file, $delm=";", $ansi2Utf8=true, $trim = true
 			if ($ansi2Utf8) {
 				$item = convert2Utf8($item);
 			}
-            $item = chop($item);
+            $item = chop((string) $item);
             //$item = str_replace($encl,'',$item);
             $csv_data = explode($delm,$item);
             for ($y=0; $y<$keynumb; $y++) {
@@ -359,7 +359,7 @@ function executeSQLCmdDML($dbconn, $mandantId, $sql, $replaceArray=[]) {
 function replaceFromArray(&$value, &$replaceArray, $checkEmpty=true) {
 
 	foreach($replaceArray as $key => $replValue ) {
-		if ($replValue==="" && (strpos($value, $key) !== false) && $checkEmpty ) {
+		if ($replValue==="" && (strpos((string) $value, (string) $key) !== false) && $checkEmpty ) {
 			setLastError("Platzhalter für ".$key ." vorhanden, Wert zum Ersetzen nicht definiert!");
 			return false;
 		}
@@ -430,7 +430,7 @@ function getFullPath() {
 }
 
 function utf8ToAnsi($value) {
-	return iconv("UTF-8", "WINDOWS-1252", $value);
+	return iconv("UTF-8", "WINDOWS-1252", (string) $value);
 	$retval = $value;
 
 	if (!mb_check_encoding($retval, 'CP1252')) {
@@ -462,7 +462,7 @@ function exportQueryToCSV($sqlResult, $mandantId, $fileName, $convertToAnsi=fals
 			}
 
 			if ($lineFile !== false) {
-				fwrite($fh, $lineFile);
+				fwrite($fh, (string) $lineFile);
 			}
 		}
 					
@@ -557,23 +557,23 @@ function callServiceForTicket($dbconn, $service, $mandantId, $ticketId, $templat
 
 	if ( $fromHauptTicket) {
 		$param[PARAM_ANREDE_SGH] = "";
-		$param[PARAM_ANREDE] = trim($hauptTicket['anrede']);
+		$param[PARAM_ANREDE] = trim((string) $hauptTicket['anrede']);
 
 		if (substr($param[PARAM_ANREDE], -1, 1) === "r") {
 			$param[PARAM_ANREDE_SGH] = "r";
 		}
 		
 		$param[PARAM_NAME] = "";
-		$param[PARAM_VORNAME] = trim($hauptTicket['vorname']);
-		$param[PARAM_NACHNAME] = trim($hauptTicket['nachname']);
+		$param[PARAM_VORNAME] = trim((string) $hauptTicket['vorname']);
+		$param[PARAM_NACHNAME] = trim((string) $hauptTicket['nachname']);
 		if ($hauptTicket['vorname'] !== "") {
-			$param[PARAM_NAME] = trim($hauptTicket['vorname']);
+			$param[PARAM_NAME] = trim((string) $hauptTicket['vorname']);
 		}
-		if (trim($hauptTicket['nachname']) !== "") {
+		if (trim((string) $hauptTicket['nachname']) !== "") {
 			if ($param[PARAM_NAME] !== ""){
 				$param[PARAM_NAME].=" ";
 			}
-			$param[PARAM_NAME].= trim($hauptTicket['nachname']);
+			$param[PARAM_NAME].= trim((string) $hauptTicket['nachname']);
 		}
 	}
 	

@@ -94,7 +94,7 @@ class Subkonto {
     }
 
     public function set_eroeffnet_am($val) { {
-            if (strlen($val) == 0) {
+            if (strlen((string) $val) == 0) {
                 $this->item["eroeffnet_am"] = NULL;
                 return;
             }
@@ -219,7 +219,7 @@ class Subkonto {
     }
 
     public function set_buchungsdatum($val) {
-        if (strlen($val) == 0) {
+        if (strlen((string) $val) == 0) {
             $this->item["buchungsdatum"] = NULL;
             return;
         }
@@ -247,7 +247,7 @@ class Subkonto {
     }
 
     public function set_belegdatum($val) {
-        if (strlen($val) == 0) {
+        if (strlen((string) $val) == 0) {
             $this->item["belegdatum"] = NULL;
             return;
         }

@@ -103,7 +103,7 @@ class Versicherung {
     }
 
     public function set_dat_abschluss($val) { {
-            if (strlen($val) == 0) {
+            if (strlen((string) $val) == 0) {
                 $this->item["dat_abschluss"] = NULL;
                 return;
             }
@@ -148,7 +148,7 @@ class Versicherung {
     }
 
     public function set_dat_storno($val) { {
-            if (strlen($val) == 0) {
+            if (strlen((string) $val) == 0) {
                 $this->item["dat_storno"] = NULL;
                 return;
             }
@@ -193,7 +193,7 @@ class Versicherung {
     }
 
     public function set_dat_meldung_abschluss($val) { {
-            if (strlen($val) == 0) {
+            if (strlen((string) $val) == 0) {
                 $this->item["dat_meldung_abschluss"] = NULL;
                 return;
             }
@@ -220,7 +220,7 @@ class Versicherung {
     }
 
     public function set_dat_info_aend_bed($val) { {
-            if (strlen($val) == 0) {
+            if (strlen((string) $val) == 0) {
                 $this->item["dat_info_aend_bed"] = NULL;
                 return;
             }

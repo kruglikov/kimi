@@ -87,7 +87,7 @@ class Subkonto {
     }
 
     public function set_eroeffnet_am($val) { {
-            if (strlen($val) == 0) {
+            if (strlen((string) $val) == 0) {
                 $this->item["eroeffnet_am"] = NULL;
                 return;
             }
@@ -223,7 +223,7 @@ class Subkonto {
     }
 
     public function set_buchungsdatum($val) {
-        if (strlen($val) == 0) {
+        if (strlen((string) $val) == 0) {
             $this->item["buchungsdatum"] = NULL;
             return;
         }
@@ -250,7 +250,7 @@ class Subkonto {
     }
 
     public function set_belegdatum($val) {
-        if (strlen($val) == 0) {
+        if (strlen((string) $val) == 0) {
             $this->item["belegdatum"] = NULL;
             return;
         }
@@ -538,7 +538,7 @@ class Subkonto {
     }
 
     public function set_zahlungsfrist($val) {
-        if (strlen($val) == 0) {
+        if (strlen((string) $val) == 0) {
             $this->item["zahlungsfrist"] = NULL;
             return;
         }
@@ -605,7 +605,7 @@ class Subkonto {
     }
 
     public function set_datum_l_tz_erm($val) {
-        if (strlen($val) == 0) {
+        if (strlen((string) $val) == 0) {
             $this->item["datum_l_tz_erm"] = NULL;
             return;
         }
@@ -687,7 +687,7 @@ class Subkonto {
     }
 
     public function set_datum_debsaldo($val) {
-        if (strlen($val) == 0) {
+        if (strlen((string) $val) == 0) {
             $this->item["datum_debsaldo"] = NULL;
             return;
         }
@@ -1322,7 +1322,7 @@ class Subkonto {
 
     public static function get_tage($dat_start, $dat_ende, $anz_total_tage, $ignore_first_day) {
 
-        $result = floor((strtotime($dat_ende) - strtotime($dat_start)) / 86400);
+        $result = floor((strtotime((string) $dat_ende) - strtotime((string) $dat_start)) / 86400);
         if ($ignore_first_day){
             $result -= 1;
             if (date_format(date_create($dat_start), 'd')==31) {

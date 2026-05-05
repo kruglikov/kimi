@@ -94,7 +94,7 @@ class Buchung {
     }
 
     public function set_buchungsdatum($val, $sql_valid = FALSE) { {
-            if (strlen($val) == 0) {
+            if (strlen((string) $val) == 0) {
                 $this->item["buchungsdatum"] = NULL;
                 return;
             }
@@ -122,7 +122,7 @@ class Buchung {
     }
 
     public function set_valutadatum($val, $sql_valid = FALSE) { {
-            if (strlen($val) == 0) {
+            if (strlen((string) $val) == 0) {
                 $this->item["valutadatum"] = NULL;
                 return;
             }
@@ -704,7 +704,7 @@ class Buchung {
         $stamm->set_gesamtsaldo($gessaldo, TRUE);
 
         $buchungsdatum = str_replace("'", "", $buchungsdatum);
-        $datestamm = substr($stamm->get_dat_ltzt_buchung(FALSE), 6, 4) . substr($stamm->get_dat_ltzt_buchung(FALSE), 3, 2) . substr($stamm->get_dat_ltzt_buchung(FALSE), 0, 2);
+        $datestamm = substr((string) $stamm->get_dat_ltzt_buchung(FALSE), 6, 4) . substr((string) $stamm->get_dat_ltzt_buchung(FALSE), 3, 2) . substr((string) $stamm->get_dat_ltzt_buchung(FALSE), 0, 2);
 
         $date = date_format(date_create($buchungsdatum), "Y-m-d H:i:s");
 

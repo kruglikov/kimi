@@ -253,7 +253,7 @@ class Ticket {
     }
 
     public function set_aufwand($val) {
-        if (strlen($val) == 0) {
+        if (strlen((string) $val) == 0) {
             unset($this->item["aufwand"]);
         } else {
             $this->item["aufwand"] = $val;
@@ -358,7 +358,7 @@ class Ticket {
     }
 
     public function set_mandant_id($mandant_id) {
-        if (strlen($mandant_id) == 0) {
+        if (strlen((string) $mandant_id) == 0) {
             unset($this->item["mandant_id"]);
         } else {
             $this->item["mandant_id"] = $mandant_id;
@@ -520,7 +520,7 @@ class Ticket {
     }
 
     public function set_hausnummer($hausnummer) {
-        if (strlen($hausnummer) == 0) {
+        if (strlen((string) $hausnummer) == 0) {
             unset($this->item["hausnummer"]);
         } else {
             $this->item["hausnummer"] = $hausnummer;
@@ -623,7 +623,7 @@ class Ticket {
     }
 
     public function set_geburtsdatum($geburtsdatum) {
-        if (strlen($geburtsdatum) == 0 || strlen($geburtsdatum) == 0) {
+        if (strlen((string) $geburtsdatum) == 0 || strlen((string) $geburtsdatum) == 0) {
             $this->item["geburtsdatum"] = NULL;
             return;
         }
@@ -756,7 +756,7 @@ class Ticket {
     }
 
     public function set_wiedervorlage($geburtsdatum) {
-        if (strlen($geburtsdatum) == 0 || strlen($geburtsdatum) == 0) {
+        if (strlen((string) $geburtsdatum) == 0 || strlen((string) $geburtsdatum) == 0) {
             $this->item["wiedervorlage"] = NULL;
             return;
         }
@@ -803,7 +803,7 @@ class Ticket {
     }
 
     public function set_letzte_wiedervorlage($value) {
-        if (strlen($value) == 0 || strlen($value) == 0) {
+        if (strlen((string) $value) == 0 || strlen((string) $value) == 0) {
             $this->item["letzte_wiedervorlage"] = NULL;
             return;
         }
@@ -878,7 +878,7 @@ class Ticket {
     }
 
     public function set_letzter_anruf($value) {
-        if (strlen($value) == 0 || strlen($value) == 0) {
+        if (strlen((string) $value) == 0 || strlen((string) $value) == 0) {
             $this->item["letzter_anruf"] = NULL;
             return;
         }
@@ -906,7 +906,7 @@ class Ticket {
     }
 
     public function set_beginn($geburtsdatum) {
-        if (strlen($geburtsdatum) == 0 || strlen($geburtsdatum) == 0) {
+        if (strlen((string) $geburtsdatum) == 0 || strlen((string) $geburtsdatum) == 0) {
             $this->item["beginn"] = NULL;
             return;
         }
@@ -934,7 +934,7 @@ class Ticket {
     }
 
     public function set_ende($geburtsdatum) {
-        if (strlen($geburtsdatum) == 0 || strlen($geburtsdatum) == 0) {
+        if (strlen((string) $geburtsdatum) == 0 || strlen((string) $geburtsdatum) == 0) {
             $this->item["ende"] = NULL;
             return;
         }
@@ -2201,7 +2201,7 @@ class Ticket {
 
     public function set_dummy_date1($val, $sql_valid = FALSE) {
         {
-            if (strlen($val) == 0) {
+            if (strlen((string) $val) == 0) {
                 $this->item["dummy_date1"] = NULL;
                 return;
             }
@@ -2229,7 +2229,7 @@ class Ticket {
 
     public function set_dummy_date2($val, $sql_valid = FALSE) {
         {
-            if (strlen($val) == 0) {
+            if (strlen((string) $val) == 0) {
                 $this->item["dummy_date2"] = NULL;
                 return;
             }
@@ -2257,7 +2257,7 @@ class Ticket {
 
     public function set_dummy_date3($val, $sql_valid = FALSE) {
         {
-            if (strlen($val) == 0) {
+            if (strlen((string) $val) == 0) {
                 $this->item["dummy_date3"] = NULL;
                 return;
             }
@@ -2285,7 +2285,7 @@ class Ticket {
 
     public function set_dummy_date4($val, $sql_valid = FALSE) {
         {
-            if (strlen($val) == 0) {
+            if (strlen((string) $val) == 0) {
                 $this->item["dummy_date4"] = NULL;
                 return;
             }
@@ -2313,7 +2313,7 @@ class Ticket {
 
     public function set_dummy_date5($val, $sql_valid = FALSE) {
         {
-            if (strlen($val) == 0) {
+            if (strlen((string) $val) == 0) {
                 $this->item["dummy_date5"] = NULL;
                 return;
             }
@@ -2341,7 +2341,7 @@ class Ticket {
 
     public function set_dummy_date6($val, $sql_valid = FALSE) {
         {
-            if (strlen($val) == 0) {
+            if (strlen((string) $val) == 0) {
                 $this->item["dummy_date6"] = NULL;
                 return;
             }
@@ -2369,7 +2369,7 @@ class Ticket {
 
     public function set_dummy_date7($val, $sql_valid = FALSE) {
         {
-            if (strlen($val) == 0) {
+            if (strlen((string) $val) == 0) {
                 $this->item["dummy_date7"] = NULL;
                 return;
             }
@@ -2397,7 +2397,7 @@ class Ticket {
 
     public function set_dummy_date8($val, $sql_valid = FALSE) {
         {
-            if (strlen($val) == 0) {
+            if (strlen((string) $val) == 0) {
                 $this->item["dummy_date8"] = NULL;
                 return;
             }
@@ -2425,7 +2425,7 @@ class Ticket {
 
     public function set_dummy_date9($val, $sql_valid = FALSE) {
         {
-            if (strlen($val) == 0) {
+            if (strlen((string) $val) == 0) {
                 $this->item["dummy_date9"] = NULL;
                 return;
             }
@@ -2453,7 +2453,7 @@ class Ticket {
 
     public function set_dummy_date10($val, $sql_valid = FALSE) {
         {
-            if (strlen($val) == 0) {
+            if (strlen((string) $val) == 0) {
                 $this->item["dummy_date10"] = NULL;
                 return;
             }

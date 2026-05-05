@@ -119,7 +119,7 @@ class Ticket {
     }
 
     public function set_aufwand($val) {
-        if (strlen($val) == 0) {
+        if (strlen((string) $val) == 0) {
             unset($this->item["aufwand"]);
         } else {
             $this->item["aufwand"] = $val;
@@ -215,7 +215,7 @@ class Ticket {
     }
 
     public function set_mandant_id($mandant_id) {
-        if (strlen($mandant_id) == 0) {
+        if (strlen((string) $mandant_id) == 0) {
             unset($this->item["mandant_id"]);
         } else {
             $this->item["mandant_id"] = $mandant_id;
@@ -339,7 +339,7 @@ class Ticket {
     }
 
     public function set_hausnummer($hausnummer) {
-        if (strlen($hausnummer) == 0) {
+        if (strlen((string) $hausnummer) == 0) {
             unset($this->item["hausnummer"]);
         } else {
             $this->item["hausnummer"] = $hausnummer;
@@ -418,7 +418,7 @@ class Ticket {
     }
 
     public function set_geburtsdatum($geburtsdatum) {
-        if (strlen($geburtsdatum) == 0 || strlen($geburtsdatum) == 0) {
+        if (strlen((string) $geburtsdatum) == 0 || strlen((string) $geburtsdatum) == 0) {
             $this->item["geburtsdatum"] = NULL;
             return;
         }
@@ -514,7 +514,7 @@ class Ticket {
     }
 
     public function set_wiedervorlage($geburtsdatum) {
-        if (strlen($geburtsdatum) == 0 || strlen($geburtsdatum) == 0) {
+        if (strlen((string) $geburtsdatum) == 0 || strlen((string) $geburtsdatum) == 0) {
             $this->item["wiedervorlage"] = NULL;
             return;
         }
@@ -542,7 +542,7 @@ class Ticket {
     }
 
     public function set_beginn($geburtsdatum) {
-        if (strlen($geburtsdatum) == 0 || strlen($geburtsdatum) == 0) {
+        if (strlen((string) $geburtsdatum) == 0 || strlen((string) $geburtsdatum) == 0) {
             $this->item["beginn"] = NULL;
             return;
         }
@@ -570,7 +570,7 @@ class Ticket {
     }
 
     public function set_ende($geburtsdatum) {
-        if (strlen($geburtsdatum) == 0 || strlen($geburtsdatum) == 0) {
+        if (strlen((string) $geburtsdatum) == 0 || strlen((string) $geburtsdatum) == 0) {
             $this->item["ende"] = NULL;
             return;
         }

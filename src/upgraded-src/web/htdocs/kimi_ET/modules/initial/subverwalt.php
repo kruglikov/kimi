@@ -15,7 +15,7 @@ if (!$new) {
 
 if ($mode == "INS") {
     $ratenhoehe = param("ratenhoehe");
-    if (strlen($ratenhoehe) == 0) {
+    if (strlen((string) $ratenhoehe) == 0) {
         $ratenhoehe = "NULL";
     }
     

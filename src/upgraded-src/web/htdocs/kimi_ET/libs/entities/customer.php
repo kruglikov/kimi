@@ -346,7 +346,7 @@ class Customer {
     }
 
     public function set_geburtsdatum($geburtsdatum) {
-        if (strlen($geburtsdatum) == 0) {
+        if (strlen((string) $geburtsdatum) == 0) {
             $this->item["geburtsdatum"] = NULL;
             return;
         }
@@ -555,7 +555,7 @@ class Customer {
     }
 
     public function set_geburtsdatum2($geburtsdatum2) {
-        if (strlen($geburtsdatum2) == 0) {
+        if (strlen((string) $geburtsdatum2) == 0) {
             $this->item["geburtsdatum2"] = NULL;
             return;
         }
@@ -581,7 +581,7 @@ class Customer {
     }
 
     public function set_anlagedatum($anlagedatum) {
-        if (strlen($anlagedatum) == 0) {
+        if (strlen((string) $anlagedatum) == 0) {
             $this->item["anlagedatum"] = NULL;
             return;
         }

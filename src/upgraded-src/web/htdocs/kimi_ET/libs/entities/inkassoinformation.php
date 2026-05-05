@@ -90,7 +90,7 @@ class Inkassoinformation {
     }
 
     public function set_status_dat($val, $sql_valid = FALSE) { {
-            if (strlen($val) == 0) {
+            if (strlen((string) $val) == 0) {
                 $this->item["status_dat"] = NULL;
                 return;
             }
@@ -146,7 +146,7 @@ class Inkassoinformation {
     }
 
     public function set_letzte_aenderung($val, $sql_valid = FALSE) { {
-            if (strlen($val) == 0) {
+            if (strlen((string) $val) == 0) {
                 $this->item["letzte_aenderung"] = NULL;
                 return;
             }
@@ -219,7 +219,7 @@ class Inkassoinformation {
     }
 
     public function set_uebergabe_dat($val, $sql_valid = FALSE) { {
-            if (strlen($val) == 0) {
+            if (strlen((string) $val) == 0) {
                 $this->item["uebergabe_dat"] = NULL;
                 return;
             }
@@ -284,7 +284,7 @@ class Inkassoinformation {
     }
 
     public function set_erl_du_dat($val, $sql_valid = FALSE) { {
-            if (strlen($val) == 0) {
+            if (strlen((string) $val) == 0) {
                 $this->item["erl_du_dat"] = NULL;
                 return;
             }
@@ -326,7 +326,7 @@ class Inkassoinformation {
     }
 
     public function set_erl_dat($val, $sql_valid = FALSE) { {
-            if (strlen($val) == 0) {
+            if (strlen((string) $val) == 0) {
                 $this->item["erl_dat"] = NULL;
                 return;
             }

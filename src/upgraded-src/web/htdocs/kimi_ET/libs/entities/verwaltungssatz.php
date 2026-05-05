@@ -75,7 +75,7 @@ class Verwaltungssatz {
 
    
     public function set_buchungsdatum($val, $sql_valid = FALSE) { {
-            if (strlen($val) == 0) {
+            if (strlen((string) $val) == 0) {
                 $this->item["buchungsdatum"] = NULL;
                 return;
             }
@@ -104,7 +104,7 @@ class Verwaltungssatz {
     }
 
     public function set_stichtag1($val, $sql_valid = FALSE) { {
-            if (strlen($val) == 0) {
+            if (strlen((string) $val) == 0) {
                 $this->item["stichtag1"] = NULL;
                 return;
             }
@@ -132,7 +132,7 @@ class Verwaltungssatz {
     }
 
     public function set_stichtag2($val, $sql_valid = FALSE) { {
-            if (strlen($val) == 0) {
+            if (strlen((string) $val) == 0) {
                 $this->item["stichtag2"] = NULL;
                 return;
             }
@@ -160,7 +160,7 @@ class Verwaltungssatz {
     }
 
     public function set_stichtag3($val, $sql_valid = FALSE) { {
-            if (strlen($val) == 0) {
+            if (strlen((string) $val) == 0) {
                 $this->item["stichtag3"] = NULL;
                 return;
             }
@@ -188,7 +188,7 @@ class Verwaltungssatz {
     }
 
     public function set_stichtag4($val, $sql_valid = FALSE) { {
-            if (strlen($val) == 0) {
+            if (strlen((string) $val) == 0) {
                 $this->item["stichtag4"] = NULL;
                 return;
             }
@@ -216,7 +216,7 @@ class Verwaltungssatz {
     }
 
     public function set_stichtag5($val, $sql_valid = FALSE) { {
-            if (strlen($val) == 0) {
+            if (strlen((string) $val) == 0) {
                 $this->item["stichtag5"] = NULL;
                 return;
             }

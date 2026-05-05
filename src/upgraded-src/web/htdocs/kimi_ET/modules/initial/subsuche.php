@@ -1,7 +1,7 @@
 <?php
 
 $filter = array();
-$kunde_nr = ltrim(param("kundennummer"), "0");
+$kunde_nr = ltrim((string) param("kundennummer"), "0");
 $rechnungsnr = param("rechnungsnummer", NULL);
 
 if (isset($_SESSION["sd-kunde"]) && !isset($kunde_nr)) {

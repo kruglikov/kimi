@@ -202,9 +202,9 @@ class Request {
 		$setTime = false;
 		$diff = 0;
 		if ($this->end_time != "") {
-			$this->dauer_sec  = strtotime($this->end_time) - strtotime($this->start_time);
+			$this->dauer_sec  = strtotime((string) $this->end_time) - strtotime((string) $this->start_time);
 		} elseif($this->connect_time != "") {
-			$this->dauer_sec  = strtotime($this->connect_time) - strtotime($this->start_time);			
+			$this->dauer_sec  = strtotime((string) $this->connect_time) - strtotime((string) $this->start_time);			
 		}
 
 	}
@@ -222,11 +222,11 @@ class Request {
 	public function getItemValue($value, $search) {
 	  
 	  $ret = "";
-	  $pos = strpos($value, $search);
+	  $pos = strpos((string) $value, (string) $search);
 	  if ($pos !== false) {
-		  $pos2 = strpos($value, '&', $pos);
+		  $pos2 = strpos((string) $value, '&', $pos);
 		  if ($pos2 !== false) {
-			  $ret = substr($value, $pos+strlen($search), $pos2-$pos-strlen($search));
+			  $ret = substr((string) $value, $pos+strlen((string) $search), $pos2-$pos-strlen((string) $search));
 		  }
 	  }
 	  return $ret;
@@ -360,7 +360,7 @@ $data = getDataFromUrl($last_key, $errText);
 
 $hasData = false;
 if ($data != '' && $data != null) {
-	$obj = json_decode($data);
+	$obj = json_decode((string) $data);
 	$dataarr = $obj->data;
 	$hasData = true;
 }

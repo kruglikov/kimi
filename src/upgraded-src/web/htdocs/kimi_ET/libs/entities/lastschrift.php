@@ -166,7 +166,7 @@ class Lastschrift {
     }
 
     public function set_dat_lastschrift($val, $sql_valid = FALSE) { {
-            if (strlen($val) == 0) {
+            if (strlen((string) $val) == 0) {
                 $this->item["dat_lastschrift"] = NULL;
                 return;
             }
@@ -193,7 +193,7 @@ class Lastschrift {
     }
 
     public function set_dat_unterschrift($val, $sql_valid = FALSE) { {
-            if (strlen($val) == 0) {
+            if (strlen((string) $val) == 0) {
                 $this->item["dat_unterschrift"] = NULL;
                 return;
             }
@@ -220,7 +220,7 @@ class Lastschrift {
     }
 
     public function set_dat_inaktiv($val, $sql_valid = FALSE) { {
-            if (strlen($val) == 0) {
+            if (strlen((string) $val) == 0) {
                 $this->item["dat_inaktiv"] = NULL;
                 return;
             }
@@ -288,7 +288,7 @@ class Lastschrift {
     }
 
     public function set_dat_einzbetrag($val, $sql_valid = FALSE) { {
-            if (strlen($val) == 0) {
+            if (strlen((string) $val) == 0) {
                 $this->item["dat_einzbetrag"] = NULL;
                 return;
             }

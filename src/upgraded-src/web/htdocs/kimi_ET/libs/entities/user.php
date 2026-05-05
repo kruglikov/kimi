@@ -120,7 +120,7 @@ class User {
     }
 
     public function set_default_belegdatum($val) {
-        if (strlen($val) == 0) {
+        if (strlen((string) $val) == 0) {
             $this->item->default_belegdatum = NULL;
             return;
         }
@@ -132,7 +132,7 @@ class User {
     public static function login($name, $passwort) {
 
         $passwort = self::encrypt($passwort);
-        $passwort = substr($passwort, 0, 64);
+        $passwort = substr((string) $passwort, 0, 64);
 
         $query = "SELECT * FROM benutzer WHERE (name = '$name' OR email = '$name') AND passwort = '$passwort'";
 

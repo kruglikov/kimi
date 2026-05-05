@@ -289,14 +289,14 @@ while ($line = dbFetchArray($result)) {
 		$email = $line['email']; 
 		$neuetelnr = $line['neuetelnr']; 
 		
-		if (strlen($email)>0 OR strlen($neuetelnr)>0) {
+		if (strlen((string) $email)>0 OR strlen((string) $neuetelnr)>0) {
 	 	   $contactdata = '';
-		   if (strlen($email)>0) {
+		   if (strlen((string) $email)>0) {
 			 // $contactdata = $contactdata.' email :'.$email;
 			 $vorlage = 91; /* Vorlage automatisch setzen */
 			 // ausgabe in eigener Zeile
 		   }
-		   if (strlen($neuetelnr)>0) {
+		   if (strlen((string) $neuetelnr)>0) {
 			 $contactdata = $contactdata.' Telnr :'.$neuetelnr;
 			 $vorlage = 91; /* Vorlage automatisch setzen */
 		   }
@@ -311,9 +311,9 @@ while ($line = dbFetchArray($result)) {
 		$ag_nachname = $line['ag_nachname']; 	
         $calldata = 'GesprDat: '.$gespraechsdatum.' GesprZeit: '.$gespraechszeit.' Agent: '.$ag_vorname.' '.$ag_nachname  ;		
 		// email 20170328
-		if (strlen($email)>0 ) {
+		if (strlen((string) $email)>0 ) {
 	 	   $email01 = '';
-		   if (strlen($email)>0) {
+		   if (strlen((string) $email)>0) {
 			 $email01 = $email01.'Mail: '.$email;
 		   }
 		   }  else {

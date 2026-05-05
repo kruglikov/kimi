@@ -19,7 +19,7 @@ function convert2Utf8($value, $encoding = null)
 
 function convert2ANSI($value)
 {
-	$retval = iconv( "UTF-8", 'Windows-1252//TRANSLIT', $value );
+	$retval = iconv( "UTF-8", 'Windows-1252//TRANSLIT', (string) $value );
 	return $retval;
 }
 

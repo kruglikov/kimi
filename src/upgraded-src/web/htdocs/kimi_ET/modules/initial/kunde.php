@@ -50,7 +50,7 @@ if (isset($_SESSION["kd-filter"])) {
 }
 
 if (isset($search["kdnr"])) {
-    $kdnr = ltrim($search["kdnr"], "0");
+    $kdnr = ltrim((string) $search["kdnr"], "0");
 } else {
     $kdnr = "";
 }

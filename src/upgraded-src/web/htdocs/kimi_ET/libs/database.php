@@ -115,7 +115,7 @@ class DB {
         }
 
         if (isset($identifier)) {
-            return mysqli_real_escape_string($identifier, $string);
+            return mysqli_real_escape_string($identifier, (string) $string);
         } else {
             return $string;
         }

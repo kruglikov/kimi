@@ -82,7 +82,7 @@ class Akt {
 
         }
         elseif($this->isFormatDate($dtype)) {
-            if (strlen($val) == 0 || strlen($val) == 0) {
+            if (strlen((string) $val) == 0 || strlen((string) $val) == 0) {
                 $this->item[$key] = NULL;
                 return;
             }

@@ -43,7 +43,7 @@ foreach($data as $x => $row ) {
 	echo "Line #<b>{$x}</b> : " . htmlspecialchars(implode(";", $row)) . "<br />\n";
 	//$indexc = $index3arr;
 	// #2 Daten Prüfen oder Umformatieren
-	$row['geburtsdatum'] = substr($row['geburtsdatum'],0,4)."-".str_pad(substr($row['geburtsdatum'],5,2),2,'0',STR_PAD_LEFT)."-".str_pad(substr($row['geburtsdatum'],8,2),2,'0',STR_PAD_LEFT);
+	$row['geburtsdatum'] = substr((string) $row['geburtsdatum'],0,4)."-".str_pad(substr((string) $row['geburtsdatum'],5,2),2,'0',STR_PAD_LEFT)."-".str_pad(substr((string) $row['geburtsdatum'],8,2),2,'0',STR_PAD_LEFT);
 
     // #2.1 Daten ausgeben zum Prüfen
 
@@ -60,7 +60,7 @@ foreach($data as $x => $row ) {
     echo "<br>Telefon: ".$row['telefon'];
     echo "<br>EMail: ".$row['email'];			
 	$gebdatum= $row['geburtsdatum'];
-	$gebdatumX= substr($gebdatum,0,4)."-".str_pad(substr($geburtsdatum,5,2),2,'0',STR_PAD_LEFT)."-".str_pad(substr($geburtsdatum,8,2),2,'0',STR_PAD_LEFT);
+	$gebdatumX= substr($gebdatum,0,4)."-".str_pad(substr((string) $geburtsdatum,5,2),2,'0',STR_PAD_LEFT)."-".str_pad(substr((string) $geburtsdatum,8,2),2,'0',STR_PAD_LEFT);
 	$gebdatum= $gebdatumX;
     echo "<br>GebDatum: ".$gebdatum;	
 echo "<br>GebDatum2: ".$row['geburtsdatum'];	

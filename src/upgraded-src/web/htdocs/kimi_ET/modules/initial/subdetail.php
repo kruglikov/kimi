@@ -18,11 +18,11 @@ $default_enable_calc_button = FALSE;
 $default_is_plus = FALSE;
 $button_calc_label = TXT_LBL_SK_BTN_CALC;
 $default_bugru_typ = 0;
-if ($user_default_bua_bgr_key != "" && strpos(CONF_SKBUCH_ENABLE_BTN_NRATE,$user_default_bua_bgr_key)!==FALSE) {
+if ($user_default_bua_bgr_key != "" && strpos(CONF_SKBUCH_ENABLE_BTN_NRATE,(string) $user_default_bua_bgr_key)!==FALSE) {
     $default_enable_calc_button = TRUE;
     $default_bugru_typ = 1;
 }
-else if ($user_default_bua_bgr_key != "" && strpos(CONF_SKBUCH_ENABLE_BTN_MAHNGEB,$user_default_bua_bgr_key)!==FALSE) {
+else if ($user_default_bua_bgr_key != "" && strpos(CONF_SKBUCH_ENABLE_BTN_MAHNGEB,(string) $user_default_bua_bgr_key)!==FALSE) {
     $default_enable_calc_button = TRUE;
     $default_bugru_typ = 2;
 }
@@ -89,7 +89,7 @@ if ($mode == "INS") {
     $current->add_informations($_POST, FALSE);
     $current->set_kz_aktuell($kz_aktuell);
 
-    if (substr($current->get_bua_bgr_man_id(), strlen($current->get_bua_bgr_man_id()) - 4, 4) == CONF_SKBUCH_CLEAR_BETRAG) {
+    if (substr((string) $current->get_bua_bgr_man_id(), strlen((string) $current->get_bua_bgr_man_id()) - 4, 4) == CONF_SKBUCH_CLEAR_BETRAG) {
         $current->set_buchungsbetrag(0);
     }
 

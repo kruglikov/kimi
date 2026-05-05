@@ -41,8 +41,8 @@ if ($kunde_id != "") {
     $stammdaten = Stammdaten::get_by_kunde($kunde_id);
 }
 if ($buch_tgz) {
-    $tgz_summen = explode("@", param("Summen"));
-    $tgz_ids = explode("@", param("SummenIDs"));
+    $tgz_summen = explode("@", (string) param("Summen"));
+    $tgz_ids = explode("@", (string) param("SummenIDs"));
     $trans_ok = TRUE;
 
     // eigene Transaktion
@@ -97,12 +97,12 @@ if ($buch_tgz) {
         App::$CURRENT->DB->rollback($db);
     }
 
-    if ( $trans_ok && substr($stammdaten->get_krsv(), 0, 1) == 1) {
+    if ( $trans_ok && substr((string) $stammdaten->get_krsv(), 0, 1) == 1) {
         $sk_gessaldo = number_format((float) Subkonto::get_gessaldo_kunde_oid(App::$CURRENT->MANDANT->get_id(), $kunde_id), 2, ".", "");
     }
 
     // Prüfe KRSV
-    if ( isset($sk_gessaldo) && $sk_gessaldo > 0 &&  $trans_ok && substr($stammdaten->get_krsv(), 0, 1) == 1) {
+    if ( isset($sk_gessaldo) && $sk_gessaldo > 0 &&  $trans_ok && substr((string) $stammdaten->get_krsv(), 0, 1) == 1) {
         // Lese Geamtsaldo
         //$sk_gessaldo = number_format((float) Subkonto::get_gessaldo_kunde_oid(App::$CURRENT->MANDANT->get_id(), $kunde_id), 2, ".", "");
         $betrag_cardif = $sk_gessaldo / 100 * CONF_CARDIF_ZINSSATZ;

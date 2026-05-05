@@ -12,7 +12,7 @@ $modify_id = param("modify_id", 0);
 $can_create = App::$CURRENT->has_permission("bankleitzahl", "INS");
 $show_delete = param("showDelete");
 
-$sblz = ltrim(param("sblz"), NULL);
+$sblz = ltrim((string) param("sblz"), NULL);
 $sbank = param("sbank", NULL);
 
 

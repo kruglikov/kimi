@@ -99,7 +99,7 @@ if ($target_number == "") {
 }
 
 if ($auto_vorwahl != "") {
-	if (substr($target_number, 0, strlen($auto_vorwahl)) != $auto_vorwahl) {
+	if (substr($target_number, 0, strlen((string) $auto_vorwahl)) != $auto_vorwahl) {
 		if (substr($target_number, 0, 1) == "0") {
 			$target_number = substr($target_number, 1, strlen($target_number)-1);
 		}

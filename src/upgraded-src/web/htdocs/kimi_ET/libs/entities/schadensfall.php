@@ -87,7 +87,7 @@ class Schadensfall {
     }
 
     public function set_dat_schadenseintritt($val, $sql_valid = FALSE) { {
-            if (strlen($val) == 0) {
+            if (strlen((string) $val) == 0) {
                 $this->item["dat_schadenseintritt"] = NULL;
                 return;
             }
@@ -114,7 +114,7 @@ class Schadensfall {
     }
 
     public function set_dat_ende_schadensleistung($val, $sql_valid = FALSE) { {
-            if (strlen($val) == 0) {
+            if (strlen((string) $val) == 0) {
                 $this->item["dat_ende_schadensleistung"] = NULL;
                 return;
             }
@@ -141,7 +141,7 @@ class Schadensfall {
     }
 
     public function set_dat_gemeldet($val, $sql_valid = FALSE) { {
-            if (strlen($val) == 0) {
+            if (strlen((string) $val) == 0) {
                 $this->item["dat_gemeldet"] = NULL;
                 return;
             }
@@ -168,7 +168,7 @@ class Schadensfall {
     }
 
     public function set_dat_pruefung($val, $sql_valid = FALSE) { {
-            if (strlen($val) == 0) {
+            if (strlen((string) $val) == 0) {
                 $this->item["dat_pruefung"] = NULL;
                 return;
             }
@@ -195,7 +195,7 @@ class Schadensfall {
     }
 
     public function set_dat_leistung($val, $sql_valid = FALSE) { {
-            if (strlen($val) == 0) {
+            if (strlen((string) $val) == 0) {
                 $this->item["dat_leistung"] = NULL;
                 return;
             }
@@ -222,7 +222,7 @@ class Schadensfall {
     }
 
     public function set_dat_zahlungseingang($val, $sql_valid = FALSE) { {
-            if (strlen($val) == 0) {
+            if (strlen((string) $val) == 0) {
                 $this->item["dat_zahlungseingang"] = NULL;
                 return;
             }
@@ -249,7 +249,7 @@ class Schadensfall {
     }
 
     public function set_dat_erledigt($val, $sql_valid = FALSE) { {
-            if (strlen($val) == 0) {
+            if (strlen((string) $val) == 0) {
                 $this->item["dat_erledigt"] = NULL;
                 return;
             }
@@ -340,7 +340,7 @@ class Schadensfall {
     }
 
     public function set_leistung_ab($val, $sql_valid = FALSE) { {
-            if (strlen($val) == 0) {
+            if (strlen((string) $val) == 0) {
                 $this->item["leistung_ab"] = NULL;
                 return;
             }

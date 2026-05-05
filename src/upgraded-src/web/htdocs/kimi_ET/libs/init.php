@@ -7,36 +7,36 @@ function getBrowser() {
     $version = "";
 
     //First get the platform?
-    if (preg_match('/linux/i', $u_agent)) {
+    if (preg_match('/linux/i', (string) $u_agent)) {
         $platform = 'linux';
-    } elseif (preg_match('/macintosh|mac os x/i', $u_agent)) {
+    } elseif (preg_match('/macintosh|mac os x/i', (string) $u_agent)) {
         $platform = 'mac';
-    } elseif (preg_match('/windows|win32/i', $u_agent)) {
+    } elseif (preg_match('/windows|win32/i', (string) $u_agent)) {
         $platform = 'windows';
     }
 
     $ub = "UNKNOWN";
 
     // Next get the name of the useragent yes seperately and for good reason
-    if ((preg_match('/MSIE/i', $u_agent) || preg_match('/Trident/i', $u_agent)) && !preg_match('/Opera/i', $u_agent)) {
+    if ((preg_match('/MSIE/i', (string) $u_agent) || preg_match('/Trident/i', (string) $u_agent)) && !preg_match('/Opera/i', (string) $u_agent)) {
         $bname = 'Internet Explorer';
         $ub = "MSIE";
-    } elseif (preg_match('/Firefox/i', $u_agent)) {
+    } elseif (preg_match('/Firefox/i', (string) $u_agent)) {
         $bname = 'Mozilla Firefox';
         $ub = "Firefox";
-    } elseif (preg_match('/Chrome/i', $u_agent)) {
+    } elseif (preg_match('/Chrome/i', (string) $u_agent)) {
         $bname = 'Google Chrome';
         $ub = "Chrome";
-    } elseif (preg_match('/Safari/i', $u_agent)) {
+    } elseif (preg_match('/Safari/i', (string) $u_agent)) {
         $bname = 'Apple Safari';
         $ub = "Safari";
-    } elseif (preg_match('/Opera/i', $u_agent)) {
+    } elseif (preg_match('/Opera/i', (string) $u_agent)) {
         $bname = 'Opera';
         $ub = "Opera";
-    } elseif (preg_match('/Netscape/i', $u_agent)) {
+    } elseif (preg_match('/Netscape/i', (string) $u_agent)) {
         $bname = 'Netscape';
         $ub = "Netscape";
-    } elseif (preg_match('/Moilla/i', $u_agent)) {
+    } elseif (preg_match('/Moilla/i', (string) $u_agent)) {
         $bname = 'Mozila';
         $ub = "Mozila";
 }
@@ -47,7 +47,7 @@ function getBrowser() {
     $known = array('Version', $ub, 'other', 'rv');
     $pattern = '#(?<browser>' . join('|', $known) .
             ')[/ :]+(?<version>[0-9.|a-zA-Z.]*)#';
-    if (!preg_match_all($pattern, $u_agent, $matches)) {
+    if (!preg_match_all($pattern, (string) $u_agent, $matches)) {
         // we have no matching number just continue
     }
 
@@ -56,7 +56,7 @@ function getBrowser() {
     if ( $i != 1) {
         //we will have two since we are not using 'other' argument yet
         //see if version is before or after the name
-        if (strripos($u_agent, "Version") < strripos($u_agent, $ub)) {
+        if (strripos((string) $u_agent, "Version") < strripos((string) $u_agent, $ub)) {
             $version = $matches['version'][0];
         } else {
             if (count($matches["version"]) >= 2) {
@@ -106,7 +106,7 @@ require_once './config/config.php';
 session_name('kimi_ET-P');
 session_start();
 if (isset($_SESSION["lang"])) {
-    $lang = strtolower($_SESSION["lang"]);
+    $lang = strtolower((string) $_SESSION["lang"]);
 
     $filename = './config/lang/' . strtolower($lang) . '.php';
 

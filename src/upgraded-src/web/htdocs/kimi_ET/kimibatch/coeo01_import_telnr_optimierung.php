@@ -32,14 +32,14 @@ foreach ($lines as $line_num => $line) {
     // echo "Line #<b>{$line_num}</b> : " . htmlspecialchars($line) . "<br />\n";
 	
 	// String auf 2 Teile für die evtl. Korrektur vorbereiten
-	$telnr = substr($line, 0,strpos($line, ";"));   // Telefonnummer - und erster Teil des Strings
+	$telnr = substr((string) $line, 0,strpos((string) $line, ";"));   // Telefonnummer - und erster Teil des Strings
 	
-	$line_abtelnr = substr($line, strpos($line, ";")+1,strlen($line));   // 2ter Teil des Strings
+	$line_abtelnr = substr((string) $line, strpos((string) $line, ";")+1,strlen((string) $line));   // 2ter Teil des Strings
 	$telnrneu = $telnr; // telnrneu auf jeden Fall Default mit telnr belegen damit diese sicher belegt ist
 	// Prüfungen
-	$telnrlw = substr($line, 0,2);   // Landesvorwahl Stelle 1-2
-	$telnrlw3 = substr($line, 0,3);   // Landesvorwahl Stelle 1-3
-	$telnrlw4 = substr($line, 0,4);   // Landesvorwahl Stelle 1-4
+	$telnrlw = substr((string) $line, 0,2);   // Landesvorwahl Stelle 1-2
+	$telnrlw3 = substr((string) $line, 0,3);   // Landesvorwahl Stelle 1-3
+	$telnrlw4 = substr((string) $line, 0,4);   // Landesvorwahl Stelle 1-4
 	
 	// echo "Landesvorwahl: ".$telnrlw."<br>";
 	// #1 keine Landesvorwahl

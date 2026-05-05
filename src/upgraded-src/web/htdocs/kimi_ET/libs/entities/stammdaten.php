@@ -80,7 +80,7 @@ class Stammdaten {
     }
 
     public function set_datum_anlage($datum_anlage, $sql_valid = FALSE) {
-        if (strlen($datum_anlage) == 0) {
+        if (strlen((string) $datum_anlage) == 0) {
             $this->item["datum_anlage"] = NULL;
             return;
         }
@@ -107,7 +107,7 @@ class Stammdaten {
     }
 
     public function set_stichtag($stichtag, $sql_valid = FALSE) {
-        if (strlen($stichtag) == 0) {
+        if (strlen((string) $stichtag) == 0) {
             $this->item["stichtag"] = NULL;
             return;
         }
@@ -134,7 +134,7 @@ class Stammdaten {
     }
 
     public function set_zahltag($zahltag, $sql_valid = FALSE) {
-        if (strlen($zahltag) == 0) {
+        if (strlen((string) $zahltag) == 0) {
             $this->item["zahltag"] = NULL;
             return;
         }
@@ -179,7 +179,7 @@ class Stammdaten {
     }
 
     public function set_mahnsperre_datum($mahnsperre_datum, $sql_valid = FALSE) {
-        if (strlen($mahnsperre_datum) == 0) {
+        if (strlen((string) $mahnsperre_datum) == 0) {
             $this->item["mahnsperre_datum"] = NULL;
             return;
         }
@@ -440,7 +440,7 @@ class Stammdaten {
     }
 
     public function set_dat_einzbetrag($val, $sql_valid = FALSE) {
-        if (strlen($val) == 0) {
+        if (strlen((string) $val) == 0) {
             $this->item["dat_einzbetrag"] = NULL;
             return;
         }
@@ -467,7 +467,7 @@ class Stammdaten {
     }
 
     public function set_dat_l_zahlung($dat_l_zahlung, $sql_valid = FALSE) {
-        if (strlen($dat_l_zahlung) == 0) {
+        if (strlen((string) $dat_l_zahlung) == 0) {
             $this->item["dat_l_zahlung"] = NULL;
             return;
         }
@@ -516,7 +516,7 @@ class Stammdaten {
     }
 
     public function set_dat_l_auslagerung($dat_l_auslagerung, $sql_valid = FALSE) {
-        if (strlen($dat_l_auslagerung) == 0) {
+        if (strlen((string) $dat_l_auslagerung) == 0) {
             $this->item["dat_l_auslagerung"] = NULL;
             return;
         }
@@ -565,7 +565,7 @@ class Stammdaten {
     }
 
     public function set_dat_l_kontoauszug($dat_l_kontoauszug, $sql_valid = FALSE) {
-        if (strlen($dat_l_kontoauszug) == 0) {
+        if (strlen((string) $dat_l_kontoauszug) == 0) {
             $this->item["dat_l_kontoauszug"] = NULL;
             return;
         }
@@ -614,7 +614,7 @@ class Stammdaten {
     }
 
     public function set_dat_ltzt_buchung($dat_ltzt_buchung, $sql_valid = FALSE) {
-        if (strlen($dat_ltzt_buchung) == 0) {
+        if (strlen((string) $dat_ltzt_buchung) == 0) {
             $this->item["dat_ltzt_buchung"] = NULL;
             return;
         }
@@ -641,7 +641,7 @@ class Stammdaten {
     }
 
     public function set_geaendert_am($geaendert_am, $sql_valid = FALSE) {
-        if (strlen($geaendert_am) == 0) {
+        if (strlen((string) $geaendert_am) == 0) {
             $this->item["geaendert_am"] = NULL;
             return;
         }
@@ -668,7 +668,7 @@ class Stammdaten {
     }
 
     public function set_dat_l_mahnlauf($dat_l_mahnlauf, $sql_valid = FALSE) {
-        if (strlen($dat_l_mahnlauf) == 0) {
+        if (strlen((string) $dat_l_mahnlauf) == 0) {
             $this->item["dat_l_mahnlauf"] = NULL;
             return;
         }
@@ -818,7 +818,7 @@ class Stammdaten {
     }
 
     public function set_letzter_stichtag($val, $sql_valid = FALSE) {
-        if (strlen($val) == 0) {
+        if (strlen((string) $val) == 0) {
             $this->item["letzter_stichtag"] = NULL;
             return;
         }
@@ -845,7 +845,7 @@ class Stammdaten {
     }
 
     public function set_status_dat($val, $sql_valid = FALSE) {
-        if (strlen($val) == 0) {
+        if (strlen((string) $val) == 0) {
             $this->item["status_dat"] = NULL;
             return;
         }
@@ -872,7 +872,7 @@ class Stammdaten {
     }
 
     public function set_letzter_zahltag($val, $sql_valid = FALSE) {
-        if (strlen($val) == 0) {
+        if (strlen((string) $val) == 0) {
             $this->item["letzter_zahltag"] = NULL;
             return;
         }
@@ -899,7 +899,7 @@ class Stammdaten {
     }
 
     public function set_dat_ende_sonderzins($val, $sql_valid = FALSE) {
-        if (strlen($val) == 0) {
+        if (strlen((string) $val) == 0) {
             $this->item["dat_ende_sonderzins"] = NULL;
             return;
         }

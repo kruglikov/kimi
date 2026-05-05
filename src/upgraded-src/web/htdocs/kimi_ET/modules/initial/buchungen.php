@@ -194,7 +194,7 @@ if ($mode == "INS") {
                 if ($anz - 1 == $n || $curr_sk->get_saldo() != "0,00") {
                     //echo "<br> BUCH".$n;
                     $curr_sk->set_saldo($aufteil['Saldo']);
-                    if (strrpos($aufteil['Saldo'], "-") !== false) {
+                    if (strrpos((string) $aufteil['Saldo'], "-") !== false) {
                         $curr_sk->set_m0($aufteil['Saldo']);
                         $aufteil['M0'] = $aufteil['Saldo'];
                     }
@@ -324,7 +324,7 @@ if ($mode == "INS") {
                 if ($anz - 1 == $n || $curr_sk->get_saldo() != "0,00") {
                     //echo "<br> BUCH".$n;
                     $curr_sk->set_saldo($aufteil['Saldo']);
-                    if (strrpos($aufteil['Saldo'], "-") !== false) {
+                    if (strrpos((string) $aufteil['Saldo'], "-") !== false) {
                         $curr_sk->set_m0($aufteil['Saldo']);
                         $aufteil['M0'] = $aufteil['Saldo'];
                     }
@@ -477,7 +477,7 @@ if ($mode == "KZBUCH_BU" || $mode == "KZBUCH_BUSK" || $mode == "KZBUCH_ST") {
 
                     if ($anz - 1 == $n || $curr_sk->get_saldo() != "0,00") {
                         $curr_sk->set_saldo($aufteil['Saldo']);
-                        if (strrpos($aufteil['Saldo'], "-") !== false) {
+                        if (strrpos((string) $aufteil['Saldo'], "-") !== false) {
                             $curr_sk->set_m0($aufteil['Saldo']);
                             $aufteil['M0'] = $aufteil['Saldo'];
                         }

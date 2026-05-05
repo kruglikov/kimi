@@ -141,7 +141,7 @@
             $sum_saldo = 0;
         }
         $sum_cardif = 0;
-        if ($sum_saldo > 0 && isset($stammdaten) && substr($stammdaten->get_krsv(), 0, 1) == 1) {
+        if ($sum_saldo > 0 && isset($stammdaten) && substr((string) $stammdaten->get_krsv(), 0, 1) == 1) {
             $sum_cardif = $sum_saldo / 100 * CONF_CARDIF_ZINSSATZ;
             $sum_cardif = number_format((float) round($sum_cardif, 2), 2, ',', '.');
         }

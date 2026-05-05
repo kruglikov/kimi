@@ -1,8 +1,186 @@
-   0/314 [░░░░░░░░░░░░░░░░░░░░░░░░░░░░]   0%[1G[2K  16/314 [▓░░░░░░░░░░░░░░░░░░░░░░░░░░░]   5%[1G[2K  32/314 [▓▓░░░░░░░░░░░░░░░░░░░░░░░░░░]  10%[1G[2K  64/314 [▓▓▓▓▓░░░░░░░░░░░░░░░░░░░░░░░]  20%[1G[2K  96/314 [▓▓▓▓▓▓▓▓░░░░░░░░░░░░░░░░░░░░]  30%[1G[2K 128/314 [▓▓▓▓▓▓▓▓▓▓▓░░░░░░░░░░░░░░░░░]  40%[1G[2K 160/314 [▓▓▓▓▓▓▓▓▓▓▓▓▓▓░░░░░░░░░░░░░░]  50%[1G[2K 192/314 [▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓░░░░░░░░░░░]  61%[1G[2K 224/314 [▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓░░░░░░░░░]  71%[1G[2K 266/314 [▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓░░░░░]  84%[1G[2K 298/314 [▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓░░]  94%[1G[2K 314/314 [▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓] 100%
-95 files with changes
+  0/51 [░░░░░░░░░░░░░░░░░░░░░░░░░░░░]   0%[1G[2K  3/51 [▓░░░░░░░░░░░░░░░░░░░░░░░░░░░]   5%[1G[2K 19/51 [▓▓▓▓▓▓▓▓▓▓░░░░░░░░░░░░░░░░░░]  37%[1G[2K 35/51 [▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓░░░░░░░░░]  68%[1G[2K 51/51 [▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓] 100%
+51 files with changes
 =====================
 
-1) ../../web/htdocs/kimi_ET/kimibatch/coeo01_import_telefonie_taeglich.php:41
+1) ../../web/htdocs/kimi_ET/modules/initial/ticketsuch_sich20150208.php:19
+
+    ---------- begin diff ----------
+@@ Line 19 @@
+ $nachname = param("nachname", "");
+ $vorname = param("vorname", "");
+ $benutzer_id = param("benutzer_id", "");
+-$kdnr = ltrim(param("kundennummer", ""), "0");
++$kdnr = ltrim((string) param("kundennummer", ""), "0");
+ $plz = param("plz", "");
+ $ort = param("ort", "");
+ $strasse = param("strasse", "");
+@@ Line 33 @@
+ $site = param("s", 0);
+
+
+-if (strlen($tnr) > 0) {
++if (strlen((string) $tnr) > 0) {
+     array_push($filter, "t.ticketnr = $tnr");
+ }
+-if (strlen($status_id) > 0 && $status_id != -1) {
++if (strlen((string) $status_id) > 0 && $status_id != -1) {
+     array_push($filter, "t.status_id = $status_id");
+ }
+-if (strlen($aufgabe) > 0) {
++if (strlen((string) $aufgabe) > 0) {
+     array_push($filter, "t.beschreibung_detail LIKE '%$aufgabe%'");
+ }
+-if (strlen($nachname) > 0) {
++if (strlen((string) $nachname) > 0) {
+     array_push($filter, "t.nachname LIKE '%$nachname%'");
+ }
+-if (strlen($vorname) > 0) {
++if (strlen((string) $vorname) > 0) {
+     array_push($filter, "t.nachname LIKE '%$vorname%'");
+ }
+-if (strlen($benutzer_id) > 0 && $benutzer_id != -1) {
++if (strlen((string) $benutzer_id) > 0 && $benutzer_id != -1) {
+     array_push($filter, "t.benutzer_id = $benutzer_id");
+ }
+ if (strlen($kdnr) > 0) {
+     array_push($filter, "t.kundennummer = '$kdnr'");
+ }
+-if (strlen($plz) > 0) {
++if (strlen((string) $plz) > 0) {
+     array_push($filter, "t.plz LIKE '%$plz%'");
+ }
+-if (strlen($ort) > 0) {
++if (strlen((string) $ort) > 0) {
+     array_push($filter, "t.ort LIKE '%$ort%'");
+ }
+-if (strlen($strasse) > 0) {
++if (strlen((string) $strasse) > 0) {
+     array_push($filter, "t.strasse LIKE '%$strasse%'");
+ }
+-if (strlen($hausnummer) > 0) {
++if (strlen((string) $hausnummer) > 0) {
+     array_push($filter, "t.hausnummer = $hausnummer");
+ }
+-if (strlen($prioritaet_id) > 0 && $prioritaet_id != -1) {
++if (strlen((string) $prioritaet_id) > 0 && $prioritaet_id != -1) {
+     array_push($filter, "t.prioritaet_id = $prioritaet_id");
+ }
+-if (strlen($beginn) > 0) {
++if (strlen((string) $beginn) > 0) {
+     $date = date_create($beginn);
+     array_push($filter, "t.beginn = '" . date_format($date, "Y-m-d H:i:s") . "'");
+ }
+-if (strlen($ende) > 0) {
++if (strlen((string) $ende) > 0) {
+     $date = date_create($ende);
+     array_push($filter, "t.ende = '" . date_format($date, "Y-m-d H:i:s") . "'");
+ }
+-if (strlen($aufwand) > 0) {
++if (strlen((string) $aufwand) > 0) {
+     array_push($filter, "t.aufwand = $aufwand");
+ }
+-if (strlen($wiedervorlage) > 0) {
++if (strlen((string) $wiedervorlage) > 0) {
+     $date = date_create($wiedervorlage);
+     array_push($filter, "t.wiedervorlage = '" . date_format($date, "Y-m-d H:i:s") . "'");
+ }
+    ----------- end diff -----------
+
+Applied rules:
+ * NullToStrictStringFuncCallArgRector
+
+
+2) ../../web/htdocs/kimi_ET/modules/subkonto.php:94
+
+    ---------- begin diff ----------
+@@ Line 94 @@
+     }
+
+     public function set_eroeffnet_am($val) { {
+-            if (strlen($val) == 0) {
++            if (strlen((string) $val) == 0) {
+                 $this->item["eroeffnet_am"] = NULL;
+                 return;
+             }
+@@ Line 219 @@
+     }
+
+     public function set_buchungsdatum($val) {
+-        if (strlen($val) == 0) {
++        if (strlen((string) $val) == 0) {
+             $this->item["buchungsdatum"] = NULL;
+             return;
+         }
+@@ Line 247 @@
+     }
+
+     public function set_belegdatum($val) {
+-        if (strlen($val) == 0) {
++        if (strlen((string) $val) == 0) {
+             $this->item["belegdatum"] = NULL;
+             return;
+         }
+    ----------- end diff -----------
+
+Applied rules:
+ * NullToStrictStringFuncCallArgRector
+
+
+3) ../../web/htdocs/kimi_ET/setticketcallinfo.php:85
+
+    ---------- begin diff ----------
+@@ Line 85 @@
+ 		$setTime = false;
+ 		$diff = 0;
+ 		if ($this->end_time != "") {
+-			$this->dauer_sec  = strtotime($this->end_time) - strtotime($this->start_time);
++			$this->dauer_sec  = strtotime((string) $this->end_time) - strtotime((string) $this->start_time);
+ 		} elseif($this->connect_time != "") {
+-			$this->dauer_sec  = strtotime($this->connect_time) - strtotime($this->start_time);			
++			$this->dauer_sec  = strtotime((string) $this->connect_time) - strtotime((string) $this->start_time);			
+ 		}
+
+ 	}
+@@ Line 105 @@
+ 	public function getItemValue($value, $search) {
+ 	  
+ 	  $ret = "";
+-	  $pos = strpos($value, $search);
++	  $pos = strpos((string) $value, (string) $search);
+ 	  if ($pos !== false) {
+-		  $pos2 = strpos($value, '&', $pos);
++		  $pos2 = strpos((string) $value, '&', $pos);
+ 		  if ($pos2 !== false) {
+-			  $ret = substr($value, $pos+strlen($search), $pos2-$pos-strlen($search));
++			  $ret = substr((string) $value, $pos+strlen((string) $search), $pos2-$pos-strlen((string) $search));
+ 		  }
+ 	  }
+ 	  return $ret;
+    ----------- end diff -----------
+
+Applied rules:
+ * NullToStrictStringFuncCallArgRector
+
+
+4) ../../web/htdocs/kimi_ET/ajax/callInntelco.php:99
+
+    ---------- begin diff ----------
+@@ Line 99 @@
+ }
+
+ if ($auto_vorwahl != "") {
+-	if (substr($target_number, 0, strlen($auto_vorwahl)) != $auto_vorwahl) {
++	if (substr($target_number, 0, strlen((string) $auto_vorwahl)) != $auto_vorwahl) {
+ 		if (substr($target_number, 0, 1) == "0") {
+ 			$target_number = substr($target_number, 1, strlen($target_number)-1);
+ 		}
+    ----------- end diff -----------
+
+Applied rules:
+ * NullToStrictStringFuncCallArgRector
+
+
+5) ../../web/htdocs/kimi_ET/kimibatch/coeo01_import_telefonie_taeglich.php:41
 
     ---------- begin diff ----------
 @@ Line 41 @@
@@ -18,7 +196,7 @@
      echo "<br>Telefon: ".$row['telefon'];
      echo "<br>EMail: ".$row['email'];			
  	$gebdatum= $row['geburtsdatum'];
--	$gebdatumX= substr($gebdatum,0,4)."-".s   "php": "^8.4 || ^8.5"tr_pad(substr($geburtsdatum,5,2),2,'0',STR_PAD_LEFT)."-".str_pad(substr($geburtsdatum,8,2),2,'0',STR_PAD_LEFT);
+-	$gebdatumX= substr($gebdatum,0,4)."-".str_pad(substr($geburtsdatum,5,2),2,'0',STR_PAD_LEFT)."-".str_pad(substr($geburtsdatum,8,2),2,'0',STR_PAD_LEFT);
 +	$gebdatumX= substr($gebdatum,0,4)."-".str_pad(substr((string) $geburtsdatum,5,2),2,'0',STR_PAD_LEFT)."-".str_pad(substr((string) $geburtsdatum,8,2),2,'0',STR_PAD_LEFT);
  	$gebdatum= $gebdatumX;
      echo "<br>GebDatum: ".$gebdatum;	
@@ -29,7 +207,7 @@ Applied rules:
  * NullToStrictStringFuncCallArgRector
 
 
-2) ../../web/htdocs/kimi_ET/kimibatch/coeo01_import_telnr_optimierung.php:32
+6) ../../web/htdocs/kimi_ET/kimibatch/coeo01_import_telnr_optimierung.php:32
 
     ---------- begin diff ----------
 @@ Line 32 @@
@@ -58,200 +236,7 @@ Applied rules:
  * NullToStrictStringFuncCallArgRector
 
 
-3) ../../web/htdocs/kimi_ET/kimibatch/db.php:19
-
-    ---------- begin diff ----------
-@@ Line 19 @@
-
- function convert2ANSI($value)
- {
--	$retval = iconv( "UTF-8", 'Windows-1252//TRANSLIT', $value );
-+	$retval = iconv( "UTF-8", 'Windows-1252//TRANSLIT', (string) $value );
- 	return $retval;
- }
-    ----------- end diff -----------
-
-Applied rules:
- * NullToStrictStringFuncCallArgRector
-
-
-4) ../../web/htdocs/kimi_ET/kimibatch/inko2016imp3.php:81
-
-    ---------- begin diff ----------
-@@ Line 81 @@
- 	//20170127 AR: wenn nicht UTF-8 dann konvertieren
- 	$line = convert2Utf8($line);
-
--    echo "Line #<b>{$line_num}</b> : " . htmlspecialchars($line) . "<br />\n";
-+    echo "Line #<b>{$line_num}</b> : " . htmlspecialchars((string) $line) . "<br />\n";
- 	
- }
- // Loop through our array, show HTML source as HTML source; and line numbers too.
- foreach ($lines as $line_num => $line) {
- 	//
--	if (substr($line, 0,6) == 'IndexA' ) {
-+	if (str_starts_with($line, 'IndexA') ) {
-       $spaltenueberschrift = substr($line, 0,123);
-
- 	  //20170127 AR: wenn nicht UTF-8 dann konvertieren
-    ----------- end diff -----------
-
-Applied rules:
- * StrStartsWithRector
- * NullToStrictStringFuncCallArgRector
-
-
-5) ../../web/htdocs/kimi_ET/modules/gui/old_delete/stammdaten.php:306
-
-    ---------- begin diff ----------
-@@ Line 306 @@
-                 <th><?php echo TXT_LBL_SALDO ?></th>
-             </tr>
-             <?php
--            $summen = array("m4" => 0, "m3" => 0, "m2" => 0, "m1" => 0, "m0" => 0, "rest" => 0, "v1" => 0, "v2" => 0, "v3" => 0, "v4" => 0, "saldo" => 0);
-+            $summen = ["m4" => 0, "m3" => 0, "m2" => 0, "m1" => 0, "m0" => 0, "rest" => 0, "v1" => 0, "v2" => 0, "v3" => 0, "v4" => 0, "saldo" => 0];
-             foreach ($subkonten as $konto) {
-                 $summen["m4"] = $summen["m4"] + $konto->get_m4(TRUE);
-                 $summen["m3"] = $summen["m3"] + $konto->get_m3(TRUE);
-    ----------- end diff -----------
-
-Applied rules:
- * LongArrayToShortArrayRector
-
-
-6) ../../web/htdocs/kimi_ET/modules/gui/old_delete/subuebersicht.php:49
-
-    ---------- begin diff ----------
-@@ Line 49 @@
-         </tr>
-
-         <?php
--        $summen = array("kaufwert" => 0.00, "ratenhoehe" => 0, "m4" => 0, "m3" => 0, "m2" => 0, "m1" => 0, "m0" => 0, "rest" => 0, "saldo" => 0, "tgz" => 0);
--        $tgz_ids = array("id" => 0);
--        $tgz_summen = array("tgz" => 0);
--        $tgz_summen_buch = array("tgz" => 0);
-+        $summen = ["kaufwert" => 0.00, "ratenhoehe" => 0, "m4" => 0, "m3" => 0, "m2" => 0, "m1" => 0, "m0" => 0, "rest" => 0, "saldo" => 0, "tgz" => 0];
-+        $tgz_ids = ["id" => 0];
-+        $tgz_summen = ["tgz" => 0];
-+        $tgz_summen_buch = ["tgz" => 0];
-         $n = 0;
-         $idx_first_sk = -1;
-         $tgz_sum_switch = 0;
-@@ Line 141 @@
-             $sum_saldo = 0;
-         }
-         $sum_cardif = 0;
--        if ($sum_saldo > 0 && isset($stammdaten) && substr($stammdaten->get_krsv(), 0, 1) == 1) {
-+        if ($sum_saldo > 0 && isset($stammdaten) && substr((string) $stammdaten->get_krsv(), 0, 1) == 1) {
-             $sum_cardif = $sum_saldo / 100 * CONF_CARDIF_ZINSSATZ;
-             $sum_cardif = number_format((float) round($sum_cardif, 2), 2, ',', '.');
-         }
-    ----------- end diff -----------
-
-Applied rules:
- * LongArrayToShortArrayRector
- * NullToStrictStringFuncCallArgRector
-
-
-7) ../../web/htdocs/kimi_ET/kimibatch/telematica_import_callmanager_log.php:202
-
-    ---------- begin diff ----------
-@@ Line 202 @@
- 		$setTime = false;
- 		$diff = 0;
- 		if ($this->end_time != "") {
--			$this->dauer_sec  = strtotime($this->end_time) - strtotime($this->start_time);
-+			$this->dauer_sec  = strtotime((string) $this->end_time) - strtotime((string) $this->start_time);
- 		} elseif($this->connect_time != "") {
--			$this->dauer_sec  = strtotime($this->connect_time) - strtotime($this->start_time);			
-+			$this->dauer_sec  = strtotime((string) $this->connect_time) - strtotime((string) $this->start_time);			
- 		}
-
- 	}
-@@ Line 222 @@
- 	public function getItemValue($value, $search) {
- 	  
- 	  $ret = "";
--	  $pos = strpos($value, $search);
-+	  $pos = strpos((string) $value, (string) $search);
- 	  if ($pos !== false) {
--		  $pos2 = strpos($value, '&', $pos);
-+		  $pos2 = strpos((string) $value, '&', $pos);
- 		  if ($pos2 !== false) {
--			  $ret = substr($value, $pos+strlen($search), $pos2-$pos-strlen($search));
-+			  $ret = substr((string) $value, $pos+strlen((string) $search), $pos2-$pos-strlen((string) $search));
- 		  }
- 	  }
- 	  return $ret;
-@@ Line 360 @@
-
- $hasData = false;
- if ($data != '' && $data != null) {
--	$obj = json_decode($data);
-+	$obj = json_decode((string) $data);
- 	$dataarr = $obj->data;
- 	$hasData = true;
- }
-    ----------- end diff -----------
-
-Applied rules:
- * StringifyStrNeedlesRector
- * NullToStrictStringFuncCallArgRector
-
-
-8) ../../web/htdocs/kimi_ET/kimibatch/inkodeimp2.php:93
-
-    ---------- begin diff ----------
-@@ Line 93 @@
- 	//20170127 AR: wenn nicht UTF-8 dann konvertieren
- 	$line = convert2Utf8($line);
-
--    echo "Line #<b>{$line_num}</b> : " . htmlspecialchars($line) . "<br />\n";
-+    echo "Line #<b>{$line_num}</b> : " . htmlspecialchars((string) $line) . "<br />\n";
- 	
- }
- // Loop through our array, show HTML source as HTML source; and line numbers too.
- foreach ($lines as $line_num => $line) {
- 	//
--	if (substr($line, 0,6) == 'IndexA' ) {
-+	if (str_starts_with($line, 'IndexA') ) {
-       $spaltenueberschrift = substr($line, 0,123);
- 	  //20170127 AR: wenn nicht UTF-8 dann konvertieren
-       echo "<br>1ter Satz: ".convert2Utf8($spaltenueberschrift);
-    ----------- end diff -----------
-
-Applied rules:
- * StrStartsWithRector
- * NullToStrictStringFuncCallArgRector
-
-
-9) ../../web/htdocs/kimi_ET/kimibatch/inkodeimp2x.php:84
-
-    ---------- begin diff ----------
-@@ Line 84 @@
- 	//20170127 AR: wenn nicht UTF-8 dann konvertieren
- 	$line = convert2Utf8($line);
-
--    echo "Line #<b>{$line_num}</b> : " . htmlspecialchars($line) . "<br />\n";
-+    echo "Line #<b>{$line_num}</b> : " . htmlspecialchars((string) $line) . "<br />\n";
- 	
- }
- // Loop through our array, show HTML source as HTML source; and line numbers too.
- foreach ($lines as $line_num => $line) {
- 	//
--	if (substr($line, 0,6) == 'IndexA' ) {
-+	if (str_starts_with($line, 'IndexA') ) {
-       $spaltenueberschrift = substr($line, 0,123);
- 	  //20170127 AR: wenn nicht UTF-8 dann konvertieren
-       echo "<br>1ter Satz: ".convert2Utf8($spaltenueberschrift);
-    ----------- end diff -----------
-
-Applied rules:
- * StrStartsWithRector
- * NullToStrictStringFuncCallArgRector
-
-
-10) ../../web/htdocs/kimi_ET/kimibatch/coeoch01_import_telefonie_taeglich.php:43
+7) ../../web/htdocs/kimi_ET/kimibatch/coeoch01_import_telefonie_taeglich.php:43
 
     ---------- begin diff ----------
 @@ Line 43 @@
@@ -278,25 +263,7 @@ Applied rules:
  * NullToStrictStringFuncCallArgRector
 
 
-11) ../../web/htdocs/kimi_ET/kimibatch/coeoch01_import_telnr_optimierung.php:81
-
-    ---------- begin diff ----------
-@@ Line 81 @@
- 	}
- 	
- 	// 1te Stelle "+" ersetzen
--	if (substr($telnrneu, 0, 1) === '+') {
-+	if (str_starts_with($telnrneu, '+')) {
- 		$telnrneu = substr($telnrneu, 1); // Entfernt das erste Zeichen
- 	    echo "Telefonnummer ohne Plus ".$telnrneu;
- 	}
-    ----------- end diff -----------
-
-Applied rules:
- * StrStartsWithRector
-
-
-12) ../../web/htdocs/kimi_ET/kimibatch/coeodrei01_import_telefonie_taeglich.php:41
+8) ../../web/htdocs/kimi_ET/kimibatch/coeodrei01_import_telefonie_taeglich.php:41
 
     ---------- begin diff ----------
 @@ Line 41 @@
@@ -323,644 +290,545 @@ Applied rules:
  * NullToStrictStringFuncCallArgRector
 
 
-13) ../../web/htdocs/kimi_ET/libs/entities/erled_qual.php:1
+9) ../../web/htdocs/kimi_ET/kimibatch/db.php:19
 
     ---------- begin diff ----------
-@@ Line 1 @@
- <?php
- /*
-  * To change this template, choose Tools | Templates
-@@ Line 10 @@
-  */
- class Erled_Qual {
+@@ Line 19 @@
 
--    private $item;
-     public function get_id() {
-         return $this->item->id;
-     }
-@@ Line 24 @@
-     }
-
-     
--    public function __construct($item) {
--        $this->item = $item;
-+    public function __construct(private $item)
-+    {
-     }
-
-     public static function load_all() {
-
-         $query = "SELECT * FROM erled_qual ORDER BY erled_qual";
--        $result = array();
-+        $result = [];
-         $response = App::$CURRENT->DB->query($query);
-
-         foreach ($response as $item) {
+ function convert2ANSI($value)
+ {
+-	$retval = iconv( "UTF-8", 'Windows-1252//TRANSLIT', $value );
++	$retval = iconv( "UTF-8", 'Windows-1252//TRANSLIT', (string) $value );
+ 	return $retval;
+ }
     ----------- end diff -----------
 
 Applied rules:
- * LongArrayToShortArrayRector
- * ClassPropertyAssignToConstructorPromotionRector
-
-
-14) ../../web/htdocs/kimi_ET/libs/entities/inkassoinformation.php:90
-
-    ---------- begin diff ----------
-@@ Line 90 @@
-     }
-
-     public function set_status_dat($val, $sql_valid = FALSE) { {
--            if (strlen($val) == 0) {
-+            if (strlen((string) $val) == 0) {
-                 $this->item["status_dat"] = NULL;
-                 return;
-             }
-@@ Line 146 @@
-     }
-
-     public function set_letzte_aenderung($val, $sql_valid = FALSE) { {
--            if (strlen($val) == 0) {
-+            if (strlen((string) $val) == 0) {
-                 $this->item["letzte_aenderung"] = NULL;
-                 return;
-             }
-@@ Line 219 @@
-     }
-
-     public function set_uebergabe_dat($val, $sql_valid = FALSE) { {
--            if (strlen($val) == 0) {
-+            if (strlen((string) $val) == 0) {
-                 $this->item["uebergabe_dat"] = NULL;
-                 return;
-             }
-@@ Line 284 @@
-     }
-
-     public function set_erl_du_dat($val, $sql_valid = FALSE) { {
--            if (strlen($val) == 0) {
-+            if (strlen((string) $val) == 0) {
-                 $this->item["erl_du_dat"] = NULL;
-                 return;
-             }
-@@ Line 326 @@
-     }
-
-     public function set_erl_dat($val, $sql_valid = FALSE) { {
--            if (strlen($val) == 0) {
-+            if (strlen((string) $val) == 0) {
-                 $this->item["erl_dat"] = NULL;
-                 return;
-             }
-@@ Line 466 @@
-         $query .= " ORDER BY $order LIMIT $start, $count";
-         try {
-             $items = App::$CURRENT->DB->query($query);
--            $inkassoinfos = array();
-+            $inkassoinfos = [];
-             foreach ($items as $value) {
-                 array_push($inkassoinfos, new Inkassoinformation($value));
-             }
-    ----------- end diff -----------
-
-Applied rules:
- * LongArrayToShortArrayRector
  * NullToStrictStringFuncCallArgRector
 
 
-15) ../../web/htdocs/kimi_ET/libs/entities/inkassostatus.php:1
+10) ../../web/htdocs/kimi_ET/kimibatch/inko2016imp3.php:81
 
     ---------- begin diff ----------
-@@ Line 1 @@
- <?php
- /*
-  * To change this template, choose Tools | Templates
-@@ Line 10 @@
-  */
- class IKStatus {
+@@ Line 81 @@
+ 	//20170127 AR: wenn nicht UTF-8 dann konvertieren
+ 	$line = convert2Utf8($line);
 
--    private $item;
-     public function get_id() {
-         return $this->item->id;
-     }
-@@ Line 39 @@
-         return $this->item->kz_inaktiv;
-     }
-         
--    public function __construct($item) {
--        $this->item = $item;
-+    public function __construct(private $item)
-+    {
-     }
-
-     public static function load_all() {
-
-         $query = "SELECT * FROM inkassostatus ORDER BY inkassostatus ";
--        $result = array();
-+        $result = [];
-         $response = App::$CURRENT->DB->query($query);
-
-         foreach ($response as $item) {
-    ----------- end diff -----------
-
-Applied rules:
- * LongArrayToShortArrayRector
- * ClassPropertyAssignToConstructorPromotionRector
-
-
-16) ../../web/htdocs/kimi_ET/libs/entities/kampagne.php:1
-
-    ---------- begin diff ----------
-@@ Line 1 @@
- <?php
- /*
-  * To change this template, choose Tools | Templates
-@@ Line 10 @@
-  */
- class Kampagne {
-
--    private $item;
-     public function get_id() {
-         return $this->item->id;
-     }
-@@ Line 27 @@
-         return $this->item->iptel_auto_vorwahl;
-     }
+-    echo "Line #<b>{$line_num}</b> : " . htmlspecialchars($line) . "<br />\n";
++    echo "Line #<b>{$line_num}</b> : " . htmlspecialchars((string) $line) . "<br />\n";
  	
--    public function __construct($item) {
--        $this->item = $item;
-+    public function __construct(private $item)
-+    {
-     }
-
-     public static function load_all() {
-@@ Line 37 @@
-             $con = new DBConnection();
-             $con->set_auto_commit();
-             $con->set_query($query);
--            $result = array();
-+            $result = [];
-             $response = $con->query();
-             $con->close();
+ }
+ // Loop through our array, show HTML source as HTML source; and line numbers too.
     ----------- end diff -----------
 
 Applied rules:
- * LongArrayToShortArrayRector
- * ClassPropertyAssignToConstructorPromotionRector
+ * NullToStrictStringFuncCallArgRector
 
 
-17) ../../web/htdocs/kimi_ET/libs/entities/kategorie.php:1
+11) ../../web/htdocs/kimi_ET/kimibatch/inkodeimp2.php:93
 
     ---------- begin diff ----------
-@@ Line 1 @@
- <?php
- /*
-  * To change this template, choose Tools | Templates
-@@ Line 10 @@
-  */
- class Kategorie {
+@@ Line 93 @@
+ 	//20170127 AR: wenn nicht UTF-8 dann konvertieren
+ 	$line = convert2Utf8($line);
 
--    private $item;
-     public function get_id() {
-         return $this->item->id;
-     }
-@@ Line 19 @@
-         return $this->item->text;
-     }
-     
--    public function __construct($item) {
--        $this->item = $item;
-+    public function __construct(private $item)
-+    {
-     }
-
-     public static function load_all() {
-
-         $query = "SELECT * FROM kategorie ORDER BY text";
--        $result = array();
-+        $result = [];
-         $response = App::$CURRENT->DB->query($query);
-
-         foreach ($response as $item) {
+-    echo "Line #<b>{$line_num}</b> : " . htmlspecialchars($line) . "<br />\n";
++    echo "Line #<b>{$line_num}</b> : " . htmlspecialchars((string) $line) . "<br />\n";
+ 	
+ }
+ // Loop through our array, show HTML source as HTML source; and line numbers too.
     ----------- end diff -----------
 
 Applied rules:
- * LongArrayToShortArrayRector
- * ClassPropertyAssignToConstructorPromotionRector
+ * NullToStrictStringFuncCallArgRector
 
 
-18) ../../web/htdocs/kimi_ET/libs/entities/kundenhistorie.php:218
+12) ../../web/htdocs/kimi_ET/kimibatch/inkodeimp2x.php:84
 
     ---------- begin diff ----------
-@@ Line 218 @@
-         $query .= " ORDER BY $order LIMIT $start, $count";
-         try {
-             $items = App::$CURRENT->DB->query($query);
--            $kundenhistorie = array();
-+            $kundenhistorie = [];
-             foreach ($items as $value) {
-                 array_push($kundenhistorie, new Kundenhistorie($value));
-             }
+@@ Line 84 @@
+ 	//20170127 AR: wenn nicht UTF-8 dann konvertieren
+ 	$line = convert2Utf8($line);
+
+-    echo "Line #<b>{$line_num}</b> : " . htmlspecialchars($line) . "<br />\n";
++    echo "Line #<b>{$line_num}</b> : " . htmlspecialchars((string) $line) . "<br />\n";
+ 	
+ }
+ // Loop through our array, show HTML source as HTML source; and line numbers too.
     ----------- end diff -----------
 
 Applied rules:
- * LongArrayToShortArrayRector
+ * NullToStrictStringFuncCallArgRector
 
 
-19) ../../web/htdocs/kimi_ET/libs/entities/lastschrift.php:166
+13) ../../web/htdocs/kimi_ET/kimibatch/kimi_general.php:140
 
     ---------- begin diff ----------
-@@ Line 166 @@
+@@ Line 140 @@
+ 		}
+ 		$head = true;
+ 	} else {
+-		$keydata = explode($delm,$csvxrow[0]);
++		$keydata = explode($delm,(string) $csvxrow[0]);
+ 	}
+     $keynumb = count($keydata);
+    
+@@ Line 151 @@
+ 			if ($ansi2Utf8) {
+ 				$csvxrow[$x] = convert2Utf8($csvxrow[$x]);
+ 			}
+-			$csvxrow[$x] = chop($csvxrow[$x]);
++			$csvxrow[$x] = chop((string) $csvxrow[$x]);
+ 			//$csvxrow[$x] = str_replace($encl,'',$csvxrow[$x]);
+ 			$csv_data[$x] = explode($delm,$csvxrow[$x]);
+ 			$i=0;
+@@ Line 172 @@
+ 			if ($ansi2Utf8) {
+ 				$item = convert2Utf8($item);
+ 			}
+-            $item = chop($item);
++            $item = chop((string) $item);
+             //$item = str_replace($encl,'',$item);
+             $csv_data = explode($delm,$item);
+             for ($y=0; $y<$keynumb; $y++) {
+@@ Line 359 @@
+ function replaceFromArray(&$value, &$replaceArray, $checkEmpty=true) {
+
+ 	foreach($replaceArray as $key => $replValue ) {
+-		if ($replValue==="" && (strpos($value, $key) !== false) && $checkEmpty ) {
++		if ($replValue==="" && (strpos((string) $value, (string) $key) !== false) && $checkEmpty ) {
+ 			setLastError("Platzhalter für ".$key ." vorhanden, Wert zum Ersetzen nicht definiert!");
+ 			return false;
+ 		}
+@@ Line 430 @@
+ }
+
+ function utf8ToAnsi($value) {
+-	return iconv("UTF-8", "WINDOWS-1252", $value);
++	return iconv("UTF-8", "WINDOWS-1252", (string) $value);
+ 	$retval = $value;
+
+ 	if (!mb_check_encoding($retval, 'CP1252')) {
+@@ Line 462 @@
+ 			}
+
+ 			if ($lineFile !== false) {
+-				fwrite($fh, $lineFile);
++				fwrite($fh, (string) $lineFile);
+ 			}
+ 		}
+ 					
+@@ Line 557 @@
+
+ 	if ( $fromHauptTicket) {
+ 		$param[PARAM_ANREDE_SGH] = "";
+-		$param[PARAM_ANREDE] = trim($hauptTicket['anrede']);
++		$param[PARAM_ANREDE] = trim((string) $hauptTicket['anrede']);
+
+ 		if (substr($param[PARAM_ANREDE], -1, 1) === "r") {
+ 			$param[PARAM_ANREDE_SGH] = "r";
+@@ Line 564 @@
+ 		}
+ 		
+ 		$param[PARAM_NAME] = "";
+-		$param[PARAM_VORNAME] = trim($hauptTicket['vorname']);
+-		$param[PARAM_NACHNAME] = trim($hauptTicket['nachname']);
++		$param[PARAM_VORNAME] = trim((string) $hauptTicket['vorname']);
++		$param[PARAM_NACHNAME] = trim((string) $hauptTicket['nachname']);
+ 		if ($hauptTicket['vorname'] !== "") {
+-			$param[PARAM_NAME] = trim($hauptTicket['vorname']);
++			$param[PARAM_NAME] = trim((string) $hauptTicket['vorname']);
+ 		}
+-		if (trim($hauptTicket['nachname']) !== "") {
++		if (trim((string) $hauptTicket['nachname']) !== "") {
+ 			if ($param[PARAM_NAME] !== ""){
+ 				$param[PARAM_NAME].=" ";
+ 			}
+-			$param[PARAM_NAME].= trim($hauptTicket['nachname']);
++			$param[PARAM_NAME].= trim((string) $hauptTicket['nachname']);
+ 		}
+ 	}
+    ----------- end diff -----------
+
+Applied rules:
+ * NullToStrictStringFuncCallArgRector
+
+
+14) ../../web/htdocs/kimi_ET/kimibatch/okoexp.php:289
+
+    ---------- begin diff ----------
+@@ Line 289 @@
+ 		$email = $line['email']; 
+ 		$neuetelnr = $line['neuetelnr']; 
+ 		
+-		if (strlen($email)>0 OR strlen($neuetelnr)>0) {
++		if (strlen((string) $email)>0 OR strlen((string) $neuetelnr)>0) {
+ 	 	   $contactdata = '';
+-		   if (strlen($email)>0) {
++		   if (strlen((string) $email)>0) {
+ 			 // $contactdata = $contactdata.' email :'.$email;
+ 			 $vorlage = 91; /* Vorlage automatisch setzen */
+ 			 // ausgabe in eigener Zeile
+ 		   }
+-		   if (strlen($neuetelnr)>0) {
++		   if (strlen((string) $neuetelnr)>0) {
+ 			 $contactdata = $contactdata.' Telnr :'.$neuetelnr;
+ 			 $vorlage = 91; /* Vorlage automatisch setzen */
+ 		   }
+@@ Line 311 @@
+ 		$ag_nachname = $line['ag_nachname']; 	
+         $calldata = 'GesprDat: '.$gespraechsdatum.' GesprZeit: '.$gespraechszeit.' Agent: '.$ag_vorname.' '.$ag_nachname  ;		
+ 		// email 20170328
+-		if (strlen($email)>0 ) {
++		if (strlen((string) $email)>0 ) {
+ 	 	   $email01 = '';
+-		   if (strlen($email)>0) {
++		   if (strlen((string) $email)>0) {
+ 			 $email01 = $email01.'Mail: '.$email;
+ 		   }
+ 		   }  else {
+    ----------- end diff -----------
+
+Applied rules:
+ * NullToStrictStringFuncCallArgRector
+
+
+15) ../../web/htdocs/kimi_ET/kimibatch/okoexp_ansi-roni.php:251
+
+    ---------- begin diff ----------
+@@ Line 251 @@
+ 		$email = $line['email']; 
+ 		$neuetelnr = $line['neuetelnr']; 
+ 		
+-		if (strlen($email)>0 OR strlen($neuetelnr)>0) {
++		if (strlen((string) $email)>0 OR strlen((string) $neuetelnr)>0) {
+ 	 	   $contactdata = '';
+-		   if (strlen($email)>0) {
++		   if (strlen((string) $email)>0) {
+ 			 // $contactdata = $contactdata.' email :'.$email;
+ 			 $vorlage = 91; /* Vorlage automatisch setzen */
+ 			 // ausgabe in eigener Zeile
+ 		   }
+-		   if (strlen($neuetelnr)>0) {
++		   if (strlen((string) $neuetelnr)>0) {
+ 			 $contactdata = $contactdata.' Telnr :'.$neuetelnr;
+ 			 $vorlage = 91; /* Vorlage automatisch setzen */
+ 		   }
+@@ Line 273 @@
+ 		$ag_nachname = $line['ag_nachname']; 	
+         $calldata = 'GesprDat: '.$gespraechsdatum.' GesprZeit: '.$gespraechszeit.' Agent: '.$ag_vorname.' '.$ag_nachname  ;		
+ 		// email 20170328
+-		if (strlen($email)>0 ) {
++		if (strlen((string) $email)>0 ) {
+ 	 	   $email01 = '';
+-		   if (strlen($email)>0) {
++		   if (strlen((string) $email)>0) {
+ 			 $email01 = $email01.'Mail: '.$email;
+ 		   }
+ 		   }  else {
+    ----------- end diff -----------
+
+Applied rules:
+ * NullToStrictStringFuncCallArgRector
+
+
+16) ../../web/htdocs/kimi_ET/kimibatch/okoexp_ansi.php:287
+
+    ---------- begin diff ----------
+@@ Line 287 @@
+ 		$email = $line['email']; 
+ 		$neuetelnr = $line['neuetelnr']; 
+ 		
+-		if (strlen($email)>0 OR strlen($neuetelnr)>0) {
++		if (strlen((string) $email)>0 OR strlen((string) $neuetelnr)>0) {
+ 	 	   $contactdata = '';
+-		   if (strlen($email)>0) {
++		   if (strlen((string) $email)>0) {
+ 			 // $contactdata = $contactdata.' email :'.$email;
+ 			 $vorlage = 91; /* Vorlage automatisch setzen */
+ 			 // ausgabe in eigener Zeile
+ 		   }
+-		   if (strlen($neuetelnr)>0) {
++		   if (strlen((string) $neuetelnr)>0) {
+ 			 $contactdata = $contactdata.' Telnr :'.$neuetelnr;
+ 			 $vorlage = 91; /* Vorlage automatisch setzen */
+ 		   }
+@@ Line 309 @@
+ 		$ag_nachname = $line['ag_nachname']; 	
+         $calldata = 'GesprDat: '.$gespraechsdatum.' GesprZeit: '.$gespraechszeit.' Agent: '.$ag_vorname.' '.$ag_nachname  ;		
+ 		// email 20170328
+-		if (strlen($email)>0 ) {
++		if (strlen((string) $email)>0 ) {
+ 	 	   $email01 = '';
+-		   if (strlen($email)>0) {
++		   if (strlen((string) $email)>0) {
+ 			 $email01 = $email01.'Mail: '.$email;
+ 		   }
+ 		   }  else {
+    ----------- end diff -----------
+
+Applied rules:
+ * NullToStrictStringFuncCallArgRector
+
+
+17) ../../web/htdocs/kimi_ET/kimibatch/okoexp_ansi2.php:287
+
+    ---------- begin diff ----------
+@@ Line 287 @@
+ 		$email = $line['email']; 
+ 		$neuetelnr = $line['neuetelnr']; 
+ 		
+-		if (strlen($email)>0 OR strlen($neuetelnr)>0) {
++		if (strlen((string) $email)>0 OR strlen((string) $neuetelnr)>0) {
+ 	 	   $contactdata = '';
+-		   if (strlen($email)>0) {
++		   if (strlen((string) $email)>0) {
+ 			 // $contactdata = $contactdata.' email :'.$email;
+ 			 $vorlage = 91; /* Vorlage automatisch setzen */
+ 			 // ausgabe in eigener Zeile
+ 		   }
+-		   if (strlen($neuetelnr)>0) {
++		   if (strlen((string) $neuetelnr)>0) {
+ 			 $contactdata = $contactdata.' Telnr :'.$neuetelnr;
+ 			 $vorlage = 91; /* Vorlage automatisch setzen */
+ 		   }
+@@ Line 309 @@
+ 		$ag_nachname = $line['ag_nachname']; 	
+         $calldata = 'GesprDat: '.$gespraechsdatum.' GesprZeit: '.$gespraechszeit.' Agent: '.$ag_vorname.' '.$ag_nachname  ;		
+ 		// email 20170328
+-		if (strlen($email)>0 ) {
++		if (strlen((string) $email)>0 ) {
+ 	 	   $email01 = '';
+-		   if (strlen($email)>0) {
++		   if (strlen((string) $email)>0) {
+ 			 $email01 = $email01.'Mail: '.$email;
+ 		   }
+ 		   }  else {
+    ----------- end diff -----------
+
+Applied rules:
+ * NullToStrictStringFuncCallArgRector
+
+
+18) ../../web/htdocs/kimi_ET/kimibatch/okoexp_dev.php:287
+
+    ---------- begin diff ----------
+@@ Line 287 @@
+ 		$email = $line['email']; 
+ 		$neuetelnr = $line['neuetelnr']; 
+ 		
+-		if (strlen($email)>0 OR strlen($neuetelnr)>0) {
++		if (strlen((string) $email)>0 OR strlen((string) $neuetelnr)>0) {
+ 	 	   $contactdata = '';
+-		   if (strlen($email)>0) {
++		   if (strlen((string) $email)>0) {
+ 			 // $contactdata = $contactdata.' email :'.$email;
+ 			 $vorlage = 91; /* Vorlage automatisch setzen */
+ 			 // ausgabe in eigener Zeile
+ 		   }
+-		   if (strlen($neuetelnr)>0) {
++		   if (strlen((string) $neuetelnr)>0) {
+ 			 $contactdata = $contactdata.' Telnr :'.$neuetelnr;
+ 			 $vorlage = 91; /* Vorlage automatisch setzen */
+ 		   }
+@@ Line 309 @@
+ 		$ag_nachname = $line['ag_nachname']; 	
+         $calldata = 'GesprDat: '.$gespraechsdatum.' GesprZeit: '.$gespraechszeit.' Agent: '.$ag_vorname.' '.$ag_nachname  ;		
+ 		// email 20170328
+-		if (strlen($email)>0 ) {
++		if (strlen((string) $email)>0 ) {
+ 	 	   $email01 = '';
+-		   if (strlen($email)>0) {
++		   if (strlen((string) $email)>0) {
+ 			 $email01 = $email01.'Mail: '.$email;
+ 		   }
+ 		   }  else {
+    ----------- end diff -----------
+
+Applied rules:
+ * NullToStrictStringFuncCallArgRector
+
+
+19) ../../web/htdocs/kimi_ET/kimibatch/okoexpzwb.php:152
+
+    ---------- begin diff ----------
+@@ Line 152 @@
+ 	// being transformed into a newline
+ 	$textzeile1 = $korrezeichen.' ';
+ 	$textzeile1 = str_pad($textzeile1, 70, ' ');   /* mit blank auffüllen */
+-	$textzeile2 = str_pad($textzeile2, 70, ' ');   /* mit blank auffüllen */
+-	$textzeile3 = str_pad($textzeile3, 70, ' ');   /* mit blank auffüllen */
++	$textzeile2 = str_pad((string) $textzeile2, 70, ' ');   /* mit blank auffüllen */
++	$textzeile3 = str_pad((string) $textzeile3, 70, ' ');   /* mit blank auffüllen */
+ 	$string= $aktnr.$vorlage.$textzeile1.$textzeile2.$textzeile3.'00000000 '."\n";
+     fwrite($fp, $string); // will proccess /n as newline ...
+    ----------- end diff -----------
+
+Applied rules:
+ * NullToStrictStringFuncCallArgRector
+
+
+20) ../../web/htdocs/kimi_ET/libs/entities/user.php:120
+
+    ---------- begin diff ----------
+@@ Line 120 @@
      }
 
-     public function set_dat_lastschrift($val, $sql_valid = FALSE) { {
+     public function set_default_belegdatum($val) {
+-        if (strlen($val) == 0) {
++        if (strlen((string) $val) == 0) {
+             $this->item->default_belegdatum = NULL;
+             return;
+         }
+@@ Line 132 @@
+     public static function login($name, $passwort) {
+
+         $passwort = self::encrypt($passwort);
+-        $passwort = substr($passwort, 0, 64);
++        $passwort = substr((string) $passwort, 0, 64);
+
+         $query = "SELECT * FROM benutzer WHERE (name = '$name' OR email = '$name') AND passwort = '$passwort'";
+    ----------- end diff -----------
+
+Applied rules:
+ * NullToStrictStringFuncCallArgRector
+
+
+21) ../../web/htdocs/kimi_ET/libs/entities/user_sich20150208.php:107
+
+    ---------- begin diff ----------
+@@ Line 107 @@
+     }
+
+     public function set_default_belegdatum($val) {
+-        if (strlen($val) == 0) {
++        if (strlen((string) $val) == 0) {
+             $this->item->default_belegdatum = NULL;
+             return;
+         }
+@@ Line 119 @@
+     public static function login($name, $passwort) {
+
+         $passwort = self::encrypt($passwort);
+-        $passwort = substr($passwort, 0, 64);
++        $passwort = substr((string) $passwort, 0, 64);
+
+         $query = "SELECT * FROM benutzer WHERE (name = '$name' OR email = '$name') AND passwort = '$passwort'";
+    ----------- end diff -----------
+
+Applied rules:
+ * NullToStrictStringFuncCallArgRector
+
+
+22) ../../web/htdocs/kimi_ET/libs/entities/versicherung.php:103
+
+    ---------- begin diff ----------
+@@ Line 103 @@
+     }
+
+     public function set_dat_abschluss($val) { {
 -            if (strlen($val) == 0) {
 +            if (strlen((string) $val) == 0) {
-                 $this->item["dat_lastschrift"] = NULL;
+                 $this->item["dat_abschluss"] = NULL;
+                 return;
+             }
+@@ Line 148 @@
+     }
+
+     public function set_dat_storno($val) { {
+-            if (strlen($val) == 0) {
++            if (strlen((string) $val) == 0) {
+                 $this->item["dat_storno"] = NULL;
                  return;
              }
 @@ Line 193 @@
      }
 
-     public function set_dat_unterschrift($val, $sql_valid = FALSE) { {
+     public function set_dat_meldung_abschluss($val) { {
 -            if (strlen($val) == 0) {
 +            if (strlen((string) $val) == 0) {
-                 $this->item["dat_unterschrift"] = NULL;
+                 $this->item["dat_meldung_abschluss"] = NULL;
                  return;
              }
 @@ Line 220 @@
      }
 
-     public function set_dat_inaktiv($val, $sql_valid = FALSE) { {
+     public function set_dat_info_aend_bed($val) { {
 -            if (strlen($val) == 0) {
 +            if (strlen((string) $val) == 0) {
-                 $this->item["dat_inaktiv"] = NULL;
+                 $this->item["dat_info_aend_bed"] = NULL;
                  return;
-             }
-@@ Line 288 @@
-     }
-
-     public function set_dat_einzbetrag($val, $sql_valid = FALSE) { {
--            if (strlen($val) == 0) {
-+            if (strlen((string) $val) == 0) {
-                 $this->item["dat_einzbetrag"] = NULL;
-                 return;
-             }
-@@ Line 374 @@
-         $query .= " ORDER BY $order LIMIT $start, $count";
-         try {
-             $items = App::$CURRENT->DB->query($query);
--            $lastschrift = array();
-+            $lastschrift = [];
-             foreach ($items as $value) {
-                 array_push($lastschrift, new Lastschrift($value));
              }
     ----------- end diff -----------
 
 Applied rules:
- * LongArrayToShortArrayRector
  * NullToStrictStringFuncCallArgRector
 
 
-20) ../../web/htdocs/kimi_ET/libs/entities/log.php:1
+23) ../../web/htdocs/kimi_ET/libs/entities/verwaltungssatz.php:75
 
     ---------- begin diff ----------
-@@ Line 1 @@
- <?php
+@@ Line 75 @@
 
- /*
-@@ Line 12 @@
-  * @author David
-  */
- class Log {
--    private $item;
--    
--    public function __construct($item) {
--        $this->item = $item;
-+    public function __construct(private $item)
-+    {
+    
+     public function set_buchungsdatum($val, $sql_valid = FALSE) { {
+-            if (strlen($val) == 0) {
++            if (strlen((string) $val) == 0) {
+                 $this->item["buchungsdatum"] = NULL;
+                 return;
+             }
+@@ Line 104 @@
      }
-     
-     public function get_id() {
+
+     public function set_stichtag1($val, $sql_valid = FALSE) { {
+-            if (strlen($val) == 0) {
++            if (strlen((string) $val) == 0) {
+                 $this->item["stichtag1"] = NULL;
+                 return;
+             }
+@@ Line 132 @@
+     }
+
+     public function set_stichtag2($val, $sql_valid = FALSE) { {
+-            if (strlen($val) == 0) {
++            if (strlen((string) $val) == 0) {
+                 $this->item["stichtag2"] = NULL;
+                 return;
+             }
+@@ Line 160 @@
+     }
+
+     public function set_stichtag3($val, $sql_valid = FALSE) { {
+-            if (strlen($val) == 0) {
++            if (strlen((string) $val) == 0) {
+                 $this->item["stichtag3"] = NULL;
+                 return;
+             }
+@@ Line 188 @@
+     }
+
+     public function set_stichtag4($val, $sql_valid = FALSE) { {
+-            if (strlen($val) == 0) {
++            if (strlen((string) $val) == 0) {
+                 $this->item["stichtag4"] = NULL;
+                 return;
+             }
+@@ Line 216 @@
+     }
+
+     public function set_stichtag5($val, $sql_valid = FALSE) { {
+-            if (strlen($val) == 0) {
++            if (strlen((string) $val) == 0) {
+                 $this->item["stichtag5"] = NULL;
+                 return;
+             }
     ----------- end diff -----------
 
 Applied rules:
- * ClassPropertyAssignToConstructorPromotionRector
+ * NullToStrictStringFuncCallArgRector
 
 
-21) ../../web/htdocs/kimi_ET/libs/entities/mandant.php:1
-
-    ---------- begin diff ----------
-@@ Line 1 @@
- <?php
-
- /*
-@@ Line 11 @@
-  * @author David
-  */
- class Mandant {
--    protected $item;
--    
-     public function get_id() {
-         return $this->item->id;
-     }
-@@ Line 59 @@
-     }
-     
-     
--    public function __construct($item) {
--        $this->item = $item;
-+    public function __construct(protected $item)
-+    {
-     }
-     
-     public static function load_mandanten($user) {
-@@ Line 67 @@
-         $query = "SELECT * FROM mandant m, mandant_benutzer mb where mb.mandant_id = m.id and mb.benutzer_id = ".$user->get_id();
-         
-         $results = App::$CURRENT->DB->query($query);
--        $mandanten = array();
-+        $mandanten = [];
-         
-         foreach ($results as $item) {
-             array_push($mandanten, new Mandant($item));
-    ----------- end diff -----------
-
-Applied rules:
- * LongArrayToShortArrayRector
- * ClassPropertyAssignToConstructorPromotionRector
-
-
-22) ../../web/htdocs/kimi_ET/libs/entities/menu_item.php:1
-
-    ---------- begin diff ----------
-@@ Line 1 @@
- <?php
-
- /*
-@@ Line 19 @@
-  */
- class MenuItem {
-
--    private $text;
-     private $link;
-
-     public function get_text() {
-@@ Line 37 @@
-         return $this->link;
-     }
-
--    public function __construct($text, $link, $params = "") {
-+    public function __construct(private $text, $link, $params = "") {
-
--        $this->text = $text;
--
-         if ($params != "") {
-
-             $this->link = $link . "&$params";
-@@ Line 54 @@
-
- class ExternMenuItem {
-
--    private $text;
--    private $link;
--
-     public function get_text() {
-
-         return $this->text;
-@@ Line 72 @@
-         return "portal";
-     }
-
--    public function __construct($text, $link) {
--
--        $this->text = $text;
--
--        $this->link = $link;
-+    public function __construct(private $text, private $link)
-+    {
-     }
-
- }
-    ----------- end diff -----------
-
-Applied rules:
- * ClassPropertyAssignToConstructorPromotionRector
-
-
-23) ../../web/htdocs/kimi_ET/libs/entities/permission.php:1
-
-    ---------- begin diff ----------
-@@ Line 1 @@
- <?php
- /*
-  * To change this template, choose Tools | Templates
-@@ Line 9 @@
-  * @author David
-  */
- class Permission {
--    private $item;
-     public function get_id() {
-         return $this->item->id;
-     }
-@@ Line 22 @@
-         return $this->item->berechtigung;
-     }
-
--    public function __construct($item) {
--        $this->item = $item;
-+    public function __construct(private $item)
-+    {
-     }
-
-     public static function get_permissions($rolle_id, $sitename, $permission) {
-@@ Line 39 @@
-             return null;
-         }
-
--        $permissions = array();
-+        $permissions = [];
-         foreach ($response as $value) {
-             array_push($permissions, new Permission($value));
-         }
-    ----------- end diff -----------
-
-Applied rules:
- * LongArrayToShortArrayRector
- * ClassPropertyAssignToConstructorPromotionRector
-
-
-24) ../../web/htdocs/kimi_ET/libs/entities/ra_ikbuero.php:1
-
-    ---------- begin diff ----------
-@@ Line 1 @@
- <?php
- /*
-  * To change this template, choose Tools | Templates
-@@ Line 10 @@
-  */
- class IKBuero {
-
--    private $item;
-     public function get_id() {
-         return $this->item->id;
-     }
-@@ Line 32 @@
-     }
-
-     
--    public function __construct($item) {
--        $this->item = $item;
-+    public function __construct(private $item)
-+    {
-     }
-
-     public static function load_all($markt = 0) {
-@@ Line 43 @@
-             $query.= " WHERE markt = $markt";
-         }
-         $query.=" ORDER BY ra_buero";
--        $result = array();
-+        $result = [];
-         $response = App::$CURRENT->DB->query($query);
-
-         foreach ($response as $item) {
-    ----------- end diff -----------
-
-Applied rules:
- * LongArrayToShortArrayRector
- * ClassPropertyAssignToConstructorPromotionRector
-
-
-25) ../../web/htdocs/kimi_ET/libs/entities/ratenrechner.php:47
-
-    ---------- begin diff ----------
-@@ Line 47 @@
-             $query = "SELECT  round( $kreditbetrag/$ratenhoehe, 2) as 'Ratenanzahl' FROM dual";
-         }
-
--        $result = array();
-+        $result = [];
-         //$response = App::$CURRENT->DB->query($query);
-         $erg = App::$CURRENT->DB->singleObjectQuery($query);
-         //print_r($erg);
-@@ Line 70 @@
-             $query = "SELECT  round( $kreditbetrag/$ratenanzahl, 2) as 'Ratenhoehe' FROM dual";
-         }
-
--        $result = array();
-+        $result = [];
-         $erg = App::$CURRENT->DB->singleObjectQuery($query);
-         return $erg->Ratenhoehe;
-     }
-@@ Line 111 @@
-             
-             $sum_zinsen = $sum_zinsen + $zinsen;
-             $sum_tilgung = $sum_tilgung + $tilgung;
--            $tilgungsplan[] = array('rate' => $rate_text,
-+            $tilgungsplan[] = ['rate' => $rate_text,
-                 'zahltag' => $date->format("M Y"),
-                 'saldovortrag' => number_format((float) $vortrag, 2, ",", "."),
-                 'zinsen' => number_format((float) $zinsen, 2, ",", "."),
-                 'tilgung' => number_format((float) $tilgung, 2, ",", "."),
--                'saldoneu' => number_format((float) $offen, 2, ",", "."));
-+                'saldoneu' => number_format((float) $offen, 2, ",", ".")];
-             $rate++;
-             $date->add($interval);
-         }
-         if (isset($tilgungsplan) ) {
--            $tilgungsplan[] = array('rate' => TXT_LBL_TILG_GESAMT,
-+            $tilgungsplan[] = ['rate' => TXT_LBL_TILG_GESAMT,
-                 'zahltag' => "",
-                 'saldovortrag' => '',
-                 'zinsen' => number_format((float) $sum_zinsen, 2, ",", "."),
-                 'tilgung' => number_format((float) $sum_tilgung, 2, ",", "."),
--                'saldoneu' => "");
-+                'saldoneu' => ""];
-             return $tilgungsplan;
-         }
-         return NULL;
-    ----------- end diff -----------
-
-Applied rules:
- * LongArrayToShortArrayRector
-
-
-26) ../../web/htdocs/kimi_ET/libs/entities/role.php:1
-
-    ---------- begin diff ----------
-@@ Line 1 @@
- <?php
-
- /*
-@@ Line 19 @@
-  */
- class Role {
-
--    private $item;
--
-     public function get_id() {
-
-         return $this->item->id;
-@@ Line 31 @@
-         return $this->item->bezeichnung;
-     }
-
--    public function __construct($item) {
--
--        $this->item = $item;
-+    public function __construct(private $item)
-+    {
-     }
-
-     public static function get_role($user, $mandant) {
-    ----------- end diff -----------
-
-Applied rules:
- * ClassPropertyAssignToConstructorPromotionRector
-
-
-27) ../../web/htdocs/kimi_ET/libs/entities/zahlart.php:1
-
-    ---------- begin diff ----------
-@@ Line 1 @@
- <?php
-
- /*
-@@ Line 19 @@
-  */
- class Zahlart {
-
--    private $item;
--
-     public function get_id() {
-
-         return $this->item->id;
-@@ Line 31 @@
-         return $this->item->text;
-     }
-
--    public function __construct($item) {
--
--        $this->item = $item;
-+    public function __construct(private $item)
-+    {
-     }
-
-     public static function get_all() {
-@@ Line 46 @@
-
-             $result = App::$CURRENT->DB->query($query);
-
--            $response = array();
-+            $response = [];
-    ----------- end diff -----------
-
-Applied rules:
- * LongArrayToShortArrayRector
- * ClassPropertyAssignToConstructorPromotionRector
-
-
-28) ../../web/htdocs/kimi_ET/libs/init.php:7
+24) ../../web/htdocs/kimi_ET/libs/init.php:7
 
     ---------- begin diff ----------
 @@ Line 7 @@
@@ -1011,12 +879,8 @@ Applied rules:
          $bname = 'Mozila';
          $ub = "Mozila";
  }
-@@ Line 44 @@
-
-
-     // finally get the correct version number
--    $known = array('Version', $ub, 'other', 'rv');
-+    $known = ['Version', $ub, 'other', 'rv'];
+@@ Line 47 @@
+     $known = array('Version', $ub, 'other', 'rv');
      $pattern = '#(?<browser>' . join('|', $known) .
              ')[/ :]+(?<version>[0-9.|a-zA-Z.]*)#';
 -    if (!preg_match_all($pattern, $u_agent, $matches)) {
@@ -1033,34 +897,6 @@ Applied rules:
              $version = $matches['version'][0];
          } else {
              if (count($matches["version"]) >= 2) {
-@@ Line 75 @@
-         $version = 11;
-     }
- //echo "Version: ".$version;
--    return array(
-+    return [
-         'userAgent' => $u_agent,
-         'name' => $bname,
-         'version' => $version,
-         'platform' => $platform,
-         'pattern' => $pattern
--    );
-+    ];
- }
- function param($name, $nullvalue = NULL) {
-     if (isset($_POST[$name])) {
-@@ Line 96 @@
- }
-
- function sess($name, $nullvalue = NULL, $sessionprefix = "portal-") {
--    if (isset($_SESSION["$sessionprefix$name"])) {
--        return $_SESSION["$sessionprefix$name"];
--    }
--    return $nullvalue;
-+    return $_SESSION["$sessionprefix$name"] ?? $nullvalue;
- }
-
- require_once './config/config.php';
 @@ Line 106 @@
  session_name('kimi_ET-P');
  session_start();
@@ -1072,195 +908,82 @@ Applied rules:
     ----------- end diff -----------
 
 Applied rules:
- * LongArrayToShortArrayRector
- * IfIssetToCoalescingRector
  * NullToStrictStringFuncCallArgRector
 
 
-29) ../../web/htdocs/kimi_ET/modules/gui/kampauswahl.php:16
+25) ../../web/htdocs/kimi_ET/modules/gui/old_delete/subuebersicht.php:141
 
     ---------- begin diff ----------
-@@ Line 16 @@
-                                 $validKamp = true;
-                                 
-                                 if (!strpos(CONF_KAMPAGNE_USER, ".".App::$CURRENT->USER->get_id()."=") == false ) {
--                                    if (strpos(CONF_KAMPAGNE_USER, ".".App::$CURRENT->USER->get_id()."=".$val->get_id()."." ) ==false ) {
-+                                    if (!str_contains(CONF_KAMPAGNE_USER, ".".App::$CURRENT->USER->get_id()."=".$val->get_id()."." ) ) {
-                                         $validKamp = false;
-                                     }
-                                 }
+@@ Line 141 @@
+             $sum_saldo = 0;
+         }
+         $sum_cardif = 0;
+-        if ($sum_saldo > 0 && isset($stammdaten) && substr($stammdaten->get_krsv(), 0, 1) == 1) {
++        if ($sum_saldo > 0 && isset($stammdaten) && substr((string) $stammdaten->get_krsv(), 0, 1) == 1) {
+             $sum_cardif = $sum_saldo / 100 * CONF_CARDIF_ZINSSATZ;
+             $sum_cardif = number_format((float) round($sum_cardif, 2), 2, ',', '.');
+         }
     ----------- end diff -----------
 
 Applied rules:
- * StrContainsRector
-
-
-30) ../../web/htdocs/kimi_ET/modules/gui/old_delete/kundenhistorie.php:130
-
-    ---------- begin diff ----------
-@@ Line 130 @@
-                 <td>
-                     <select disabled name="benutzer_id1"  >
-                         <?php foreach ($ben as $p) { ?>
--                            <option <?php if ($p->_get_name() == App::$CURRENT->USER->get_name(TRUE)) echo " selected "; ?> value="<?php echo $p->_get_id() ?>"><?php echo $p->_get_name();  ?></option>
-+                            <option <?php if ($p->_get_name() == App::$CURRENT->USER->get_name()) echo " selected "; ?> value="<?php echo $p->_get_id() ?>"><?php echo $p->_get_name();  ?></option>
-                         <?php } ?>
-                     </select>
-                 </td>
-@@ Line 157 @@
-                 <td>
-                     <select name="benutzer_id2"  >
-                         <?php foreach ($ben as $p) { ?>
--                            <option <?php if ($p->_get_name() == App::$CURRENT->USER->get_name(TRUE)) echo " selected "; ?> value="<?php echo $p->_get_id() ?>"><?php echo $p->_get_name();  ?></option>
-+                            <option <?php if ($p->_get_name() == App::$CURRENT->USER->get_name()) echo " selected "; ?> value="<?php echo $p->_get_id() ?>"><?php echo $p->_get_name();  ?></option>
-                         <?php } ?>
-                     </select>
-    ----------- end diff -----------
-
-Applied rules:
- * RemoveExtraParametersRector
-
-
-31) ../../web/htdocs/kimi_ET/kimibatch/kimi_general.php:73
-
-    ---------- begin diff ----------
-@@ Line 73 @@
-
-
-
--$query_replace = array (PLACEHOLDER_SQL_DATUM => "",PLACEHOLDER_SQL_MANDANT => "" );
-+$query_replace =  [PLACEHOLDER_SQL_DATUM => "",PLACEHOLDER_SQL_MANDANT => "" ];
-
- $lastError = "";
-
-@@ Line 140 @@
- 		}
- 		$head = true;
- 	} else {
--		$keydata = explode($delm,$csvxrow[0]);
-+		$keydata = explode($delm,(string) $csvxrow[0]);
- 	}
-     $keynumb = count($keydata);
-    
-@@ Line 151 @@
- 			if ($ansi2Utf8) {
- 				$csvxrow[$x] = convert2Utf8($csvxrow[$x]);
- 			}
--			$csvxrow[$x] = chop($csvxrow[$x]);
-+			$csvxrow[$x] = chop((string) $csvxrow[$x]);
- 			//$csvxrow[$x] = str_replace($encl,'',$csvxrow[$x]);
- 			$csv_data[$x] = explode($delm,$csvxrow[$x]);
- 			$i=0;
-@@ Line 172 @@
- 			if ($ansi2Utf8) {
- 				$item = convert2Utf8($item);
- 			}
--            $item = chop($item);
-+            $item = chop((string) $item);
-             //$item = str_replace($encl,'',$item);
-             $csv_data = explode($delm,$item);
-             for ($y=0; $y<$keynumb; $y++) {
-@@ Line 359 @@
- function replaceFromArray(&$value, &$replaceArray, $checkEmpty=true) {
-
- 	foreach($replaceArray as $key => $replValue ) {
--		if ($replValue==="" && (strpos($value, $key) !== false) && $checkEmpty ) {
-+		if ($replValue==="" && (str_contains((string) $value, (string) $key)) && $checkEmpty ) {
- 			setLastError("Platzhalter für ".$key ." vorhanden, Wert zum Ersetzen nicht definiert!");
- 			return false;
- 		}
-@@ Line 430 @@
- }
-
- function utf8ToAnsi($value) {
--	return iconv("UTF-8", "WINDOWS-1252", $value);
-+	return iconv("UTF-8", "WINDOWS-1252", (string) $value);
- 	$retval = $value;
-
- 	if (!mb_check_encoding($retval, 'CP1252')) {
-@@ Line 462 @@
- 			}
-
- 			if ($lineFile !== false) {
--				fwrite($fh, $lineFile);
-+				fwrite($fh, (string) $lineFile);
- 			}
- 		}
- 					
-@@ Line 541 @@
- 		
- 	}
-
--	$aktTicket = array();
--	$hauptTicket = array();
-+	$aktTicket = [];
-+	$hauptTicket = [];
-
- 	$ret = getTicketInfo($dbconn, $mandantId, $ticketId, true, $aktTicket, $hauptTicket);
- 	
-@@ Line 557 @@
-
- 	if ( $fromHauptTicket) {
- 		$param[PARAM_ANREDE_SGH] = "";
--		$param[PARAM_ANREDE] = trim($hauptTicket['anrede']);
-+		$param[PARAM_ANREDE] = trim((string) $hauptTicket['anrede']);
-
--		if (substr($param[PARAM_ANREDE], -1, 1) === "r") {
-+		if (str_ends_with($param[PARAM_ANREDE], "r")) {
- 			$param[PARAM_ANREDE_SGH] = "r";
- 		}
- 		
- 		$param[PARAM_NAME] = "";
--		$param[PARAM_VORNAME] = trim($hauptTicket['vorname']);
--		$param[PARAM_NACHNAME] = trim($hauptTicket['nachname']);
-+		$param[PARAM_VORNAME] = trim((string) $hauptTicket['vorname']);
-+		$param[PARAM_NACHNAME] = trim((string) $hauptTicket['nachname']);
- 		if ($hauptTicket['vorname'] !== "") {
--			$param[PARAM_NAME] = trim($hauptTicket['vorname']);
-+			$param[PARAM_NAME] = trim((string) $hauptTicket['vorname']);
- 		}
--		if (trim($hauptTicket['nachname']) !== "") {
-+		if (trim((string) $hauptTicket['nachname']) !== "") {
- 			if ($param[PARAM_NAME] !== ""){
- 				$param[PARAM_NAME].=" ";
- 			}
--			$param[PARAM_NAME].= trim($hauptTicket['nachname']);
-+			$param[PARAM_NAME].= trim((string) $hauptTicket['nachname']);
- 		}
- 	}
- 	
-@@ Line 657 @@
- 			//$mail->MsgHTML( "test");
- 	$fh = fopen($fileName, "a");
- 	fwrite($fh, "vor send\n");
--			$result = sendEMail($mandantId, $mail, $templateContent, $retCode, $retMessage);
-+			$result = sendEMail($mandantId, $mail, $templateContent, $retCode);
- 			
- 			fwrite($fh, "result=".$retCode.", ".$retMessage."\n");
- 			fclose($fh);
-    ----------- end diff -----------
-
-Applied rules:
- * LongArrayToShortArrayRector
- * RemoveExtraParametersRector
- * StrEndsWithRector
- * StrContainsRector
  * NullToStrictStringFuncCallArgRector
 
 
-32) ../../web/htdocs/kimi_ET/modules/initial/kunde.php:1
+26) ../../web/htdocs/kimi_ET/modules/initial/bankleitzahl.php:12
 
     ---------- begin diff ----------
-@@ Line 1 @@
- <?php
+@@ Line 12 @@
+ $can_create = App::$CURRENT->has_permission("bankleitzahl", "INS");
+ $show_delete = param("showDelete");
 
--$filter = array();
--$search = array();
-+$filter = [];
-+$search = [];
+-$sblz = ltrim(param("sblz"), NULL);
++$sblz = ltrim((string) param("sblz"), NULL);
+ $sbank = param("sbank", NULL);
+    ----------- end diff -----------
 
- if (param("reset", false)) {
-     if (isset($_SESSION["kd-filter"])) {
+Applied rules:
+ * NullToStrictStringFuncCallArgRector
+
+
+27) ../../web/htdocs/kimi_ET/modules/initial/buchungen.php:194
+
+    ---------- begin diff ----------
+@@ Line 194 @@
+                 if ($anz - 1 == $n || $curr_sk->get_saldo() != "0,00") {
+                     //echo "<br> BUCH".$n;
+                     $curr_sk->set_saldo($aufteil['Saldo']);
+-                    if (strrpos($aufteil['Saldo'], "-") !== false) {
++                    if (strrpos((string) $aufteil['Saldo'], "-") !== false) {
+                         $curr_sk->set_m0($aufteil['Saldo']);
+                         $aufteil['M0'] = $aufteil['Saldo'];
+                     }
+@@ Line 324 @@
+                 if ($anz - 1 == $n || $curr_sk->get_saldo() != "0,00") {
+                     //echo "<br> BUCH".$n;
+                     $curr_sk->set_saldo($aufteil['Saldo']);
+-                    if (strrpos($aufteil['Saldo'], "-") !== false) {
++                    if (strrpos((string) $aufteil['Saldo'], "-") !== false) {
+                         $curr_sk->set_m0($aufteil['Saldo']);
+                         $aufteil['M0'] = $aufteil['Saldo'];
+                     }
+@@ Line 477 @@
+
+                     if ($anz - 1 == $n || $curr_sk->get_saldo() != "0,00") {
+                         $curr_sk->set_saldo($aufteil['Saldo']);
+-                        if (strrpos($aufteil['Saldo'], "-") !== false) {
++                        if (strrpos((string) $aufteil['Saldo'], "-") !== false) {
+                             $curr_sk->set_m0($aufteil['Saldo']);
+                             $aufteil['M0'] = $aufteil['Saldo'];
+                         }
+    ----------- end diff -----------
+
+Applied rules:
+ * NullToStrictStringFuncCallArgRector
+
+
+28) ../../web/htdocs/kimi_ET/modules/initial/kunde.php:50
+
+    ---------- begin diff ----------
 @@ Line 50 @@
  }
 
@@ -1273,88 +996,12 @@ Applied rules:
     ----------- end diff -----------
 
 Applied rules:
- * LongArrayToShortArrayRector
  * NullToStrictStringFuncCallArgRector
 
 
-33) ../../web/htdocs/kimi_ET/modules/initial/menu_verw.php:1
+29) ../../web/htdocs/kimi_ET/modules/initial/stammsuche.php:14
 
     ---------- begin diff ----------
-@@ Line 1 @@
- <?php
- $text = Portal_Text::load_text(App::$CURRENT->USER->get_sprache());
-
--$verw_menu = array();
-+$verw_menu = [];
- if (App::$CURRENT->has_permission("schadensfall_art", "*")) {
-     array_push($verw_menu, new MenuItem(TXT_LBL_VW_SCHADENSFALLART, "schadensfall_art"));
- }
-    ----------- end diff -----------
-
-Applied rules:
- * LongArrayToShortArrayRector
-
-
-34) ../../web/htdocs/kimi_ET/modules/initial/portal.php:1
-
-    ---------- begin diff ----------
-@@ Line 1 @@
- <?php
- $text = Portal_Text::load_text(App::$CURRENT->USER->get_sprache());
-
--$portal_menu = array();
-+$portal_menu = [];
- /*if (App::$CURRENT->has_permission("kunde", "*")) {
-     array_push($portal_menu, new MenuItem(TXT_LBL_CUSTOMER_SEARCH, "kunde"));
- }
-    ----------- end diff -----------
-
-Applied rules:
- * LongArrayToShortArrayRector
-
-
-35) ../../web/htdocs/kimi_ET/modules/initial/stammdaten.php:54
-
-    ---------- begin diff ----------
-@@ Line 54 @@
-         $mahnsperre = "";
-     }
-
--    $data = array();
-+    $data = [];
-     $data["mandant_id"] = App::$CURRENT->MANDANT->get_id();
-     $data["mahnsperre"] = $mahnsperre;
-     $data["ktonr"] = $kunde->get_kdnr();
-@@ Line 75 @@
-     
-     $sd = Stammdaten::get($kunde->get_id());    
-
--    $data = array();
-+    $data = [];
-     $data["mandant_id"] = App::$CURRENT->MANDANT->get_id();
-     $data["mahnsperre"] = $mahnsperre;
-     $data["ktonr"] = $kunde->get_kdnr();
-    ----------- end diff -----------
-
-Applied rules:
- * LongArrayToShortArrayRector
-
-
-36) ../../web/htdocs/kimi_ET/modules/initial/stammsuche.php:1
-
-    ---------- begin diff ----------
-@@ Line 1 @@
- <?php
-
--$filter = sess("filter", array(), "ss-");
-+$filter = sess("filter", [], "ss-");
-
- if (param("reset", FALSE)) {
--    $filter = array();
-+    $filter = [];
-     $_SESSION["ss-filter"] = NULL;
-     $_SESSION["ss-kdnr"] = NULL;
-     $_SESSION["ss-zahltag"] = NULL;
 @@ Line 14 @@
 
  $site = param("s", 0);
@@ -1394,681 +1041,10 @@ Applied rules:
     ----------- end diff -----------
 
 Applied rules:
- * LongArrayToShortArrayRector
  * NullToStrictStringFuncCallArgRector
 
 
-37) ../../web/htdocs/kimi_ET/ajax/add_log.php:22
-
-    ---------- begin diff ----------
-@@ Line 22 @@
- 		Ticket::add_anruf($ticket_id, $t->get_mandant_id());	
- 	}
- 	$t=Ticket::get($ticket_id);
--	$response = array();
-+	$response = [];
- 	$response['status'] = 'success';
- 	$response['anzahl_anrufe'] = $t->get_anzahl_anrufe();
- 	$response['wiedervorlage'] = $t->get_wiedervorlage();
-    ----------- end diff -----------
-
-Applied rules:
- * LongArrayToShortArrayRector
-
-
-38) ../../web/htdocs/kimi_ET/ajax/callInntelco.php:5
-
-    ---------- begin diff ----------
-@@ Line 5 @@
- $source_number = "";
- $target_number = "";
-  
--$logfile = dirname(__FILE__)."/log/callTelematica.log";
-+$logfile = __DIR__."/log/callTelematica.log";
-
--$response = array();
-+$response = [];
- /*	$source= $_REQUEST["iptel_durchwahl"];
- 	$destclid= $_REQUEST["kampagne_iptel_destclid"];
- 	
-@@ Line 43 @@
-
- // format destination number
- $target_number = str_replace(" ", "", $target_number);
--if (substr($target_number, 0, 1) == "+") {
-+if (str_starts_with($target_number, "+")) {
- 	$target_number = substr_replace($target_number, "00", 0, 1);
- }
- $target_number = str_replace("/", "", $target_number);
-@@ Line 51 @@
- $target_number = str_replace(".", "", $target_number);
- $target_number = str_replace(",", "", $target_number);
- //20191013
--if ( (substr($target_number, 0, 1) != "0") && (substr($target_number, 0, 4) != "1090") && (substr($target_number, 0, 4) != "1091") && (substr($target_number, 0, 4) != "1092") ) {
-+if ( (!str_starts_with($target_number, "0")) && (!str_starts_with($target_number, "1090")) && (!str_starts_with($target_number, "1091")) && (!str_starts_with($target_number, "1092")) ) {
- 	$target_number = "0".$target_number;
- }
-
-@@ Line 66 @@
- }
-
- // Prüfe führende 00
--if ( substr($target_number, 0, 2) == "00") {
-+if ( str_starts_with($target_number, "00")) {
- 	$target_number = substr($target_number, 2, strlen($target_number) );
- }
-
-@@ Line 99 @@
- }
-
- if ($auto_vorwahl != "") {
--	if (substr($target_number, 0, strlen($auto_vorwahl)) != $auto_vorwahl) {
--		if (substr($target_number, 0, 1) == "0") {
-+	if (!str_starts_with($target_number, (string) $auto_vorwahl)) {
-+		if (str_starts_with($target_number, "0")) {
- 			$target_number = substr($target_number, 1, strlen($target_number)-1);
- 		}
- 		$target_number = $auto_vorwahl.$target_number;
-    ----------- end diff -----------
-
-Applied rules:
- * DirNameFileConstantToDirConstantRector
- * LongArrayToShortArrayRector
- * StrStartsWithRector
- * NullToStrictStringFuncCallArgRector
-
-
-39) ../../web/htdocs/kimi_ET/ajax/write_file.php:1
-
-    ---------- begin diff ----------
-@@ Line 1 @@
- ﻿<?php
- // AJAX zum schreiben einer Datei
-
--$response = array();
-+$response = [];
- $content = $_REQUEST["content"];
-
- if (isset($_REQUEST["filename"]) && $_REQUEST["filename"] != "") {
-    ----------- end diff -----------
-
-Applied rules:
- * LongArrayToShortArrayRector
-
-
-40) ../../web/htdocs/kimi_ET/getticketurl.php:7
-
-    ---------- begin diff ----------
-@@ Line 7 @@
-
- // Allgemeine globale Funktionen
- function param($array, $name, $nullvalue = NULL) {
--	if (isset($array[$name])) {
--		return $array[$name];
--	}
--	return $nullvalue;
-+	return $array[$name] ?? $nullvalue;
- }
-
- function isEmpty($value, $checkZero = false) {
-@@ Line 198 @@
- // Response
- class Response {
- 	
--	private $response = array();
-+	private $response = [];
- 	
- 	public function __construct() {
- 		$this->response["resultCode"] = "";
-    ----------- end diff -----------
-
-Applied rules:
- * LongArrayToShortArrayRector
- * IfIssetToCoalescingRector
-
-
-41) ../../web/htdocs/kimi_ET/index.php:198
-
-    ---------- begin diff ----------
-@@ Line 198 @@
-                         <ul style="padding-bottom: 10px;">
-                             <li><a href="./index.php"><?php echo TXT_LBL_PORTAL ?></a></li>
-                             <?php
--                            $menu = array();
-+                            $menu = [];
-                             $menu_filename = './modules/menu/' . $module . '.php';
-
-                             if (file_exists($menu_filename)) {
-    ----------- end diff -----------
-
-Applied rules:
- * LongArrayToShortArrayRector
-
-
-42) ../../web/htdocs/kimi_ET/modules/gui/ticket.php:153
-
-    ---------- begin diff ----------
-@@ Line 153 @@
- 	// 20180529/ar ($kampId != CONF_KAMPAGNE_AKT)
-     <?php 
-
--	if (strpos(CONF_KAMPAGNE_AKT, ".".$kampId.".") == false && strpos(CONF_KAMPAGNE_TICKET_NO_NEWDELETE, ".".$kampId.".") === false  ) { ?>
-+	if (!str_contains(CONF_KAMPAGNE_AKT, ".".$kampId.".") && !str_contains(CONF_KAMPAGNE_TICKET_NO_NEWDELETE, ".".$kampId.".")  ) { ?>
-         window.onload = function() {
- 			
- 		
-@@ Line 167 @@
- 				<?php
- 				
- 				// 20200720/ab Prüfe ob Standardabfrage kommen soll
--				if ( strpos(CONF_TICKETTELABFRAGE_KAMPID, ",".$kampId.",") !== false ) {
-+				if ( str_contains(CONF_TICKETTELABFRAGE_KAMPID, ",".$kampId.",") ) {
- 					?>
- 					 if (document.getElementsByName("id")[0].value != '') {
- 						 var r = confirm("<?php echo TXT_LBL_TICKET_HIST_START  ?>");
-@@ Line 594 @@
- <?php echo TXT_LBL_TICKDETAIL; ?> (<?php echo $kamp->get_bezeichnung(); ?>)
-     <?php 
- 		//20180529/ar  if ($kampId!=CONF_KAMPAGNE_AKT) { 
--		if ( strpos(CONF_KAMPAGNE_AKT, ".".$kampId.".") == false && strpos(CONF_KAMPAGNE_TICKET_NO_TELEFON, ".".$kampId.".") === false ) { 
-+		if ( !str_contains(CONF_KAMPAGNE_AKT, ".".$kampId.".") && !str_contains(CONF_KAMPAGNE_TICKET_NO_TELEFON, ".".$kampId.".") ) { 
- 		?>
- 			
-         <button id="btnStart" class="button" style="font-size:15px;" href="#"><?php echo TXT_LBL_TICKET_HIST_START ?></button>
-@@ Line 605 @@
-         <button id="btnTelReachable" class="button" style="font-size:15px;" href="#"><?php echo "erreichbar" ?></button>
-     <?php } ?>
- 	<?php
--	if (strpos(CONF_KAMPAGNE_TICKET_NO_NEWDELETE, ".".$kampId.".") === false) {?>
-+	if (!str_contains(CONF_KAMPAGNE_TICKET_NO_NEWDELETE, ".".$kampId.".")) {?>
- 	<?php echo "&nbsp;&nbsp;" ?>
-         <input style="width: 170px" placeholder="Telefonnummer Direktwahl" name="telefon_allg" id="telefon_allg" class="column" type="text" value="" /> 
- 		<img alt="wählen" style="vertical-align: middle;" src="../images/telephone.png" id="callTelcoAllg" name="callTelcoAllg" width="20" height="20" />
-@@ Line 671 @@
-         <a class="button" href="./index.php?site=ticketsuch&reset=TRUE"><?php echo TXT_LBL_CANCEL ?></a>
-     <?php }?>
-
--    <?php if ($ticket_id != -1 && strpos(CONF_KAMPAGNE_AKT, ".".$kampId.".") == false && strpos(CONF_KAMPAGNE_TICKET_NO_NEWDELETE, ".".$kampId.".") === false && App::$CURRENT->has_permission("ticket", "DEL")) { ?>
-+    <?php if ($ticket_id != -1 && !str_contains(CONF_KAMPAGNE_AKT, ".".$kampId.".") && !str_contains(CONF_KAMPAGNE_TICKET_NO_NEWDELETE, ".".$kampId.".") && App::$CURRENT->has_permission("ticket", "DEL")) { ?>
-         <a class="button confirm" href="./index.php?site=ticket&mode=DEL&ticket_id=<?php echo $ticket_id; ?>"><?php echo TXT_LBL_DEL ?></a>
-     <?php }
--    if (App::$CURRENT->has_permission("ticket", "INS") && strpos(CONF_KAMPAGNE_TICKET_NO_NEWDELETE, ".".$kampId.".") === false && App::$CURRENT->USER->get_name() !== "elsbeth" ) {
-+    if (App::$CURRENT->has_permission("ticket", "INS") && !str_contains(CONF_KAMPAGNE_TICKET_NO_NEWDELETE, ".".$kampId.".") && App::$CURRENT->USER->get_name() !== "elsbeth" ) {
-         ?>
-         <a accesskey="N"  class="button" href="./index.php?site=ticket"><?php echo TXT_LBL_NEW ?></a>
-     <?php } ?>
-    ----------- end diff -----------
-
-Applied rules:
- * StrContainsRector
-
-
-43) ../../web/htdocs/kimi_ET/modules/gui/ticket2.php:15
-
-    ---------- begin diff ----------
-@@ Line 15 @@
-     }
-
- 	// 20180529/ar ($kampId != CONF_KAMPAGNE_AKT)
--    <?php if (strpos(CONF_KAMPAGNE_AKT, ".".$kampId.".") == false && strpos(CONF_KAMPAGNE_TICKET_NO_NEWDELETE, ".".$kampId.".") === false  ) { ?>
-+    <?php if (!str_contains(CONF_KAMPAGNE_AKT, ".".$kampId.".") && !str_contains(CONF_KAMPAGNE_TICKET_NO_NEWDELETE, ".".$kampId.".")  ) { ?>
-         window.onload = function() {
-
- 			if (document.getElementsByName("id")[0].value != '') {
-@@ Line 281 @@
- <?php echo TXT_LBL_TICKDETAIL; ?> (<?php echo $kamp->get_bezeichnung(); ?>)
-     <?php 
- 		//20180529/ar  if ($kampId!=CONF_KAMPAGNE_AKT) { 
--		if ( strpos(CONF_KAMPAGNE_AKT, ".".$kampId.".") == false && strpos(CONF_KAMPAGNE_TICKET_NO_TELEFON, ".".$kampId.".") === false ) { 
-+		if ( !str_contains(CONF_KAMPAGNE_AKT, ".".$kampId.".") && !str_contains(CONF_KAMPAGNE_TICKET_NO_TELEFON, ".".$kampId.".") ) { 
- 		?>
- 			
-         <button id="btnStart" class="button" href="#"><?php echo TXT_LBL_TICKET_HIST_START ?></button>
-@@ Line 291 @@
-         <button id="btnTelNotReachable" class="button" href="#"><?php echo "nicht erreichbar" ?></button>
-     <?php } ?>
- 	<?php
--	if (strpos(CONF_KAMPAGNE_TICKET_NO_NEWDELETE, ".".$kampId.".") === false) {?>
-+	if (!str_contains(CONF_KAMPAGNE_TICKET_NO_NEWDELETE, ".".$kampId.".")) {?>
- 	<?php echo "&nbsp;&nbsp;" ?>
-         <input style="width: 170px" placeholder="Telefonnummer Direktwahl" name="telefon_allg" id="telefon_allg" class="column" type="text" value="" /> 
- 		<img alt="wählen" style="vertical-align: middle;" src="../images/telephone.png" id="callTelcoAllg" name="callTelcoAllg" width="20" height="20" />
-@@ Line 349 @@
-         <a class="button" href="./index.php?site=ticketsuch2&reset=TRUE"><?php echo TXT_LBL_CANCEL ?></a>
-     <?php }?>
-
--    <?php if ($ticket_id != -1 && strpos(CONF_KAMPAGNE_AKT, ".".$kampId.".") == false && strpos(CONF_KAMPAGNE_TICKET_NO_NEWDELETE, ".".$kampId.".") === false && App::$CURRENT->has_permission("ticket2", "DEL")) { ?>
-+    <?php if ($ticket_id != -1 && !str_contains(CONF_KAMPAGNE_AKT, ".".$kampId.".") && !str_contains(CONF_KAMPAGNE_TICKET_NO_NEWDELETE, ".".$kampId.".") && App::$CURRENT->has_permission("ticket2", "DEL")) { ?>
-         <a class="button confirm" href="./index.php?site=ticket2&mode=DEL&ticket_id=<?php echo $ticket_id; ?>"><?php echo TXT_LBL_DEL ?></a>
-     <?php }
--    if (App::$CURRENT->has_permission("ticket2", "INS") && strpos(CONF_KAMPAGNE_TICKET_NO_NEWDELETE, ".".$kampId.".") === false ) {
-+    if (App::$CURRENT->has_permission("ticket2", "INS") && !str_contains(CONF_KAMPAGNE_TICKET_NO_NEWDELETE, ".".$kampId.".") ) {
-         ?>
-         <a accesskey="N"  class="button" href="./index.php?site=ticket2"><?php echo TXT_LBL_NEW ?></a>
- <?php } ?>
-    ----------- end diff -----------
-
-Applied rules:
- * StrContainsRector
-
-
-44) ../../web/htdocs/kimi_ET/modules/initial/bankleitzahl.php:12
-
-    ---------- begin diff ----------
-@@ Line 12 @@
- $can_create = App::$CURRENT->has_permission("bankleitzahl", "INS");
- $show_delete = param("showDelete");
-
--$sblz = ltrim(param("sblz"), NULL);
-+$sblz = ltrim((string) param("sblz"), NULL);
- $sbank = param("sbank", NULL);
-    ----------- end diff -----------
-
-Applied rules:
- * NullToStrictStringFuncCallArgRector
-
-
-45) ../../web/htdocs/kimi_ET/modules/initial/buchungen.php:107
-
-    ---------- begin diff ----------
-@@ Line 107 @@
-             $sk_m0 = $sk->get_m0(TRUE);
-             $sk_rest = $sk->get_rest(TRUE);
-
--            $sk_aufteilung[] = array('sk_id' => "0",
-+            $sk_aufteilung[] = ['sk_id' => "0",
-                 'sklfdnr' => $sk->get_rechnungsnummer(),
-                 'M4' => $sk->format_number($sk_m4),
-                 'M3' => $sk->format_number($sk_m3),
-@@ Line 117 @@
-                 'Rest' => $sk->format_number($sk_rest),
-                 'Saldo' => $sk->format_number($sk_saldo),
-                 'Buch' => ""
--            );
-+            ];
-
-             $start = $offen;
-             $sk->neg_betrag($offen, $sk_m4);
-@@ Line 138 @@
-             $sk_saldo_neu = $sk_saldo - $gebucht;
-             $sum = $sum + $gebucht;
-
--            $sk_aufteilung[] = array('sk_id' => $sk->get_id(),
-+            $sk_aufteilung[] = ['sk_id' => $sk->get_id(),
-                 'sklfdnr' => "",
-                 'M4' => $sk->format_number($sk_m4),
-                 'M3' => $sk->format_number($sk_m3),
-@@ Line 148 @@
-                 'Rest' => $sk->format_number($sk_rest),
-                 'Saldo' => $sk->format_number($sk_saldo_neu),
-                 'Buch' => $sk->format_number($gebucht)
--            );
-+            ];
-
-
-             $n++;
-@@ Line 156 @@
-                 break;
-             }
-         }
--        $sk_aufteilung[] = array('sk_id' => "0",
-+        $sk_aufteilung[] = ['sk_id' => "0",
-             'sklfdnr' => "",
-             'M4' => "",
-             'M3' => "",
-@@ Line 166 @@
-             'Rest' => "",
-             'Saldo' => TXT_SUM,
-             'Buch' => number_format((float) $sum, 2, ",", ".")
--        );
-+        ];
-         // und los mit Buchung
-         $anz = count($sk_aufteilung);
-         $n = 1;
-@@ Line 194 @@
-                 if ($anz - 1 == $n || $curr_sk->get_saldo() != "0,00") {
-                     //echo "<br> BUCH".$n;
-                     $curr_sk->set_saldo($aufteil['Saldo']);
--                    if (strrpos($aufteil['Saldo'], "-") !== false) {
-+                    if (strrpos((string) $aufteil['Saldo'], "-") !== false) {
-                         $curr_sk->set_m0($aufteil['Saldo']);
-                         $aufteil['M0'] = $aufteil['Saldo'];
-                     }
-
--                    $trans_ok = Subkonto::insert($curr_sk, FALSE, $db);
-+                    $trans_ok = Subkonto::insert($curr_sk);
-                 }
-             }
-             $n++;
-@@ Line 235 @@
- 			$gebucht = 0;
-
- 			if ($sk_saldo < 0 && $sk_m0 < 0 && $sk_saldo == $sk_m0) {
--				$sk_aufteilung[] = array('sk_id' => "0",
-+				$sk_aufteilung[] = ['sk_id' => "0",
- 					'sklfdnr' => $sk->get_rechnungsnummer(),
- 					'M4' => $sk->format_number($sk_m4),
- 					'M3' => $sk->format_number($sk_m3),
-@@ Line 245 @@
- 					'Rest' => $sk->format_number($sk_rest),
- 					'Saldo' => $sk->format_number($sk_saldo),
- 					'Buch' => ""
--				);
-+				];
-
- 				$start = $offen;
- 				$sk->neg_betrag($offen, $sk_m4);
-@@ Line 268 @@
- 			$sk_m0 = $sk_m0 + $gebucht;
-             $sum = $sum + $gebucht;
-
--            $sk_aufteilung[] = array('sk_id' => $sk->get_id(),
-+            $sk_aufteilung[] = ['sk_id' => $sk->get_id(),
-                 'sklfdnr' => "",
-                 'M4' => $sk->format_number($sk_m4),
-                 'M3' => $sk->format_number($sk_m3),
-@@ Line 278 @@
-                 'Rest' => $sk->format_number($sk_rest),
-                 'Saldo' => $sk->format_number($sk_saldo_neu),
-                 'Buch' => $sk->format_number($gebucht)
--            );
-+            ];
-
-
-             $n++;
-@@ Line 286 @@
-                 break;
-             }
-         }
--        $sk_aufteilung[] = array('sk_id' => "0",
-+        $sk_aufteilung[] = ['sk_id' => "0",
-             'sklfdnr' => "",
-             'M4' => "",
-             'M3' => "",
-@@ Line 296 @@
-             'Rest' => "",
-             'Saldo' => TXT_SUM,
-             'Buch' => number_format((float) $sum, 2, ",", ".")
--        );
-+        ];
-         // und los mit Buchung
-         $anz = count($sk_aufteilung);
-         $n = 1;
-@@ Line 324 @@
-                 if ($anz - 1 == $n || $curr_sk->get_saldo() != "0,00") {
-                     //echo "<br> BUCH".$n;
-                     $curr_sk->set_saldo($aufteil['Saldo']);
--                    if (strrpos($aufteil['Saldo'], "-") !== false) {
-+                    if (strrpos((string) $aufteil['Saldo'], "-") !== false) {
-                         $curr_sk->set_m0($aufteil['Saldo']);
-                         $aufteil['M0'] = $aufteil['Saldo'];
-                     }
-
--                    $trans_ok = Subkonto::insert($curr_sk, FALSE, $db);
-+                    $trans_ok = Subkonto::insert($curr_sk);
-                 }
-             }
-             $n++;
-@@ Line 392 @@
-                 $sk_m0 = $sk->get_m0(TRUE);
-                 $sk_rest = $sk->get_rest(TRUE);
-
--                $sk_aufteilung[] = array('sk_id' => "0",
-+                $sk_aufteilung[] = ['sk_id' => "0",
-                     'sklfdnr' => $sk->get_rechnungsnummer(),
-                     'M4' => $sk->format_number($sk_m4),
-                     'M3' => $sk->format_number($sk_m3),
-@@ Line 402 @@
-                     'Rest' => $sk->format_number($sk_rest),
-                     'Saldo' => $sk->format_number($sk_saldo),
-                     'Buch' => ""
--                );
-+                ];
-
-                 $start = $offen;
-                 $sk->neg_betrag($offen, $sk_m4);
-@@ Line 423 @@
-                 $sk_saldo_neu = $sk_saldo - $gebucht;
-                 $sum = $sum + $gebucht;
-
--                $sk_aufteilung[] = array('sk_id' => $sk->get_id(),
-+                $sk_aufteilung[] = ['sk_id' => $sk->get_id(),
-                     'sklfdnr' => "",
-                     'M4' => $sk->format_number($sk_m4),
-                     'M3' => $sk->format_number($sk_m3),
-@@ Line 433 @@
-                     'Rest' => $sk->format_number($sk_rest),
-                     'Saldo' => $sk->format_number($sk_saldo_neu),
-                     'Buch' => $sk->format_number($gebucht)
--                );
-+                ];
-
-
-                 $n++;
-@@ Line 441 @@
-                     break;
-                 }
-             }
--            $sk_aufteilung[] = array('sk_id' => "0",
-+            $sk_aufteilung[] = ['sk_id' => "0",
-                 'sklfdnr' => "",
-                 'M4' => "",
-                 'M3' => "",
-@@ Line 451 @@
-                 'Rest' => "",
-                 'Saldo' => TXT_SUM,
-                 'Buch' => number_format((float) $sum, 2, ",", ".")
--            );
-+            ];
-             // und los mit Buchung
-             $anz = count($sk_aufteilung);
-             $n = 1;
-@@ Line 477 @@
-
-                     if ($anz - 1 == $n || $curr_sk->get_saldo() != "0,00") {
-                         $curr_sk->set_saldo($aufteil['Saldo']);
--                        if (strrpos($aufteil['Saldo'], "-") !== false) {
-+                        if (strrpos((string) $aufteil['Saldo'], "-") !== false) {
-                             $curr_sk->set_m0($aufteil['Saldo']);
-                             $aufteil['M0'] = $aufteil['Saldo'];
-                         }
-
--                        $trans_ok = Subkonto::insert($curr_sk, FALSE, $db);
-+                        $trans_ok = Subkonto::insert($curr_sk);
-                     }
-                 }
-                 $n++;
-    ----------- end diff -----------
-
-Applied rules:
- * LongArrayToShortArrayRector
- * RemoveExtraParametersRector
- * NullToStrictStringFuncCallArgRector
-
-
-46) ../../web/htdocs/kimi_ET/modules/subkonto.php:94
-
-    ---------- begin diff ----------
-@@ Line 94 @@
-     }
-
-     public function set_eroeffnet_am($val) { {
--            if (strlen($val) == 0) {
-+            if (strlen((string) $val) == 0) {
-                 $this->item["eroeffnet_am"] = NULL;
-                 return;
-             }
-@@ Line 219 @@
-     }
-
-     public function set_buchungsdatum($val) {
--        if (strlen($val) == 0) {
-+        if (strlen((string) $val) == 0) {
-             $this->item["buchungsdatum"] = NULL;
-             return;
-         }
-@@ Line 247 @@
-     }
-
-     public function set_belegdatum($val) {
--        if (strlen($val) == 0) {
-+        if (strlen((string) $val) == 0) {
-             $this->item["belegdatum"] = NULL;
-             return;
-         }
-@@ Line 512 @@
-                 ORDER BY 1, 2";
-         try {
-             $result = App::$CURRENT->DB->query($query);
--            $response = array();
-+            $response = [];
-             foreach ($result as $item) {
-                 array_push($response, new Subkonto($item));
-             }
-@@ Line 534 @@
-         
-         try {
-             $result = App::$CURRENT->DB->query($query);
--            $response = array();
-+            $response = [];
-             foreach ($result as $item) {
-                 array_push($response, new Subkonto($item));
-             }
-@@ Line 572 @@
-         $query .= " ORDER BY $order LIMIT $start, $count";
-         try {
-             $items = App::$CURRENT->DB->query($query);
--            $subkonten = array();
-+            $subkonten = [];
-             foreach ($items as $value) {
-                 array_push($subkonten, new Subkonto($value));
-             }
-@@ Line 599 @@
-                 LIMIT $start, $count";
-         try {
-             $result = App::$CURRENT->DB->query($query);
--            $subkonten = array();
-+            $subkonten = [];
-             foreach ($result as $item) {
-                 array_push($subkonten, new Subkonto($item));
-             }
-    ----------- end diff -----------
-
-Applied rules:
- * LongArrayToShortArrayRector
- * NullToStrictStringFuncCallArgRector
-
-
-47) ../../web/htdocs/kimi_ET/setticketcallinfo.php:10
-
-    ---------- begin diff ----------
-@@ Line 10 @@
-
- // Allgemeine globale Funktionen
- function param($array, $name, $nullvalue = NULL) {
--	if (isset($array[$name])) {
--		return $array[$name];
--	}
--	return $nullvalue;
-+	return $array[$name] ?? $nullvalue;
- }
-
- function isEmpty($value, $checkZero = false) {
-@@ Line 85 @@
- 		$setTime = false;
- 		$diff = 0;
- 		if ($this->end_time != "") {
--			$this->dauer_sec  = strtotime($this->end_time) - strtotime($this->start_time);
-+			$this->dauer_sec  = strtotime((string) $this->end_time) - strtotime((string) $this->start_time);
- 		} elseif($this->connect_time != "") {
--			$this->dauer_sec  = strtotime($this->connect_time) - strtotime($this->start_time);			
-+			$this->dauer_sec  = strtotime((string) $this->connect_time) - strtotime((string) $this->start_time);			
- 		}
-
- 	}
-@@ Line 105 @@
- 	public function getItemValue($value, $search) {
- 	  
- 	  $ret = "";
--	  $pos = strpos($value, $search);
-+	  $pos = strpos((string) $value, (string) $search);
- 	  if ($pos !== false) {
--		  $pos2 = strpos($value, '&', $pos);
-+		  $pos2 = strpos((string) $value, '&', $pos);
- 		  if ($pos2 !== false) {
--			  $ret = substr($value, $pos+strlen($search), $pos2-$pos-strlen($search));
-+			  $ret = substr((string) $value, $pos+strlen((string) $search), $pos2-$pos-strlen((string) $search));
- 		  }
- 	  }
- 	  return $ret;
-@@ Line 230 @@
- // Response
- class Response {
- 	
--	private $response = array();
-+	private $response = [];
- 	
- 	public function __construct() {
- 		$this->response["success"] = true;
-    ----------- end diff -----------
-
-Applied rules:
- * LongArrayToShortArrayRector
- * IfIssetToCoalescingRector
- * StringifyStrNeedlesRector
- * NullToStrictStringFuncCallArgRector
-
-
-48) ../../web/htdocs/kimi_ET/testpost.php:15
-
-    ---------- begin diff ----------
-@@ Line 15 @@
-
-
- $myurl = './setticketcallinfo2.php';
--$data = array('key1' => 'value1', 'key2' => 'value2');
-+$data = ['key1' => 'value1', 'key2' => 'value2'];
-
- $JsonData = json_encode($data, JSON_UNESCAPED_UNICODE);
- // use key 'http' even if you send the request to https://...
--$options = array(
--    'http' => array(
-+$options = [
-+    'http' => [
-         'header'  => "Content-type: application/json\r\n",
-         'method'  => 'POST',
-         'content' => http_build_query($data)
--    )
--);
-+    ]
-+];
-
- //$result = httpPost($myurl, $data);
-    ----------- end diff -----------
-
-Applied rules:
- * LongArrayToShortArrayRector
-
-
-49) ../../web/htdocs/kimi_ET/xhangup.php:114
-
-    ---------- begin diff ----------
-@@ Line 114 @@
- // Response
- class Response {
- 	
--	private $response = array();
-+	private $response = [];
- 	
- 	public function __construct() {
- 		$this->response["success"] = true;
-    ----------- end diff -----------
-
-Applied rules:
- * LongArrayToShortArrayRector
-
-
-50) ../../web/htdocs/kimi_ET/modules/initial/subdetail.php:18
+30) ../../web/htdocs/kimi_ET/modules/initial/subdetail.php:18
 
     ---------- begin diff ----------
 @@ Line 18 @@
@@ -2076,12 +1052,12 @@ Applied rules:
  $button_calc_label = TXT_LBL_SK_BTN_CALC;
  $default_bugru_typ = 0;
 -if ($user_default_bua_bgr_key != "" && strpos(CONF_SKBUCH_ENABLE_BTN_NRATE,$user_default_bua_bgr_key)!==FALSE) {
-+if ($user_default_bua_bgr_key != "" && str_contains(CONF_SKBUCH_ENABLE_BTN_NRATE,(string) $user_default_bua_bgr_key)) {
++if ($user_default_bua_bgr_key != "" && strpos(CONF_SKBUCH_ENABLE_BTN_NRATE,(string) $user_default_bua_bgr_key)!==FALSE) {
      $default_enable_calc_button = TRUE;
      $default_bugru_typ = 1;
  }
 -else if ($user_default_bua_bgr_key != "" && strpos(CONF_SKBUCH_ENABLE_BTN_MAHNGEB,$user_default_bua_bgr_key)!==FALSE) {
-+else if ($user_default_bua_bgr_key != "" && str_contains(CONF_SKBUCH_ENABLE_BTN_MAHNGEB,(string) $user_default_bua_bgr_key)) {
++else if ($user_default_bua_bgr_key != "" && strpos(CONF_SKBUCH_ENABLE_BTN_MAHNGEB,(string) $user_default_bua_bgr_key)!==FALSE) {
      $default_enable_calc_button = TRUE;
      $default_bugru_typ = 2;
  }
@@ -2096,40 +1072,28 @@ Applied rules:
     ----------- end diff -----------
 
 Applied rules:
- * StrContainsRector
  * NullToStrictStringFuncCallArgRector
 
 
-51) ../../web/htdocs/kimi_ET/modules/initial/subsuche.php:1
+31) ../../web/htdocs/kimi_ET/modules/initial/subsuche.php:1
 
     ---------- begin diff ----------
 @@ Line 1 @@
  <?php
 
--$filter = array();
+ $filter = array();
 -$kunde_nr = ltrim(param("kundennummer"), "0");
-+$filter = [];
 +$kunde_nr = ltrim((string) param("kundennummer"), "0");
  $rechnungsnr = param("rechnungsnummer", NULL);
 
  if (isset($_SESSION["sd-kunde"]) && !isset($kunde_nr)) {
-@@ Line 39 @@
-     $site = 0;
-     $max_site = 0;
-     $more_pages = 0;
--    $myfilter = array();
-+    $myfilter = [];
-     $myfilter[0] = "k.id=-1";
-     $subkonten = Subkonto::load_items($site * $site_count, $site_count, $myfilter, TRUE) ;
- }
     ----------- end diff -----------
 
 Applied rules:
- * LongArrayToShortArrayRector
  * NullToStrictStringFuncCallArgRector
 
 
-52) ../../web/htdocs/kimi_ET/modules/initial/subuebersicht.php:41
+32) ../../web/htdocs/kimi_ET/modules/initial/subuebersicht.php:41
 
     ---------- begin diff ----------
 @@ Line 41 @@
@@ -2143,15 +1107,6 @@ Applied rules:
      $trans_ok = TRUE;
 
      // eigene Transaktion
-@@ Line 84 @@
-                     $sk->set_buchungsbetrag($tgz_summen[$n], TRUE);
-                     $sk->set_saldo($saldo + $tgz_summen[$n], TRUE); //$tgz_summen[$n]);
-                     $sk->set_rest($rest + $tgz_summen[$n], TRUE); //$tgz_summen[$n]);
--                    $trans_ok = Subkonto::insert($sk, FALSE, $db);
-+                    $trans_ok = Subkonto::insert($sk);
-                 }
-             }
-             $n++;
 @@ Line 97 @@
          App::$CURRENT->DB->rollback($db);
      }
@@ -2167,32 +1122,13 @@ Applied rules:
          // Lese Geamtsaldo
          //$sk_gessaldo = number_format((float) Subkonto::get_gessaldo_kunde_oid(App::$CURRENT->MANDANT->get_id(), $kunde_id), 2, ".", "");
          $betrag_cardif = $sk_gessaldo / 100 * CONF_CARDIF_ZINSSATZ;
-@@ Line 136 @@
-                 $skold->set_buchungsbetrag($betrag_cardif, TRUE);
-                 $skold->set_saldo($saldo + $betrag_cardif, TRUE);
-                 $skold->set_rest($rest + $betrag_cardif, TRUE);
--                $trans_ok = Subkonto::insert($skold, FALSE, $db);
-+                $trans_ok = Subkonto::insert($skold);
-             }
-         }
-     }
-@@ Line 158 @@
-     // date_format(date_create("19-NOV-2013"), "d.m.Y")
-     $sk_tgz = Subkonto::select_for_tgz($kunde->get_kdnr(), App::$CURRENT->MANDANT->get_id(), $kunde->get_markt(), CONF_TGZ_BUABUGRUMAN_ID_KAPITALISIERT, date("d.m.Y"), $stammdaten->get_stichtag());
-     
--    $sum_tgz = array();
-+    $sum_tgz = [];
-     $gessaldo = number_format((float) Subkonto::get_gessaldo_kunde_oid(App::$CURRENT->MANDANT->get_id(), $kunde_id), 2, ".", "");
- }
     ----------- end diff -----------
 
 Applied rules:
- * LongArrayToShortArrayRector
- * RemoveExtraParametersRector
  * NullToStrictStringFuncCallArgRector
 
 
-53) ../../web/htdocs/kimi_ET/modules/initial/subverwalt.php:15
+33) ../../web/htdocs/kimi_ET/modules/initial/subverwalt.php:15
 
     ---------- begin diff ----------
 @@ Line 15 @@
@@ -2209,54 +1145,9 @@ Applied rules:
  * NullToStrictStringFuncCallArgRector
 
 
-54) ../../web/htdocs/kimi_ET/modules/initial/ticket.php:79
+34) ../../web/htdocs/kimi_ET/modules/initial/ticketsuch.php:51
 
     ---------- begin diff ----------
-@@ Line 79 @@
-     }
-
-     // $kampId==CONF_KAMPAGNE_AKT
--    $id = Ticket::insert($ticket, ( strpos(CONF_KAMPAGNE_AKT, ".".$kampId.".") != false  ), $kampId);
-+    $id = Ticket::insert($ticket);
-     if ($id != 0) {
-         $mode = "UPD";
-         $ticket->set_id($id);
-    ----------- end diff -----------
-
-Applied rules:
- * RemoveExtraParametersRector
-
-
-55) ../../web/htdocs/kimi_ET/modules/initial/ticket2.php:46
-
-    ---------- begin diff ----------
-@@ Line 46 @@
-     $ticket->set_kampagne_id($kampId);
-
-     // $kampId==CONF_KAMPAGNE_AKT
--    $id = Ticket::insert($ticket, ( strpos(CONF_KAMPAGNE_AKT, ".".$kampId.".") != false  ), $kampId);
-+    $id = Ticket::insert($ticket);
-     if ($id != 0) {
-         $mode = "UPD";
-         $ticket->set_id($id);
-    ----------- end diff -----------
-
-Applied rules:
- * RemoveExtraParametersRector
-
-
-56) ../../web/htdocs/kimi_ET/modules/initial/ticketsuch.php:43
-
-    ---------- begin diff ----------
-@@ Line 43 @@
- $kampPath = "./modules/gui/templates/tickets/$kampId";
- $kamp = Kampagne::load_for_id($kampId);
-
--$filter = array();
-+$filter = [];
-
- $tnr = param("ticketnr", "");
- $status_id = param("status_id", "");
 @@ Line 51 @@
  $nachname = param("nachname", "");
  $vorname = param("vorname", "");
@@ -2409,44 +1300,15 @@ Applied rules:
      array_push($filter, "t.dummy_text9 LIKE '%$dummy_text9%'");
  }
  // TODO: hier evtl. neu benötigte Suchfelder hinzufügen!!
-
- $site_count = CONF_PORTAL_LINE_PER_SITE;
--$tickets_selected = array();
-+$tickets_selected = [];
-
- if ($kampId!=30)
-     $doquery = true;
-@@ Line 193 @@
- //$doquery = true;
-
- if ($doquery=="true") {
--    $entry_count = Ticket::count(App::$CURRENT->MANDANT->get_id(), $filter, $kampId);
--    $tickets = Ticket::search($site * $site_count, $site_count, $filter, $kampId);
-+    $entry_count = Ticket::count(App::$CURRENT->MANDANT->get_id(), $filter);
-+    $tickets = Ticket::search($site * $site_count, $site_count, $filter);
-     // 20161214/ab
-     foreach ($tickets as $t) {
-         array_push($tickets_selected, $t->get_id());
     ----------- end diff -----------
 
 Applied rules:
- * LongArrayToShortArrayRector
- * RemoveExtraParametersRector
  * NullToStrictStringFuncCallArgRector
 
 
-57) ../../web/htdocs/kimi_ET/modules/initial/ticketsuch2.php:43
+35) ../../web/htdocs/kimi_ET/modules/initial/ticketsuch2.php:51
 
     ---------- begin diff ----------
-@@ Line 43 @@
- $kampPath = "./modules/gui/templates/tickets/$kampId";
- $kamp = Kampagne::load_for_id($kampId);
-
--$filter = array();
-+$filter = [];
-
- $tnr = param("ticketnr", "");
- $status_id = param("status_id", "");
 @@ Line 51 @@
  $nachname = param("nachname", "");
  $vorname = param("vorname", "");
@@ -2559,131 +1421,58 @@ Applied rules:
      array_push($filter, "t.dummy_text9 LIKE '%$dummy_text9%'");
  }
  // TODO: hier evtl. neu benötigte Suchfelder hinzufügen!!
-
- $site_count = CONF_PORTAL_LINE_PER_SITE;
--$tickets_selected = array();
-+$tickets_selected = [];
-
- if ($kampId!=30) {
-     $doquery = true;
-@@ Line 160 @@
-
- //$doquery = true;
- if ($doquery=="true") {
--    $entry_count = Ticket::count(App::$CURRENT->MANDANT->get_id(), $filter, $kampId);
--    $tickets = Ticket::search($site * $site_count, $site_count, $filter, $kampId);
-+    $entry_count = Ticket::count(App::$CURRENT->MANDANT->get_id(), $filter);
-+    $tickets = Ticket::search($site * $site_count, $site_count, $filter);
-     // 20161214/ab
-     foreach ($tickets as $t) {
-         array_push($tickets_selected, $t->get_id());
     ----------- end diff -----------
 
 Applied rules:
- * LongArrayToShortArrayRector
- * RemoveExtraParametersRector
  * NullToStrictStringFuncCallArgRector
 
 
-58) ../../web/htdocs/kimi_ET/modules/initial/ticketsuch_sich20150208.php:11
+36) ../../web/htdocs/kimi_ET/kimibatch/telematica_import_callmanager_log.php:202
 
     ---------- begin diff ----------
-@@ Line 11 @@
-     $_SESSION["ts-search"] = $_GET;
- }
+@@ Line 202 @@
+ 		$setTime = false;
+ 		$diff = 0;
+ 		if ($this->end_time != "") {
+-			$this->dauer_sec  = strtotime($this->end_time) - strtotime($this->start_time);
++			$this->dauer_sec  = strtotime((string) $this->end_time) - strtotime((string) $this->start_time);
+ 		} elseif($this->connect_time != "") {
+-			$this->dauer_sec  = strtotime($this->connect_time) - strtotime($this->start_time);			
++			$this->dauer_sec  = strtotime((string) $this->connect_time) - strtotime((string) $this->start_time);			
+ 		}
 
--$filter = array();
-+$filter = [];
+ 	}
+@@ Line 222 @@
+ 	public function getItemValue($value, $search) {
+ 	  
+ 	  $ret = "";
+-	  $pos = strpos($value, $search);
++	  $pos = strpos((string) $value, (string) $search);
+ 	  if ($pos !== false) {
+-		  $pos2 = strpos($value, '&', $pos);
++		  $pos2 = strpos((string) $value, '&', $pos);
+ 		  if ($pos2 !== false) {
+-			  $ret = substr($value, $pos+strlen($search), $pos2-$pos-strlen($search));
++			  $ret = substr((string) $value, $pos+strlen((string) $search), $pos2-$pos-strlen((string) $search));
+ 		  }
+ 	  }
+ 	  return $ret;
+@@ Line 360 @@
 
- $tnr = param("ticketnr", "");
- $status_id = param("status_id", "");
-@@ Line 19 @@
- $nachname = param("nachname", "");
- $vorname = param("vorname", "");
- $benutzer_id = param("benutzer_id", "");
--$kdnr = ltrim(param("kundennummer", ""), "0");
-+$kdnr = ltrim((string) param("kundennummer", ""), "0");
- $plz = param("plz", "");
- $ort = param("ort", "");
- $strasse = param("strasse", "");
-@@ Line 33 @@
- $site = param("s", 0);
-
-
--if (strlen($tnr) > 0) {
-+if (strlen((string) $tnr) > 0) {
-     array_push($filter, "t.ticketnr = $tnr");
- }
--if (strlen($status_id) > 0 && $status_id != -1) {
-+if (strlen((string) $status_id) > 0 && $status_id != -1) {
-     array_push($filter, "t.status_id = $status_id");
- }
--if (strlen($aufgabe) > 0) {
-+if (strlen((string) $aufgabe) > 0) {
-     array_push($filter, "t.beschreibung_detail LIKE '%$aufgabe%'");
- }
--if (strlen($nachname) > 0) {
-+if (strlen((string) $nachname) > 0) {
-     array_push($filter, "t.nachname LIKE '%$nachname%'");
- }
--if (strlen($vorname) > 0) {
-+if (strlen((string) $vorname) > 0) {
-     array_push($filter, "t.nachname LIKE '%$vorname%'");
- }
--if (strlen($benutzer_id) > 0 && $benutzer_id != -1) {
-+if (strlen((string) $benutzer_id) > 0 && $benutzer_id != -1) {
-     array_push($filter, "t.benutzer_id = $benutzer_id");
- }
- if (strlen($kdnr) > 0) {
-     array_push($filter, "t.kundennummer = '$kdnr'");
- }
--if (strlen($plz) > 0) {
-+if (strlen((string) $plz) > 0) {
-     array_push($filter, "t.plz LIKE '%$plz%'");
- }
--if (strlen($ort) > 0) {
-+if (strlen((string) $ort) > 0) {
-     array_push($filter, "t.ort LIKE '%$ort%'");
- }
--if (strlen($strasse) > 0) {
-+if (strlen((string) $strasse) > 0) {
-     array_push($filter, "t.strasse LIKE '%$strasse%'");
- }
--if (strlen($hausnummer) > 0) {
-+if (strlen((string) $hausnummer) > 0) {
-     array_push($filter, "t.hausnummer = $hausnummer");
- }
--if (strlen($prioritaet_id) > 0 && $prioritaet_id != -1) {
-+if (strlen((string) $prioritaet_id) > 0 && $prioritaet_id != -1) {
-     array_push($filter, "t.prioritaet_id = $prioritaet_id");
- }
--if (strlen($beginn) > 0) {
-+if (strlen((string) $beginn) > 0) {
-     $date = date_create($beginn);
-     array_push($filter, "t.beginn = '" . date_format($date, "Y-m-d H:i:s") . "'");
- }
--if (strlen($ende) > 0) {
-+if (strlen((string) $ende) > 0) {
-     $date = date_create($ende);
-     array_push($filter, "t.ende = '" . date_format($date, "Y-m-d H:i:s") . "'");
- }
--if (strlen($aufwand) > 0) {
-+if (strlen((string) $aufwand) > 0) {
-     array_push($filter, "t.aufwand = $aufwand");
- }
--if (strlen($wiedervorlage) > 0) {
-+if (strlen((string) $wiedervorlage) > 0) {
-     $date = date_create($wiedervorlage);
-     array_push($filter, "t.wiedervorlage = '" . date_format($date, "Y-m-d H:i:s") . "'");
+ $hasData = false;
+ if ($data != '' && $data != null) {
+-	$obj = json_decode($data);
++	$obj = json_decode((string) $data);
+ 	$dataarr = $obj->data;
+ 	$hasData = true;
  }
     ----------- end diff -----------
 
 Applied rules:
- * LongArrayToShortArrayRector
  * NullToStrictStringFuncCallArgRector
 
 
-59) ../../web/htdocs/kimi_ET/libs/application.php:50
+37) ../../web/htdocs/kimi_ET/libs/application.php:50
 
     ---------- begin diff ----------
 @@ Line 50 @@
@@ -2694,45 +1483,15 @@ Applied rules:
 +function throw_exception($message = null, $code = null): never {
      throw new Exception($message, $code);
  }
-
-@@ Line 80 @@
-     public $MANDANT;
-
-     function __construct() {
--        $this->ERRORS = array();
--        $this->INFORMATION = array();
-+        $this->ERRORS = [];
-+        $this->INFORMATION = [];
-         $this->DB = new DB();
-     }
     ----------- end diff -----------
 
 Applied rules:
- * LongArrayToShortArrayRector
  * ReturnNeverTypeRector
 
 
-60) ../../web/htdocs/kimi_ET/libs/database.php:32
+38) ../../web/htdocs/kimi_ET/libs/database.php:115
 
     ---------- begin diff ----------
-@@ Line 32 @@
-     }
-
-     public function query($query, $fetch = TRUE) {
--        $results = array();
-+        $results = [];
-         $identifier = mysqli_connect(self::$HOST, self::$USERNAME, self::$PASSWORT) or die(mysqli_error());
-
-         mysqli_select_db($identifier, self::$DB_NAME) or throw_exception("$query<br />" . mysqli_error($identifier));
-@@ Line 85 @@
-             return;
-         }
-
--        $result = array();
-+        $result = [];
-
-         while ($item = mysqli_fetch_object($resource)) {
-             array_push($result, $item);
 @@ Line 115 @@
          }
 
@@ -2745,11 +1504,10 @@ Applied rules:
     ----------- end diff -----------
 
 Applied rules:
- * LongArrayToShortArrayRector
  * NullToStrictStringFuncCallArgRector
 
 
-61) ../../web/htdocs/kimi_ET/libs/entities/akt.php:82
+39) ../../web/htdocs/kimi_ET/libs/entities/akt.php:82
 
     ---------- begin diff ----------
 @@ Line 82 @@
@@ -2761,287 +1519,13 @@ Applied rules:
                  $this->item[$key] = NULL;
                  return;
              }
-@@ Line 1013 @@
-
-     // Allgemein
-     public function __construct($item) {
--        $this->item = array();
-+        $this->item = [];
-
-         $item = (array) $item;
-
-@@ Line 1041 @@
-         $query .= " ORDER BY ticket_id LIMIT $start, $count";
-
-         try {
--            $response = array();
-+            $response = [];
-             $result = App::$CURRENT->DB->query($query);
-
-             foreach($result as $item) {
     ----------- end diff -----------
 
 Applied rules:
- * LongArrayToShortArrayRector
  * NullToStrictStringFuncCallArgRector
 
 
-62) ../../web/htdocs/kimi_ET/libs/entities/anrede.php:1
-
-    ---------- begin diff ----------
-@@ Line 1 @@
- <?php
- /*
-  * To change this template, choose Tools | Templates
-@@ Line 10 @@
-  */
- class Anrede {
-
--    private $item;
-     public function get_id() {
-         return $this->item->id;
-     }
-@@ Line 19 @@
-         return $this->item->text;
-     }
-
--    public function __construct($item) {
--        $this->item = $item;
-+    public function __construct(private $item)
-+    {
-     }
-
-     public static function load_all() {
-
-         $query = "SELECT * FROM anrede";
--        $result = array();
-+        $result = [];
-         $response = App::$CURRENT->DB->query($query);
-
-         foreach ($response as $item) {
-    ----------- end diff -----------
-
-Applied rules:
- * LongArrayToShortArrayRector
- * ClassPropertyAssignToConstructorPromotionRector
-
-
-63) ../../web/htdocs/kimi_ET/libs/entities/anrufzeiten.php:1
-
-    ---------- begin diff ----------
-@@ Line 1 @@
- <?php
- /*
-  * To change this template, choose Tools | Templates
-@@ Line 10 @@
-  */
- class Anrufzeiten {
-
--    private $item;
-     public function get_id() {
-         return $this->item->id;
-     }
-@@ Line 31 @@
-         return $this->item->bis;
-     }
- 	
--    public function __construct($item) {
--        $this->item = $item;
-+    public function __construct(private $item)
-+    {
-     }
-
-     public static function load_all() {
-
-         $query = "SELECT * FROM anrufzeiten order by reihung";
--        $result = array();
-+        $result = [];
-         $response = App::$CURRENT->DB->query($query);
-
-         foreach ($response as $item) {
-    ----------- end diff -----------
-
-Applied rules:
- * LongArrayToShortArrayRector
- * ClassPropertyAssignToConstructorPromotionRector
-
-
-64) ../../web/htdocs/kimi_ET/libs/entities/anstoss.php:1
-
-    ---------- begin diff ----------
-@@ Line 1 @@
- <?php
- /*
-  * To change this template, choose Tools | Templates
-@@ Line 10 @@
-  */
- class Anstoss {
-
--    private $item;
-     public function get_id() {
-         return $this->item->id;
-     }
-@@ Line 19 @@
-         return $this->item->text;
-     }
-     
--    public function __construct($item) {
--        $this->item = $item;
-+    public function __construct(private $item)
-+    {
-     }
-
-     public static function load_all() {
-
-         $query = "SELECT * FROM anstoss ORDER BY text";
--        $result = array();
-+        $result = [];
-         $response = App::$CURRENT->DB->query($query);
-
-         foreach ($response as $item) {
-    ----------- end diff -----------
-
-Applied rules:
- * LongArrayToShortArrayRector
- * ClassPropertyAssignToConstructorPromotionRector
-
-
-65) ../../web/htdocs/kimi_ET/libs/entities/ausbuchungsgrund.php:1
-
-    ---------- begin diff ----------
-@@ Line 1 @@
- <?php
- /*
-  * To change this template, choose Tools | Templates
-@@ Line 10 @@
-  */
- class Ausbuchungsgrund {
-
--    private $item;
-     public function get_id() {
-         return $this->item->id;
-     }
-@@ Line 23 @@
-         return $this->item->text;
-     }
-     
--    public function __construct($item) {
--        $this->item = $item;
-+    public function __construct(private $item)
-+    {
-     }
-
-     public static function load_all() {
-
-         $query = "SELECT * FROM ausbuchungsgrund ORDER BY ausbuch_grund";
--        $result = array();
-+        $result = [];
-         $response = App::$CURRENT->DB->query($query);
-
-         foreach ($response as $item) {
-    ----------- end diff -----------
-
-Applied rules:
- * LongArrayToShortArrayRector
- * ClassPropertyAssignToConstructorPromotionRector
-
-
-66) ../../web/htdocs/kimi_ET/libs/entities/bankleitzahl.php:105
-
-    ---------- begin diff ----------
-@@ Line 105 @@
-     public static function load_all() {
-
-         $query = "SELECT b.id, b.bankleitzahl as 'blz', b.bank, b.bic, b.kz_sepa_faehig, b.geaendert_am, b.geaendert_von FROM bankleitzahl b ORDER BY bankleitzahl, bank";
--        $result = array();
-+        $result = [];
-         $response = App::$CURRENT->DB->query($query);
-
-         foreach ($response as $item) {
-@@ Line 153 @@
-         $query .= " ORDER BY $order LIMIT $start, $count";
-         try {
-             $items = App::$CURRENT->DB->query($query);
--            $records = array();
-+            $records = [];
-             foreach ($items as $value) {
-                 array_push($records, new Bankleitzahl($value));
-             }
-    ----------- end diff -----------
-
-Applied rules:
- * LongArrayToShortArrayRector
-
-
-67) ../../web/htdocs/kimi_ET/libs/entities/benutzer.php:1
-
-    ---------- begin diff ----------
-@@ Line 1 @@
- <?php
-
- /*
-@@ Line 12 @@
-  */
- class Benutzer {
-
--    private $item;
--
-     public function get_id() {
-         return $this->item["id"];
-     }
-@@ Line 203 @@
-     }
-
-     public function set_default_belegdatum($value) {
--        if (strlen(default_belegdatum) == 0) {
-+        if (strlen(\DEFAULT_BELEGDATUM) == 0) {
-             $this->item["default_belegdatum"] = NULL;
-             return;
-         }
-@@ Line 232 @@
-
-
-
--    public function __construct($item) {
--        $this->item = $item;
-+    public function __construct(private $item)
-+    {
-     }
-
-     public static function load_items($mandant_id, $start, $count) {
-@@ Line 241 @@
-         $query = "SELECT b.* FROM benutzer b "
-                 . " JOIN mandant_benutzer mb ON mb.benutzer_id = b.id"
-                 . " WHERE mb.mandant_id = $mandant_id ORDER BY name";
--        $result = array();
-+        $result = [];
-         $response = App::$CURRENT->DB->query($query);
-
-         try {
-             $items = App::$CURRENT->DB->query($query);
--            $benutzer = array();
-+            $benutzer = [];
-             foreach ($items as $value) {
-                 array_push($benutzer, new Benutzer($value));
-             }
-@@ Line 278 @@
-                 . " JOIN mandant_benutzer mb ON mb.benutzer_id = b.id"
-                 . " WHERE mb.mandant_id = $mandant_id ORDER BY name";
-
--        $result = array();
-+        $result = [];
-         $response = App::$CURRENT->DB->query($query);
-
-         foreach ($response as $item) {
-    ----------- end diff -----------
-
-Applied rules:
- * LongArrayToShortArrayRector
- * SensitiveConstantNameRector
- * ClassPropertyAssignToConstructorPromotionRector
-
-
-68) ../../web/htdocs/kimi_ET/libs/entities/buchungen.php:94
+40) ../../web/htdocs/kimi_ET/libs/entities/buchungen.php:94
 
     ---------- begin diff ----------
 @@ Line 94 @@
@@ -3062,24 +1546,6 @@ Applied rules:
                  $this->item["valutadatum"] = NULL;
                  return;
              }
-@@ Line 478 @@
-
-         try {
-             $items = App::$CURRENT->DB->query($query);
--            $buchungen = array();
-+            $buchungen = [];
-             foreach ($items as $value) {
-                 array_push($buchungen, new Buchung($value));
-             }
-@@ Line 506 @@
-
-         try {
-             $items = App::$CURRENT->DB->query($query);
--            $buchungen = array();
-+            $buchungen = [];
-             foreach ($items as $value) {
-                 array_push($buchungen, new Buchung($value));
-             }
 @@ Line 704 @@
          $stamm->set_gesamtsaldo($gessaldo, TRUE);
 
@@ -3091,150 +1557,10 @@ Applied rules:
     ----------- end diff -----------
 
 Applied rules:
- * LongArrayToShortArrayRector
  * NullToStrictStringFuncCallArgRector
 
 
-69) ../../web/htdocs/kimi_ET/libs/entities/buchungsart.php:1
-
-    ---------- begin diff ----------
-@@ Line 1 @@
- <?php
- /*
-  * To change this template, choose Tools | Templates
-@@ Line 10 @@
-  */
- class Buchungsart {
-
--    private $item;
--
-     public function get_id() {
-         return $this->item->id;
-     }
-@@ Line 37 @@
-     }
-
-     
--    public function __construct($item) {
--        $this->item = $item;
-+    public function __construct(private $item)
-+    {
-     }
-
-     public static function get_list($mandant_id) {
-@@ Line 49 @@
-                 ORDER BY b.text";
-         try {
-             $result = App::$CURRENT->DB->query($query);
--            $response = array();
-+            $response = [];
-             foreach ($result as $item) {
-                 array_push($response, new Buchungsart($item));
-             }
-@@ Line 67 @@
-                 ORDER BY bg.bugru_key ";
-         try {
-             $result = App::$CURRENT->DB->query($query);
--            $response = array();
-+            $response = [];
-             foreach ($result as $item) {
-                 array_push($response, new Buchungsart($item));
-             }
-    ----------- end diff -----------
-
-Applied rules:
- * LongArrayToShortArrayRector
- * ClassPropertyAssignToConstructorPromotionRector
-
-
-70) ../../web/htdocs/kimi_ET/libs/entities/buchungsgrund.php:1
-
-    ---------- begin diff ----------
-@@ Line 1 @@
- <?php
- /*
-  * To change this template, choose Tools | Templates 
-@@ Line 12 @@
-
- class Buchungsgrund {
-
--    private $item;
--    
-     public function get_id() {
-         return $this->item->id;
-     }
-@@ Line 116 @@
-         return $this->item["kz_saldowirksam"];
-     }
-     
--    public function __construct($item) {
--        $this->item = $item;
-+    public function __construct(private $item)
-+    {
-     }
-
-     public static function load($mandant_id, $markt = 0) {
-@@ Line 136 @@
-
-         try {
-             $result = App::$CURRENT->DB->query($query);
--            $response = array();
-+            $response = [];
-             foreach ($result as $item) {
-                 array_push($response, new Buchungsgrund($item));
-             }
-    ----------- end diff -----------
-
-Applied rules:
- * LongArrayToShortArrayRector
- * ClassPropertyAssignToConstructorPromotionRector
-
-
-71) ../../web/htdocs/kimi_ET/libs/entities/country.php:1
-
-    ---------- begin diff ----------
-@@ Line 1 @@
- <?php
-
-
-@@ Line 24 @@
-
- class Country {
-
--    private $item;
--
--    
--
-     public function get_id() {
-
-         return $this->item->id;
-@@ Line 60 @@
-
-
-
--    public function __construct($item) {
--
--        $this->item = $item;
--
-+    public function __construct(private $item)
-+    {
-     }
-
-     
-@@ Line 74 @@
-
-         $response = App::$CURRENT->DB->query($query);
-
--        $result = array();
-+        $result = [];
-    ----------- end diff -----------
-
-Applied rules:
- * LongArrayToShortArrayRector
- * ClassPropertyAssignToConstructorPromotionRector
-
-
-72) ../../web/htdocs/kimi_ET/libs/entities/customer.php:346
+41) ../../web/htdocs/kimi_ET/libs/entities/customer.php:346
 
     ---------- begin diff ----------
 @@ Line 346 @@
@@ -3264,413 +1590,112 @@ Applied rules:
              $this->item["anlagedatum"] = NULL;
              return;
          }
-@@ Line 643 @@
-
-     
-     public function __construct($item) {
--        $this->item = array();
-+        $this->item = [];
-         $item = (array) $item;
-
-         foreach ($item as $key => $value) {
-@@ Line 672 @@
-
-         try {
-             $items = App::$CURRENT->DB->query($query);
--            $customers = array();
-+            $customers = [];
-
-             foreach ($items as $value) {
-                 array_push($customers, new Customer($value));
-@@ Line 690 @@
-     public static function load_all_items($mandant_id) {
-         $query = "SELECT * FROM kunde WHERE mandant_id = $mandant_id";
-         $items = App::$CURRENT->DB->query($query);
--        $customers = array();
-+        $customers = [];
-
-         foreach ($items as $value) {
-             array_push($customers, new Customer($value));
-@@ Line 791 @@
-                         " . $kunde->get_geburtsdatum(TRUE) . ",
-                         " . $kunde->get_kenner(TRUE) . ",
-                         '" . date("Y-m-d H:i:s") . "',
--                        '" . App::$CURRENT->USER->get_name(TRUE) . "',
-+                        '" . App::$CURRENT->USER->get_name() . "',
-                         " . $kunde->get_land_id(TRUE) . ",
- 			" . $kunde->get_primaerkdnr(TRUE) . ",
- 			" . $kunde->get_nachname2(TRUE) . ",
-@@ Line 872 @@
-                     `geburtsdatum` = " . $kunde->get_geburtsdatum(TRUE) . ",
-                     `kenner` = " . $kunde->get_kenner(TRUE) . ",
-                     `geaendert_am` = '" . date("Y-m-d H:i:s") . "',
--                    `geaendert_von` = '" . App::$CURRENT->USER->get_name(TRUE) . "' ,
-+                    `geaendert_von` = '" . App::$CURRENT->USER->get_name() . "' ,
-                     `land_id` = " . $kunde->get_land_id(TRUE) . ",
-                     `primaerkdnr` = " . $kunde->get_primaerkdnr(TRUE) . ",
-                     `nachname2` = " . $kunde->get_nachname2(TRUE) . ",
-    ----------- end diff -----------
-
-Applied rules:
- * LongArrayToShortArrayRector
- * RemoveExtraParametersRector
- * NullToStrictStringFuncCallArgRector
-
-
-73) ../../web/htdocs/kimi_ET/kimibatch/okoexp.php:289
-
-    ---------- begin diff ----------
-@@ Line 289 @@
- 		$email = $line['email']; 
- 		$neuetelnr = $line['neuetelnr']; 
- 		
--		if (strlen($email)>0 OR strlen($neuetelnr)>0) {
-+		if (strlen((string) $email)>0 OR strlen((string) $neuetelnr)>0) {
- 	 	   $contactdata = '';
--		   if (strlen($email)>0) {
-+		   if (strlen((string) $email)>0) {
- 			 // $contactdata = $contactdata.' email :'.$email;
- 			 $vorlage = 91; /* Vorlage automatisch setzen */
- 			 // ausgabe in eigener Zeile
- 		   }
--		   if (strlen($neuetelnr)>0) {
-+		   if (strlen((string) $neuetelnr)>0) {
- 			 $contactdata = $contactdata.' Telnr :'.$neuetelnr;
- 			 $vorlage = 91; /* Vorlage automatisch setzen */
- 		   }
-@@ Line 311 @@
- 		$ag_nachname = $line['ag_nachname']; 	
-         $calldata = 'GesprDat: '.$gespraechsdatum.' GesprZeit: '.$gespraechszeit.' Agent: '.$ag_vorname.' '.$ag_nachname  ;		
- 		// email 20170328
--		if (strlen($email)>0 ) {
-+		if (strlen((string) $email)>0 ) {
- 	 	   $email01 = '';
--		   if (strlen($email)>0) {
-+		   if (strlen((string) $email)>0) {
- 			 $email01 = $email01.'Mail: '.$email;
- 		   }
- 		   }  else {
     ----------- end diff -----------
 
 Applied rules:
  * NullToStrictStringFuncCallArgRector
 
 
-74) ../../web/htdocs/kimi_ET/kimibatch/okoexp_ansi-roni.php:251
+42) ../../web/htdocs/kimi_ET/libs/entities/inkassoinformation.php:90
 
     ---------- begin diff ----------
-@@ Line 251 @@
- 		$email = $line['email']; 
- 		$neuetelnr = $line['neuetelnr']; 
- 		
--		if (strlen($email)>0 OR strlen($neuetelnr)>0) {
-+		if (strlen((string) $email)>0 OR strlen((string) $neuetelnr)>0) {
- 	 	   $contactdata = '';
--		   if (strlen($email)>0) {
-+		   if (strlen((string) $email)>0) {
- 			 // $contactdata = $contactdata.' email :'.$email;
- 			 $vorlage = 91; /* Vorlage automatisch setzen */
- 			 // ausgabe in eigener Zeile
- 		   }
--		   if (strlen($neuetelnr)>0) {
-+		   if (strlen((string) $neuetelnr)>0) {
- 			 $contactdata = $contactdata.' Telnr :'.$neuetelnr;
- 			 $vorlage = 91; /* Vorlage automatisch setzen */
- 		   }
-@@ Line 273 @@
- 		$ag_nachname = $line['ag_nachname']; 	
-         $calldata = 'GesprDat: '.$gespraechsdatum.' GesprZeit: '.$gespraechszeit.' Agent: '.$ag_vorname.' '.$ag_nachname  ;		
- 		// email 20170328
--		if (strlen($email)>0 ) {
-+		if (strlen((string) $email)>0 ) {
- 	 	   $email01 = '';
--		   if (strlen($email)>0) {
-+		   if (strlen((string) $email)>0) {
- 			 $email01 = $email01.'Mail: '.$email;
- 		   }
- 		   }  else {
+@@ Line 90 @@
+     }
+
+     public function set_status_dat($val, $sql_valid = FALSE) { {
+-            if (strlen($val) == 0) {
++            if (strlen((string) $val) == 0) {
+                 $this->item["status_dat"] = NULL;
+                 return;
+             }
+@@ Line 146 @@
+     }
+
+     public function set_letzte_aenderung($val, $sql_valid = FALSE) { {
+-            if (strlen($val) == 0) {
++            if (strlen((string) $val) == 0) {
+                 $this->item["letzte_aenderung"] = NULL;
+                 return;
+             }
+@@ Line 219 @@
+     }
+
+     public function set_uebergabe_dat($val, $sql_valid = FALSE) { {
+-            if (strlen($val) == 0) {
++            if (strlen((string) $val) == 0) {
+                 $this->item["uebergabe_dat"] = NULL;
+                 return;
+             }
+@@ Line 284 @@
+     }
+
+     public function set_erl_du_dat($val, $sql_valid = FALSE) { {
+-            if (strlen($val) == 0) {
++            if (strlen((string) $val) == 0) {
+                 $this->item["erl_du_dat"] = NULL;
+                 return;
+             }
+@@ Line 326 @@
+     }
+
+     public function set_erl_dat($val, $sql_valid = FALSE) { {
+-            if (strlen($val) == 0) {
++            if (strlen((string) $val) == 0) {
+                 $this->item["erl_dat"] = NULL;
+                 return;
+             }
     ----------- end diff -----------
 
 Applied rules:
  * NullToStrictStringFuncCallArgRector
 
 
-75) ../../web/htdocs/kimi_ET/kimibatch/okoexp_ansi.php:287
+43) ../../web/htdocs/kimi_ET/libs/entities/lastschrift.php:166
 
     ---------- begin diff ----------
-@@ Line 287 @@
- 		$email = $line['email']; 
- 		$neuetelnr = $line['neuetelnr']; 
- 		
--		if (strlen($email)>0 OR strlen($neuetelnr)>0) {
-+		if (strlen((string) $email)>0 OR strlen((string) $neuetelnr)>0) {
- 	 	   $contactdata = '';
--		   if (strlen($email)>0) {
-+		   if (strlen((string) $email)>0) {
- 			 // $contactdata = $contactdata.' email :'.$email;
- 			 $vorlage = 91; /* Vorlage automatisch setzen */
- 			 // ausgabe in eigener Zeile
- 		   }
--		   if (strlen($neuetelnr)>0) {
-+		   if (strlen((string) $neuetelnr)>0) {
- 			 $contactdata = $contactdata.' Telnr :'.$neuetelnr;
- 			 $vorlage = 91; /* Vorlage automatisch setzen */
- 		   }
-@@ Line 309 @@
- 		$ag_nachname = $line['ag_nachname']; 	
-         $calldata = 'GesprDat: '.$gespraechsdatum.' GesprZeit: '.$gespraechszeit.' Agent: '.$ag_vorname.' '.$ag_nachname  ;		
- 		// email 20170328
--		if (strlen($email)>0 ) {
-+		if (strlen((string) $email)>0 ) {
- 	 	   $email01 = '';
--		   if (strlen($email)>0) {
-+		   if (strlen((string) $email)>0) {
- 			 $email01 = $email01.'Mail: '.$email;
- 		   }
- 		   }  else {
+@@ Line 166 @@
+     }
+
+     public function set_dat_lastschrift($val, $sql_valid = FALSE) { {
+-            if (strlen($val) == 0) {
++            if (strlen((string) $val) == 0) {
+                 $this->item["dat_lastschrift"] = NULL;
+                 return;
+             }
+@@ Line 193 @@
+     }
+
+     public function set_dat_unterschrift($val, $sql_valid = FALSE) { {
+-            if (strlen($val) == 0) {
++            if (strlen((string) $val) == 0) {
+                 $this->item["dat_unterschrift"] = NULL;
+                 return;
+             }
+@@ Line 220 @@
+     }
+
+     public function set_dat_inaktiv($val, $sql_valid = FALSE) { {
+-            if (strlen($val) == 0) {
++            if (strlen((string) $val) == 0) {
+                 $this->item["dat_inaktiv"] = NULL;
+                 return;
+             }
+@@ Line 288 @@
+     }
+
+     public function set_dat_einzbetrag($val, $sql_valid = FALSE) { {
+-            if (strlen($val) == 0) {
++            if (strlen((string) $val) == 0) {
+                 $this->item["dat_einzbetrag"] = NULL;
+                 return;
+             }
     ----------- end diff -----------
 
 Applied rules:
  * NullToStrictStringFuncCallArgRector
 
 
-76) ../../web/htdocs/kimi_ET/kimibatch/okoexp_ansi2.php:287
-
-    ---------- begin diff ----------
-@@ Line 287 @@
- 		$email = $line['email']; 
- 		$neuetelnr = $line['neuetelnr']; 
- 		
--		if (strlen($email)>0 OR strlen($neuetelnr)>0) {
-+		if (strlen((string) $email)>0 OR strlen((string) $neuetelnr)>0) {
- 	 	   $contactdata = '';
--		   if (strlen($email)>0) {
-+		   if (strlen((string) $email)>0) {
- 			 // $contactdata = $contactdata.' email :'.$email;
- 			 $vorlage = 91; /* Vorlage automatisch setzen */
- 			 // ausgabe in eigener Zeile
- 		   }
--		   if (strlen($neuetelnr)>0) {
-+		   if (strlen((string) $neuetelnr)>0) {
- 			 $contactdata = $contactdata.' Telnr :'.$neuetelnr;
- 			 $vorlage = 91; /* Vorlage automatisch setzen */
- 		   }
-@@ Line 309 @@
- 		$ag_nachname = $line['ag_nachname']; 	
-         $calldata = 'GesprDat: '.$gespraechsdatum.' GesprZeit: '.$gespraechszeit.' Agent: '.$ag_vorname.' '.$ag_nachname  ;		
- 		// email 20170328
--		if (strlen($email)>0 ) {
-+		if (strlen((string) $email)>0 ) {
- 	 	   $email01 = '';
--		   if (strlen($email)>0) {
-+		   if (strlen((string) $email)>0) {
- 			 $email01 = $email01.'Mail: '.$email;
- 		   }
- 		   }  else {
-    ----------- end diff -----------
-
-Applied rules:
- * NullToStrictStringFuncCallArgRector
-
-
-77) ../../web/htdocs/kimi_ET/kimibatch/okoexp_dev.php:287
-
-    ---------- begin diff ----------
-@@ Line 287 @@
- 		$email = $line['email']; 
- 		$neuetelnr = $line['neuetelnr']; 
- 		
--		if (strlen($email)>0 OR strlen($neuetelnr)>0) {
-+		if (strlen((string) $email)>0 OR strlen((string) $neuetelnr)>0) {
- 	 	   $contactdata = '';
--		   if (strlen($email)>0) {
-+		   if (strlen((string) $email)>0) {
- 			 // $contactdata = $contactdata.' email :'.$email;
- 			 $vorlage = 91; /* Vorlage automatisch setzen */
- 			 // ausgabe in eigener Zeile
- 		   }
--		   if (strlen($neuetelnr)>0) {
-+		   if (strlen((string) $neuetelnr)>0) {
- 			 $contactdata = $contactdata.' Telnr :'.$neuetelnr;
- 			 $vorlage = 91; /* Vorlage automatisch setzen */
- 		   }
-@@ Line 309 @@
- 		$ag_nachname = $line['ag_nachname']; 	
-         $calldata = 'GesprDat: '.$gespraechsdatum.' GesprZeit: '.$gespraechszeit.' Agent: '.$ag_vorname.' '.$ag_nachname  ;		
- 		// email 20170328
--		if (strlen($email)>0 ) {
-+		if (strlen((string) $email)>0 ) {
- 	 	   $email01 = '';
--		   if (strlen($email)>0) {
-+		   if (strlen((string) $email)>0) {
- 			 $email01 = $email01.'Mail: '.$email;
- 		   }
- 		   }  else {
-    ----------- end diff -----------
-
-Applied rules:
- * NullToStrictStringFuncCallArgRector
-
-
-78) ../../web/htdocs/kimi_ET/kimibatch/okoexpzwb.php:152
-
-    ---------- begin diff ----------
-@@ Line 152 @@
- 	// being transformed into a newline
- 	$textzeile1 = $korrezeichen.' ';
- 	$textzeile1 = str_pad($textzeile1, 70, ' ');   /* mit blank auffüllen */
--	$textzeile2 = str_pad($textzeile2, 70, ' ');   /* mit blank auffüllen */
--	$textzeile3 = str_pad($textzeile3, 70, ' ');   /* mit blank auffüllen */
-+	$textzeile2 = str_pad((string) $textzeile2, 70, ' ');   /* mit blank auffüllen */
-+	$textzeile3 = str_pad((string) $textzeile3, 70, ' ');   /* mit blank auffüllen */
- 	$string= $aktnr.$vorlage.$textzeile1.$textzeile2.$textzeile3.'00000000 '."\n";
-     fwrite($fp, $string); // will proccess /n as newline ...
-    ----------- end diff -----------
-
-Applied rules:
- * NullToStrictStringFuncCallArgRector
-
-
-79) ../../web/htdocs/kimi_ET/kimibatch/okoimp.php:112
-
-    ---------- begin diff ----------
-@@ Line 112 @@
- 	// echo  "<br>Nach der Korrektur".$line."<BR>";
- 	// 2023-11-24		
-     //echo "<br>ausschnitt: ".$ausschnitt;
--	if (substr($line, 0,21) == 'Telefonintervention f' ) {
-+	if (str_starts_with($line, 'Telefonintervention f') ) {
-         if ( $erstersatz == 1 ) {
- 		 		echo "<br><br>".convert2Utf8($telefonintervention);
-                 echo "<br> ";
-@@ Line 183 @@
- 	//
- 	$telefonintervention = $telefonintervention.substr($line, 0,80)."<br>";
- 	//
--	if (substr($line, 0,5) == 'Aktnr' ) {
-+	if (str_starts_with($line, 'Aktnr') ) {
-     	$aktnr1 = substr($line, 11,5);
-         echo "<br>aktnr1: ".convert2Utf8($aktnr1);
- 	    $aktnr2 = substr($line, 17,8);
-@@ Line 191 @@
- 		$data = 'Aktnr';
- 	}	
-
--	if (substr($line, 0,10) == 'Sachbearb:' ) {
-+	if (str_starts_with($line, 'Sachbearb:') ) {
-     	$sachbearb = substr($line, 11,50);
-         echo "<br>sachbearb: ".convert2Utf8($sachbearb);
- 		$data = 'Sachbearb:';
-@@ Line 207 @@
- 		$data = 'Gläubigeranschrift';
- 	}
- 	
--	if (substr($line, 0,10) == 'Schuldner:' ) {
-+	if (str_starts_with($line, 'Schuldner:') ) {
-     	$schuldner_name = substr($line, 11,50);
-         echo "<br>Schuldner: ".convert2Utf8($schuldner_name);
- 		$data = 'Schuldner:';
-@@ Line 237 @@
-     	$schuldner_ort = substr($line, 14,34);
-         echo "<br>schuldner_ort: ".convert2Utf8($schuldner_ort);
- 	}	
--	if (substr($line, 0,10) == 'Mitsch.  :' ) {
-+	if (str_starts_with($line, 'Mitsch.  :') ) {
-     	$mitschuldner_name = substr($line, 11,50);
-         echo "<br>mitschuldner: ".convert2Utf8($mitschuldner_name);
- 		$data = 'Mitschuldner:';
- 	}	
--    if (substr($line, 0,10) == 'Ford.Begr:' ) {
-+    if (str_starts_with($line, 'Ford.Begr:') ) {
- 		$data = 'Ford.Begr:';
- 		$lz = $z;
-         echo "<br>lz: ".convert2Utf8($lz);
-@@ Line 253 @@
-         echo "<br>aufgabe1: ".convert2Utf8($aufgabe1);
- 	}	
-
--	if ( $data == 'Ford.Begr:'  and substr($line, 0,5) == 'Offen' ) {
-+	if ( $data == 'Ford.Begr:'  and str_starts_with($line, 'Offen') ) {
-     	$aufgabe2 = substr($line, 0,80);
-         echo "<br>aufgabe2: ".convert2Utf8($aufgabe2);
- 		$saldo = substr($line, 53,15);
- 	    echo "<br>saldo: ".convert2Utf8($saldo);	
- 	}	
--	if (substr($line, 0,6) == 'Tele1:' ) {
-+	if (str_starts_with($line, 'Tele1:') ) {
-     	$telefon1 = substr($line, 8,13);
-         echo "<br>telefon1: ".convert2Utf8($telefon1);
- 		$data = 'telefon1:';
- 	}		
--	if (substr($line, 0,6) == 'Tele2:' ) {
-+	if (str_starts_with($line, 'Tele2:') ) {
-     	$telefon2 = substr($line, 8,13);
-         echo "<br>telefon2: ".convert2Utf8($telefon2);
- 		$data = 'telefon2:';
- 	}
--	if (substr($line, 0,6) == 'Tele3:' ) {
-+	if (str_starts_with($line, 'Tele3:') ) {
-     	$telefon3 = substr($line, 8,13);
-         echo "<br>telefon3: ".convert2Utf8($telefon3);
- 		$data = 'telefon3:';
-@@ Line 276 @@
- 		$telefon3plus = $telefon3plus." Tele3: ".substr($line, 8,13)." / ";
-         echo "<br>telefon3plus: ".convert2Utf8($telefon3plus);
- 	}
--	if (substr($line, 0,6) == 'Tele4:' ) {
-+	if (str_starts_with($line, 'Tele4:') ) {
-     	$telefon4 = substr($line, 8,13);
- 		$telefon4 = $telefon4." $ ";
-         echo "<br>telefon4: ".convert2Utf8($telefon4);
-@@ Line 285 @@
-         echo "<br>telefon3plus: ".convert2Utf8($telefon3plus);
- 	}	
-
--	if (substr($line, 0,6) == 'Tele5:' ) {
-+	if (str_starts_with($line, 'Tele5:') ) {
- 		$telefon3plus = $telefon3plus." Tele5: ".substr($line, 8,13)." / ";
-         echo "<br>telefon3plus: ".convert2Utf8($telefon3plus);
- 		$data = '$telefon3plus';
- 	}	
--	if (substr($line, 0,6) == 'Tele6:' ) {
-+	if (str_starts_with($line, 'Tele6:') ) {
- 		$telefon3plus = $telefon3plus." Tele6: ".substr($line, 8,13)." / ";
-         echo "<br>telefon3plus: ".convert2Utf8($telefon3plus);
- 		$data = '$telefon3plus';
- 	}	
--	if (substr($line, 0,6) == 'Tele7:' ) {
-+	if (str_starts_with($line, 'Tele7:') ) {
- 		$telefon3plus = $telefon3plus." Tele7: ".substr($line, 8,13)." / ";
-         echo "<br>telefon3plus: ".convert2Utf8($telefon3plus);
- 		$data = '$telefon3plus';
- 	}	
--	if (substr($line, 0,6) == 'Tele8:' ) {
-+	if (str_starts_with($line, 'Tele8:') ) {
- 		$telefon3plus = $telefon3plus." Tele8: ".substr($line, 8,13)." / ";
-         echo "<br>telefon3plus: ".convert2Utf8($telefon3plus);
- 		$data = '$telefon3plus';
- 	}	
--	if (substr($line, 0,6) == 'Tele9:' ) {
-+	if (str_starts_with($line, 'Tele9:') ) {
- 		$telefon3plus = $telefon3plus." Tele9: ".substr($line, 8,13)." / ";
-         echo "<br>telefon3plus: ".convert2Utf8($telefon3plus);
- 		$data = '$telefon3plus';
-@@ Line 333 @@
- 		$faelligbis = substr($line, 56,4).'-'.substr($line, 53,2).'-'.substr($line, 50,2);
-         echo "<br>faelligbis: ".convert2Utf8($faelligbis);
- 	}	
--	if (substr($line, 0,6) == 'Mail1:' ) {
-+	if (str_starts_with($line, 'Mail1:') ) {
- 		$email01 = substr($line, 7,50);
-         echo "<br>Mail1: ".convert2Utf8($email01);
- 	}
-    ----------- end diff -----------
-
-Applied rules:
- * StrStartsWithRector
-
-
-80) ../../web/htdocs/kimi_ET/libs/entities/schadensfall.php:87
+44) ../../web/htdocs/kimi_ET/libs/entities/schadensfall.php:87
 
     ---------- begin diff ----------
 @@ Line 87 @@
@@ -3745,50 +1770,13 @@ Applied rules:
                  $this->item["leistung_ab"] = NULL;
                  return;
              }
-@@ Line 469 @@
-         $query .= " ORDER BY $order LIMIT $start, $count";
-         try {
-             $items = App::$CURRENT->DB->query($query);
--            $schadensfall = array();
-+            $schadensfall = [];
-             foreach ($items as $value) {
-                 array_push($schadensfall, new Schadensfall($value));
-             }
     ----------- end diff -----------
 
 Applied rules:
- * LongArrayToShortArrayRector
  * NullToStrictStringFuncCallArgRector
 
 
-81) ../../web/htdocs/kimi_ET/libs/entities/schadensfall_art.php:53
-
-    ---------- begin diff ----------
-@@ Line 53 @@
-     public static function load_all() {
-
-         $query = "SELECT * FROM schadensfall_art ORDER BY text";
--        $result = array();
-+        $result = [];
-         $response = App::$CURRENT->DB->query($query);
-
-         foreach ($response as $item) {
-@@ Line 77 @@
-
-         try {
-             $items = App::$CURRENT->DB->query($query);
--            $schadensfall_art = array();
-+            $schadensfall_art = [];
-             foreach ($items as $value) {
-                 array_push($schadensfall_art, new SchadensfallArt($value));
-             }
-    ----------- end diff -----------
-
-Applied rules:
- * LongArrayToShortArrayRector
-
-
-82) ../../web/htdocs/kimi_ET/libs/entities/stammdaten.php:80
+45) ../../web/htdocs/kimi_ET/libs/entities/stammdaten.php:80
 
     ---------- begin diff ----------
 @@ Line 80 @@
@@ -3926,61 +1914,15 @@ Applied rules:
              $this->item["dat_ende_sonderzins"] = NULL;
              return;
          }
-@@ Line 1095 @@
-         $query .= " LIMIT $start, $count";
-         try {
-             $results = App::$CURRENT->DB->query($query);
--            $response = array();
-+            $response = [];
-             foreach ($results as $item) {
-                 array_push($response, new Stammdaten($item));
-             }
     ----------- end diff -----------
 
 Applied rules:
- * LongArrayToShortArrayRector
  * NullToStrictStringFuncCallArgRector
 
 
-83) ../../web/htdocs/kimi_ET/libs/entities/status_schadensfall.php:70
+46) ../../web/htdocs/kimi_ET/libs/entities/subkonto.php:91
 
     ---------- begin diff ----------
-@@ Line 70 @@
-     public static function load_all() {
-
-         $query = "SELECT * FROM status_schadensfall ORDER BY text";
--        $result = array();
-+        $result = [];
-         $response = App::$CURRENT->DB->query($query);
-
-         foreach ($response as $item) {
-@@ Line 94 @@
-
-         try {
-             $items = App::$CURRENT->DB->query($query);
--            $statusschadensfall = array();
-+            $statusschadensfall = [];
-             foreach ($items as $value) {
-                 array_push($statusschadensfall, new StatusSchadensfall($value));
-             }
-    ----------- end diff -----------
-
-Applied rules:
- * LongArrayToShortArrayRector
-
-
-84) ../../web/htdocs/kimi_ET/libs/entities/subkonto.php:16
-
-    ---------- begin diff ----------
-@@ Line 16 @@
-
-     public function __construct($item) {
-         $this->item = (array) $item;
--        $this->add_informations($item, TRUE);
-+        $this->add_informations($item);
-     }
-
-     public function add_informations($informations, $sql_valid = false) {
 @@ Line 91 @@
      }
 
@@ -4035,117 +1977,6 @@ Applied rules:
              $this->item["datum_debsaldo"] = NULL;
              return;
          }
-@@ Line 961 @@
-                 ORDER BY 1";
-         try {
-             $result = App::$CURRENT->DB->query($query);
--            $response = array();
-+            $response = [];
-             foreach ($result as $item) {
-                 array_push($response, new Subkonto($item));
-             }
-@@ Line 981 @@
-                 WHERE k.kdnr = '$kdnr' AND s.kz_aktuell = 'J'" . $order;
-         try {
-             $result = App::$CURRENT->DB->query($query);
--            $response = array();
-+            $response = [];
-             foreach ($result as $item) {
-                 array_push($response, new Subkonto($item));
-             }
-@@ Line 998 @@
-                 WHERE s.stammdaten_id = $stammdaten_id  AND s.kz_aktuell = 'J' " . $order;
-         try {
-             $result = App::$CURRENT->DB->query($query);
--            $response = array();
-+            $response = [];
-             foreach ($result as $item) {
-                 array_push($response, new Subkonto($item));
-             }
-@@ Line 1041 @@
-         $query .= " ORDER BY $order LIMIT $start, $count";
-         try {
-             $items = App::$CURRENT->DB->query($query);
--            $subkonten = array();
-+            $subkonten = [];
-             foreach ($items as $value) {
-                 array_push($subkonten, new Subkonto($value));
-             }
-@@ Line 1071 @@
-                 LIMIT $start, $count";
-         try {
-             $result = App::$CURRENT->DB->query($query);
--            $subkonten = array();
-+            $subkonten = [];
-             foreach ($result as $item) {
-                 array_push($subkonten, new Subkonto($item));
-             }
-@@ Line 1251 @@
-         }
-         if ($subkonto->get_kz_aktuell() == "J" || $subkonto->get_kz_aktuell() == "'J'") {
-             //self::delete_current($subkonto->get_sk_lfdnr(), $con);
--            self::delete_current($subkonto->get_sk_lfdnr(), $subkonto->get_stammdaten_id(), $subkonto->get_rechnungsnummer(), $con);
-+            self::delete_current($subkonto->get_sk_lfdnr(), $subkonto->get_stammdaten_id());
-         }
-
-         $query = "INSERT INTO `subkonto_neu`( 
-@@ Line 1419 @@
-         $query .= " ORDER BY $order ";
-         try {
-             $items = App::$CURRENT->DB->query($query);
--            $subkonten = array();
--            $subkonten_return = array();
-+            $subkonten = [];
-+            $subkonten_return = [];
-             $finished = FALSE;
-             $last_sk_lfdnr = 0;
-             $saldo_neu = 0;
-@@ Line 1462 @@
-                     $sk_new->set_bugru_key_om(null);
-                     $sk_new->set_buart_text(TXT_LBL_TGZ_AUFGEL_ZINSEN_BIS . " " . $stichtag);
-                     $sk_new->set_bugru_text(null);
--                    $sk_new->set_buchungsbetrag(0, TRUE);
-+                    $sk_new->set_buchungsbetrag(0);
-                     $sk_new->set_saldo_neu($sk_new->get_saldo(TRUE));
--                    $subkonten[$sk->get_sk_lfdnr()] = array();
-+                    $subkonten[$sk->get_sk_lfdnr()] = [];
-                     array_push($subkonten[$sk_new->get_sk_lfdnr()], $sk_new);
-                 }
-                 $last_sk_lfdnr = $sk->get_sk_lfdnr();
-@@ Line 1476 @@
-                         $saldo_neu = $saldo_neu - $betrag;
-                         //Buchung::calc_saldo($sk_save->get_buchungsbetrag(TRUE), $sk_save->get_kz_berechnung(), $sk_save->get_kz_saldowirksam(), $sk_save->get_buchungskennzeichen());
-                         $sk->set_saldo_neu($saldo_neu, TRUE);
--                        $sk->set_saldo($saldo_neu, TRUE);
-+                        $sk->set_saldo($saldo_neu);
-                     } else {
-                         $saldo_neu = $sk->get_saldo(TRUE);
-                         $sk->set_saldo_neu($saldo_neu, TRUE);
-                     }
--                    $sk->set_buchungsbetrag(Buchung::calc_saldo(abs($sk->get_buchungsbetrag(TRUE)), $sk->get_kz_berechnung(), $sk->get_kz_saldowirksam(), $sk->get_buchungskennzeichen()) * -1, TRUE);
-+                    $sk->set_buchungsbetrag(Buchung::calc_saldo(abs($sk->get_buchungsbetrag(TRUE)), $sk->get_kz_berechnung(), $sk->get_kz_saldowirksam(), $sk->get_buchungskennzeichen()) * -1);
-                     if ($sk->get_zinssatz() == NULL || $sk->get_zinssatz() == 0) {
--                        $sk->set_zinssatz($akt_tageszinssatz, TRUE);
-+                        $sk->set_zinssatz($akt_tageszinssatz);
-                     } else {
-                         $akt_tageszinssatz = $sk->get_zinssatz(TRUE);
-                     }
-
-                     if (!isset($subkonten[$sk->get_sk_lfdnr()])) {
--                        $subkonten[$sk->get_sk_lfdnr()] = array();
-+                        $subkonten[$sk->get_sk_lfdnr()] = [];
-                     }
-                     array_push($subkonten[$sk->get_sk_lfdnr()], $sk);
-                 }
-@@ Line 1502 @@
-                 $sk_save = $sk;
-             }
- //exit;
--            $subkonten_return["sk_lfdnr"] = array();
-+            $subkonten_return["sk_lfdnr"] = [];
-             $tz_sum = 0;
-             $datum_start_done = FALSE;
-             $anz_tgz = 0;
 @@ Line 1564 @@
 
      public static function get_tage($dat_start, $dat_ende, $anz_total_tage, $ignore_first_day, $max_tage = CONF_TGZ_MAX_DAYS) {
@@ -4158,12 +1989,10 @@ Applied rules:
     ----------- end diff -----------
 
 Applied rules:
- * LongArrayToShortArrayRector
- * RemoveExtraParametersRector
  * NullToStrictStringFuncCallArgRector
 
 
-85) ../../web/htdocs/kimi_ET/libs/entities/subkonto_1.php:87
+47) ../../web/htdocs/kimi_ET/libs/entities/subkonto_1.php:87
 
     ---------- begin diff ----------
 @@ Line 87 @@
@@ -4220,80 +2049,6 @@ Applied rules:
              $this->item["datum_debsaldo"] = NULL;
              return;
          }
-@@ Line 847 @@
-                 ORDER BY 1";
-         try {
-             $result = App::$CURRENT->DB->query($query);
--            $response = array();
-+            $response = [];
-             foreach ($result as $item) {
-                 array_push($response, new Subkonto($item));
-             }
-@@ Line 867 @@
-                 WHERE k.kdnr = '$kdnr' AND s.kz_aktuell = 'J'" . $order;
-         try {
-             $result = App::$CURRENT->DB->query($query);
--            $response = array();
-+            $response = [];
-             foreach ($result as $item) {
-                 array_push($response, new Subkonto($item));
-             }
-@@ Line 910 @@
-         $query .= " ORDER BY $order LIMIT $start, $count";
-         try {
-             $items = App::$CURRENT->DB->query($query);
--            $subkonten = array();
-+            $subkonten = [];
-             foreach ($items as $value) {
-                 array_push($subkonten, new Subkonto($value));
-             }
-@@ Line 940 @@
-                 LIMIT $start, $count";
-         try {
-             $result = App::$CURRENT->DB->query($query);
--            $subkonten = array();
-+            $subkonten = [];
-             foreach ($result as $item) {
-                 array_push($subkonten, new Subkonto($item));
-             }
-@@ Line 1208 @@
-         exit;
-         try {
-             $items = App::$CURRENT->DB->query($query);
--            $subkonten = array();
--            $subkonten_return = array();
-+            $subkonten = [];
-+            $subkonten_return = [];
-             $finished = FALSE;
-             $last_sk_lfdnr = 0;
-             $saldo_neu = 0;
-@@ Line 1236 @@
-                     $sk_new->set_bugru_text(null);
-                     $sk_new->set_buchungsbetrag(null);
-                     $sk_new->set_saldo_neu($sk_new->get_saldo());
--                    $subkonten[$sk->get_sk_lfdnr()] = array();
-+                    $subkonten[$sk->get_sk_lfdnr()] = [];
-                     array_push($subkonten[$sk_new->get_sk_lfdnr()], $sk_new);
-                 }
-
-@@ Line 1260 @@
-                     }
-
-                     if (!isset($subkonten[$sk->get_sk_lfdnr()])) {
--                        $subkonten[$sk->get_sk_lfdnr()] = array();
-+                        $subkonten[$sk->get_sk_lfdnr()] = [];
-                     }
-                     array_push($subkonten[$sk->get_sk_lfdnr()], $sk);
-                 }
-@@ Line 1273 @@
-                 $sk_save = $sk;
-             }
-
--            $subkonten_return["sk_lfdnr"] = array();
-+            $subkonten_return["sk_lfdnr"] = [];
-             $tz_sum = 0;
-             $datum_start_done = FALSE;
-             $anz_tgz = 0;
 @@ Line 1322 @@
 
      public static function get_tage($dat_start, $dat_ende, $anz_total_tage, $ignore_first_day) {
@@ -4306,22 +2061,12 @@ Applied rules:
     ----------- end diff -----------
 
 Applied rules:
- * LongArrayToShortArrayRector
  * NullToStrictStringFuncCallArgRector
 
 
-86) ../../web/htdocs/kimi_ET/libs/entities/subkonto_s.php:16
+48) ../../web/htdocs/kimi_ET/libs/entities/subkonto_s.php:87
 
     ---------- begin diff ----------
-@@ Line 16 @@
-
-     public function __construct($item) {
-         $this->item = (array) $item;
--        $this->add_informations($item, TRUE);
-+        $this->add_informations($item);
-     }
-
-     public function add_informations($informations, $sql_valid = false) {
 @@ Line 87 @@
      }
 
@@ -4376,99 +2121,6 @@ Applied rules:
              $this->item["datum_debsaldo"] = NULL;
              return;
          }
-@@ Line 913 @@
-                 ORDER BY 1";
-         try {
-             $result = App::$CURRENT->DB->query($query);
--            $response = array();
-+            $response = [];
-             foreach ($result as $item) {
-                 array_push($response, new Subkonto($item));
-             }
-@@ Line 933 @@
-                 WHERE k.kdnr = '$kdnr' AND s.kz_aktuell = 'J'" . $order;
-         try {
-             $result = App::$CURRENT->DB->query($query);
--            $response = array();
-+            $response = [];
-             foreach ($result as $item) {
-                 array_push($response, new Subkonto($item));
-             }
-@@ Line 976 @@
-         $query .= " ORDER BY $order LIMIT $start, $count";
-         try {
-             $items = App::$CURRENT->DB->query($query);
--            $subkonten = array();
-+            $subkonten = [];
-             foreach ($items as $value) {
-                 array_push($subkonten, new Subkonto($value));
-             }
-@@ Line 1006 @@
-                 LIMIT $start, $count";
-         try {
-             $result = App::$CURRENT->DB->query($query);
--            $subkonten = array();
-+            $subkonten = [];
-             foreach ($result as $item) {
-                 array_push($subkonten, new Subkonto($item));
-             }
-@@ Line 1285 @@
-         $query .= " ORDER BY $order ";
-         try {
-             $items = App::$CURRENT->DB->query($query);
--            $subkonten = array();
--            $subkonten_return = array();
-+            $subkonten = [];
-+            $subkonten_return = [];
-             $finished = FALSE;
-             $last_sk_lfdnr = 0;
-             $saldo_neu = 0;
-@@ Line 1311 @@
-                     $sk_new->set_bugru_key_om(null);
-                     $sk_new->set_buart_text(TXT_LBL_TGZ_AUFGEL_ZINSEN_BIS . " " . $stichtag);
-                     $sk_new->set_bugru_text(null);
--                    $sk_new->set_buchungsbetrag(0, TRUE);
-+                    $sk_new->set_buchungsbetrag(0);
-                     $sk_new->set_saldo_neu($sk_new->get_saldo(TRUE));
--                    $subkonten[$sk->get_sk_lfdnr()] = array();
-+                    $subkonten[$sk->get_sk_lfdnr()] = [];
-                     array_push($subkonten[$sk_new->get_sk_lfdnr()], $sk_new);
-                 }
-
-@@ Line 1323 @@
-                     if ( isset($sk_save) && ( $sk->get_saldo() == NULL || $sk->get_saldo(TRUE) == 0) ) {
-                         $saldo_neu += Buchung::calc_saldo($sk_save->get_buchungsbetrag(TRUE), $sk_save->get_kz_berechnung(), $sk_save->get_kz_saldowirksam(), $sk_save->get_buchungskennzeichen());
-                         $sk->set_saldo_neu($saldo_neu, TRUE);
--                        $sk->set_saldo($saldo_neu, TRUE);
-+                        $sk->set_saldo($saldo_neu);
-                     } else {
-                         $saldo_neu = $sk->get_saldo(TRUE);
-                         $sk->set_saldo_neu($saldo_neu, TRUE);
-                     }
--                    $sk->set_buchungsbetrag(Buchung::calc_saldo($sk->get_buchungsbetrag(TRUE), $sk->get_kz_berechnung(), $sk->get_kz_saldowirksam(), $sk->get_buchungskennzeichen()) * -1, TRUE);
-+                    $sk->set_buchungsbetrag(Buchung::calc_saldo($sk->get_buchungsbetrag(TRUE), $sk->get_kz_berechnung(), $sk->get_kz_saldowirksam(), $sk->get_buchungskennzeichen()) * -1);
-                     if ($sk->get_zinssatz() == NULL || $sk->get_zinssatz(TRUE) == 0) {
--                        $sk->set_zinssatz($akt_tageszinssatz, TRUE);
-+                        $sk->set_zinssatz($akt_tageszinssatz);
-                     } else {
-                         $akt_tageszinssatz = $sk->get_zinssatz(TRUE);
-                     }
-
-                     if (!isset($subkonten[$sk->get_sk_lfdnr()])) {
--                        $subkonten[$sk->get_sk_lfdnr()] = array();
-+                        $subkonten[$sk->get_sk_lfdnr()] = [];
-                     }
-                     array_push($subkonten[$sk->get_sk_lfdnr()], $sk);
-                 }
-@@ Line 1349 @@
-                 $sk_save = $sk;
-             }
-
--            $subkonten_return["sk_lfdnr"] = array();
-+            $subkonten_return["sk_lfdnr"] = [];
-             $tz_sum = 0;
-             $datum_start_done = FALSE;
-             $anz_tgz = 0;
 @@ Line 1400 @@
 
      public static function get_tage($dat_start, $dat_ende, $anz_total_tage, $ignore_first_day) {
@@ -4481,30 +2133,10 @@ Applied rules:
     ----------- end diff -----------
 
 Applied rules:
- * LongArrayToShortArrayRector
- * RemoveExtraParametersRector
  * NullToStrictStringFuncCallArgRector
 
 
-87) ../../web/htdocs/kimi_ET/libs/entities/text.php:71
-
-    ---------- begin diff ----------
-@@ Line 71 @@
-         $query = "SELECT * FROM $table_name WHERE mandant_id = " . App::$CURRENT->MANDANT->get_id().$where;
-
-         try {
--            $result = array();
-+            $result = [];
-             $response = App::$CURRENT->DB->query($query);
-             
-             foreach ($response as $item) {
-    ----------- end diff -----------
-
-Applied rules:
- * LongArrayToShortArrayRector
-
-
-88) ../../web/htdocs/kimi_ET/libs/entities/ticket.php:253
+49) ../../web/htdocs/kimi_ET/libs/entities/ticket.php:253
 
     ---------- begin diff ----------
 @@ Line 253 @@
@@ -4543,15 +2175,6 @@ Applied rules:
              $this->item["geburtsdatum"] = NULL;
              return;
          }
-@@ Line 724 @@
-
-     public function __construct($item = null, $sql_valid = FALSE) {
- 		if (isset($item)) {
--            $this->item = array();
-+            $this->item = [];
-             $item = (array) $item;
-
-             foreach($item as $key => $value) {
 @@ Line 756 @@
      }
 
@@ -4687,23 +2310,13 @@ Applied rules:
                  $this->item["dummy_date10"] = NULL;
                  return;
              }
-@@ Line 2551 @@
-         $query .= " ORDER BY 1 LIMIT $start, $count";
-
-         try {
--            $response = array();
-+            $response = [];
-             $result = App::$CURRENT->DB->query($query);
-
-             foreach($result as $item) {
     ----------- end diff -----------
 
 Applied rules:
- * LongArrayToShortArrayRector
  * NullToStrictStringFuncCallArgRector
 
 
-89) ../../web/htdocs/kimi_ET/libs/entities/ticket_historie.php:119
+50) ../../web/htdocs/kimi_ET/libs/entities/ticket_historie.php:119
 
     ---------- begin diff ----------
 @@ Line 119 @@
@@ -4742,15 +2355,6 @@ Applied rules:
              $this->item["geburtsdatum"] = NULL;
              return;
          }
-@@ Line 486 @@
-     }
-
-     public function __construct($item) {
--        $this->item = array();
-+        $this->item = [];
-         $item = (array) $item;
-
-         foreach ($item as $key => $value) {
 @@ Line 516 @@
      }
 
@@ -4868,23 +2472,13 @@ Applied rules:
                  $this->item["dummy_date10"] = NULL;
                  return;
              }
-@@ Line 1884 @@
-         $query .= " ORDER BY 1 LIMIT $start, $count";
-
-         try {
--            $response = array();
-+            $response = [];
-             $result = App::$CURRENT->DB->query($query);
-
-             foreach ($result as $item) {
     ----------- end diff -----------
 
 Applied rules:
- * LongArrayToShortArrayRector
  * NullToStrictStringFuncCallArgRector
 
 
-90) ../../web/htdocs/kimi_ET/libs/entities/ticket_sich20150208.php:119
+51) ../../web/htdocs/kimi_ET/libs/entities/ticket_sich20150208.php:119
 
     ---------- begin diff ----------
 @@ Line 119 @@
@@ -4923,15 +2517,6 @@ Applied rules:
              $this->item["geburtsdatum"] = NULL;
              return;
          }
-@@ Line 484 @@
-     }
-
-     public function __construct($item) {
--        $this->item = array();
-+        $this->item = [];
-         $item = (array) $item;
-
-         foreach ($item as $key => $value) {
 @@ Line 514 @@
      }
 
@@ -4959,350 +2544,11 @@ Applied rules:
              $this->item["ende"] = NULL;
              return;
          }
-@@ Line 1127 @@
-         $query .= " ORDER BY 1 LIMIT $start, $count";
-
-         try {
--            $response = array();
-+            $response = [];
-             $result = App::$CURRENT->DB->query($query);
-
-             foreach ($result as $item) {
     ----------- end diff -----------
 
 Applied rules:
- * LongArrayToShortArrayRector
  * NullToStrictStringFuncCallArgRector
 
 
-91) ../../web/htdocs/kimi_ET/libs/entities/titel.php:1
-
-    ---------- begin diff ----------
-@@ Line 1 @@
- <?php
-
-
-@@ Line 24 @@
-
- class Titel {
-
--    private $item;
--
--    
--
-     public function get_id() {
-
-         return $this->item->id;
-@@ Line 42 @@
-
-     
-
--    public function __construct($item) {
--
--        $this->item = $item;
--
-+    public function __construct(private $item)
-+    {
-     }
-
-     
-@@ Line 54 @@
-
-         $query = "SELECT * FROM titel";
-
--        $result = array();
-+        $result = [];
-
-         $response = App::$CURRENT->DB->query($query);
-    ----------- end diff -----------
-
-Applied rules:
- * LongArrayToShortArrayRector
- * ClassPropertyAssignToConstructorPromotionRector
-
-
-92) ../../web/htdocs/kimi_ET/libs/entities/user.php:1
-
-    ---------- begin diff ----------
-@@ Line 1 @@
- <?php
-
- /*
-@@ Line 19 @@
-  */
- class User {
-
--    private $item;
--
-     public function get_id() {
-
-         return $this->item->id;
-@@ Line 85 @@
-     }
-
-
--    public function __construct($user) {
--        $this->item = $user;
-+    public function __construct(private $item)
-+    {
-     }
-
-     public function get_letzte_kampagne_id($sql_valid = FALSE) {
-@@ Line 120 @@
-     }
-
-     public function set_default_belegdatum($val) {
--        if (strlen($val) == 0) {
-+        if (strlen((string) $val) == 0) {
-             $this->item->default_belegdatum = NULL;
-             return;
-         }
-@@ Line 132 @@
-     public static function login($name, $passwort) {
-
-         $passwort = self::encrypt($passwort);
--        $passwort = substr($passwort, 0, 64);
-+        $passwort = substr((string) $passwort, 0, 64);
-
-         $query = "SELECT * FROM benutzer WHERE (name = '$name' OR email = '$name') AND passwort = '$passwort'";
-
-@@ Line 165 @@
-             WHERE mb.mandant_id = " . App::$CURRENT->MANDANT->get_id();
-
-         try {
--            $result = array();
-+            $result = [];
-             $response = App::$CURRENT->DB->query($query);
-
-             foreach ($response as $item) {
-    ----------- end diff -----------
-
-Applied rules:
- * LongArrayToShortArrayRector
- * ClassPropertyAssignToConstructorPromotionRector
- * NullToStrictStringFuncCallArgRector
-
-
-93) ../../web/htdocs/kimi_ET/libs/entities/user_sich20150208.php:1
-
-    ---------- begin diff ----------
-@@ Line 1 @@
- <?php
-
- /*
-@@ Line 19 @@
-  */
- class User {
-
--    private $item;
--
-     public function get_id() {
-
-         return $this->item->id;
-@@ Line 78 @@
-         return $this->item->sprache;
-     }
-
--    public function __construct($user) {
--
--        $this->item = $user;
-+    public function __construct(private $item)
-+    {
-     }
-
-     public function get_default_bua_bgr_key($sql_valid = FALSE) {
-@@ Line 107 @@
-     }
-
-     public function set_default_belegdatum($val) {
--        if (strlen($val) == 0) {
-+        if (strlen((string) $val) == 0) {
-             $this->item->default_belegdatum = NULL;
-             return;
-         }
-@@ Line 119 @@
-     public static function login($name, $passwort) {
-
-         $passwort = self::encrypt($passwort);
--        $passwort = substr($passwort, 0, 64);
-+        $passwort = substr((string) $passwort, 0, 64);
-
-         $query = "SELECT * FROM benutzer WHERE (name = '$name' OR email = '$name') AND passwort = '$passwort'";
-
-@@ Line 139 @@
-             WHERE mb.mandant_id = " . App::$CURRENT->MANDANT->get_id();
-
-         try {
--            $result = array();
-+            $result = [];
-             $response = App::$CURRENT->DB->query($query);
-
-             foreach ($response as $item) {
-    ----------- end diff -----------
-
-Applied rules:
- * LongArrayToShortArrayRector
- * ClassPropertyAssignToConstructorPromotionRector
- * NullToStrictStringFuncCallArgRector
-
-
-94) ../../web/htdocs/kimi_ET/libs/entities/versicherung.php:103
-
-    ---------- begin diff ----------
-@@ Line 103 @@
-     }
-
-     public function set_dat_abschluss($val) { {
--            if (strlen($val) == 0) {
-+            if (strlen((string) $val) == 0) {
-                 $this->item["dat_abschluss"] = NULL;
-                 return;
-             }
-@@ Line 148 @@
-     }
-
-     public function set_dat_storno($val) { {
--            if (strlen($val) == 0) {
-+            if (strlen((string) $val) == 0) {
-                 $this->item["dat_storno"] = NULL;
-                 return;
-             }
-@@ Line 193 @@
-     }
-
-     public function set_dat_meldung_abschluss($val) { {
--            if (strlen($val) == 0) {
-+            if (strlen((string) $val) == 0) {
-                 $this->item["dat_meldung_abschluss"] = NULL;
-                 return;
-             }
-@@ Line 220 @@
-     }
-
-     public function set_dat_info_aend_bed($val) { {
--            if (strlen($val) == 0) {
-+            if (strlen((string) $val) == 0) {
-                 $this->item["dat_info_aend_bed"] = NULL;
-                 return;
-             }
-@@ Line 257 @@
-         $query .= " ORDER BY $order LIMIT $start, $count";
-         try {
-             $items = App::$CURRENT->DB->query($query);
--            $versicherungen = array();
-+            $versicherungen = [];
-             foreach ($items as $value) {
-                 array_push($versicherungen, new Versicherung($value));
-             }
-    ----------- end diff -----------
-
-Applied rules:
- * LongArrayToShortArrayRector
- * NullToStrictStringFuncCallArgRector
-
-
-95) ../../web/htdocs/kimi_ET/libs/entities/verwaltungssatz.php:1
-
-    ---------- begin diff ----------
-@@ Line 1 @@
- <?php
- /*
-  * To change this template, choose Tools | Templates
-@@ Line 10 @@
-  */
- class Verwaltungssatz {
-
--    private $item;
-     public function get_id() {
-         return $this->item->id;
-     }
-@@ Line 75 @@
-
-    
-     public function set_buchungsdatum($val, $sql_valid = FALSE) { {
--            if (strlen($val) == 0) {
-+            if (strlen((string) $val) == 0) {
-                 $this->item["buchungsdatum"] = NULL;
-                 return;
-             }
-@@ Line 104 @@
-     }
-
-     public function set_stichtag1($val, $sql_valid = FALSE) { {
--            if (strlen($val) == 0) {
-+            if (strlen((string) $val) == 0) {
-                 $this->item["stichtag1"] = NULL;
-                 return;
-             }
-@@ Line 132 @@
-     }
-
-     public function set_stichtag2($val, $sql_valid = FALSE) { {
--            if (strlen($val) == 0) {
-+            if (strlen((string) $val) == 0) {
-                 $this->item["stichtag2"] = NULL;
-                 return;
-             }
-@@ Line 160 @@
-     }
-
-     public function set_stichtag3($val, $sql_valid = FALSE) { {
--            if (strlen($val) == 0) {
-+            if (strlen((string) $val) == 0) {
-                 $this->item["stichtag3"] = NULL;
-                 return;
-             }
-@@ Line 188 @@
-     }
-
-     public function set_stichtag4($val, $sql_valid = FALSE) { {
--            if (strlen($val) == 0) {
-+            if (strlen((string) $val) == 0) {
-                 $this->item["stichtag4"] = NULL;
-                 return;
-             }
-@@ Line 216 @@
-     }
-
-     public function set_stichtag5($val, $sql_valid = FALSE) { {
--            if (strlen($val) == 0) {
-+            if (strlen((string) $val) == 0) {
-                 $this->item["stichtag5"] = NULL;
-                 return;
-             }
-@@ Line 226 @@
-         }
-     }
-     
--    public function __construct($item) {
--        $this->item = $item;
-+    public function __construct(private $item)
-+    {
-     }
-
-     public static function get_aktuell2($mandant_id, $markt) {
-@@ Line 238 @@
-                 ." ORDER BY buchungsdatum desc";
-         try {    
-         $result = App::$CURRENT->DB->query($query);
--        $verwaltungssatz= array();
-+        $verwaltungssatz= [];
-             
-             foreach ($result as $item) {
-                 array_push($verwaltungssatz, new Verwaltungssatz($item));
-    ----------- end diff -----------
-
-Applied rules:
- * LongArrayToShortArrayRector
- * ClassPropertyAssignToConstructorPromotionRector
- * NullToStrictStringFuncCallArgRector
-
-
- [ERROR] Could not process                                                      
-         "../../web/htdocs/kimi_ET/kimibatch/coeochdeexptest.php" file, due to: 
-         "Syntax error, unexpected T_STRING, Syntax error, unexpected           
-         T_CONSTANT_ENCAPSED_STRING, Syntax error, unexpected                   
-         T_CONSTANT_ENCAPSED_STRING, Syntax error, unexpected                   
-         T_CONSTANT_ENCAPSED_STRING, Syntax error, unexpected                   
-         T_CONSTANT_ENCAPSED_STRING". On line: 24                               
+ [OK] 51 files would have been changed (dry-run) by Rector                      
 

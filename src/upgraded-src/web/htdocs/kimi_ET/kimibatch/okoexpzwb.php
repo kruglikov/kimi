@@ -152,8 +152,8 @@ while ($line = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
 	// being transformed into a newline
 	$textzeile1 = $korrezeichen.' ';
 	$textzeile1 = str_pad($textzeile1, 70, ' ');   /* mit blank auffüllen */
-	$textzeile2 = str_pad($textzeile2, 70, ' ');   /* mit blank auffüllen */
-	$textzeile3 = str_pad($textzeile3, 70, ' ');   /* mit blank auffüllen */
+	$textzeile2 = str_pad((string) $textzeile2, 70, ' ');   /* mit blank auffüllen */
+	$textzeile3 = str_pad((string) $textzeile3, 70, ' ');   /* mit blank auffüllen */
 	$string= $aktnr.$vorlage.$textzeile1.$textzeile2.$textzeile3.'00000000 '."\n";
     fwrite($fp, $string); // will proccess /n as newline ... 
 

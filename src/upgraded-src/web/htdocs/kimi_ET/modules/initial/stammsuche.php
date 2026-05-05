@@ -14,7 +14,7 @@ if (param("reset", FALSE)) {
 
 $site = param("s", 0);
 $site_count = CONF_PORTAL_LINE_PER_SITE;
-$kdnr = ltrim(param("kdnr", sess("kdnr", "", "ss-")), "0");
+$kdnr = ltrim((string) param("kdnr", sess("kdnr", "", "ss-")), "0");
 $zahltag = param("zahltag", sess("zahltag", "", "ss-"));
 $abrechnungstag = param("abrechnungstag", sess("abrechnungstag", "", "ss-"));
 $mahnsperre = param("mahnsperre", sess("mahnsperre", "", "ss-"));
@@ -40,7 +40,7 @@ else {
     unset($_SESSION["ss-zahltag"]);
 }
 
-if (strlen($abrechnungstag) != 0) {
+if (strlen((string) $abrechnungstag) != 0) {
     $new_date = date_create($abrechnungstag);
     $new_date = date_format($new_date, "Y-m-d");
     $filter["stichtag"] = "s.stichtag = '$new_date'";
@@ -50,7 +50,7 @@ else {
     unset($filter["stichtag"]);
     unset($_SESSION["ss-abrechnungstag"]);
 }
-if (strlen($mahnsperre) != 0) {
+if (strlen((string) $mahnsperre) != 0) {
     $filter["mahnsperre"] = "s.mahnsperre LIKE '$mahnsperre'";
     $_SESSION["ss-mahnsperre"] = $mahnsperre;
 }
@@ -59,7 +59,7 @@ else {
     unset($_SESSION["ss-mahnsperre"]);
 }
 
-if (strlen($mahnsperre_datum) != 0) {
+if (strlen((string) $mahnsperre_datum) != 0) {
     $new_date = date_create($mahnsperre_datum);
     $new_date = date_format($new_date, "Y-m-d");
     $filter["mahnsperre_datum"] = "s.mahnsperre_datum = '$new_date'";

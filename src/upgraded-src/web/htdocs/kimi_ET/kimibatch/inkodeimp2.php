@@ -93,7 +93,7 @@ foreach ($lines as $line_num => $line) {
 	//20170127 AR: wenn nicht UTF-8 dann konvertieren
 	$line = convert2Utf8($line);
 
-    echo "Line #<b>{$line_num}</b> : " . htmlspecialchars($line) . "<br />\n";
+    echo "Line #<b>{$line_num}</b> : " . htmlspecialchars((string) $line) . "<br />\n";
 	
 }
 // Loop through our array, show HTML source as HTML source; and line numbers too.

@@ -19,7 +19,7 @@ $aufgabe = param("aufgabe", "");
 $nachname = param("nachname", "");
 $vorname = param("vorname", "");
 $benutzer_id = param("benutzer_id", "");
-$kdnr = ltrim(param("kundennummer", ""), "0");
+$kdnr = ltrim((string) param("kundennummer", ""), "0");
 $plz = param("plz", "");
 $ort = param("ort", "");
 $strasse = param("strasse", "");
@@ -33,54 +33,54 @@ $wiedervorlage = param("wiedervorlage", "");
 $site = param("s", 0);
 
 
-if (strlen($tnr) > 0) {
+if (strlen((string) $tnr) > 0) {
     array_push($filter, "t.ticketnr = $tnr");
 }
-if (strlen($status_id) > 0 && $status_id != -1) {
+if (strlen((string) $status_id) > 0 && $status_id != -1) {
     array_push($filter, "t.status_id = $status_id");
 }
-if (strlen($aufgabe) > 0) {
+if (strlen((string) $aufgabe) > 0) {
     array_push($filter, "t.beschreibung_detail LIKE '%$aufgabe%'");
 }
-if (strlen($nachname) > 0) {
+if (strlen((string) $nachname) > 0) {
     array_push($filter, "t.nachname LIKE '%$nachname%'");
 }
-if (strlen($vorname) > 0) {
+if (strlen((string) $vorname) > 0) {
     array_push($filter, "t.nachname LIKE '%$vorname%'");
 }
-if (strlen($benutzer_id) > 0 && $benutzer_id != -1) {
+if (strlen((string) $benutzer_id) > 0 && $benutzer_id != -1) {
     array_push($filter, "t.benutzer_id = $benutzer_id");
 }
 if (strlen($kdnr) > 0) {
     array_push($filter, "t.kundennummer = '$kdnr'");
 }
-if (strlen($plz) > 0) {
+if (strlen((string) $plz) > 0) {
     array_push($filter, "t.plz LIKE '%$plz%'");
 }
-if (strlen($ort) > 0) {
+if (strlen((string) $ort) > 0) {
     array_push($filter, "t.ort LIKE '%$ort%'");
 }
-if (strlen($strasse) > 0) {
+if (strlen((string) $strasse) > 0) {
     array_push($filter, "t.strasse LIKE '%$strasse%'");
 }
-if (strlen($hausnummer) > 0) {
+if (strlen((string) $hausnummer) > 0) {
     array_push($filter, "t.hausnummer = $hausnummer");
 }
-if (strlen($prioritaet_id) > 0 && $prioritaet_id != -1) {
+if (strlen((string) $prioritaet_id) > 0 && $prioritaet_id != -1) {
     array_push($filter, "t.prioritaet_id = $prioritaet_id");
 }
-if (strlen($beginn) > 0) {
+if (strlen((string) $beginn) > 0) {
     $date = date_create($beginn);
     array_push($filter, "t.beginn = '" . date_format($date, "Y-m-d H:i:s") . "'");
 }
-if (strlen($ende) > 0) {
+if (strlen((string) $ende) > 0) {
     $date = date_create($ende);
     array_push($filter, "t.ende = '" . date_format($date, "Y-m-d H:i:s") . "'");
 }
-if (strlen($aufwand) > 0) {
+if (strlen((string) $aufwand) > 0) {
     array_push($filter, "t.aufwand = $aufwand");
 }
-if (strlen($wiedervorlage) > 0) {
+if (strlen((string) $wiedervorlage) > 0) {
     $date = date_create($wiedervorlage);
     array_push($filter, "t.wiedervorlage = '" . date_format($date, "Y-m-d H:i:s") . "'");
 }

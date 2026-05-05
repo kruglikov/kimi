@@ -50,7 +50,7 @@ require_once './libs/entities/akt.php';
 // 20160710/Roni
 require_once './libs/entities/anrufzeiten.php';
 
-function throw_exception($message = null, $code = null) {
+function throw_exception($message = null, $code = null): never {
     throw new Exception($message, $code);
 }
 
