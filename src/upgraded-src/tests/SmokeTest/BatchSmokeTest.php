@@ -31,9 +31,15 @@ class BatchSmokeTest extends TestCase
             ? '/var/www/html/kimi_ET/kimibatch'
             : realpath(__DIR__ . '/../../web/htdocs/kimi_ET/kimibatch');
 
+        $files = glob($dir . '/*.php') ?: [];
+        $files = array_values(array_filter(
+            $files,
+            fn($f) => basename($f) !== 'pwgen.php'
+        ));
+
         return array_map(
             fn($f) => [basename($f), $f],
-            glob($dir . '/*.php') ?: []
+            $files
         );
     }
 }

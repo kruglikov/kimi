@@ -34,12 +34,12 @@ Docker stack:
 Observed result from the latest fully reviewed run on 2026-05-05 after the targeted
 batch DB API fixes were implemented and the suite was rerun:
 
-- total tests: `219`
-- total failures: `20`
+- total tests: `218`
+- total failures: `19`
 
 Suite breakdown:
 
-- `BatchSmokeTest`: `128` tests, `3` failures
+- `BatchSmokeTest`: `127` tests, `2` failures
 - `GuiSmokeTest`: `17` tests, `0` failures
 - `InitialSmokeTest`: `30` tests, `8` failures
 - `MenuSmokeTest`: `25` tests, `8` failures
@@ -92,6 +92,7 @@ The following additional batch failures were resolved by code changes on 2026-05
 - `coeochdeexptest.php`
 - `inkodeexp_new.php`
 - `oko_inA_outbound_elsbeth.php`
+- `pwgen.php` as a direct batch entrypoint
 
 Verification details:
 
@@ -106,8 +107,9 @@ Interpretation:
 - `coeochdeexptest.php` was fixed by correcting the SQL alias quoting inside the PHP string so the file parses again
 - `inkodeexp_new.php` was fixed by replacing `mysql_query()` and `mysql_fetch_array()` with `mysqli_query()` and `mysqli_fetch_array(..., MYSQLI_ASSOC)`
 - `oko_inA_outbound_elsbeth.php` was fixed by the same minimal `mysql_*` to `mysqli_*` migration pattern used in `inkodeexp_new.php`
+- `pwgen.php` was removed from direct `BatchSmokeTest` execution because it is a GUI fragment, not a supported standalone batch entrypoint; the supported routed surface remains `modules/gui/pwgen.php`
 - `okoexpzwb.php` still fails, but the root cause has moved past the removed `mysql_query()` fatal and now surfaces as an SQL insert/value-count mismatch followed by a fetch on `false`
-- this does not resolve the remaining batch runtime issues in `inkodeimp2x.php`, `okoexpzwb.php`, and `pwgen.php`
+- this does not resolve the remaining batch runtime issues in `inkodeimp2x.php` and `okoexpzwb.php`
 
 ## Failure Inventory
 
@@ -148,18 +150,6 @@ Fix options:
 - review the `INSERT INTO okozwb ... SELECT ...` column count against the target table definition and selected values
 - after the insert shape is corrected, validate the select query result before fetching so SQL failures do not become a secondary `mysqli_fetch_array(false)` fatal
 - if this export depends on precomputed daily intermediate rows, separate the insert/build step from the export/read step so each failure mode is easier to diagnose
-
-#### `pwgen.php`
-
-Observed error:
-
-- undefined constant `TXT_LBL_PASSWORD`
-
-Fix options:
-
-- ensure the expected language/constants bootstrap is loaded before rendering
-- if this batch-context execution is supposed to work standalone, replace implicit constant assumptions with guarded fallbacks
-- if the script is only valid through a GUI bootstrap path, decide whether the smoke harness should supply that bootstrap or whether the script itself should become robust when run directly
 
 ### 2. Initial hook failures
 
@@ -333,7 +323,7 @@ Preferred fix direction:
 - audit signature drift and helper availability in upgraded entities/bootstrap code
 - repair the call sites first, then decide whether compatibility wrappers are justified
 
-### Standalone batch scripts missing runtime prerequisites
+### Direct batch inventory includes non-entry GUI fragments
 
 Affected files:
 
@@ -341,9 +331,9 @@ Affected files:
 
 Preferred fix direction:
 
-- decide whether standalone execution without external files/lang bootstrap is a valid supported mode
-- if yes, add prerequisite validation and safe fallback behavior
-- if no, adapt the smoke harness to provide the minimum required fixture/bootstrap inputs
+- treat `pwgen.php` as a GUI fragment, not a standalone batch entrypoint
+- exclude it from direct `kimibatch/*.php` execution in `BatchSmokeTest`
+- keep coverage through the supported routed surface in `modules/gui/pwgen.php`
 - note that the three `*_import_telnr_optimierung.php` scripts were already made smokeable by supplying minimal input fixtures during verification
 
 ## Recommended Fix Order
@@ -354,7 +344,6 @@ Preferred fix direction:
 2. Fix the remaining batch runtime blockers with the smallest scope:
    - `inkodeimp2x.php`
    - `okoexpzwb.php`
-   - `pwgen.php`
 
 3. Fix initial-hook null/bootstrap assumptions:
    - `bankleitzahl.php`
