@@ -231,9 +231,10 @@ class Verwaltungssatz {
     }
 
     public static function get_aktuell2($mandant_id, $markt) {
+        $markt = App::$CURRENT->DB->escape_string($markt);
 
         $query = "SELECT * FROM verwaltungssatz"
-                . " WHERE mandant_id = $mandant_id AND markt = $markt"
+                . " WHERE mandant_id = $mandant_id AND markt = '$markt'"
                 . " AND kz_aktuell = 'J'"
                 ." ORDER BY buchungsdatum desc";
         try {    
@@ -263,9 +264,10 @@ class Verwaltungssatz {
     
     
   public static function get_aktuell($mandant_id, $markt) {
+        $markt = App::$CURRENT->DB->escape_string($markt);
 
         $query = "SELECT * FROM verwaltungssatz"
-                . " WHERE mandant_id = $mandant_id AND markt = $markt"
+                . " WHERE mandant_id = $mandant_id AND markt = '$markt'"
                 . " AND kz_aktuell = 'J'"
                 ." ORDER BY buchungsdatum desc";
         try {
