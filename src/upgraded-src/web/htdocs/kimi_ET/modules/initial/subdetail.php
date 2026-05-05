@@ -124,7 +124,7 @@ if ($mode == "INS") {
 
 $subkonten = Subkonto::get_all_for_subkonto($subkonto_id, $site * $site_count, $site_count);
 $verwaltungssatz = Verwaltungssatz::get_aktuell2(App::$CURRENT->MANDANT->get_id(), $kunde->get_markt());
-if (count($subkonten) > 0) {
+if (is_array($subkonten) && count($subkonten) > 0) {
     if (!isset($cur_subkonto_id)) {
         $first = $subkonten[0];
     } else {

@@ -64,7 +64,7 @@ if ( 1==1 || $sblz != NULL || $sbank != NULL) {
 
     $bankleitzahl = Bankleitzahl::load_items($sblz, $sbank, $site * $site_count, $site_count);
 
-    if (count($bankleitzahl) > 0) {
+    if (is_array($bankleitzahl) && count($bankleitzahl) > 0) {
         if (!isset($cur_id)) {
             $first = $bankleitzahl[0];
         } else {

@@ -26,6 +26,14 @@ function isEmpty($value, $checkZero = false) {
 	return $result;
 }
 
+function fetchAssocOrFalse($result) {
+	if ($result === false) {
+		return false;
+	}
+
+	return mysqli_fetch_assoc($result);
+}
+
 function getTicketIdFromPhone ($dbconn, $queueName, $phoneNo, &$ticket_id, &$mandant_name, &$projekt, &$ticketNr, &$mandantId, &$kampId ) {
     $ticket_id = "";
     $ticketData = FALSE;
@@ -44,7 +52,7 @@ function getTicketIdFromPhone ($dbconn, $queueName, $phoneNo, &$ticket_id, &$man
         // Ermittle Mandant-ID
         $sql = "select id, text, getCleanPhoneNoN('$phoneNo', '', false) phoneNo from mandant where clid_name = '$queueName';";
         $result = mysqli_query($dbconn, $sql);
-        $row = mysqli_fetch_assoc($result);
+        $row = fetchAssocOrFalse($result);
         if ($row!=false) {
 			
             $mandant_id = $row['id'];
@@ -62,7 +70,7 @@ function getTicketIdFromPhone ($dbconn, $queueName, $phoneNo, &$ticket_id, &$man
                     " and (search_telnr1 = '$phoneNo' or search_telnr2 = '$phoneNo') ". 
                     " order by 1 asc, 2 desc; ";
                     $result = mysqli_query($dbconn, $sql);
-                    $row = mysqli_fetch_assoc($result);
+                    $row = fetchAssocOrFalse($result);
                     if ($row!=false) {
                         $ticket_id = $row['ticket_id'];
 						$ticketNr = $row['ticketnr'];
@@ -84,7 +92,7 @@ function getTicketIdFromPhone ($dbconn, $queueName, $phoneNo, &$ticket_id, &$man
 							 " and status_id = $statusOffen  ".
 							 " order by ticketnr ";
 						$result = mysqli_query($dbconn, $sql);
-						$row = mysqli_fetch_assoc($result);
+						$row = fetchAssocOrFalse($result);
 						if ($row!=false) {
 							// Update Status
 							$sql = "UPDATE ticket set status_id = $statusBearbeitung ".

@@ -55,7 +55,7 @@ $max_site = $count / $site_count;
 
 $status_schadensfall = StatusSchadensfall::load_items( $site * $site_count, $site_count);
 
-if (count($status_schadensfall_id) > 0) {
+if (is_array($status_schadensfall) && count($status_schadensfall) > 0) {
     if (!isset($cur_id)) {
         $first = $status_schadensfall[0];
     } else {

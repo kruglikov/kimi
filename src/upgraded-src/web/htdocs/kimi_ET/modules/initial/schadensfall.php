@@ -99,7 +99,7 @@ $max_site = $count / $site_count;
 
 $schadensfall = Schadensfall::load_items(App::$CURRENT->MANDANT->get_id(), $kunde_nr, $site * $site_count, $site_count);
 
-if (count($schadensfall_id) > 0) {
+if (is_array($schadensfall) && count($schadensfall) > 0) {
     if (!isset($cur_id)) {
         $first = $schadensfall[0];
     } else {

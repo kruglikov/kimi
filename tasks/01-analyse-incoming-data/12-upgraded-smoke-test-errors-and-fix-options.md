@@ -36,20 +36,21 @@ batch DB API fixes, the harness-only customer-context workaround, the existing
 `IKBuero::load_all()` market-quoting fix in
 `src/upgraded-src/web/htdocs/kimi_ET/libs/entities/ra_ikbuero.php`, and the
 new `Verwaltungssatz` market-quoting fix in
-`src/upgraded-src/web/htdocs/kimi_ET/libs/entities/verwaltungssatz.php` were
-all present and the suite was rerun:
+`src/upgraded-src/web/htdocs/kimi_ET/libs/entities/verwaltungssatz.php`, plus
+the low-risk null-safe loader guards and query-result guards in the affected
+initial/top-level entrypoints, were all present and the suite was rerun:
 
 - total tests: `218`
-- total failures: `19`
+- total failures: `5`
 
 Suite breakdown:
 
 - `BatchSmokeTest`: `127` tests, `1` failure
 - `GuiSmokeTest`: `17` tests, `0` failures
-- `InitialSmokeTest`: `30` tests, `8` failures
-- `MenuSmokeTest`: `25` tests, `8` failures
+- `InitialSmokeTest`: `30` tests, `2` failures
+- `MenuSmokeTest`: `25` tests, `2` failures
 - `RouterSmokeTest`: `13` tests, `0` failures
-- `TopLevelEntrySmokeTest`: `6` tests, `1` failure
+- `TopLevelEntrySmokeTest`: `6` tests, `0` failures
 
 Important verification notes:
 
@@ -69,6 +70,8 @@ docker compose -f src/upgraded-src/docker-compose.yml run --rm \
 - that targeted rerun completed with `127` batch tests and `1` remaining batch failure, confirming that `inkodeimp2x.php` no longer fails in `BatchSmokeTest`
 - after the market quoting change in `src/upgraded-src/web/htdocs/kimi_ET/libs/entities/verwaltungssatz.php`, the full upgraded suite was rerun again with `./src/upgraded-src/tests/run-all.sh`
 - that rerun completed with the same active failure set as before: `19` total failures across `BatchSmokeTest`, `InitialSmokeTest`, `MenuSmokeTest`, and `TopLevelEntrySmokeTest`
+- after the low-risk null-safe loader guards were added in `bankleitzahl.php`, `lastschrift.php`, `schadensfall.php`, `status_schadensfall.php`, and `subdetail.php`, and after `getticketurl.php` was changed to validate raw `mysqli_query()` results before `mysqli_fetch_assoc()`, the full upgraded suite was rerun again with `./src/upgraded-src/tests/run-all.sh`
+- that rerun reduced the active failure set to `5` total failures, leaving only `okoexpzwb.php`, `subuebersicht.php`, and `ticketsuch_sich20150208.php` as the remaining root causes
 - three previous batch failures were resolved by providing the expected input fixture files
 - the final PHPUnit process again did not print its closing summary line before stalling, but the per-suite output was complete and the failure total above is derived directly from that full output
 
@@ -115,6 +118,12 @@ The following additional batch failures were resolved by code changes on 2026-05
 - `oko_inA_outbound_elsbeth.php`
 - `pwgen.php` as a direct batch entrypoint
 - `modules/initial/buchungen.php` and `modules/menu/buchungen.php` as smoke-harness-only customer bootstrap failures
+- `modules/initial/bankleitzahl.php` and `modules/menu/bankleitzahl.php`
+- `modules/initial/lastschrift.php` and `modules/menu/lastschrift.php`
+- `modules/initial/schadensfall.php` and `modules/menu/schadensfall.php`
+- `modules/initial/status_schadensfall.php` and `modules/menu/status_schadensfall.php`
+- `modules/initial/subdetail.php` and `modules/menu/subdetail.php`
+- `getticketurl.php`
 
 Verification details:
 
@@ -135,6 +144,8 @@ Interpretation:
 - this harness-only workaround removed the artificial smoke failure in `buchungen.php`, but the remaining initial/menu failures now expose deeper runtime issues that were previously masked by the missing-customer fatal
 - `IKBuero::load_all($kunde->get_markt())` is already fixed in the upgraded source by treating `markt` as a string code and emitting quoted SQL such as `WHERE markt = 'AT'` instead of `WHERE markt = AT`
 - `Verwaltungssatz::get_aktuell2()` and `Verwaltungssatz::get_aktuell()` were updated to quote and escape string market codes as well, but that fix did not change the active smoke failure count in the latest full rerun
+- the affected initial modules were then hardened so their result-list display branches only call `count()` when the loader returned an array, which removed the PHP 8 `count(null)` fatals without changing the main happy-path logic
+- `getticketurl.php` was hardened by validating the raw `mysqli_query()` result before `mysqli_fetch_assoc()`, which removed the top-level fatal without changing the successful lookup path
 - `okoexpzwb.php` still fails, but the root cause has moved past the removed `mysql_query()` fatal and now surfaces as an SQL insert/value-count mismatch followed by a fetch on `false`
 - after the targeted batch rerun, `okoexpzwb.php` is the only remaining active `BatchSmokeTest` failure
 
@@ -165,14 +176,10 @@ Fix options:
 
 #### `modules/initial/bankleitzahl.php`
 
-Observed error:
+Resolved on 2026-05-05:
 
-- `count(null)` at line 67
-
-Fix options:
-
-- guard the counted value with `is_array()`, `instanceof Countable`, or a null-coalescing default
-- initialize the expected collection earlier in the module bootstrap
+- the list-display branch now only calls `count()` when `Bankleitzahl::load_items(...)` returned an array
+- the latest full rerun confirmed that `modules/initial/bankleitzahl.php` no longer fails in `InitialSmokeTest`
 
 #### `modules/initial/buchungen.php`
 
@@ -191,45 +198,31 @@ No active failure in the latest reviewed rerun:
 
 #### `modules/initial/lastschrift.php`
 
-Observed error:
+Resolved on 2026-05-05:
 
-- `count(null)` at line 112
-
-Fix options:
-
-- same remediation as `bankleitzahl.php`
-- verify whether the missing value should be an empty array by default
+- the list-display branch now only calls `count()` when `Lastschrift::load_items(...)` returned an array
+- the latest full rerun confirmed that `modules/initial/lastschrift.php` no longer fails in `InitialSmokeTest`
 
 #### `modules/initial/schadensfall.php`
 
-Observed error:
+Resolved on 2026-05-05:
 
-- `count(null)` at line 102
-
-Fix options:
-
-- same remediation as the other `count(null)` failures
+- the stale `count($schadensfall_id)` guard was corrected to check the loaded result list instead
+- the latest full rerun confirmed that `modules/initial/schadensfall.php` no longer fails in `InitialSmokeTest`
 
 #### `modules/initial/status_schadensfall.php`
 
-Observed error:
+Resolved on 2026-05-05:
 
-- `count(null)` at line 58
-
-Fix options:
-
-- same remediation as `schadensfall.php`
+- the stale `count($status_schadensfall_id)` guard was corrected to check the loaded result list instead
+- the latest full rerun confirmed that `modules/initial/status_schadensfall.php` no longer fails in `InitialSmokeTest`
 
 #### `modules/initial/subdetail.php`
 
-Observed error:
+Resolved on 2026-05-05:
 
-- `count(null)` at line 127 after the harness supplies customer context
-
-Fix options:
-
-- guard the counted value with `is_array()`, `instanceof Countable`, or a null-coalescing default
-- verify whether the underlying subkonto list loader should return an empty array instead of `null` on no-result or exception
+- the list-display branch now only calls `count()` when `Subkonto::get_all_for_subkonto(...)` returned an array
+- the latest full rerun confirmed that `modules/initial/subdetail.php` no longer fails in `InitialSmokeTest`
 
 #### `modules/initial/subuebersicht.php`
 
@@ -263,11 +256,6 @@ The following menu failures are not independent root causes. They fail because t
 
 Affected files:
 
-- `modules/menu/bankleitzahl.php`
-- `modules/menu/lastschrift.php`
-- `modules/menu/schadensfall.php`
-- `modules/menu/status_schadensfall.php`
-- `modules/menu/subdetail.php`
 - `modules/menu/subuebersicht.php`
 - `modules/menu/ticketsuch_sich20150208.php`
 
@@ -279,22 +267,21 @@ Fix options:
 
 No active menu failure:
 
+- `modules/menu/bankleitzahl.php` no longer fails after the matching initial-module guard fix
 - `modules/menu/inkassoinformation.php` did not appear in the latest `MenuSmokeTest` failure set
+- `modules/menu/lastschrift.php` no longer fails after the matching initial-module guard fix
+- `modules/menu/schadensfall.php` no longer fails after the matching initial-module guard fix
+- `modules/menu/status_schadensfall.php` no longer fails after the matching initial-module guard fix
+- `modules/menu/subdetail.php` no longer fails after the matching initial-module guard fix
 
 ### 4. Top-level entrypoint failure
 
 #### `getticketurl.php`
 
-Observed error:
+Resolved on 2026-05-05:
 
-- `mysqli_fetch_assoc(false)` at line 47
-- query result is not validated before fetch
-
-Fix options:
-
-- validate the query result before calling `mysqli_fetch_assoc()`
-- if the query can legitimately return `false`, convert that path into a controlled response instead of a fatal
-- log or expose the SQL failure reason in a safe debug path so this endpoint becomes diagnosable during smoke runs
+- the raw `mysqli_query()` result is now validated before any `mysqli_fetch_assoc()` call
+- the latest full rerun confirmed that `getticketurl.php` no longer fails in `TopLevelEntrySmokeTest`
 
 ## Cross-Cutting Root Causes
 
@@ -313,11 +300,6 @@ Preferred fix direction:
 
 Affected files:
 
-- `bankleitzahl.php`
-- `lastschrift.php`
-- `schadensfall.php`
-- `status_schadensfall.php`
-- `subdetail.php`
 - `subuebersicht.php`
 
 Preferred fix direction:
@@ -339,7 +321,7 @@ Current status:
 
 - both upgraded entity paths now quote string market values
 - the latest full rerun confirmed that this was a safe fix, but it did not reduce the remaining failure count
-- the current blockers are still dominated by `count(null)`, stale method signatures, and missing query-result validation
+- the current blockers are now dominated by missing bootstrap state in `subuebersicht.php`, stale method signatures in `ticketsuch_sich20150208.php`, and the remaining batch SQL failure in `okoexpzwb.php`
 
 ### Outdated method/helper contracts
 
@@ -367,29 +349,21 @@ Preferred fix direction:
 
 ## Recommended Fix Order
 
-1. Fix the next smallest runtime blocker:
-   - `getticketurl.php`
-
-2. Fix the remaining batch runtime blockers with the smallest scope:
+1. Fix the remaining batch runtime blocker with the smallest scope:
    - `okoexpzwb.php`
 
-3. Fix the real initial-hook runtime issues now exposed by the harness workaround:
-   - `bankleitzahl.php`
-   - `lastschrift.php`
-   - `schadensfall.php`
-   - `status_schadensfall.php`
-   - `subdetail.php`
+2. Fix the remaining initial-hook runtime issue exposed by the harness workaround:
    - `subuebersicht.php`
 
-4. Repair outdated helper/signature usage:
+3. Repair outdated helper/signature usage:
    - `ticketsuch_sich20150208.php`
 
-5. Decide how standalone batch scripts should behave when bootstrap inputs are missing:
+4. Decide how standalone batch scripts should behave when bootstrap inputs are missing:
    - `pwgen.php`
 
-6. Decide whether the `*_import_telnr_optimierung.php` fixture inputs should become an explicit, documented part of the smoke-test setup instead of an ad hoc verification aid.
+5. Decide whether the `*_import_telnr_optimierung.php` fixture inputs should become an explicit, documented part of the smoke-test setup instead of an ad hoc verification aid.
 
-7. Rerun the full suite and then reassess whether any menu failures remain after their corresponding initial-hook dependencies are fixed.
+6. Rerun the full suite and then reassess whether any menu failures remain after their corresponding initial-hook dependencies are fixed.
 
 ## Important Interpretation
 

@@ -109,7 +109,7 @@ $max_site = $count / $site_count;
 
 $lastschriften = Lastschrift::load_items(App::$CURRENT->MANDANT->get_id(), $kunde_nr, $site * $site_count, $site_count);
 
-if (count($lastschriften) > 0) {
+if (is_array($lastschriften) && count($lastschriften) > 0) {
     if (!isset($cur_id)) {
         $first = $lastschriften[0];
     } else {
