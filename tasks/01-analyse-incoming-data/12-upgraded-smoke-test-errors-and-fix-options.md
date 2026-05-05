@@ -53,6 +53,16 @@ Important verification notes:
 - the suite was rerun again after the module smoke harness was changed to inject a local `$kunde`
   stub object instead of executing the broken `Customer::get()` / `Customer::get_by_kunde_nr()`
   lookup path
+- after the typo fix in `src/upgraded-src/web/htdocs/kimi_ET/kimibatch/inkodeimp2x.php`, the batch suite was rerun separately with:
+
+```bash
+docker compose -f src/upgraded-src/docker-compose.yml run --rm \
+  -v "$REPO_ROOT/src/upgraded-src/tests:/var/www/tests" \
+  -w /var/www/tests \
+  web php vendor/bin/phpunit --testdox --filter BatchSmokeTest
+```
+
+- that targeted rerun completed with `127` batch tests and `1` remaining batch failure, confirming that `inkodeimp2x.php` no longer fails in `BatchSmokeTest`
 - three previous batch failures were resolved by providing the expected input fixture files
 - the final PHPUnit process again did not print its closing summary line before stalling, but the per-suite output was complete and the failure total above is derived directly from that full output
 
@@ -95,6 +105,7 @@ The following additional batch failures were resolved by code changes on 2026-05
 - `oko04_status_offen_vortage_auf_inA_setzen.php`
 - `coeochdeexptest.php`
 - `inkodeexp_new.php`
+- `inkodeimp2x.php`
 - `oko_inA_outbound_elsbeth.php`
 - `pwgen.php` as a direct batch entrypoint
 - `modules/initial/buchungen.php` and `modules/menu/buchungen.php` as smoke-harness-only customer bootstrap failures
@@ -111,12 +122,13 @@ Interpretation:
 - this confirms the immediate `mysql_fetch_array()` fatals in the four status-update scripts are fixed
 - `coeochdeexptest.php` was fixed by correcting the SQL alias quoting inside the PHP string so the file parses again
 - `inkodeexp_new.php` was fixed by replacing `mysql_query()` and `mysql_fetch_array()` with `mysqli_query()` and `mysqli_fetch_array(..., MYSQLI_ASSOC)`
+- `inkodeimp2x.php` was fixed by replacing the stale helper typo `bFetchArray()` with the existing batch helper `dbFetchArray()` already provided by `kimi_general.php`
 - `oko_inA_outbound_elsbeth.php` was fixed by the same minimal `mysql_*` to `mysqli_*` migration pattern used in `inkodeexp_new.php`
 - `pwgen.php` was removed from direct `BatchSmokeTest` execution because it is a GUI fragment, not a supported standalone batch entrypoint; the supported routed surface remains `modules/gui/pwgen.php`
 - the module smoke harness now injects a local `$kunde` stub object and suppresses the request/session customer inputs that would otherwise trigger the currently broken `Customer` entity lookup path
 - this harness-only workaround removed the artificial smoke failure in `buchungen.php`, but the remaining initial/menu failures now expose deeper runtime issues that were previously masked by the missing-customer fatal
 - `okoexpzwb.php` still fails, but the root cause has moved past the removed `mysql_query()` fatal and now surfaces as an SQL insert/value-count mismatch followed by a fetch on `false`
-- this does not resolve the remaining batch runtime issues in `inkodeimp2x.php` and `okoexpzwb.php`
+- after the targeted batch rerun, `okoexpzwb.php` is the only remaining active `BatchSmokeTest` failure
 
 ## Failure Inventory
 
@@ -124,15 +136,10 @@ Interpretation:
 
 #### `inkodeimp2x.php`
 
-Observed error:
+Resolved on 2026-05-05:
 
-- call to undefined function `bFetchArray()`
-
-Fix options:
-
-- locate the intended helper implementation and restore the include/bootstrap path if it should exist
-- if `bFetchArray()` is obsolete, replace it with the current supported fetch helper or direct `mysqli_fetch_*` logic
-- review the script bootstrap assumptions in `kimi_general.php` and related includes
+- the stale helper typo at `src/upgraded-src/web/htdocs/kimi_ET/kimibatch/inkodeimp2x.php:66` was changed from `bFetchArray()` to `dbFetchArray()`
+- the subsequent targeted `BatchSmokeTest` rerun confirmed that this script no longer produces a fatal error
 
 #### `okoexpzwb.php`
 
@@ -292,7 +299,6 @@ Affected files:
 
 Preferred fix direction:
 
-- fix the stale helper typo in `inkodeimp2x.php`
 - fix the SQL shape mismatch and follow-on fetch-on-false path in `okoexpzwb.php`
 - keep the DB access style standardized on `mysqli_*` / shared helpers
 
@@ -319,7 +325,6 @@ Preferred fix direction:
 Affected files:
 
 - `ticketsuch_sich20150208.php`
-- `inkodeimp2x.php`
 
 Preferred fix direction:
 
@@ -345,7 +350,6 @@ Preferred fix direction:
    - `getticketurl.php`
 
 2. Fix the remaining batch runtime blockers with the smallest scope:
-   - `inkodeimp2x.php`
    - `okoexpzwb.php`
 
 3. Fix the real initial-hook runtime issues now exposed by the harness workaround:
@@ -358,7 +362,6 @@ Preferred fix direction:
    - `subuebersicht.php`
 
 4. Repair outdated helper/signature usage:
-   - `inkodeimp2x.php`
    - `ticketsuch_sich20150208.php`
 
 5. Decide how standalone batch scripts should behave when bootstrap inputs are missing:

@@ -63,7 +63,7 @@ INSERT INTO ticket
 
 //
 $result = mysqli_query($dbconn, $query_id);
-while ($line = bFetchArray($result)) { ?>
+while ($line = dbFetchArray($result)) { ?>
 <?PHP
 $id= $line['id'];
 echo "<br>".$id;
