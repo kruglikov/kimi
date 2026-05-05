@@ -32,18 +32,20 @@ Docker stack:
 - `src/upgraded-src/docker-compose.yml`
 
 Observed result from the latest fully reviewed run on 2026-05-05 after the targeted
-batch DB API fixes and the harness-only customer-context workaround were implemented
+batch DB API fixes, the harness-only customer-context workaround, and the
+`IKBuero::load_all()` market-quoting fix in
+`src/upgraded-src/web/htdocs/kimi_ET/libs/entities/ra_ikbuero.php` were implemented
 and the suite was rerun:
 
 - total tests: `218`
-- total failures: `19`
+- total failures: `16`
 
 Suite breakdown:
 
-- `BatchSmokeTest`: `127` tests, `2` failures
+- `BatchSmokeTest`: `127` tests, `1` failure
 - `GuiSmokeTest`: `17` tests, `0` failures
-- `InitialSmokeTest`: `30` tests, `8` failures
-- `MenuSmokeTest`: `25` tests, `8` failures
+- `InitialSmokeTest`: `30` tests, `7` failures
+- `MenuSmokeTest`: `25` tests, `7` failures
 - `RouterSmokeTest`: `13` tests, `0` failures
 - `TopLevelEntrySmokeTest`: `6` tests, `1` failure
 
@@ -63,6 +65,8 @@ docker compose -f src/upgraded-src/docker-compose.yml run --rm \
 ```
 
 - that targeted rerun completed with `127` batch tests and `1` remaining batch failure, confirming that `inkodeimp2x.php` no longer fails in `BatchSmokeTest`
+- after the SQL quoting fix in `src/upgraded-src/web/htdocs/kimi_ET/libs/entities/ra_ikbuero.php`, the full upgraded suite was rerun again with `./src/upgraded-src/tests/run-all.sh`
+- that rerun removed the previous `inkassoinformation.php` failure from both `InitialSmokeTest` and `MenuSmokeTest`
 - three previous batch failures were resolved by providing the expected input fixture files
 - the final PHPUnit process again did not print its closing summary line before stalling, but the per-suite output was complete and the failure total above is derived directly from that full output
 
@@ -109,6 +113,7 @@ The following additional batch failures were resolved by code changes on 2026-05
 - `oko_inA_outbound_elsbeth.php`
 - `pwgen.php` as a direct batch entrypoint
 - `modules/initial/buchungen.php` and `modules/menu/buchungen.php` as smoke-harness-only customer bootstrap failures
+- `modules/initial/inkassoinformation.php` and `modules/menu/inkassoinformation.php`
 
 Verification details:
 
@@ -127,6 +132,7 @@ Interpretation:
 - `pwgen.php` was removed from direct `BatchSmokeTest` execution because it is a GUI fragment, not a supported standalone batch entrypoint; the supported routed surface remains `modules/gui/pwgen.php`
 - the module smoke harness now injects a local `$kunde` stub object and suppresses the request/session customer inputs that would otherwise trigger the currently broken `Customer` entity lookup path
 - this harness-only workaround removed the artificial smoke failure in `buchungen.php`, but the remaining initial/menu failures now expose deeper runtime issues that were previously masked by the missing-customer fatal
+- `IKBuero::load_all($kunde->get_markt())` was fixed by treating `markt` as a string code and emitting quoted SQL such as `WHERE markt = 'AT'` instead of `WHERE markt = AT`
 - `okoexpzwb.php` still fails, but the root cause has moved past the removed `mysql_query()` fatal and now surfaces as an SQL insert/value-count mismatch followed by a fetch on `false`
 - after the targeted batch rerun, `okoexpzwb.php` is the only remaining active `BatchSmokeTest` failure
 
@@ -175,15 +181,11 @@ Resolved in the latest harness-based rerun:
 
 #### `modules/initial/inkassoinformation.php`
 
-Observed error:
+Resolved on 2026-05-05:
 
-- `IKBuero::load_all($kunde->get_markt())` builds SQL with an unquoted market value and fails with `Unknown column 'AT' in 'where clause'`
-
-Fix options:
-
-- quote or escape the market value correctly inside `IKBuero::load_all()`
-- if `markt` is intended to be a string code, ensure the entity method always emits `WHERE markt = 'AT'` style SQL rather than `WHERE markt = AT`
-- keep the harness-only `$kunde` workaround in place so this real query issue remains visible during smoke runs
+- the failure came from `src/upgraded-src/web/htdocs/kimi_ET/libs/entities/ra_ikbuero.php`, where `IKBuero::load_all($markt)` built `WHERE markt = AT`
+- the method now treats `markt` as a string code and quotes the emitted SQL correctly
+- the full suite rerun confirmed that `modules/initial/inkassoinformation.php` no longer fails in `InitialSmokeTest`
 
 #### `modules/initial/lastschrift.php`
 
@@ -260,7 +262,6 @@ The following menu failures are not independent root causes. They fail because t
 Affected files:
 
 - `modules/menu/bankleitzahl.php`
-- `modules/menu/inkassoinformation.php`
 - `modules/menu/lastschrift.php`
 - `modules/menu/schadensfall.php`
 - `modules/menu/status_schadensfall.php`
@@ -273,6 +274,10 @@ Fix options:
 - fix the corresponding `modules/initial/*.php` file first
 - after that, rerun `MenuSmokeTest` to confirm whether any menu-specific issues remain
 - do not prioritize menu-file edits before the initial-hook failures are resolved, because the current signal says the pre-hook is the blocking layer
+
+Resolved since the prior revision:
+
+- `modules/menu/inkassoinformation.php` no longer fails after the `IKBuero::load_all()` quoting fix removed the matching initial-module failure
 
 ### 4. Top-level entrypoint failure
 
@@ -307,7 +312,6 @@ Preferred fix direction:
 Affected files:
 
 - `bankleitzahl.php`
-- `inkassoinformation.php`
 - `lastschrift.php`
 - `schadensfall.php`
 - `status_schadensfall.php`
@@ -317,7 +321,9 @@ Affected files:
 Preferred fix direction:
 
 - keep the harness-only `$kunde` stub because it removes artificial missing-customer fatals without changing application code
-- treat the remaining failures as real module/entity/query issues rather than pure harness bootstrap gaps
+- treat the remaining failures as a mix of real module/entity/query issues and likely smoke-environment incompleteness
+- the upgraded `03-dev-seed.sql` currently provides only one `kunde`, one `stammdaten`, one `ticket`, one `subkonto_neu`, and one `buchungen` row, and it does not seed reference tables such as `ra_ikbuero`, `bankleitzahl`, `status_schadensfall`, `schadensfall_art`, `verwaltungssatz`, `ausbuchungsgrund`, or `erled_qual`
+- because several loaders are expected by the legacy modules to return populated arrays rather than `null`, any follow-up fix work should first decide whether the smoke environment must seed those tables or whether the upgraded code should tolerate missing reference data
 - document separately that the real `Customer` entity lookup path is still broken in the upgraded runtime, but is intentionally bypassed by the harness workaround
 
 ### Outdated method/helper contracts

@@ -39,10 +39,11 @@ class IKBuero {
     public static function load_all($markt = 0) {
 
         $query = "SELECT * FROM ra_ikbuero ";
-        if (!$markt == 0) {
-            $query.= " WHERE markt = $markt";
+        if ($markt !== 0 && $markt !== "0" && $markt !== NULL && $markt !== "") {
+            $markt = App::$CURRENT->DB->escape_string($markt);
+            $query .= " WHERE markt = '$markt'";
         }
-        $query.=" ORDER BY ra_buero";
+        $query .= " ORDER BY ra_buero";
         $result = array();
         $response = App::$CURRENT->DB->query($query);
 
