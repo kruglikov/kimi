@@ -67,6 +67,7 @@ CREATE TABLE IF NOT EXISTS `mandant` (
     `id`                         INT UNSIGNED NOT NULL AUTO_INCREMENT,
     `mandant`                    VARCHAR(100) NOT NULL,
     `text`                       TEXT         DEFAULT NULL,
+    `clid_name`                  VARCHAR(100) DEFAULT NULL,  -- smoke/test telephony queue mapping
     `uid`                        VARCHAR(50)  DEFAULT NULL,  -- UID/VAT number
     `land`                       VARCHAR(10)  DEFAULT NULL,
     `plz`                        VARCHAR(20)  DEFAULT NULL,
@@ -476,6 +477,8 @@ CREATE TABLE IF NOT EXISTS `ticket` (
     `hausnummer_erw`           VARCHAR(20)  DEFAULT NULL,
     `telefon`                  VARCHAR(50)  DEFAULT NULL,
     `telefon2`                 VARCHAR(50)  DEFAULT NULL,
+    `search_telnr1`            VARCHAR(50)  DEFAULT NULL,  -- normalized phone lookup used by getticketurl.php
+    `search_telnr2`            VARCHAR(50)  DEFAULT NULL,  -- normalized phone lookup used by getticketurl.php
     `email`                    VARCHAR(255) DEFAULT NULL,
     `geburtsdatum`             DATE         DEFAULT NULL,
     -- ticket state

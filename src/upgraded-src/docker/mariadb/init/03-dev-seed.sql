@@ -66,15 +66,16 @@ ON DUPLICATE KEY UPDATE
     `letzter_mandant_id` = VALUES(`letzter_mandant_id`);
 
 INSERT INTO `mandant` (
-    `id`, `mandant`, `text`, `uid`, `land`, `plz`, `ort`, `strasse`, `hausnummer`,
+    `id`, `mandant`, `text`, `clid_name`, `uid`, `land`, `plz`, `ort`, `strasse`, `hausnummer`,
     `telefon`, `email`, `encryption_aktiv`, `encryption_columns_ticket`
 ) VALUES (
-    1, 'local-demo', 'Local Demo Mandant', 'ATU00000000', 'AT', '1010', 'Wien',
+    1, 'local-demo', 'Local Demo Mandant', 'SMOKE-GROUP', 'ATU00000000', 'AT', '1010', 'Wien',
     'Demo Strasse', '1', '+43 1 000000', 'office@example.test', 'N', NULL
 )
 ON DUPLICATE KEY UPDATE
     `mandant` = VALUES(`mandant`),
     `text` = VALUES(`text`),
+    `clid_name` = VALUES(`clid_name`),
     `encryption_aktiv` = VALUES(`encryption_aktiv`),
     `encryption_columns_ticket` = VALUES(`encryption_columns_ticket`);
 
@@ -254,19 +255,21 @@ ON DUPLICATE KEY UPDATE
 INSERT INTO `ticket` (
     `id`, `ticketnr`, `mandant_id`, `kampagne_id`, `kunde_id`, `benutzer_id`,
     `kundennummer`, `anrede`, `nachname`, `vorname`, `plz`, `ort`, `strasse`,
-    `hausnummer`, `telefon`, `email`, `kenner`, `anruf_status_id`, `ergebnis`,
+    `hausnummer`, `telefon`, `search_telnr1`, `search_telnr2`, `email`, `kenner`, `anruf_status_id`, `ergebnis`,
     `wiedervorlage`, `status_id`, `prioritaet_id`, `beginn`, `beschreibung_detail`,
     `geaendert_am`, `geaendert_von`, `grund_id`, `firma_id`, `produkt_id`
 ) VALUES (
     1, 100001, 1, 1, 1, 1,
     '100001', 'Herr', 'Mustermann', 'Max', '1010', 'Wien', 'Demo Strasse',
-    '10', '+43 1 123456', 'max.mustermann@example.test', 'DEMO', 1, '',
+    '10', '+43 1 123456', '+43123456789', '', 'max.mustermann@example.test', 'DEMO', 1, '',
     'N', 1, 1, CURDATE(), 'Lokales Demo-Ticket', NOW(), 'admin', 1, 1, 1
 )
 ON DUPLICATE KEY UPDATE
     `ticketnr` = VALUES(`ticketnr`),
     `mandant_id` = VALUES(`mandant_id`),
     `kampagne_id` = VALUES(`kampagne_id`),
+    `search_telnr1` = VALUES(`search_telnr1`),
+    `search_telnr2` = VALUES(`search_telnr2`),
     `status_id` = VALUES(`status_id`),
     `prioritaet_id` = VALUES(`prioritaet_id`);
 

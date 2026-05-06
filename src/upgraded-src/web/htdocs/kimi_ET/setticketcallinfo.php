@@ -212,8 +212,8 @@ class Request {
 			"client_reference, project_reference, ticket_reference, action_url, pickup_user_id, outgoing_number, call_id, mandant_id, ticket_id, dauer_sec)".
 			" values ('$this->status', sysdate(), '$this->cdr_unique_id','$this->source_num','$this->target_num', '$this->start_time', '$this->connect_time', ".
 			"'$this->end_time', '$this->call_duration', '$this->talk_duration',".
-			"'$this->client_reference', '$this->project_reference', $this->ticket_reference, '$this->action_url', '$this->pickup_user_id',  ".
-			"'$this->outgoing_number', $this->id, $this->mandantId, $this->ticketId, $this->dauer_sec)";
+			"'$this->client_reference', '$this->project_reference', '$this->ticket_reference', '$this->action_url', '$this->pickup_user_id',  ".
+			"'$this->outgoing_number', '$this->id', $this->mandantId, $this->ticketId, $this->dauer_sec)";
 			/*
 			"'$this->client_reference', '$this->project_reference', '$this->ticket_reference', '$this->$action_url', '$this->pickup_user_id',";
 			$sql.="'$this->outgoing_number', $this->id, $this->mandant_id, $this->ticket_id, $this->dauer_sec)";

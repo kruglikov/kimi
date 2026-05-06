@@ -51,6 +51,24 @@ CREATE FUNCTION IF NOT EXISTS get_log_last_user(p_objekt VARCHAR(100), p_objekt_
     DETERMINISTIC
     RETURN '';
 
+-- Used by getticketurl.php to normalize inbound phone numbers.
+-- The smoke environment only needs a deterministic non-fatal placeholder.
+CREATE FUNCTION IF NOT EXISTS getCleanPhoneNoN(
+    p_phone VARCHAR(255),
+    p_country_prefix VARCHAR(20),
+    p_keep_formatting BOOLEAN
+)
+    RETURNS VARCHAR(255)
+    DETERMINISTIC
+    RETURN TRIM(IFNULL(p_phone, ''));
+
+-- Used by INKODE import scripts while constructing encrypted phone values.
+-- Returning the trimmed input preserves the script flow without inventing data.
+CREATE FUNCTION IF NOT EXISTS getvwhw(p_country_prefix INT, p_phone VARCHAR(255))
+    RETURNS VARCHAR(255)
+    DETERMINISTIC
+    RETURN TRIM(IFNULL(p_phone, ''));
+
 -- ---------------------------------------------------------------------------
 -- Campaign import data tables
 -- Column lists derived from INSERT statements in the corresponding imp scripts.
@@ -168,14 +186,25 @@ CREATE TABLE IF NOT EXISTS oko (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- OKO daily call summary (okoexp.php LEFT JOIN)
+-- The legacy batch script inserts a raw SELECT list without an explicit column
+-- list, so the smoke stub must match that projection shape.
 CREATE TABLE IF NOT EXISTS okozwb (
-    id         INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
-    mandant    INT(10) UNSIGNED NOT NULL,
-    ticketnr   INT(10) UNSIGNED NOT NULL,
-    tagesdatum DATE             NOT NULL,
-    anzahl     INT              NOT NULL DEFAULT 0,
-    text       VARCHAR(255),
-    PRIMARY KEY (id)
+    mandant          INT(10) UNSIGNED NOT NULL,
+    ticketnr         INT(10) UNSIGNED NOT NULL,
+    anzahl           INT              NOT NULL DEFAULT 0,
+    tagesdatum       DATE             NOT NULL,
+    prioritaet_id    INT              DEFAULT NULL,
+    text             VARCHAR(255),
+    aktnr            VARCHAR(255),
+    glaeubiger       TEXT,
+    schuldner        TEXT,
+    strasse          TEXT,
+    ort              TEXT,
+    status_id        INT              DEFAULT NULL,
+    status           VARCHAR(255),
+    anruf_status_id  INT              DEFAULT NULL,
+    anruf_status     VARCHAR(255),
+    erstellt         DATETIME         DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- INKODE urgency notes (inkodeimp2.php)
@@ -240,23 +269,53 @@ CREATE TABLE IF NOT EXISTS knp3 (
     PRIMARY KEY (id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
--- KNP3 outbound call result table (coeochdeexp*.php alias: ki / ki2)
-CREATE TABLE IF NOT EXISTS knp3_out (
+-- Shared outbound call result shape used by the Elsbeth loader scripts.
+CREATE TABLE IF NOT EXISTS batch_call_result_stub (
     id                              INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+    nachname                        TEXT,
+    vorname                         TEXT,
+    ort                             TEXT,
+    plz                             TEXT,
+    strasse                         TEXT,
+    letzter_anruf_kontakt_datetimeoffset VARCHAR(50),
+    grund_negativer_ausgang         TEXT,
     imp_str_ticketnr                INT(10) UNSIGNED,
+    imp_str_kontaktid               INT(10) UNSIGNED,
+    ask_str_kontakt_telefonnummer   VARCHAR(100),
+    telefon                         TEXT,
     import                          DATETIME,
     verarbeitet                     DATE,
     status                          VARCHAR(100),
     beschreibung_positiver_ausgang  TEXT,
-    grund_negativer_ausgang         TEXT,
     nachname_agenten                VARCHAR(200),
+    vorname_agenten                 VARCHAR(200),
     PRIMARY KEY (id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+CREATE TABLE IF NOT EXISTS knp3_out LIKE batch_call_result_stub;
+CREATE TABLE IF NOT EXISTS knp_out LIKE batch_call_result_stub;
+CREATE TABLE IF NOT EXISTS knpdrei_out LIKE batch_call_result_stub;
+CREATE TABLE IF NOT EXISTS inko2016_out LIKE batch_call_result_stub;
+CREATE TABLE IF NOT EXISTS inkode_out LIKE batch_call_result_stub;
+CREATE TABLE IF NOT EXISTS oko_out LIKE batch_call_result_stub;
 
 -- OKO dated snapshot table referenced by okoexp_dev / okoexp_ansi variants
 CREATE TABLE IF NOT EXISTS okoerledigt20220713 (
     ticketnr INT(10) UNSIGNED NOT NULL,
     PRIMARY KEY (ticketnr)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- Scratch tables dropped/recreated by import scripts.
+CREATE TABLE IF NOT EXISTS inkode_duplet (
+    ticket_id INT(10) UNSIGNED NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+CREATE TABLE IF NOT EXISTS inko2016_duplet (
+    ticket_id INT(10) UNSIGNED NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+CREATE TABLE IF NOT EXISTS okomehrfach (
+    ticketnr INT(10) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- QUESTER campaign original data (questerexp20250208.php alias: sst)
@@ -268,36 +327,67 @@ CREATE TABLE IF NOT EXISTS quester (
     PRIMARY KEY (id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+-- Callmanager logging target used by setticketcallinfo.php and telematica imports.
+CREATE TABLE IF NOT EXISTS callmanager_log (
+    id                INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+    status            VARCHAR(100),
+    timestamp         DATETIME,
+    cdr_unique_id     VARCHAR(255),
+    source_num        VARCHAR(100),
+    target_num        VARCHAR(100),
+    start_time        VARCHAR(50),
+    connect_time      VARCHAR(50),
+    end_time          VARCHAR(50),
+    call_duration     VARCHAR(50),
+    talk_duration     VARCHAR(50),
+    client_reference  VARCHAR(255),
+    project_reference VARCHAR(255),
+    ticket_reference  VARCHAR(255),
+    action_url        TEXT,
+    pickup_user_id    VARCHAR(255),
+    outgoing_number   VARCHAR(100),
+    call_id           VARCHAR(100) NULL,
+    mandant_id        INT(10) UNSIGNED NULL,
+    ticket_id         INT(10) UNSIGNED NULL,
+    dauer_sec         INT NULL,
+    PRIMARY KEY (id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
 -- ---------------------------------------------------------------------------
--- ticket_* stub views for KPI scripts (kpis.php, kpiscsv.php, kpisemail.php)
--- Each view returns an empty result set with the required column signature.
--- All views expose the standard ticket columns plus erstellt (DATETIME alias).
+-- Writable ticket_* stub tables for report and KPI scripts.
+-- Report scripts insert `ticket.*, now()/curdate()` into these objects, so they
+-- must be tables rather than views.
 -- ---------------------------------------------------------------------------
 
-CREATE OR REPLACE VIEW ticket_inkoinbound AS
-    SELECT *, CAST(NULL AS DATETIME) AS erstellt
-    FROM ticket WHERE 1=0;
+DROP VIEW IF EXISTS ticket_inkoinbound;
+DROP VIEW IF EXISTS ticket_inko2016;
+DROP VIEW IF EXISTS ticket_inkode;
+DROP VIEW IF EXISTS ticket_schlaustrom;
+DROP VIEW IF EXISTS ticket_knp1;
+DROP VIEW IF EXISTS ticket_knp3;
+DROP VIEW IF EXISTS ticket_knpdrei;
+DROP VIEW IF EXISTS ticket_oko;
 
-CREATE OR REPLACE VIEW ticket_inko2016 AS
-    SELECT *, CAST(NULL AS DATETIME) AS erstellt
-    FROM ticket WHERE 1=0;
+CREATE TABLE IF NOT EXISTS ticket_inkoinbound LIKE ticket;
+ALTER TABLE ticket_inkoinbound ADD COLUMN IF NOT EXISTS erstellt DATETIME NULL;
 
-CREATE OR REPLACE VIEW ticket_inkode AS
-    SELECT *, CAST(NULL AS DATETIME) AS erstellt
-    FROM ticket WHERE 1=0;
+CREATE TABLE IF NOT EXISTS ticket_inko2016 LIKE ticket;
+ALTER TABLE ticket_inko2016 ADD COLUMN IF NOT EXISTS erstellt DATETIME NULL;
 
-CREATE OR REPLACE VIEW ticket_schlaustrom AS
-    SELECT *, CAST(NULL AS DATETIME) AS erstellt
-    FROM ticket WHERE 1=0;
+CREATE TABLE IF NOT EXISTS ticket_inkode LIKE ticket;
+ALTER TABLE ticket_inkode ADD COLUMN IF NOT EXISTS erstellt DATETIME NULL;
 
-CREATE OR REPLACE VIEW ticket_knp1 AS
-    SELECT *, CAST(NULL AS DATETIME) AS erstellt
-    FROM ticket WHERE 1=0;
+CREATE TABLE IF NOT EXISTS ticket_schlaustrom LIKE ticket;
+ALTER TABLE ticket_schlaustrom ADD COLUMN IF NOT EXISTS erstellt DATETIME NULL;
 
-CREATE OR REPLACE VIEW ticket_knp3 AS
-    SELECT *, CAST(NULL AS DATETIME) AS erstellt
-    FROM ticket WHERE 1=0;
+CREATE TABLE IF NOT EXISTS ticket_knp1 LIKE ticket;
+ALTER TABLE ticket_knp1 ADD COLUMN IF NOT EXISTS erstellt DATETIME NULL;
 
-CREATE OR REPLACE VIEW ticket_oko AS
-    SELECT *, CAST(NULL AS DATETIME) AS erstellt
-    FROM ticket WHERE 1=0;
+CREATE TABLE IF NOT EXISTS ticket_knp3 LIKE ticket;
+ALTER TABLE ticket_knp3 ADD COLUMN IF NOT EXISTS erstellt DATETIME NULL;
+
+CREATE TABLE IF NOT EXISTS ticket_knpdrei LIKE ticket;
+ALTER TABLE ticket_knpdrei ADD COLUMN IF NOT EXISTS erstellt DATETIME NULL;
+
+CREATE TABLE IF NOT EXISTS ticket_oko LIKE ticket;
+ALTER TABLE ticket_oko ADD COLUMN IF NOT EXISTS erstellt DATETIME NULL;
