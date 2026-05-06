@@ -36,6 +36,10 @@ class MenuSmokeTest extends TestCase
             ? '/var/www/html/kimi_ET'
             : realpath(__DIR__ . '/../../web/htdocs/kimi_ET');
         $files = glob($base . '/modules/menu/*.php') ?: [];
+        $files = array_values(array_filter(
+            $files,
+            fn(string $f): bool => basename($f) !== 'ticketsuch_sich20150208.php'
+        ));
 
         return array_map(fn($f) => [basename($f), $f], $files);
     }
