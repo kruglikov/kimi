@@ -14,17 +14,22 @@ KIMI Portal is a legacy custom PHP/MariaDB business application with one main br
 # Upgrade PHP Versions plan
 
 [done] Make the system work:`
-  - Create docker file with app and db container (this change should only add or wrap the current coding base, and do not change its structure )
-  - Recreate database dump file from the code and apply it 
-  - Create accounts in database to see that it work
-  - Create seed data
-[] Cover with tests (How? Scenarios we cover? How to test email sending? In general we only need to check that the filed do not chra)
-    [] (How to deal with the copy\paste functionality files?)
-    [] Batch processing tests - The test iterates over every *.php file in kimibatch/ that includes kimi_general.php - is that right? 
-[] PHP Upgrade to php 8.5
-  - 
-[] Run tests
-
+- Prepare environment and smoke tests safety net on PHP 8.0 version [DONE]
+  - Create docker file with app and db container on PHP 8.0 (this change should only add or wrap the current coding base, and do not change its structure ) [DONE]
+  - Recreate database dump file from the code and apply it [DONE]
+  - Create accounts in database to see that it work [DONE]
+  - Create reverce-engeneer datbase seed data to make the system work locally in a base state [DONE]
+  - Create safety-net smoke tests as the baseline before broader code or dependency changes [DONE]
+  - Make sure that test safety net covers project files enough (with PHP 8.0) [DONE]
+  - Prepare Rector code updates script to run updates PHP 8.0 - 8.5 leap [DONE]
+- Upgrade environment to php 8.5 and check [DONE]
+  - Update docker environment php version 8.0 -> 8.5 [DONE]
+  - Run Rector code updates PHP 8.0 - 8.5 tool [DONE]
+- Check after udpate problems and fix them [DONE]
+  - Run safety net tests and fix issues related to the update that Rector did not handle [DONE] 
+  - Review dependencies that were intentionally skipped by Rector, especially `vendor/`, `kimibatch/files/vendor/`, and bundled legacy libraries such as `libs/addons/phpmail/` [DONE]
+  - Run the project live and check if it works with own eyes [DONE]
+  
 # Security review
 [] Are `hash("sha256", "kimiplus" . $password)` with static salt "kimiplus" good enough from security reasons?  
 [] Are security issues mentioned in ### Session Security Issues in @ARCHITECTURE.md severe\require solving?
@@ -34,5 +39,3 @@ KIMI Portal is a legacy custom PHP/MariaDB business application with one main br
 # GDPR Review
 [] GDPR Review
 
-
-# Questions
