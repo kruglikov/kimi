@@ -5,6 +5,7 @@ $kunde_nr = param("kundennummer");
 $kunde_nr_backup = param("kundennummer_backup");
 $show_tgz = (param("TGZ") == "1");
 $buch_tgz = (param("BUCHTGZ") == "1");
+$stammdaten = NULL;
 
 
 if (!isset($kunde_id) && !isset($_SESSION["sd-kunde"]) && !isset($kunde_nr)) {
@@ -40,7 +41,7 @@ if (!isset($kunde_id) && !isset($_SESSION["sd-kunde"]) && !isset($kunde_nr)) {
 if ($kunde_id != "") {
     $stammdaten = Stammdaten::get_by_kunde($kunde_id);
 }
-if ($buch_tgz) {
+if ($buch_tgz && isset($stammdaten) && isset($kunde)) {
     $tgz_summen = explode("@", (string) param("Summen"));
     $tgz_ids = explode("@", (string) param("SummenIDs"));
     $trans_ok = TRUE;
@@ -156,8 +157,17 @@ if (isset($kunde) && $kunde->get_kdnr() != "") {
 //    echo date_format($dat, "d.m.Y");
 //    exit;
     // date_format(date_create("19-NOV-2013"), "d.m.Y")
-    $sk_tgz = Subkonto::select_for_tgz($kunde->get_kdnr(), App::$CURRENT->MANDANT->get_id(), $kunde->get_markt(), CONF_TGZ_BUABUGRUMAN_ID_KAPITALISIERT, date("d.m.Y"), $stammdaten->get_stichtag());
-    
+    if (isset($stammdaten)) {
+        $sk_tgz = Subkonto::select_for_tgz(
+            $kunde->get_kdnr(),
+            App::$CURRENT->MANDANT->get_id(),
+            $kunde->get_markt(),
+            CONF_TGZ_BUABUGRUMAN_ID_KAPITALISIERT,
+            date("d.m.Y"),
+            $stammdaten->get_stichtag()
+        );
+    }
+
     $sum_tgz = array();
     $gessaldo = number_format((float) Subkonto::get_gessaldo_kunde_oid(App::$CURRENT->MANDANT->get_id(), $kunde_id), 2, ".", "");
 }

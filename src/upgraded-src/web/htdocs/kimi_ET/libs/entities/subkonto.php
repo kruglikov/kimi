@@ -629,9 +629,9 @@ class Subkonto {
 
     public function set_prozent_zinsen($val, $sql_valid = FALSE) {
         if (!$sql_valid) {
-            $val = str_replace(".", "", $val);
+            $val = str_replace(".", "", (string) $val);
         }
-        $val = str_replace(",", ".", $val);
+        $val = str_replace(",", ".", (string) $val);
         $this->item["prozent_zinsen"] = $val;
     }
 
@@ -652,9 +652,9 @@ class Subkonto {
 
     public function set_tageszinshoehe($val, $sql_valid = FALSE) {
         if (!$sql_valid) {
-            $val = str_replace(".", "", $val);
+            $val = str_replace(".", "", (string) $val);
         }
-        $val = str_replace(",", ".", $val);
+        $val = str_replace(",", ".", (string) $val);
         $this->item["tageszinshoehe"] = $val;
     }
 
@@ -702,9 +702,9 @@ class Subkonto {
 
     public function set_l_st_kap_zins($val, $sql_valid = FALSE) {
         if (!$sql_valid) {
-            $val = str_replace(".", "", $val);
+            $val = str_replace(".", "", (string) $val);
         }
-        $val = str_replace(",", ".", $val);
+        $val = str_replace(",", ".", (string) $val);
         $this->item["l_st_kap_zins"] = $val;
     }
 
@@ -725,9 +725,9 @@ class Subkonto {
 
     public function set_vl_st_kap_zins($val, $sql_valid = FALSE) {
         if (!$sql_valid) {
-            $val = str_replace(".", "", $val);
+            $val = str_replace(".", "", (string) $val);
         }
-        $val = str_replace(",", ".", $val);
+        $val = str_replace(",", ".", (string) $val);
         $this->item["vl_st_kap_zins"] = $val;
     }
 
@@ -798,9 +798,9 @@ class Subkonto {
 
     public function set_verguetung($val, $sql_valid = FALSE) {
         if (!$sql_valid) {
-            $val = str_replace(".", "", $val);
+            $val = str_replace(".", "", (string) $val);
         }
-        $val = str_replace(",", ".", $val);
+        $val = str_replace(",", ".", (string) $val);
         $this->item["verguetung"] = $val;
     }
 
