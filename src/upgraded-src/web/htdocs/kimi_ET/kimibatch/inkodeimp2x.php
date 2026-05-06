@@ -278,7 +278,13 @@ else
 $ins_urgenz = "
 insert into inkodeurgenz 
 select 24 mandant_id, max(ticketnr) ticketnr,group_concat(urgenztxt order by urgenztxt desc)  urgenztext from (
-select ticketnr,kimi_encrypt(nachname),kimi_encrypt(vorname),kimi_encrypt(geburtsdatum),kimi_encrypt(plz),kimi_encrypt(strasse),dummy_text9,
+select ticketnr,
+kimi_encrypt(nachname) enc_nachname,
+kimi_encrypt(vorname) enc_vorname,
+kimi_encrypt(geburtsdatum) enc_geburtsdatum,
+kimi_encrypt(plz) enc_plz,
+kimi_encrypt(strasse) enc_strasse,
+dummy_text9,
 CONCAT('Beginn: ' , beginn, 'Index:',dummy_text9,' - ','Ticket:',ticketnr, ' - ', REPLACE( ergebnis, CHAR(13,10), ' ' ),CHAR(13,10)) urgenztxt,
 REPLACE(REPLACE(dummy_text10, char(10), char(32)), char(13), char(32))
 from ticket where mandant_id = 24 and concat(nachname,vorname) in (
@@ -286,7 +292,7 @@ select concat(kimi_encrypt(nachname),kimi_encrypt(vorname)) from ticket where id
 and  mandant_id = 24 and kampagne_id <> 99 
 ) order by kimi_encrypt(nachname), ticketnr desc
 ) x
-group by concat(kimi_encrypt(nachname),kimi_encrypt(vorname),kimi_encrypt(geburtsdatum))
+group by concat(enc_nachname,enc_vorname,enc_geburtsdatum)
 ";
 // 
 if (mysqli_query($dbconn, $ins_urgenz ))
