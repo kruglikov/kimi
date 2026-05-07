@@ -1,6 +1,6 @@
 
 # Short document summary
-During the audit with AI tools we already updated the PHP version from 8.0 to 8.5. Archives with updated code and updated code with test docker environment and AI-generated smoke tests. See the full report what steps was taken below.
+During the audit with AI tools we already updated the PHP version from 8.0 to 8.5. Archives with updated code (htdocs-folder-updated-to-php85.zip) and updated code with test docker environment and AI-generated smoke tests (upgraded-code-with-safety-net-test-updated-to-php85(optional-archive).zip). See the full report what steps was taken below.
 Clent's system administrators can prepare new PHP 8.5 environment and deploy the system and test.
 
 Also Security and GDPR review was conducted (see the full report below). In a nutshell, "must fix" results of both Security review and GDPR review are the next:
