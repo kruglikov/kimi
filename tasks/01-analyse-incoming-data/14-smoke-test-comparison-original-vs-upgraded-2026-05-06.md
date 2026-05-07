@@ -93,7 +93,7 @@ This section is grouped by root cause. Every group is marked with:
 - status: `[fixed]` or `[not fixed]`
 - whether the same smoke failure existed in the original stack
 
-## 1. Missing batch staging tables and loader-target schema mismatches [not fixed]
+## 1. Missing batch staging tables and loader-target schema mismatches [FIXED]
 
 Exists in original smoke baseline:
 
@@ -135,7 +135,19 @@ Fix directions:
 - for `coeoch03_verarbeitung_elsbeth_out.php`, align the loader SQL and target-table columns so the expected `nachname` field actually exists or is removed from the load mapping
 - if these are only intermediate import tables, create minimal smoke-test versions with the exact columns referenced by the import/update SQL rather than trying to reconstruct full production schema immediately
 
-## 2. Report scripts inserting into non-insertable or missing report targets [not fixed]
+Follow-up update after implementing the smoke-schema fix in `/home/viktar/Projects/kimi-plus.at/src/upgraded-src/docker/mariadb/init/06-batch-stubs.sql`:
+
+- the missing tables `knp_out`, `knpdrei_out`, `inko2016_out`, `inkode_out`, and `oko_out` were added
+- `knp3_out` was rebuilt to use the same outbound-result shape, which removes the earlier COEOCH `nachname` mismatch
+- after rerunning `/home/viktar/Projects/kimi-plus.at/src/upgraded-src/tests/run-all.sh` on a fresh upgraded DB volume, these scripts no longer fail for the reasons listed above
+- the same entrypoints are still not all green, but they now fail later on missing input fixture files such as `COEO_ExportResult.csv`, `COEO_CH_DE_ExportResult.csv`, `DREI_ExportResult.csv`, `INKO2016_ExportResult.csv`, `INKODE_ExportResult.csv`, and `OKO_ExportResult.csv`
+
+Status clarification:
+
+- root cause documented in this section: `[FIXED]`
+- affected smoke entrypoints overall: `[not fixed]`
+
+## 2. Report scripts inserting into non-insertable or missing report targets [FIXED]
 
 Exists in original smoke baseline:
 
@@ -177,7 +189,18 @@ Fix directions:
 - alternatively, keep the views and add environment-aware guards in the scripts so smoke runs skip the insert step and only test export formatting
 - add a stub object for `ticket_knpdrei` as well, using the same schema contract as the report script expects
 
-## 3. Missing stored DB functions and missing logging table now fatal under upgraded mysqli behavior [not fixed]
+Follow-up update after implementing the smoke-schema fix in `/home/viktar/Projects/kimi-plus.at/src/upgraded-src/docker/mariadb/init/06-batch-stubs.sql`:
+
+- the `ticket_*` report targets were converted from read-only `VIEW`s to writable smoke tables cloned from `ticket`
+- `ticket_knpdrei` was added with the same smoke-table approach
+- `erstellt` was added to each report target so `insert into ticket_* select ticket.*, now()/curdate()` matches the expected table shape
+- after rerunning `/home/viktar/Projects/kimi-plus.at/src/upgraded-src/tests/run-all.sh`, the previous failures `target table is not insertable-into` and missing table `ticket_knpdrei` disappeared
+
+Status clarification:
+
+- root cause documented in this section: `[FIXED]`
+
+## 3. Missing stored DB functions and missing logging table now fatal under upgraded mysqli behavior [FIXED]
 
 Exists in original smoke baseline:
 
@@ -219,6 +242,22 @@ Fix directions:
 - add a minimal `callmanager_log` table definition in the upgraded DB init scripts
 - for `/home/viktar/Projects/kimi-plus.at/src/upgraded-src/web/htdocs/kimi_ET/getticketurl.php`, keep the existing fetch-result guard and also handle the query failure itself so missing functions do not abort the request
 - for `/home/viktar/Projects/kimi-plus.at/src/upgraded-src/web/htdocs/kimi_ET/setticketcallinfo.php`, catch `mysqli_sql_exception` or explicitly handle `mysqli_query()` failure if the desired smoke contract is “no fatal even when optional logging infra is absent”
+
+Follow-up update after implementing the smoke-schema fix in `/home/viktar/Projects/kimi-plus.at/src/upgraded-src/docker/mariadb/init/06-batch-stubs.sql`:
+
+- smoke-safe stored function stubs were added for `getCleanPhoneNoN(...)` and `getvwhw(...)`
+- a minimal `callmanager_log` table was added
+- after rerunning `/home/viktar/Projects/kimi-plus.at/src/upgraded-src/tests/run-all.sh`, the specific missing-object failures from this section disappeared
+- `/home/viktar/Projects/kimi-plus.at/src/upgraded-src/web/htdocs/kimi_ET/getticketurl.php` now fails later on a deeper schema mismatch: missing column `mandant.clid_name`
+- `/home/viktar/Projects/kimi-plus.at/src/upgraded-src/web/htdocs/kimi_ET/kimibatch/inkodeimp2.php` and `/home/viktar/Projects/kimi-plus.at/src/upgraded-src/web/htdocs/kimi_ET/kimibatch/inkodeimp2x.php` now fail later on missing helper table `inkode_duplet`
+- `/home/viktar/Projects/kimi-plus.at/src/upgraded-src/web/htdocs/kimi_ET/kimibatch/inko2016imp3.php` now fails later on missing helper table `inko2016_duplet`
+- `/home/viktar/Projects/kimi-plus.at/src/upgraded-src/web/htdocs/kimi_ET/kimibatch/okoimp.php` now fails later on missing helper table `okomehrfach`
+- `/home/viktar/Projects/kimi-plus.at/src/upgraded-src/web/htdocs/kimi_ET/setticketcallinfo.php` no longer lacks `callmanager_log`; the next likely blocker is its raw SQL construction in `Request::insert_callmanager()` inside `/home/viktar/Projects/kimi-plus.at/src/upgraded-src/web/htdocs/kimi_ET/setticketcallinfo.php`, where empty numeric-looking values can still produce invalid SQL before the legacy error branch runs
+
+Status clarification:
+
+- root cause documented in this section: `[FIXED]`
+- affected smoke entrypoints overall: `[not fixed]`
 
 ## 4. Remaining application-level module bugs [not fixed]
 
@@ -431,7 +470,7 @@ Status:
 
 ## Recommended Fix Order
 
-## 1. Environment/schema blockers first [not fixed]
+## 1. Environment/schema blockers first [FIXED]
 
 Recommended first because they create the largest number of upgraded-only failures:
 
@@ -459,3 +498,28 @@ What actually happened is more specific:
 - the upgraded runtime is stricter and now turns latent schema/runtime gaps into fatal smoke failures
 - only one clearly new application-level module root cause was added to the active set: `/home/viktar/Projects/kimi-plus.at/src/upgraded-src/web/htdocs/kimi_ET/modules/initial/subuebersicht.php`
 - most of the newly added upgraded smoke failures are environment/schema completeness problems in the upgraded local DB, not broad code regressions
+
+## Follow-up Update After Implementing Environment/Schema Fixes
+
+This follow-up update was added after implementing the smoke-environment changes in:
+
+- `/home/viktar/Projects/kimi-plus.at/src/upgraded-src/docker/mariadb/init/06-batch-stubs.sql`
+
+and rerunning:
+
+- `/home/viktar/Projects/kimi-plus.at/src/upgraded-src/tests/run-all.sh`
+
+after resetting the upgraded Docker DB volume.
+
+### Updated upgraded smoke result
+
+Observed active failing entrypoints after the rerun:
+
+- batch: `11`
+- initial: `2`
+- menu: `2`
+- top-level: `2`
+- total observed failures: `17`
+
+This is lower than the earlier upgraded baseline of `23`.
+

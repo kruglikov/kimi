@@ -13,7 +13,7 @@ TBD: Overview of all affected system areas
 
 # Highlighted critical points and technical risks
 ## PHPMailer Update
-- 
+- A legacy PHPMailer 2.0.4 copy is still present in the repository, but the visible active mail-sending code paths already use vendor PHPMailer 6.5.1. This should be treated as a dependency review and cleanup topic, not as a confirmed PHP 8.5 blocker, unless an additional runtime path still loads the old bundled copy.
 
 
 # Upgrade plan

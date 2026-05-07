@@ -81,7 +81,7 @@ Before running the tools, issues already identified by reading the source:
 
 | Severity   | File                                        | Issue |
 |------------|---------------------------------------------|---|
-| **High**   | `libs/addons/phpmail/class.phpmailer.php:4` | PHPMailer **v2.0.4** — incompatible with PHP 8.x. Must replace with v6.9+ |
+| **Medium** | `libs/addons/phpmail/class.phpmailer.php:4` | Legacy PHPMailer **v2.0.4** copy still exists in the repository, but visible active mail paths already use vendor PHPMailer **6.5.1**. Confirm no runtime path still loads the legacy copy, then review/update the vendor package to a currently supported 6.x release. |
 | **High**   | `libs/database.php:22,36`                   | `mysqli_error()` called without argument — deprecated PHP 8.1, fatal PHP 8.2 |
 | **Medium** | `libs/init.php:107`                         | `session_start()` has no `secure`/`httponly`/`samesite` options — GDPR/security |
 | **Medium** | All entity/batch files                      | Scan for implicitly nullable params (`function foo(T $x = null)` → `?T`) — deprecated PHP 8.5 |
