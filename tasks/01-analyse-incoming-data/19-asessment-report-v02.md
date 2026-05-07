@@ -14,6 +14,8 @@ If the site is accessible publicly, then additional "must fix" tasks should be i
 
 After GDPR review, "must fix" issues are the same. But there are a bunch "Nice to be fixed" additional GDPR tasks (see details below).
 
+Testing problem: Currently we cannot test the application on our end, the final testing (including calls functionality, etc) is possible only on the Kimi's side. So some minor issues may be catched only on Kimi's side. This adds risks that Kimi should have capability to test and fix minor issues after final testing on their side. Or Innowise needs to have access to testing environmnet and include QA hours into the estimate.
+
 # To Be Done
 
 - Review all provided system documentation and source materials.
@@ -165,7 +167,7 @@ Code-visible GDPR issues:
   GDPR articles and justification: Articles 33 and 34 personal data breach notification and communication govern breach notification and communication. This is primarily an organisational control item.
 
 ## GDPR Priorities
-GDPR priorities if the current application remains in use:
+
 ### Must be fixed for GDPR:
 - [GDPR1] URL-based auto-login is not privacy-safe by default.
   - Related must-fix technical item: [S2] URL-based auto-login bypass.
@@ -184,3 +186,19 @@ GDPR priorities if the current application remains in use:
   - Related must-fix technical items under current assumptions: none.
 - [GDPR8] Breach-response readiness cannot be assessed from code alone.
   - Related must-fix technical items under current assumptions: none.
+
+# Further Steps
+
+The main tasks to be fixed are either only 2 must have fixed:
+- [S1] SQL injection exposure in auth and DB access.
+- [S2] URL-based auto-login bypass
+If the site accessible publicly, then we need to fix next "must fix" issues too:
+- [S3] Weak password hashing.
+- [S4] Weak session configuration.
+- [S5] Missing session rotation and CSRF protection.
+
+To continue with these fixes, we would very appreciate a real db dump with truncated data.   
+
+## Testing problem\risks
+
+Currently, we cannot test the application on our end, the final testing (including calls functionality, etc) is possible only on the Kimi's side. So some minor issues may be catched only on Kimi's side. This adds risks that Kimi should have capability to test and fix minor issues after final testing on their side. Or Innowise needs to have access to testing environmnet and include QA hours into the estimate.
