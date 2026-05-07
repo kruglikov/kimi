@@ -95,7 +95,7 @@ Code-visible GDPR issues:
   What needs to be clarified before the fix: whether this mechanism is still operationally required, whether a non-URL-based replacement is acceptable, and whether any current integrations depend on this exact flow.
   How to fix: remove this mechanism, or replace it with short-lived signed one-time tokens, strict IP/network restrictions, server-side expiry, and audit controls. Evidence in code includes [S1] URL-based auto-login bypass at `web/htdocs/kimi_ET/index.php:11` and multiple batch/telephony-generated links under `web/htdocs/kimi_ET/kimibatch/`.
   GDPR articles and justification: Article 25 data protection by design and by default and Article 32 security of processing require privacy-safe defaults and appropriate security. A passwordless URL-auth flow is difficult to justify as a secure default for debtor/customer data.
-- [GDPR2] Inadequate protection of personal data in authentication and data access.
+- [GDPR2] Weak protection of personal data in authentication and data access.
   Business sense: personal and debtor-related data is exposed to avoidable compromise risk because the authentication and data-access layers use weak security patterns.
   What needs to be clarified before the fix: whether the portal is public or strictly private, whether credentials may be reused elsewhere, whether shared workstations exist, and which query paths are highest-risk because they handle login or customer/debtor data directly.
   How to fix: move critical auth and data-access paths to prepared statements, replace password storage with `password_hash()` plus migration logic, and harden session cookies and login session rotation. Evidence in code includes [S2] SQL injection exposure in auth and DB access at `web/htdocs/kimi_ET/libs/entities/user.php:115`, [S3] weak password hashing at `web/htdocs/kimi_ET/libs/entities/user.php:178`, [S4] weak session configuration at `web/htdocs/kimi_ET/libs/init.php:93`, and [S5] missing session rotation and CSRF protection at `web/htdocs/kimi_ET/ajax/check-login.php:1`.
@@ -135,7 +135,7 @@ Code-visible GDPR issues:
 GDPR priorities if the current application remains in use:
 ### Must be fixed for GDPR:
 - [GDPR1] URL-based auto-login is not privacy-safe by default.
-- [GDPR2] Inadequate protection of personal data in authentication and data access.
+- [GDPR2] Weak protection of personal data in authentication and data access.
 ### Nice to have fixed for GDPR, but should be checked carefully because they may move into must-fix depending on the real deployment, threat model, and organisational process maturity:
 - [GDPR3] Missing CSRF protection for authenticated state changes.
 - [GDPR4] Missing documented technical baseline for secure processing.
@@ -153,7 +153,7 @@ Assumption [A1]: We assume that the site is accessible only private network by t
     - current priority: Must fix
     - what needs to be checked: whether any safe replacement is really needed, or whether the feature can be removed entirely
     - interpretation under [A1]: this remains must fix because the GDPR risk comes from the existence of a passwordless authenticated URL flow itself, not only from public internet exposure
-- [GDPR2] Inadequate protection of personal data in authentication and data access
+- [GDPR2] Weak protection of personal data in authentication and data access
   - depends on [S2] SQL injection exposure in auth and DB access
     - current priority: Must fix
     - what needs to be checked: identify all high-risk auth and personal-data query paths
