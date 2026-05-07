@@ -35,16 +35,16 @@ Caution: this upgrade validation was done with the smoke-test safety net only, n
   
 # Security review
 
-- [S1] URL-based auto-login bypass.
-  Business sense: this creates a direct authenticated access path without password verification. If such links leak through browser history, internal forwarding, logs, screenshots, copied URLs, or helper tools, unauthorized access to debtor/customer data becomes much easier.
-  Evidence in code: `web/htdocs/kimi_ET/index.php:11`; the same pattern is also embedded into multiple batch and telephony-generated URLs under `web/htdocs/kimi_ET/kimibatch/`.
-  What needs to be clarified before the fix: whether this mechanism is still genuinely required for telephony, batch, or agent workflows; whether the application is accessible only on a strictly private network; whether any safe replacement is operationally acceptable.
-  How to fix: remove the mechanism if possible. If it must remain in some form, replace it with short-lived signed one-time tokens, strict server-side expiry, audit logging, and network/IP restrictions.
-- [S2] SQL injection exposure in auth and DB access.
+- [S1] SQL injection exposure in auth and DB access.
   Business sense: authentication and customer-data access are handled through raw SQL construction. This creates a risk of unauthorized data access, record manipulation, and compromise of personal data.
   Evidence in code: `web/htdocs/kimi_ET/libs/entities/user.php:115` and the broader raw-query pattern in `web/htdocs/kimi_ET/libs/database.php:1`.
   What needs to be clarified before the fix: which login, search, customer, ticket, and batch entry points still build SQL from untrusted values; whether there are helper wrappers already used anywhere for safer query construction.
   How to fix: migrate high-risk authentication and personal-data query paths to prepared statements.
+- [S2] URL-based auto-login bypass.
+  Business sense: this creates a direct authenticated access path without password verification. If such links leak through browser history, internal forwarding, logs, screenshots, copied URLs, or helper tools, unauthorized access to debtor/customer data becomes much easier.
+  Evidence in code: `web/htdocs/kimi_ET/index.php:11`; the same pattern is also embedded into multiple batch and telephony-generated URLs under `web/htdocs/kimi_ET/kimibatch/`.
+  What needs to be clarified before the fix: whether this mechanism is still genuinely required for telephony, batch, or agent workflows; whether the application is accessible only on a strictly private network; whether any safe replacement is operationally acceptable.
+  How to fix: remove the mechanism if possible. If it must remain in some form, replace it with short-lived signed one-time tokens, strict server-side expiry, audit logging, and network/IP restrictions.
 - [S3] Weak password hashing.
   Business sense: static-salt SHA-256 is weak compared with modern password hashing. If password data is exposed, offline cracking risk is materially higher than with Argon2id or bcrypt.
   Evidence in code: `web/htdocs/kimi_ET/libs/entities/user.php:178`.
@@ -65,8 +65,8 @@ Caution: this upgrade validation was done with the smoke-test safety net only, n
 
 ## Private network with trusted users
 If the site is only reachable inside a private network and only trusted users can access it:
-- Must be fixed: [S2] SQL injection exposure in auth and DB access.
-- Must be fixed: [S1] URL-based auto-login bypass, if there is any chance of lateral access, link sharing, or misuse by internal users or connected systems.
+- Must be fixed: [S1] SQL injection exposure in auth and DB access.
+- Must be fixed: [S2] URL-based auto-login bypass, if there is any chance of lateral access, link sharing, or misuse by internal users or connected systems.
 - Nice to have fixed: [S3] Weak password hashing.
 - Nice to have fixed: [S5] Missing session rotation and CSRF protection, unless shared workstations, lateral access paths, externally reachable helper links, or browser-driven authenticated actions make session misuse realistic.
 - Nice to have fixed: [S4] Weak session configuration.
@@ -74,8 +74,8 @@ If the site is only reachable inside a private network and only trusted users ca
 
 ## Public network access
 If the site is accessible publicly:
-- Must be fixed: [S1] URL-based auto-login bypass.
-- Must be fixed: [S2] SQL injection exposure in auth and DB access.
+- Must be fixed: [S1] SQL injection exposure in auth and DB access.
+- Must be fixed: [S2] URL-based auto-login bypass.
 - Must be fixed: [S3] Weak password hashing.
 - Must be fixed: [S4] Weak session configuration.
 - Must be fixed: [S5] Missing session rotation and CSRF protection.
@@ -93,12 +93,12 @@ Code-visible GDPR issues:
 - [GDPR1] URL-based auto-login is not privacy-safe by default.
   Business sense: direct authenticated access by URL increases the chance of unauthorized access through leaked links, browser history, logs, internal forwarding, or misuse by connected systems.
   What needs to be clarified before the fix: whether this mechanism is still operationally required, whether a non-URL-based replacement is acceptable, and whether any current integrations depend on this exact flow.
-  How to fix: remove this mechanism, or replace it with short-lived signed one-time tokens, strict IP/network restrictions, server-side expiry, and audit controls. Evidence in code includes [S1] URL-based auto-login bypass at `web/htdocs/kimi_ET/index.php:11` and multiple batch/telephony-generated links under `web/htdocs/kimi_ET/kimibatch/`.
+  How to fix: remove this mechanism, or replace it with short-lived signed one-time tokens, strict IP/network restrictions, server-side expiry, and audit controls. Evidence in code includes [S2] URL-based auto-login bypass at `web/htdocs/kimi_ET/index.php:11` and multiple batch/telephony-generated links under `web/htdocs/kimi_ET/kimibatch/`.
   GDPR articles and justification: Article 25 data protection by design and by default and Article 32 security of processing require privacy-safe defaults and appropriate security. A passwordless URL-auth flow is difficult to justify as a secure default for debtor/customer data.
 - [GDPR2] Weak protection of personal data in authentication and data access.
   Business sense: personal and debtor-related data is exposed to avoidable compromise risk because the authentication and data-access layers use weak security patterns.
   What needs to be clarified before the fix: whether the portal is public or strictly private, whether credentials may be reused elsewhere, whether shared workstations exist, and which query paths are highest-risk because they handle login or customer/debtor data directly.
-  How to fix: the core required technical fix for this GDPR item is [S2] SQL injection exposure in auth and DB access, meaning critical authentication and personal-data query paths should be migrated to prepared statements. Conditional supporting fixes are [S3] weak password hashing, [S4] weak session configuration, and the session-rotation part of [S5] missing session rotation and CSRF protection; these improve the same GDPR concern but are currently lower-priority or deployment-dependent under the private-network assumption. Evidence in code includes [S2] SQL injection exposure in auth and DB access at `web/htdocs/kimi_ET/libs/entities/user.php:115`, [S3] weak password hashing at `web/htdocs/kimi_ET/libs/entities/user.php:178`, [S4] weak session configuration at `web/htdocs/kimi_ET/libs/init.php:93`, and [S5] missing session rotation and CSRF protection at `web/htdocs/kimi_ET/ajax/check-login.php:1`.
+  How to fix: the core required technical fix for this GDPR item is [S1] SQL injection exposure in auth and DB access, meaning critical authentication and personal-data query paths should be migrated to prepared statements. Conditional supporting fixes are [S3] weak password hashing, [S4] weak session configuration, and the session-rotation part of [S5] missing session rotation and CSRF protection; these improve the same GDPR concern but are currently lower-priority or deployment-dependent under the private-network assumption. Evidence in code includes [S1] SQL injection exposure in auth and DB access at `web/htdocs/kimi_ET/libs/entities/user.php:115`, [S3] weak password hashing at `web/htdocs/kimi_ET/libs/entities/user.php:178`, [S4] weak session configuration at `web/htdocs/kimi_ET/libs/init.php:93`, and [S5] missing session rotation and CSRF protection at `web/htdocs/kimi_ET/ajax/check-login.php:1`.
   GDPR articles and justification: Article 5(1)(f) integrity and confidentiality and Article 32 security of processing require security measures appropriate to the risk. Article 24 responsibility of the controller is also relevant because the controller must implement and be able to demonstrate appropriate measures.
 - [GDPR3] Missing CSRF protection for authenticated state changes.
   Business sense: an authenticated user can potentially be tricked into submitting unwanted state-changing requests, which can affect customer records, logs, or case-processing actions.
@@ -151,11 +151,11 @@ Assumption [A2]: Production setup: use HTTPS (Production is set up by Kimi's sys
 Assumption [A3]: Production setup: errors are hidden on production environment (Production is set up by Kimi's system administrators).
 
 - [GDPR1] URL-based auto-login is not privacy-safe by default
-  - depends on [S1] URL-based auto-login bypass
+  - depends on [S2] URL-based auto-login bypass
     - current priority: Must fix
     - what needs to be checked: whether any safe replacement is really needed, or whether the feature can be removed entirely
 - [GDPR2] Weak protection of personal data in authentication and data access
-  - depends on [S2] SQL injection exposure in auth and DB access
+  - depends on [S1] SQL injection exposure in auth and DB access
     - current priority: Must fix
     - what needs to be checked: identify all high-risk auth and personal-data query paths
   - depends on [S3] Weak password hashing
@@ -210,8 +210,8 @@ Assumption [A3]: Production setup: errors are hidden on production environment (
 
 | ID   | Title                                               | Current Priority |
 |------|-----------------------------------------------------|---|
-| S1   | URL-based auto-login bypass                         | Must fix for public access; must fix for private network if lateral access or link misuse is realistic |
-| S2   | SQL injection exposure in auth and DB access        | Must fix |
+| S1   | SQL injection exposure in auth and DB access        | Must fix |
+| S2   | URL-based auto-login bypass                         | Must fix for public access; must fix for private network if lateral access or link misuse is realistic |
 | S3   | Weak password hashing                               | Must fix for public access; nice to have for private trusted network |
 | S4   | Weak session configuration                          | Must fix for public access; nice to have for private trusted network |
 | S5   | Missing session rotation and CSRF protection        | Must fix for public access; nice to have for private trusted network unless session misuse is realistic |
