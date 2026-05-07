@@ -1,4 +1,6 @@
 
+# Short document summary
+
 
 # To Be Done
 
@@ -32,13 +34,33 @@ KIMI Portal is a legacy custom PHP/MariaDB business application with one main br
 Caution: this upgrade validation was done with the smoke-test safety net only, not with full functional/regression testing. The system may still contain issues in business flows, edge cases, integrations, or less-used modules that were not covered by the current safety net.
   
 # Security review
-- [S1] URL-based auto-login bypass. `web/htdocs/kimi_ET/index.php:11` accepts `?autologin=true&loginuser=...&mandant=...&kId=...` and establishes a logged-in session without password verification. The same pattern is embedded into multiple batch and telephony-generated URLs under `web/htdocs/kimi_ET/kimibatch/`.
-- [S2] SQL injection exposure in auth and DB access. `web/htdocs/kimi_ET/libs/entities/user.php:115` builds the login query with raw string interpolation for `$name`, and `web/htdocs/kimi_ET/libs/database.php:1` provides a raw-query DB layer without prepared statements as the default pattern. This matters from both security and GDPR perspectives because the affected area is authentication and personal/customer data access.
-- [S3] Weak password hashing. 
-   `web/htdocs/kimi_ET/libs/entities/user.php:178` still uses `hash("sha256", "kimiplus" . $passwort)` with a global static salt. This is weaker than `password_hash()` with Argon2id or bcrypt because it has no per-user salt and no adaptive work factor.
-- [S4] Weak session configuration. `web/htdocs/kimi_ET/libs/init.php:93` calls `session_start()` without secure cookie flags such as `cookie_secure`, `cookie_httponly`, or `cookie_samesite`. `web/htdocs/kimi_ET/libs/init.php:92`, `web/htdocs/kimi_ET/login.php:5`, and `web/htdocs/kimi_ET/index.php:6` also use inconsistent session names (`kimi_ET-P` vs `kimiET-P`).
-- [S5] Missing session rotation and CSRF protection. `web/htdocs/kimi_ET/ajax/check-login.php:1` sets `$_SESSION["user"]` after login but does not rotate the session via `session_regenerate_id(true)`. No CSRF token handling was found in the main login or routed portal files reviewed.
-- [S6] Raw error disclosure and insecure auxiliary cookies. Many scripts echo raw SQL/database errors via `mysqli_error(...)`, which can disclose internal query structure and schema details. There are also cookie writes such as the `KimiNebenstelle` path in `web/htdocs/kimi_ET/index.php:25` without visible security attributes in the code path shown.
+- [S1] URL-based auto-login bypass.
+  Business sense: this creates a direct authenticated access path without password verification. If such links leak through browser history, internal forwarding, logs, screenshots, copied URLs, or helper tools, unauthorized access to debtor/customer data becomes much easier.
+  Evidence in code: `web/htdocs/kimi_ET/index.php:11`; the same pattern is also embedded into multiple batch and telephony-generated URLs under `web/htdocs/kimi_ET/kimibatch/`.
+  What needs to be clarified before the fix: whether this mechanism is still genuinely required for telephony, batch, or agent workflows; whether the application is accessible only on a strictly private network; whether any safe replacement is operationally acceptable.
+  How to fix: remove the mechanism if possible. If it must remain in some form, replace it with short-lived signed one-time tokens, strict server-side expiry, audit logging, and network/IP restrictions.
+- [S2] SQL injection exposure in auth and DB access.
+  Business sense: authentication and customer-data access are handled through raw SQL construction. This creates a risk of unauthorized data access, record manipulation, and compromise of personal data.
+  Evidence in code: `web/htdocs/kimi_ET/libs/entities/user.php:115` and the broader raw-query pattern in `web/htdocs/kimi_ET/libs/database.php:1`.
+  What needs to be clarified before the fix: which login, search, customer, ticket, and batch entry points still build SQL from untrusted values; whether there are helper wrappers already used anywhere for safer query construction.
+  How to fix: migrate high-risk authentication and personal-data query paths to prepared statements.
+- [S3] Weak password hashing.
+  Business sense: static-salt SHA-256 is weak compared with modern password hashing. If password data is exposed, offline cracking risk is materially higher than with Argon2id or bcrypt.
+  Evidence in code: `web/htdocs/kimi_ET/libs/entities/user.php:178`.
+  How to fix: switch to `password_hash()` and `password_verify()` with a migration strategy that rehashes legacy passwords on successful login or through a controlled reset flow.
+- [S4] Weak session configuration.
+  Business sense: missing secure cookie flags and inconsistent session naming weaken session integrity and make session behavior harder to reason about and harden.
+  Evidence in code: `web/htdocs/kimi_ET/libs/init.php:92-93`, `web/htdocs/kimi_ET/login.php:5`, `web/htdocs/kimi_ET/index.php:6`.
+  How to fix: normalize session naming, enforce secure cookie settings such as `cookie_secure`, `cookie_httponly`, and `cookie_samesite`, and keep session initialization centralized.
+- [S5] Missing session rotation and CSRF protection.
+  Business sense: without session ID rotation on login, session fixation risk remains. Without CSRF protection, authenticated users may be tricked into unintended state-changing actions.
+  Evidence in code: `web/htdocs/kimi_ET/ajax/check-login.php:1`.
+  How to fix: call `session_regenerate_id(true)` immediately after successful login and add CSRF tokens plus server-side validation for authenticated state-changing actions.
+- [S6] Raw error disclosure and insecure auxiliary cookies.
+  Business sense: raw SQL errors can reveal schema details, SQL text, and internal processing context. Auxiliary cookies without clear security attributes may also increase exposure, though this is secondary to the raw error issue.
+  Evidence in code: widespread `mysqli_error(...)` output in web-facing and batch-adjacent scripts; auxiliary cookie handling includes `web/htdocs/kimi_ET/index.php:25`.
+  What needs to be clarified before the fix:  client should check if  which error paths are user-visible in production, whether SQL text can include personal-data context, and whether the auxiliary cookie is actually used in production.
+  How to fix: return only generic user-safe errors to the browser, log technical details to protected server logs, and review whether auxiliary cookies should be hardened or removed.
 
 ## Private network with trusted users
 If the site is only reachable inside a private network and only trusted users can access it:
@@ -67,33 +89,51 @@ Question [Q1]: Am I right that the site is accessible only in private network by
 - The most directly implicated GDPR requirements are Article 5(1)(f) integrity and confidentiality, Article 24 responsibility of the controller, Article 25 data protection by design and by default, and Article 32 security of processing.
 - GDPR does not create one set of duties for private networks and another for public deployments. The legal obligations remain the same. What changes is the Article 32 security of processing risk profile: public exposure usually makes weak controls less defensible and raises the likelihood that a finding should be treated as urgent.
 
-Code-visible GDPR issues and what should be done:
+Code-visible GDPR issues:
 - [GDPR1] URL-based auto-login is not privacy-safe by default.
-  Business sense and how to fix: direct authenticated access by URL increases the chance of unauthorized access through leaked links, browser history, logs, internal forwarding, or misuse by connected systems. Evidence in code includes [S1] URL-based auto-login bypass at `web/htdocs/kimi_ET/index.php:11` and multiple batch/telephony-generated links under `web/htdocs/kimi_ET/kimibatch/`. Fix: remove this mechanism, or replace it with short-lived signed one-time tokens, strict IP/network restrictions, server-side expiry, and audit controls.
+  Business sense: direct authenticated access by URL increases the chance of unauthorized access through leaked links, browser history, logs, internal forwarding, or misuse by connected systems.
+  What needs to be clarified before the fix: whether this mechanism is still operationally required, whether a non-URL-based replacement is acceptable, and whether any current integrations depend on this exact flow.
+  How to fix: remove this mechanism, or replace it with short-lived signed one-time tokens, strict IP/network restrictions, server-side expiry, and audit controls. Evidence in code includes [S1] URL-based auto-login bypass at `web/htdocs/kimi_ET/index.php:11` and multiple batch/telephony-generated links under `web/htdocs/kimi_ET/kimibatch/`.
   GDPR articles and justification: Article 25 data protection by design and by default and Article 32 security of processing require privacy-safe defaults and appropriate security. A passwordless URL-auth flow is difficult to justify as a secure default for debtor/customer data.
 - [GDPR2] Inadequate protection of personal data in authentication and data access.
-  Business sense and how to fix: personal and debtor-related data is exposed to avoidable compromise risk because the authentication and data-access layers use weak security patterns. Evidence in code includes [S2] SQL injection exposure in auth and DB access at `web/htdocs/kimi_ET/libs/entities/user.php:115`, [S3] weak password hashing at `web/htdocs/kimi_ET/libs/entities/user.php:178`, [S4] weak session configuration at `web/htdocs/kimi_ET/libs/init.php:93`, [S5] missing session rotation and CSRF protection at `web/htdocs/kimi_ET/ajax/check-login.php:1`, and [S6] raw error disclosure and insecure auxiliary cookies in `web/htdocs/kimi_ET/libs/database.php:1` and many endpoint scripts. Fix: move critical auth and data-access paths to prepared statements, replace password storage with `password_hash()` plus migration logic, harden session cookies and login session rotation, and stop exposing raw DB errors to end users.
+  Business sense: personal and debtor-related data is exposed to avoidable compromise risk because the authentication and data-access layers use weak security patterns.
+  What needs to be clarified before the fix: whether the portal is public or strictly private, whether credentials may be reused elsewhere, whether shared workstations exist, and which query paths are highest-risk because they handle login or customer/debtor data directly.
+  How to fix: move critical auth and data-access paths to prepared statements, replace password storage with `password_hash()` plus migration logic, harden session cookies and login session rotation, and stop exposing raw DB errors to end users. Evidence in code includes [S2] SQL injection exposure in auth and DB access at `web/htdocs/kimi_ET/libs/entities/user.php:115`, [S3] weak password hashing at `web/htdocs/kimi_ET/libs/entities/user.php:178`, [S4] weak session configuration at `web/htdocs/kimi_ET/libs/init.php:93`, [S5] missing session rotation and CSRF protection at `web/htdocs/kimi_ET/ajax/check-login.php:1`, and [S6] raw error disclosure and insecure auxiliary cookies in `web/htdocs/kimi_ET/libs/database.php:1` and many endpoint scripts.
   GDPR articles and justification: Article 5(1)(f) integrity and confidentiality and Article 32 security of processing require security measures appropriate to the risk. Article 24 responsibility of the controller is also relevant because the controller must implement and be able to demonstrate appropriate measures.
 - [GDPR3] Error handling discloses excessive technical detail.
-  Business sense and how to fix: raw SQL errors can leak schema details, SQL text, and internal context that make personal-data systems easier to exploit or inspect. Evidence overlaps with [S6] Raw error disclosure and insecure auxiliary cookies. Fix: log technical errors to protected server logs, return generic user-safe error messages to the browser, and avoid including full SQL text in response content.
+  Business sense: raw SQL errors can leak schema details, SQL text, and internal context that make personal-data systems easier to exploit or inspect.
+  What needs to be clarified before the fix: whether current error outputs are visible to end users in production, whether error messages can include personal-data context, and whether any operational support process depends on the current detailed output.
+  How to fix: log technical errors to protected server logs, return generic user-safe error messages to the browser, and avoid including full SQL text in response content. Evidence overlaps with [S6] Raw error disclosure and insecure auxiliary cookies.
   GDPR articles and justification: Article 5(1)(f) integrity and confidentiality, Article 24 responsibility of the controller, and Article 32 security of processing are relevant because unnecessary disclosure undermines confidentiality and indicates insufficient protective measures.
 - [GDPR4] Missing CSRF protection for authenticated state changes.
-  Business sense and how to fix: an authenticated user can potentially be tricked into submitting unwanted state-changing requests, which can affect customer records, logs, or case-processing actions. Evidence in code overlaps with [S5] Missing session rotation and CSRF protection. Fix: introduce CSRF tokens for authenticated POST actions and verify them server-side.
+  Business sense: an authenticated user can potentially be tricked into submitting unwanted state-changing requests, which can affect customer records, logs, or case-processing actions.
+  What needs to be clarified before the fix: which authenticated actions actually change data, whether they are triggered only by POST, and whether any integrations or frontend scripts would break once CSRF checks are enforced.
+  How to fix: introduce CSRF tokens for authenticated POST actions and verify them server-side. Evidence in code overlaps with [S5] Missing session rotation and CSRF protection.
   GDPR articles and justification: Article 25 data protection by design and by default and Article 32 security of processing are relevant because integrity of personal-data processing depends on preventing unauthorized or manipulated actions under an authenticated user context.
 - [GDPR5] Missing documented technical baseline for secure processing.
-  Business sense and how to fix: repeated insecure defaults across authentication, session handling, and DB access indicate the system lacks a clearly enforced minimum security standard. Fix: define and implement a minimum security baseline for authentication, session handling, error handling, and query execution, and keep it documented as part of the maintained application standard.
+  Business sense: repeated insecure defaults across authentication, session handling, and DB access indicate the system lacks a clearly enforced minimum security standard.
+  What needs to be clarified before the fix: whether any internal security standard, operational checklist, or deployment hardening guide already exists but is not reflected in the codebase or report inputs.
+  How to fix: define and implement a minimum security baseline for authentication, session handling, error handling, and query execution, and keep it documented as part of the maintained application standard.
   GDPR articles and justification: Article 24 responsibility of the controller requires the controller to implement and be able to demonstrate appropriate technical and organisational measures. This is partly a governance/documentation issue, not only a coding issue.
 - [GDPR6] Retention and storage-limitation controls are not evident from code.
-  Business sense and how to fix: the portal appears to maintain logs, archive data, telephony data, and batch-import artifacts, but the reviewed code does not show clear deletion, anonymisation, or retention enforcement. Evidence includes `web/htdocs/kimi_ET/config/config.php:39` with `kimi_archiv`, `web/htdocs/kimi_ET/libs/application.php:47`, and file logging such as `web/htdocs/kimi_ET/setticketcallinfo.php:258`. Fix: define retention periods for operational logs, archived records, telephony logs, and batch-import files, and implement deletion/anonymisation routines where required.
+  Business sense: the portal appears to maintain logs, archive data, telephony data, and batch-import artifacts, but the reviewed code does not show clear deletion, anonymisation, or retention enforcement.
+  What needs to be clarified before the fix: actual production retention practice, whether `kimi_archiv` is used for regulated archiving, whether operational or contractual retention duties exist, and where file-based imports/exports are stored and cleaned up.
+  How to fix: define retention periods for operational logs, archived records, telephony logs, and batch-import files, and implement deletion/anonymisation routines where required. Evidence includes `web/htdocs/kimi_ET/config/config.php:39` with `kimi_archiv`, `web/htdocs/kimi_ET/libs/application.php:47`, and file logging such as `web/htdocs/kimi_ET/setticketcallinfo.php:258`.
   GDPR articles and justification: Article 5(1)(e) storage limitation requires that personal data not be kept longer than necessary. This item cannot be fully confirmed from code alone, so it should be checked against real operations, DB content, and documented retention policy.
 - [GDPR7] Transparency coverage cannot be confirmed from code alone.
-  Business sense and how to fix: the UI links to `../datenschutz.html`, but this review did not validate whether the privacy notice fully covers actual purposes, legal bases, retention, recipients, and rights. Fix: review the live privacy notice against actual processing activities and ensure it matches the implemented data flows.
+  Business sense: the UI links to `../datenschutz.html`, but this review did not validate whether the privacy notice fully covers actual purposes, legal bases, retention, recipients, and rights.
+  What needs to be clarified before the fix: the live privacy-notice text, real processing purposes, legal bases, recipients, retention statements, and whether employee/agent-facing and debtor/customer-facing notices differ.
+  How to fix: review the live privacy notice against actual processing activities and ensure it matches the implemented data flows.
   GDPR articles and justification: Articles 13 and 14 information duties require clear information to data subjects. This is mainly a content/process review item rather than a pure code defect.
 - [GDPR8] Data-subject-rights workflows are not evident in the reviewed implementation.
-  Business sense and how to fix: the review did not identify clear application support for access, rectification, erasure, restriction, objection, or portability handling. This does not prove non-compliance, because such requests may be handled operationally outside the portal. Fix: confirm whether these requests are handled outside the system; if not, implement and document a controlled process.
+  Business sense: the review did not identify clear application support for access, rectification, erasure, restriction, objection, or portability handling. This does not prove non-compliance, because such requests may be handled operationally outside the portal.
+  What needs to be clarified before the fix: whether such requests are currently handled manually, which teams handle them, whether turnaround times are documented, and whether the portal needs technical support for those workflows.
+  How to fix: confirm whether these requests are handled outside the system; if not, implement and document a controlled process.
   GDPR articles and justification: Articles 15 to 22 data subject rights establish these rights. This item needs process review in addition to code review.
 - [GDPR9] Breach-response readiness cannot be assessed from code alone.
-  Business sense and how to fix: application code does not show whether incident handling, assessment, evidence preservation, and notification responsibilities are operationally in place. Fix: ensure there is an organisational incident-response process covering detection, assessment, notification, and evidence preservation for personal-data breaches.
+  Business sense: application code does not show whether incident handling, assessment, evidence preservation, and notification responsibilities are operationally in place.
+  What needs to be clarified before the fix: whether there is already an incident-response procedure, who owns breach assessment and notification, and whether evidence preservation/log access are operationally feasible.
+  How to fix: ensure there is an organisational incident-response process covering detection, assessment, notification, and evidence preservation for personal-data breaches.
   GDPR articles and justification: Articles 33 and 34 personal data breach notification and communication govern breach notification and communication. This is primarily an organisational control item.
 
 ## GDPR Priorities
@@ -112,27 +152,35 @@ GDPR priorities if the current application remains in use:
 
 ## GDPR-to-Security Dependency Map
 
+Assumption [A1]: We assume that the site is accessible only private network by trusted users.
+
 - [GDPR1] URL-based auto-login is not privacy-safe by default
   - depends on [S1] URL-based auto-login bypass
     - current priority: Must fix
-    - check: whether any safe replacement is really needed, or whether the feature can be removed entirely
+    - what needs to be checked: whether any safe replacement is really needed, or whether the feature can be removed entirely
+    - interpretation under [A1]: this remains must fix because the GDPR risk comes from the existence of a passwordless authenticated URL flow itself, not only from public internet exposure
 - [GDPR2] Inadequate protection of personal data in authentication and data access
   - depends on [S2] SQL injection exposure in auth and DB access
     - current priority: Must fix
-    - check: identify all high-risk auth and personal-data query paths
+    - what needs to be checked: identify all high-risk auth and personal-data query paths
+    - interpretation under [A1]: still must fix
   - depends on [S3] Weak password hashing
     - current priority: Must fix for public access; nice to have for strict private trusted network
-    - check: public exposure, credential reuse risk, sensitivity of the data handled
+    - what needs to be checked: public exposure, credential reuse risk, sensitivity of the data handled
+    - interpretation under [A1]: likely nice to have unless passwords are reused elsewhere or data sensitivity/risk appetite requires stronger treatment
   - depends on [S4] Weak session configuration
     - current priority: Must fix for public access; nice to have for strict private trusted network
-    - check: HTTPS enforcement, cookie exposure, shared workstation usage
+    - what needs to be checked: HTTPS enforcement, cookie exposure, shared workstation usage
+    - interpretation under [A1]: likely nice to have unless internal network trust is weak or shared workstation/cookie exposure risk is real
   - depends on [S5] Missing session rotation and CSRF protection
     - current priority: session rotation must fix for public access; nice to have for strict private trusted network
-    - check: shared workstations, lateral internal access, helper-link/browser misuse scenarios
+    - what needs to be checked: shared workstations, lateral internal access, helper-link/browser misuse scenarios
+    - interpretation under [A1]: session-rotation part is likely nice to have unless session misuse is realistic; CSRF part belongs more directly to [GDPR4]
 - [GDPR3] Error handling discloses excessive technical detail
   - depends on [S6] Raw error disclosure and insecure auxiliary cookies
     - current priority: raw error disclosure part is Must fix
-    - check: whether current errors expose SQL text, schema details, or personal-data context; auxiliary cookie hardening remains secondary unless additional risk is identified
+    - what needs to be checked: whether current errors expose SQL text, schema details, or personal-data context; auxiliary cookie hardening remains secondary unless additional risk is identified
+    - interpretation under [A1]: raw error disclosure still remains must fix; the auxiliary-cookie part stays secondary unless a separate exposure path is confirmed
 
 ## Issue Index
 
