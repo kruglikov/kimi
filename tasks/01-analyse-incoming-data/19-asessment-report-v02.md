@@ -13,7 +13,6 @@ KIMI Portal is a legacy custom PHP/MariaDB business application with one main br
 
 # Upgrade PHP Versions plan
 
-[done] Make the system work:`
 - Prepare environment and smoke tests safety net on PHP 8.0 version [DONE]
   - Create docker file with app and db container on PHP 8.0 (this change should only add or wrap the current coding base, and do not change its structure ) [DONE]
   - Recreate database dump file from the code and apply it [DONE]
@@ -29,34 +28,40 @@ KIMI Portal is a legacy custom PHP/MariaDB business application with one main br
   - Run safety net tests and fix issues related to the update that Rector did not handle [DONE] 
   - Review dependencies that were intentionally skipped by Rector, especially `vendor/`, `kimibatch/files/vendor/`, and bundled legacy libraries such as `libs/addons/phpmail/` [DONE]
   - Run the project live and check if it works with own eyes [DONE]
+
+Caution: this upgrade validation was done with the smoke-test safety net only, not with full functional/regression testing. The system may still contain issues in business flows, edge cases, integrations, or less-used modules that were not covered by the current safety net.
   
 # Security review
-- Password hashing is not sufficient by current standards. `web/htdocs/kimi_ET/libs/entities/user.php:178` still uses `hash("sha256", "kimiplus" . $passwort)` with a global static salt. This is weaker than `password_hash()` with Argon2id or bcrypt because it has no per-user salt and no adaptive work factor.
-- The session-security issues are confirmed in code and should be treated as relevant. `web/htdocs/kimi_ET/libs/init.php:93` calls `session_start()` without secure cookie flags such as `cookie_secure`, `cookie_httponly`, or `cookie_samesite`. `web/htdocs/kimi_ET/libs/init.php:92`, `web/htdocs/kimi_ET/login.php:5`, and `web/htdocs/kimi_ET/index.php:6` also use inconsistent session names (`kimi_ET-P` vs `kimiET-P`).
-- Session fixation and CSRF protection are missing in the reviewed login flow. `web/htdocs/kimi_ET/ajax/check-login.php:1` sets `$_SESSION["user"]` after login but does not rotate the session via `session_regenerate_id(true)`. No CSRF token handling was found in the main login or routed portal files reviewed.
-- The URL-based auto-login path is a severe risk if reachable outside a trusted internal network. `web/htdocs/kimi_ET/index.php:11` accepts `?autologin=true&loginuser=...&mandant=...&kId=...` and establishes a logged-in session without password verification. The same pattern is embedded into multiple batch and telephony-generated URLs under `web/htdocs/kimi_ET/kimibatch/`.
-- SQL injection exposure is relevant and should be highlighted. `web/htdocs/kimi_ET/libs/entities/user.php:115` builds the login query with raw string interpolation for `$name`, and `web/htdocs/kimi_ET/libs/database.php:1` provides a raw-query DB layer without prepared statements as the default pattern. This matters from both security and GDPR perspectives because the affected area is authentication and personal/customer data access.
-- Additional code-visible weaknesses were also observed. Many scripts echo raw SQL/database errors via `mysqli_error(...)`, which can disclose internal query structure and schema details. There are also cookie writes such as the `KimiNebenstelle` path in `web/htdocs/kimi_ET/index.php:25` without visible security attributes in the code path shown.
+- Issue: Weak password hashing. 
+   `web/htdocs/kimi_ET/libs/entities/user.php:178` still uses `hash("sha256", "kimiplus" . $passwort)` with a global static salt. This is weaker than `password_hash()` with Argon2id or bcrypt because it has no per-user salt and no adaptive work factor.
+- Issue: Weak session configuration. `web/htdocs/kimi_ET/libs/init.php:93` calls `session_start()` without secure cookie flags such as `cookie_secure`, `cookie_httponly`, or `cookie_samesite`. `web/htdocs/kimi_ET/libs/init.php:92`, `web/htdocs/kimi_ET/login.php:5`, and `web/htdocs/kimi_ET/index.php:6` also use inconsistent session names (`kimi_ET-P` vs `kimiET-P`).
+- Issue: Missing session rotation and CSRF protection. `web/htdocs/kimi_ET/ajax/check-login.php:1` sets `$_SESSION["user"]` after login but does not rotate the session via `session_regenerate_id(true)`. No CSRF token handling was found in the main login or routed portal files reviewed.
+- Issue: URL-based auto-login bypass. `web/htdocs/kimi_ET/index.php:11` accepts `?autologin=true&loginuser=...&mandant=...&kId=...` and establishes a logged-in session without password verification. The same pattern is embedded into multiple batch and telephony-generated URLs under `web/htdocs/kimi_ET/kimibatch/`.
+- Issue: SQL injection exposure in auth and DB access. `web/htdocs/kimi_ET/libs/entities/user.php:115` builds the login query with raw string interpolation for `$name`, and `web/htdocs/kimi_ET/libs/database.php:1` provides a raw-query DB layer without prepared statements as the default pattern. This matters from both security and GDPR perspectives because the affected area is authentication and personal/customer data access.
+- Issue: Raw error disclosure and insecure auxiliary cookies. Many scripts echo raw SQL/database errors via `mysqli_error(...)`, which can disclose internal query structure and schema details. There are also cookie writes such as the `KimiNebenstelle` path in `web/htdocs/kimi_ET/index.php:25` without visible security attributes in the code path shown.
 
 If the site is only reachable inside a private network and only trusted users can access it:
-- Must be fixed: SQL injection exposure in the login/authentication path and the broader raw-query DB access pattern.
-- Must be fixed: URL-based auto-login if there is any chance of lateral access, link sharing, or misuse by internal users or connected systems.
-- Must be fixed: session fixation risk by rotating the session ID on login and normalizing session configuration.
-- Nice to have fixed: modern password hashing migration from static-salt SHA-256 to `password_hash()`.
-- Nice to have fixed: CSRF protection for state-changing requests.
-- Nice to have fixed: secure cookie flags and reduction of raw SQL error disclosure.
+- Must be fixed: Issue: SQL injection exposure in auth and DB access.
+- Must be fixed: Issue: URL-based auto-login bypass, if there is any chance of lateral access, link sharing, or misuse by internal users or connected systems.
+- Must be fixed: Issue: Missing session rotation and CSRF protection, at least for the session-rotation part.
+- Nice to have fixed: Issue: Weak password hashing.
+- Nice to have fixed: Issue: Missing session rotation and CSRF protection, for the CSRF-protection part.
+- Nice to have fixed: Issue: Weak session configuration.
+- Nice to have fixed: Issue: Raw error disclosure and insecure auxiliary cookies.
 
 If the site is accessible publicly:
-- Must be fixed: URL-based auto-login.
-- Must be fixed: SQL injection exposure in the login/authentication path and the broader raw-query DB access pattern.
-- Must be fixed: modern password hashing migration from static-salt SHA-256 to `password_hash()`.
-- Must be fixed: session hardening, including secure cookie flags, consistent session naming, and session ID rotation on login.
-- Must be fixed: CSRF protection for authenticated state-changing requests.
-- Nice to have fixed: reduction of raw SQL error disclosure and cleanup of insecure auxiliary cookie handling.
+- Must be fixed: Issue: URL-based auto-login bypass.
+- Must be fixed: Issue: SQL injection exposure in auth and DB access.
+- Must be fixed: Issue: Weak password hashing.
+- Must be fixed: Issue: Weak session configuration.
+- Must be fixed: Issue: Missing session rotation and CSRF protection.
+- Nice to have fixed: Issue: Raw error disclosure and insecure auxiliary cookies.
 
 # GDPR Review
+
 - This review is code-visible only. It identifies GDPR-relevant issues that can be evidenced from the application code and local configuration. It is not a full legal audit of contracts, records of processing, retention policies, processor agreements, or live operational practice.
 - The most directly implicated GDPR requirements are: Article 5(1)(f) integrity and confidentiality, Article 24 controller responsibility, Article 25 data protection by design and by default, and Article 32 security of processing.
+- The review was done on the codebase updated to PHP 8.5 so refers to particular  
 
 Code-visible GDPR issues and what should be done:
 - Article 5(1)(f) and Article 32: personal data is not protected with security measures appropriate to the risk. Evidence in code includes raw SQL authentication queries in `web/htdocs/kimi_ET/libs/entities/user.php:115`, weak static-salt SHA-256 password hashing in `web/htdocs/kimi_ET/libs/entities/user.php:178`, insecure session setup in `web/htdocs/kimi_ET/libs/init.php:93`, missing session rotation in `web/htdocs/kimi_ET/ajax/check-login.php:1`, and raw SQL error disclosure in `web/htdocs/kimi_ET/libs/database.php:1` and many endpoint scripts. Fix: move critical auth and data-access paths to prepared statements, replace password storage with `password_hash()` plus migration logic, harden session cookies and login session rotation, and stop exposing raw DB errors to end users.
