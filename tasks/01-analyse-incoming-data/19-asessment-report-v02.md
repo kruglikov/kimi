@@ -98,7 +98,7 @@ Code-visible GDPR issues:
 - [GDPR2] Weak protection of personal data in authentication and data access.
   Business sense: personal and debtor-related data is exposed to avoidable compromise risk because the authentication and data-access layers use weak security patterns.
   What needs to be clarified before the fix: whether the portal is public or strictly private, whether credentials may be reused elsewhere, whether shared workstations exist, and which query paths are highest-risk because they handle login or customer/debtor data directly.
-  How to fix: move critical auth and data-access paths to prepared statements, replace password storage with `password_hash()` plus migration logic, and harden session cookies and login session rotation. Evidence in code includes [S2] SQL injection exposure in auth and DB access at `web/htdocs/kimi_ET/libs/entities/user.php:115`, [S3] weak password hashing at `web/htdocs/kimi_ET/libs/entities/user.php:178`, [S4] weak session configuration at `web/htdocs/kimi_ET/libs/init.php:93`, and [S5] missing session rotation and CSRF protection at `web/htdocs/kimi_ET/ajax/check-login.php:1`.
+  How to fix: the core required technical fix for this GDPR item is [S2] SQL injection exposure in auth and DB access, meaning critical authentication and personal-data query paths should be migrated to prepared statements. Conditional supporting fixes are [S3] weak password hashing, [S4] weak session configuration, and the session-rotation part of [S5] missing session rotation and CSRF protection; these improve the same GDPR concern but are currently lower-priority or deployment-dependent under the private-network assumption. Evidence in code includes [S2] SQL injection exposure in auth and DB access at `web/htdocs/kimi_ET/libs/entities/user.php:115`, [S3] weak password hashing at `web/htdocs/kimi_ET/libs/entities/user.php:178`, [S4] weak session configuration at `web/htdocs/kimi_ET/libs/init.php:93`, and [S5] missing session rotation and CSRF protection at `web/htdocs/kimi_ET/ajax/check-login.php:1`.
   GDPR articles and justification: Article 5(1)(f) integrity and confidentiality and Article 32 security of processing require security measures appropriate to the risk. Article 24 responsibility of the controller is also relevant because the controller must implement and be able to demonstrate appropriate measures.
 - [GDPR3] Missing CSRF protection for authenticated state changes.
   Business sense: an authenticated user can potentially be tricked into submitting unwanted state-changing requests, which can affect customer records, logs, or case-processing actions.
@@ -146,18 +146,18 @@ GDPR priorities if the current application remains in use:
 
 ## GDPR-to-Security Dependency Map
 
-Assumption [A1]: We assume that the site is accessible only private network by trusted users.  
+Assumption [A1]: We assume that the site is accessible only private network by trusted users.
+Assumption [A2]: Production setup: use HTTPS (Production is set up by Kimi's system administrators).
+Assumption [A3]: Production setup: errors are hidden on production environment (Production is set up by Kimi's system administrators).
 
 - [GDPR1] URL-based auto-login is not privacy-safe by default
   - depends on [S1] URL-based auto-login bypass
     - current priority: Must fix
     - what needs to be checked: whether any safe replacement is really needed, or whether the feature can be removed entirely
-    - interpretation under [A1]: this remains must fix because the GDPR risk comes from the existence of a passwordless authenticated URL flow itself, not only from public internet exposure
 - [GDPR2] Weak protection of personal data in authentication and data access
   - depends on [S2] SQL injection exposure in auth and DB access
     - current priority: Must fix
     - what needs to be checked: identify all high-risk auth and personal-data query paths
-    - interpretation under [A1]: still must fix
   - depends on [S3] Weak password hashing
     - current priority: Must fix for public access; nice to have for strict private trusted network
     - what needs to be checked: public exposure, credential reuse risk, sensitivity of the data handled
@@ -179,7 +179,6 @@ Assumption [A1]: We assume that the site is accessible only private network by t
   - not tied to one single `S*` issue; this is a cross-cutting governance/control item informed by [S1] to [S5]
     - current priority: Nice to have
     - what needs to be checked: whether any internal security baseline or operational hardening standard already exists
-    - interpretation under [A1]: remains lower priority than direct exploitability issues
 - [GDPR5] Retention and storage-limitation controls are not evident from code
   - not tied to one single `S*` issue
     - current priority: Nice to have
