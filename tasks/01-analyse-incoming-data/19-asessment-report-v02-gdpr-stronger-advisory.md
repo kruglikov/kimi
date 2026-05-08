@@ -1,20 +1,36 @@
 
 # Short document summary
-During the audit with AI tools we already updated the PHP version from 8.0 to 8.5. Archives with updated code (htdocs-folder-updated-to-php85.zip) and updated code with test docker environment and AI-generated smoke tests (upgraded-code-with-safety-net-test-updated-to-php85(optional-archive).zip). See the full report what steps was taken below.
+During the audit with AI tools we already updated the PHP version from 8.0 to 8.5. Archives with updated code (htdocs-folder-updated-to-php85.zip) and updated code
+with test docker environment and AI-generated smoke tests (upgraded-code-with-safety-net-test-updated-to-php85(optional-archive).zip). See the full report what steps
+was taken below.
 Clent's system administrators can prepare new PHP 8.5 environment and deploy the system and test.
 
 Also Security and GDPR review was conducted (see the full report below). In a nutshell, "must fix" results of both Security review and GDPR review are the next:
 If the site is only reachable inside a private network and only trusted users can access it:
 - [S1] SQL injection exposure in auth and DB access.
 - [S2] URL-based auto-login bypass
-If the site is accessible publicly, then additional "must fix" tasks should be included:
+  If the site is accessible publicly, then additional "must fix" tasks should be included:
 - [S3] Weak password hashing.
 - [S4] Weak session configuration.
 - [S5] Missing session rotation and CSRF protection.
 
 After GDPR review, "must fix" issues are the same. But there are a bunch "Nice to be fixed" additional GDPR tasks (see details below).
 
-Testing problem: Currently we cannot test the application on our end, the final testing (including calls functionality, etc) is possible only on the Kimi's side. So some minor issues may be catched only on Kimi's side. This adds risks that Kimi should have capability to test and fix minor issues after final testing on their side. Or Innowise needs to have access to testing environmnet and include QA hours into the estimate.
+For [S2] URL-based auto-login bypass, client input is required before the final remediation scope is fixed. In particular, KIMI should confirm whether this flow is
+still used in production, which exact systems or workflows depend on it, whether it is restricted to a strictly private/internal network, and whether a safer
+replacement such as short-lived signed one-time tokens would be operationally acceptable.
+
+Testing problem: Currently we cannot test the application on our end, the final testing (including calls functionality, etc) is possible only on the Kimi's side. So
+some minor issues may be catched only on Kimi's side. This adds risks that Kimi should have capability to test and fix minor issues after final testing on their side.
+Or Innowise needs to have access to testing environmnet and include QA hours into the estimate.
+
+Questions to KIMI regarding [S2]:
+- Is the URL-based auto-login flow still actively used in production?
+- If yes, which exact systems, scripts, integrations, or user workflows depend on it?
+- Is the portal and every dependent auto-login workflow restricted to a strictly private internal network, or can any part of it be reached from public, VPN, partner,
+  or mixed-trust access paths?
+- Is one-click direct ticket opening operationally required, or can those workflows be changed to use normal authenticated login?
+- If one-click access must remain, would a safer replacement such as short-lived signed one-time tokens be operationally acceptable?
 
 # To Be Done
 
@@ -58,6 +74,12 @@ Caution: this upgrade validation was done with the smoke-test safety net only, n
   Business sense: this creates a direct authenticated access path without password verification. If such links leak through browser history, internal forwarding, logs, screenshots, copied URLs, or helper tools, unauthorized access to debtor/customer data becomes much easier.
   Evidence in code: `web/htdocs/kimi_ET/index.php:11`; the same pattern is also embedded into multiple batch and telephony-generated URLs under `web/htdocs/kimi_ET/kimibatch/`.
   What needs to be clarified before the fix: whether this mechanism is still genuinely required for telephony, batch, or agent workflows; whether the application is accessible only on a strictly private network; whether any safe replacement is operationally acceptable.
+  Questions to the client:
+  - Is the URL-based auto-login flow still actively used in production?
+  - If yes, which exact systems, scripts, integrations, or user workflows depend on it?
+  - Is the portal and every dependent auto-login workflow restricted to a strictly private internal network, or can any part of it be reached from public, VPN, partner, or mixed-trust access paths?
+  - Is one-click direct ticket opening operationally required, or can those workflows be changed to use normal authenticated login?
+  - If one-click access must remain, would a safer replacement such as short-lived signed one-time tokens be operationally acceptable?
   How to fix: remove the mechanism if possible. If it must remain in some form, replace it with short-lived signed one-time tokens, strict server-side expiry, audit logging, and network/IP restrictions.
 - [S3] Weak password hashing.
   Business sense: static-salt SHA-256 is weak compared with modern password hashing. If password data is exposed, offline cracking risk is materially higher than with Argon2id or bcrypt.
