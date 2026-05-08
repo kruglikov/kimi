@@ -9,10 +9,12 @@ Also Security and GDPR review was conducted (see the full report below). In a nu
 If the site is only reachable inside a private network and only trusted users can access it:
 - [S1] SQL injection exposure in auth and DB access.
 - [S2] URL-based auto-login bypass
+Estimated for 18-32h Expected: 29h
   If the site is accessible publicly, then additional "must fix" tasks should be included:
 - [S3] Weak password hashing.
 - [S4] Weak session configuration.
 - [S5] Missing session rotation and CSRF protection.
+Estimated for 30-50h Expected: 45h
 
 After GDPR review, "must fix" issues are the same. But there are a bunch "Nice to be fixed" additional GDPR tasks (see details below).
 
@@ -28,9 +30,8 @@ Questions to KIMI regarding [S2]:
 - Example of the auto-login URL pattern visible in code:
   `https://10.196.69.11/kimi_ET/index.php?autologin=true&loginuser=elsbeth&mandant=40&kId=...&ticket_id=...&site=ticket&selected_tickets=...&selected_ticket_index=0&noHeader=true&telefonStarten=A`
 - Is the URL-based auto-login flow still actively used in production?
-- If yes, which exact systems, scripts, integrations, or user workflows depend on it?
-- Is the portal and every dependent auto-login workflow restricted to a strictly private internal network, or can any part of it be reached from public, VPN, partner,
-  or mixed-trust access paths?
+- If yes, which exact systems, integrations, or user workflows depend on it?
+- Is the portal and every dependent auto-login workflow restricted to a strictly private internal network, or can any part of it be reached from public, VPN, partner, or mixed-trust access paths?
 - Is one-click direct ticket opening operationally required, or can those workflows be changed to use normal authenticated login?
 - If one-click access must remain, would a safer replacement such as short-lived signed one-time tokens be operationally acceptable?
 
