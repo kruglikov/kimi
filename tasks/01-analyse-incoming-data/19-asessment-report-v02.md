@@ -64,8 +64,8 @@ Caution: this upgrade validation was done with the smoke-test safety net only, n
   Evidence in code: `web/htdocs/kimi_ET/libs/entities/user.php:178`.
   How to fix: switch to `password_hash()` and `password_verify()` with a migration strategy that rehashes legacy passwords on successful login or through a controlled reset flow.
 - [S4] Weak session configuration.
-  Business sense: missing secure cookie flags and inconsistent session naming weaken session integrity and make session behavior harder to reason about and harden.
-  Evidence in code: `web/htdocs/kimi_ET/libs/init.php:92-93`, `web/htdocs/kimi_ET/login.php:5`, `web/htdocs/kimi_ET/index.php:6`.
+  Business sense: session setup is not cleanly centralized, and explicit secure cookie settings are not evident in the reviewed portal code. This weakens session integrity and makes session behavior harder to reason about and harden.
+  Evidence in code: `web/htdocs/kimi_ET/login.php:5`, `web/htdocs/kimi_ET/index.php:6`, `web/htdocs/kimi_ET/libs/init.php:106`.
   How to fix: normalize session naming, enforce secure cookie settings such as `cookie_secure`, `cookie_httponly`, and `cookie_samesite`, and keep session initialization centralized.
 - [S5] Missing session rotation and CSRF protection.
   Business sense: without session ID rotation on login, session fixation risk remains. Without CSRF protection, authenticated users may be tricked into unintended state-changing actions.

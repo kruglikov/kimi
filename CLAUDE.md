@@ -20,7 +20,7 @@ Migration and modernisation of the **KIMI Portal** — a legacy PHP 8.0 / MariaD
 - when you finish some task or investigation and present the results be descriptive. I.e.: 
   - Please in your final answer provide steps that you have taken to find out the final answer\solution and justify all changes in code
   - clear explanation of underlying entities that are included into the final explanation
-- when you mention any file or method, please provide full path to the file or method 
+- When you mention any file or method, please provide **full path** to the file or method!!!
 
 ## Repository Layout
 
