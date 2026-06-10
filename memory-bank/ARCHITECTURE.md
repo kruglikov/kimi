@@ -9,17 +9,28 @@ It is intended both as human-readable documentation and as an AI-agent context f
 
 ## Technology Stack
 
-| Component    | Version / Detail                                           |
-|--------------|------------------------------------------------------------|
-| Language     | PHP 8.0.30                                                 |
-| Web server   | Apache (config not in archive; document root: `src/original-src/web/htdocs/`) |
-| Database     | MariaDB 10.5.21 (`kimi_et` schema)                         |
-| Archive DB   | MariaDB, separate `kimi_archiv` schema (same server)       |
-| Frontend     | jQuery 1.x + jQuery UI 1.10.3 (no modern SPA framework)    |
-| Mailer       | PHPMailer v2.0.4 (legacy) at `src/original-src/web/htdocs/kimi_ET/libs/addons/phpmail/`; Composer PHPMailer 6.x also present at `src/original-src/web/htdocs/vendor/` |
-| Telephony    | Telematica VoIP REST API + Elsbeth dialing system (file-based) |
-| Deployment   | Docker Compose for local dev (see `src/original-src/docker-compose.yml` or `scripts/up-original.sh`); originally direct file deployment on production |
-| Composer     | Present at `src/original-src/web/htdocs/vendor/` (main app, PHPMailer 6.x) and `src/original-src/web/htdocs/kimi_ET/kimibatch/files/vendor/` (batch, separate context) |
+The project has two parallel codebases. Both share the same application design and database schema.
+
+### `src/original-src/` — Preserved legacy (PHP 8.0)
+
+| Component  | Version / Detail |
+|------------|---|
+| Language   | PHP 8.0.30 |
+| Web server | Apache (document root: `src/original-src/web/htdocs/`) |
+| Database   | MariaDB 10.5.21 (`kimi_et` schema) |
+| Docker     | `src/original-src/docker-compose.yml`, port 8080 |
+| Composer   | `src/original-src/web/htdocs/vendor/` (main app, PHPMailer 6.x) and `src/original-src/web/htdocs/kimi_ET/kimibatch/files/vendor/` (batch) |
+
+### `src/upgraded-src/` — PHP 8.5 modernized target
+
+| Component  | Version / Detail |
+|------------|---|
+| Language   | PHP 8.5.5 |
+| Web server | Apache (document root: `src/upgraded-src/web/htdocs/`) |
+| Database   | MariaDB 10.5 (`kimi_et` schema, extended with upgrade-era additions) |
+| Docker     | `src/upgraded-src/docker-compose.yml`, port 8081 |
+| Rector     | `src/upgraded-src/tooling/php-upgrade/rector.php` (PHP_81–PHP_85 sets only) |
+| Smoke tests | `src/upgraded-src/tests/` — 216 tests, 0 failures on PHP 8.5.5 |
 
 ---
 

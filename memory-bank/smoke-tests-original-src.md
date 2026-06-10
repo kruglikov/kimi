@@ -1,8 +1,12 @@
-# PHP Smoke Test Safety Net
+# PHP Smoke Test Safety Net — `src/original-src/`
 
 ## Purpose
 
-This note describes the current runtime smoke-test safety net for the legacy KIMI PHP application during the PHP upgrade and modernization work.
+This note describes the runtime smoke-test safety net for the **preserved legacy PHP 8.0** KIMI Portal codebase in `src/original-src/`.
+
+The suite serves as the reference baseline before the PHP 8.5 upgrade and as a regression detector for the legacy stack.
+
+For the upgraded PHP 8.5 suite, see `smoke-tests-upgraded-src.md`.
 
 The smoke suite is meant to answer a narrow but important question:
 
