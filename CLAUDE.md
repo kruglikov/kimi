@@ -37,8 +37,11 @@ memory-bank/
   index.md                   ← entry point for project knowledge and navigation
 
 tasks/
-  01-analyse-incoming-data/  ← analysis prompts, folder map, preliminary plan,
-                               assessment report (04-asessment-report-v01.md)
+  01-analyse-incoming-data/  ← [DONE] PHP 8.0→8.5 upgrade analysis and execution;
+                               security (S1–S6) and GDPR review (GDPR1–8).
+                               Task results\deliverables: @docs/04-results/Audit-report.md,
+                               @docs/htdocs-folder-updated-to-php85.zip,
+                               @docs/upgraded-code-with-safety-net-test-updated-to-php85(optional-archive).zip
 
 src/
   original-src/
