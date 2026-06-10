@@ -35,14 +35,6 @@ Questions to KIMI regarding [S2]:
 - Is one-click direct ticket opening operationally required, or can those workflows be changed to use normal authenticated login?
 - If one-click access must remain, would a safer replacement such as short-lived signed one-time tokens be operationally acceptable?
 
-# To Be Done
-
-- Review all provided system documentation and source materials.
-- Assess PHP 8.0 -> current supported PHP 8.5 migration feasibility.
-- Highlight critical code sections, technical risks, and high-test-effort components.
-- Review code-visible GDPR/DSGVO-relevant security aspects.
-- Prepare a rough effort estimate for the migration work.
-
 # Architectural overview & critical code sections
 KIMI Portal is a legacy custom PHP/MariaDB business application with one main browser-based portal and a large set of supporting batch scripts. The main parts are authentication and session handling, mandant/role-based access control, customer and ticket management, campaign-specific UI modules, AJAX/telephony integration, and file/database-driven batch processing. The application is modular in structure but tightly coupled through shared bootstrap, database, and entity layers.
 
