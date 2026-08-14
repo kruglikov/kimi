@@ -1,8 +1,10 @@
 <?php
 define("CONF_MYSQL_SERVER", "localhost");
-define("CONF_MYSQL_USER", "sql_kimi_et");
+//define("CONF_MYSQL_USER", "sql_kimi_et");
+define("CONF_MYSQL_USER", "sql_kimidev_et");
 define("CONF_MYSQL_PASSWORD", "NS889Hs4bhL1aub7HyEH6AjdYpYAlx");
-define("CONF_MYSQL_DB", "kimi_et");
+//define("CONF_MYSQL_DB", "kimi_et");
+define("CONF_MYSQL_DB", "kimidev_et");
 define("CONF_PORTAL_MENU_COLUMNS", 5);
 define("CONF_PORTAL_LINE_PER_SITE", 20);
 define("CONF_PORTAL_MAX_PAGES", 20);

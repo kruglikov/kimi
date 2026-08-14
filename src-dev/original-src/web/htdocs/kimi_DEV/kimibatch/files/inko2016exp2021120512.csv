@@ -1,0 +1,9 @@
+IndexA;IndexB;IndexC;CONNECT;RPC;PTP;Inko-Aktion;;Anmerkung;Gespraechsdatum;Gespraechszeit;Fehlerstatus;AgentenAnrede;AgentenVorname;AgentenNachname;kontakttel_vw;kontkattel_hw;Email_neu;name_neu;vorname_neu;plz_neu;ort_neu;strasse_neu;neuetel_vw1;neuetel_hw1;neuetel_vw2;neuetel_hw2;telefon1falsch;telefon2falsch;gebdatum_neu;neuetel_vwa;neuetel_hwa;telefon_apl_falsch;
+4810;18810270;0;1;1;1;monatliche RATE 50,00 ab 08.01.2022 bitte RV per Email senden ;;;05.12.2021;10:56:02;erreicht;Frau;Susanne;Lauer;664;75325653;;;;;;;;;;;;;;;;;
+4810;18709273;0;0;0;0; 5 Anrufversuche kein Rückruf;;;05.12.2021;10:53:14;Unerreichbar;Frau;Susanne;Lauer;;;;;;;;;;;;;;;;;;;
+4810;18812776;0;0;0;0;;;;05.12.2021;10:58:13;Telefonnummer falsch;Frau;Susanne;Lauer;;;;;;;;;;;;;;6764931731;;;;;
+4810;18797768;0;1;1;1;monatliche Rate 50,00 ab 01.01.2022 Sepa;;;05.12.2021;11:00:17;erreicht;Frau;Susanne;Lauer;660;8237885;;;;;;;;;;;;;;;;;
+4810;18814170;0;0;0;0;meldet sich Herr kennt Schuldner nicht ;;;05.12.2021;11:02:07;erreicht - falsche Person;Frau;Susanne;Lauer;;;;;;;;;;;;;;67763465298;;;;;
+4810;18812210;0;1;1;1;neue Adresse Tillysburg 21, 4490 St. Florian, alte Adresse Generationenplatz 1/17, 7343 Neutal, neue Email susanne.lauer@gmx.at alte Email: romankundics@gmail.com, hat geheiratet heißt jetzt Tausch, vorher Kundics, Geb.Datum aktualisiert 12.01.1966 ;;;05.12.2021;11:06:00;erreicht;Frau;Susanne;Lauer;676;5618780;susanne.lauer@gmx.at;Tausch        ;;4490;St. Florian           ;Tillysburg  21;;;;;;;1966.01.12;;;;
+4810;18812897;0;1;1;0;Herr richtet Rückruf aus, 5 Anrufversuche kein Rückruf Telefonnummer zwei falsch;;;05.12.2021;11:09:21;erreicht;Frau;Susanne;Lauer;650;9999041;;;;;;;;;;;;6509999041;;;;;
+12222;710922219;416;1;1;1;test franz nnn;;;04.12.2021;16:02:49;erreicht;Herr;FranZ;Tausch;664;3024000;;;;;;;;;;;;;;;;;

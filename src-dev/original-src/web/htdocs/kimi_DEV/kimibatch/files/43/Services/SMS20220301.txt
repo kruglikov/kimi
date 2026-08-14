@@ -1,0 +1,16 @@
+SMS 20220301094359: Ticket-ID=, TicketNr=, HauptticketNr=, Service-Kontakt=0043676845222500, Parameter=49-9-1644426480-550;599,81;zahlungshilfe@sberbank-collections.de;+49 69 50958953;;;;;
+   Templateinhalt: 
+Bitte kontaktieren Sie uns zu Ihrer Verbindlichkeit zum KK:49-9-1644426480-550 - zahlungshilfe@sberbank-collections.de
+
+SMS 20220301094359: Ticket-ID=, TicketNr=, HauptticketNr=, Service-Kontakt=0043676845222500, Parameter=49-9-1644426480-550;599,81;zahlungshilfe@sberbank-collections.de;+49 69 50958953;;;;;
+   Templateinhalt: 
+Wir konnten Sie nicht erreichen-bitte kontaktieren Sie uns zu Ihrer Verbindlichkeit KK: 49-9-1644426480-550-zahlungshilfe@sberbank-collections.de, Tel. NR: +49 69 50958953
+
+SMS 20220301094359: Ticket-ID=, TicketNr=, HauptticketNr=, Service-Kontakt=0043676845222500, Parameter=49-9-1644426480-550;599,81;zahlungshilfe@sberbank-collections.de;+49 69 50958953;;;;;
+   Templateinhalt: 
+Ihre Kreditrate ist %129berf%132llig! Bitte bezahlen Sie Ihre Rate sofort ein, oder rufen Sie uns an: +49 69 50958953. Ihr Kredit wird sonst gesamt f%132llig gestellt!
+
+SMS 20220301094359: Ticket-ID=, TicketNr=, HauptticketNr=, Service-Kontakt=0043676845222500, Parameter=49-9-1644426480-550;599,81;zahlungshilfe@sberbank-collections.de;+49 69 50958953;;;;;
+   Templateinhalt: 
+Die vereinbarte Kreditrate ist heute f%132llig. Bitte zahlen Sie die %129berf%132llige Rate sofort ein oder Tel.NR: +49 69 50958953. Vermeiden Sie weitere Schritte.
+

@@ -1,0 +1,3148 @@
+
+===== getticketurl.php =====
+--- orig
++++ dev
+@@ -84,8 +84,6 @@
+ $projekt=trim($projekt);
+ $projekt=$mandantName.":".$projekt;
+ $mandantId=$row['mandant_id'];
+-//20230508/ar
+-$kampId=$row['kampagne_id'];
+ $return=TRUE;
+ }
+ }
+@@ -225,8 +223,8 @@
+ $ergMandantId="";
+ $ergKampId="";
+ if(getTicketIdFromPhone($dbconn,$request->getTelefonGruppe(),$request->getTelefonNr(),$ticket_id,$mandant_name,$projekt,$ticketNr,$ergMandantId,$ergKampId)){
+-$request->response->setResponse(200,"https://10.196.69.11/kimi_ET/index.php?autologin=true&loginuser=userReferenz&mandant=".$ergMandantId."&kId=".$ergKampId."&ticket_id=".$ticket_id."&site=ticket&selected_tickets=".$ticket_id."&selected_ticket_index=0",
+-$projekt,
++$request->response->setResponse(200,"https://10.196.69.21/kimidev_ET/index.php?autologin=true&loginuser=userReferenz&mandant=".$ergMandantId."&kId=".$ergKampId."&ticket_id=".$ticket_id."&site=ticket&selected_tickets=".$ticket_id."&selected_ticket_index=0",
++"DEV:".$projekt,
+ $mandant_name,
+ $ticketNr);
+ }else{
+
+===== kimibatch/coeo01_import_telefonie_taeglich.php =====
+--- orig
++++ dev
+@@ -46,7 +46,7 @@
+ echo"<br>Saldo:".$row['gesamtrueckstand'];
+ echo"<br>Kampagne:".$row['kampagne'];
+ echo"<br>Anwalt:".$row['anwalt'];
+-$bemerkung="H:".$row['Kampagne']."Gesamtkapitalhf:".$row['gesamtkapitalhf']."gesamtkapitalnf:".$row['gesamtkapitalnf']."Offenes_kapitalhf:".$row['offenes_kapitalhf']."Offenes_kapitalnf:".$row['offenes_kapitalnf']."Zinsen:".$row['zinsen']."Gesamtrueckstand:".$row['gesamtrueckstand']."Inkassokosten:".$row['inkassokosten'];
++$bemerkung="Zahlungen:".$row['zahlungen']."Gesamtkapitalhf:".$row['gesamtkapitalhf']."gesamtkapitalnf:".$row['gesamtkapitalnf']."Offenes_kapitalhf:".$row['offenes_kapitalhf']."Offenes_kapitalnf:".$row['offenes_kapitalnf']."Zinsen:".$row['zinsen']."Gesamtrueckstand:".$row['gesamtrueckstand']."Inkassokosten:".$row['inkassokosten'];
+ echo"<br>Bemerkung:".$bemerkung;
+ echo"<br>";
+ //Insert-Statement
+@@ -72,9 +72,6 @@
+ exit;
+ }
+ }
+-$heute=date("d.m.YH:i:s");
+-echo"<br>COEOIMPORT-INSERTINTICKET-Tabelle:".$heute;
+-//
+ //#4nachEOFderDateiDatensatzmitInsertinderTickettabelleaufbauen
+ //INSERTINTICKET-Tabelle
+ $result=executeSQLDML($dbconn,$mandant_id,"coeo01_insert_ticket_from_knp1.sql");
+@@ -84,9 +81,6 @@
+ echo"<br><br>ErrorinsertTICKETindatabase:".getLastError();
+ exit;
+ }
+-$heute=date("d.m.YH:i:s");
+-echo"<br>COEOIMPORT-TRUNCATEknp1_duplet:".$heute;
+-//
+ //#5TRUNCATEknp1_duplet–istjetzteinDroptablegeworden
+ $mehrfach_trunc="droptableknp1_duplet";//2017-01-06umbauwegenhangingoncopyingtotmptable
+ if(executeSQLCmdDML($dbconn,$mandant_id,$mehrfach_trunc)){
+@@ -96,9 +90,6 @@
+ exit;
+ }
+ //
+-$heute=date("d.m.YH:i:s");
+-echo"<br>COEOIMPORT-DOUBLETTEAUFBAUEN:".$heute;
+-//
+ //#6DOUBLETTEAUFBAUEN
+ $result=executeSQLDML($dbconn,$mandant_id,"coeo01_create_table_duplet.sql");
+ if($result){
+@@ -107,9 +98,6 @@
+ echo"<br><br>INSERTknp1duplet:".getLastError();
+ exit;
+ }
+-$heute=date("d.m.YH:i:s");
+-echo"<br>COEOIMPORT-DOUBLETTEinTICKETimFeldErbniseintragen:".$heute;
+-//
+ //#7DOUBLETTEinTICKETimFeldErbniseintragen
+ $result=executeSQLDML($dbconn,$mandant_id,"coeo01_update_ticket_schuldner_mehrfach.sql");
+ if($result){
+@@ -118,9 +106,6 @@
+ echo"<br><br>UPDATETICKETDupletten:".getLastError();
+ exit;
+ }
+-$heute=date("d.m.YH:i:s");
+-echo"<br>COEOIMPORT-Urgenztextaufbauen–Basistabelleleeren:".$heute;
+-//
+ //--#8Urgenztextaufbauen–Basistabelleleeren
+ $result=executeSQLDML($dbconn,$mandant_id,"coeo01_truncate_knp1urgenz.sql");
+ if($result){
+@@ -129,20 +114,14 @@
+ echo"<br><br>TRUNCATEKNP1URGENZ:".getLastError();
+ //exit;
+ }
+-$heute=date("d.m.YH:i:s");
+-echo"<br>COEOIMPORT-Urgenzenermitteln:".$heute;
+-//
+ //--#9Urgenzenermitteln
+-//$result=executeSQLDML($dbconn,$mandant_id,"coeo01_insert_knp1urgenz.sql");--KEINEDURCHFUEHRUNGMEHRAUFGRUNDLANGERLAUFZEIT&Ergebnisnichtkorrekt
+-if($result){
+-echo"<br><br>INSERTKNP1URGENZNICHTdurchgef&uuml;hrt";
++$result=executeSQLDML($dbconn,$mandant_id,"coeo01_insert_knp1urgenz.sql");
++if($result){
++echo"<br><br>INSERTKNP1URGENZdurchgef&uuml;hrt";
+ }else{
+ echo"<br><br>INSERTKNP1URGENZ:".getLastError();
+ //exit;
+ }
+-$heute=date("d.m.YH:i:s");
+-echo"<br>COEOIMPORT-UrgenzeninTicketeintragen:".$heute;
+-//
+ //--#10UrgenzeninTicketeintragen
+ $result=executeSQLDML($dbconn,$mandant_id,"coeo01_update_ticket_urgenzen.sql");
+ if($result){
+@@ -151,10 +130,7 @@
+ echo"<br><br>UPDATETICKETURGENZ:".getLastError();
+ //exit;
+ }
+-$heute=date("d.m.YH:i:s");
+-echo"<br>COEOIMPORT-ZwischentabellefürMEHRFACHENTickets#1löschen:".$heute;
+-//
+-//--wennmehrfachdanndieAktenzeichenimFeldErgebniseintragen
++//--wennmehrfachdanndieAktenzheichenimFeldErgebniseintragen
+ //--#10.1ZwischentabellefürMEHRFACHENTickets#1löschen
+ $result=executeSQLDML($dbconn,$mandant_id,"coeo01_drop_table_knpmehrfach.sql");
+ if($result){
+@@ -163,9 +139,6 @@
+ echo"<br><br>DROPTABLEKNPMEHRFACH:".getLastError();
+ //exit;
+ }
+-$heute=date("d.m.YH:i:s");
+-echo"<br>COEOIMPORT-ZwischentabellemitdenMEHRFACHENTickets#1NEUerstellen:".$heute;
+-//
+ //--#10.2ZwischentabellemitdenMEHRFACHENTickets#1NEUerstellen
+ $result=executeSQLDML($dbconn,$mandant_id,"coeo01_create_table_knpmehrfach.sql");
+ if($result){
+@@ -174,9 +147,6 @@
+ echo"<br><br>CREATETABLEKNPMEHRFACH:".getLastError();
+ //exit;
+ }
+-$heute=date("d.m.YH:i:s");
+-echo"<br>COEOIMPORT-ZwischentabellefürMEHRFACHENTickets#2löschen:".$heute;
+-//
+ //--#10.3ZwischentabellefürMEHRFACHENTickets#2löschen
+ $result=executeSQLDML($dbconn,$mandant_id,"coeo01_drop_table_knpmehrfach2.sql");
+ if($result){
+@@ -185,9 +155,6 @@
+ echo"<br><br>DROPTABLEKNPMEHRFACH2:".getLastError();
+ //exit;
+ }
+-$heute=date("d.m.YH:i:s");
+-echo"<br>COEOIMPORT-ZwischentabellemitdenMEHRFACHENTickets#2NEUerstellen:".$heute;
+-//
+ //--#10.4ZwischentabellemitdenMEHRFACHENTickets#2NEUerstellen
+ $result=executeSQLDML($dbconn,$mandant_id,"coeo01_create_table_knpmehrfach2.sql");
+ if($result){
+@@ -196,9 +163,6 @@
+ echo"<br><br>CREATETABLEKNPMEHRFACH2:".getLastError();
+ //exit;
+ }
+-$heute=date("d.m.YH:i:s");
+-echo"<br>COEOIMPORT-ErgebnisMIN=1tesAZ/2tesTicketinErgebnisfeldschhreiben:".$heute;
+-//
+ //--#10.5ErgebnisMIN=1tesAZ/2tesTicketinErgebnisfeldschhreiben
+ $result=executeSQLDML($dbconn,$mandant_id,"coeo01_update_ticket_ergebnis_min.sql");
+ if($result){
+@@ -207,9 +171,6 @@
+ echo"<br><br>UPDATEUPDATETICKETERGEBNISMIN:".getLastError();
+ //exit;
+ }
+-$heute=date("d.m.YH:i:s");
+-echo"<br>COEOIMPORT-ErgebnisMAX=2tesAZ/2tesTicketinErgebnisfeldschhreiben:".$heute;
+-//
+ //--#10.6ErgebnisMAX=2tesAZ/2tesTicketinErgebnisfeldschhreiben
+ $result=executeSQLDML($dbconn,$mandant_id,"coeo01_update_ticket_ergebnis_max.sql");
+ if($result){
+@@ -218,9 +179,6 @@
+ echo"<br><br>UPDATETICKETERGEBNISMAX:".getLastError();
+ //exit;
+ }
+-$heute=date("d.m.YH:i:s");
+-echo"<br>COEOIMPORT-AnzahlUrgenzenermitteln:".$heute;
+-//
+ //--#11AnzahlUrgenzenermitteln
+ //selectcount(*)anzahl_n_urgenzFromknp1urgenz
+ echo"<br><br><b>Pr&uuml;fungURGENZ:<br></b>";
+@@ -232,13 +190,11 @@
+ exit;
+ }
+ //--#12AnzahlUrgenzenausgeben
+-$heute=date("d.m.YH:i:s");
+-echo"<br>COEOIMPORT-AnzahlUrgenzenausgeben:".$heute;
+-//
++echo"<br>";
++if($result['anzahl_n_urgenz']>0){
++echo"<b><fontcolor='#FF0000'>Anzahl</font></b>&nbsp;Status|URGENZ:".$result['anzahl_n_urgenz']."<br>";
++}
+ //--#13AnzahlOffeneTicketsermitteln
+-$heute=date("d.m.YH:i:s");
+-echo"<br>COEOIMPORT-AnzahlUrgenzenausgeben:".$heute;
+-//
+ echo"<br><br><b>Pr&uuml;fungOFFENEEINGESPIELT:<br></b>";
+ echo"Start:".date("d.m.YH:i:s");
+ $query="selectcount(*)anzahl_n_offenfromticketwheremandant_id=40andstatus_id=190andkampagne_id<>99anddatediff(beginn,curdate())<1";
+
+===== kimibatch/coeo02_tagl_daten_fuer_elsbeth_import_alle.php =====
+--- orig
++++ dev
+@@ -13,7 +13,7 @@
+ if($result!==false){
+ //Ausgabeautomatischdurchführenlassen,AusgabealsANSI(letzterParameter)
+ $file="COEO_OUTBOUND_ELSBETH_alle_exp".date("YmdHis").".csv";
+-$count=exportQueryToCSV($result,$mandant_id,$file,false);
++$count=exportQueryToCSV($result,$mandant_id,$file,true);
+ if($count===false){
+ echogetLastError()."<br>";
+ exit;
+
+===== kimibatch/coeo02_tagl_daten_fuer_elsbeth_import_l2tage_klarna.php =====
+--- orig
++++ dev
+@@ -13,7 +13,7 @@
+ if($result!==false){
+ //Ausgabeautomatischdurchführenlassen,AusgabealsANSI(letzterParameter)
+ $file="COEO_OUTBOUND_ELSBETH_l2tage_klarna_exp".date("YmdHis").".csv";
+-$count=exportQueryToCSV($result,$mandant_id,$file,false);
++$count=exportQueryToCSV($result,$mandant_id,$file,true);
+ if($count===false){
+ echogetLastError()."<br>";
+ exit;
+
+===== kimibatch/coeo02_tagl_daten_fuer_elsbeth_import_l2tage.php =====
+--- orig
++++ dev
+@@ -13,7 +13,7 @@
+ if($result!==false){
+ //Ausgabeautomatischdurchführenlassen,AusgabealsANSI(letzterParameter)
+ $file="COEO_OUTBOUND_ELSBETH_l2tage_exp".date("YmdHis").".csv";
+-$count=exportQueryToCSV($result,$mandant_id,$file,false);
++$count=exportQueryToCSV($result,$mandant_id,$file,true);
+ if($count===false){
+ echogetLastError()."<br>";
+ exit;
+
+===== kimibatch/coeo02_tagl_daten_fuer_elsbeth_import_l2tage_raten.php =====
+--- orig
++++ dev
+@@ -13,7 +13,7 @@
+ if($result!==false){
+ //Ausgabeautomatischdurchführenlassen,AusgabealsANSI(letzterParameter)
+ $file="COEO_OUTBOUND_ELSBETH_l2tage_raten_exp".date("YmdHis").".csv";
+-$count=exportQueryToCSV($result,$mandant_id,$file,false);
++$count=exportQueryToCSV($result,$mandant_id,$file,true);
+ if($count===false){
+ echogetLastError()."<br>";
+ exit;
+
+===== kimibatch/coeo02_tagl_daten_fuer_elsbeth_import_l3tage_klarna.php =====
+--- orig
++++ dev
+@@ -13,7 +13,7 @@
+ if($result!==false){
+ //Ausgabeautomatischdurchführenlassen,AusgabealsANSI(letzterParameter)
+ $file="COEO_OUTBOUND_ELSBETH_l3tage_klarna_exp".date("YmdHis").".csv";
+-$count=exportQueryToCSV($result,$mandant_id,$file,false);
++$count=exportQueryToCSV($result,$mandant_id,$file,true);
+ if($count===false){
+ echogetLastError()."<br>";
+ exit;
+
+===== kimibatch/coeo02_tagl_daten_fuer_elsbeth_import_l3tage.php =====
+--- orig
++++ dev
+@@ -13,7 +13,7 @@
+ if($result!==false){
+ //Ausgabeautomatischdurchführenlassen,AusgabealsANSI(letzterParameter)
+ $file="COEO_OUTBOUND_ELSBETH_l3tage_exp".date("YmdHis").".csv";
+-$count=exportQueryToCSV($result,$mandant_id,$file,false);
++$count=exportQueryToCSV($result,$mandant_id,$file,true);
+ if($count===false){
+ echogetLastError()."<br>";
+ exit;
+
+===== kimibatch/coeo02_tagl_daten_fuer_elsbeth_import_l3tage_raten.php =====
+--- orig
++++ dev
+@@ -13,7 +13,7 @@
+ if($result!==false){
+ //Ausgabeautomatischdurchführenlassen,AusgabealsANSI(letzterParameter)
+ $file="COEO_OUTBOUND_ELSBETH_l3tage_raten_exp".date("YmdHis").".csv";
+-$count=exportQueryToCSV($result,$mandant_id,$file,false);
++$count=exportQueryToCSV($result,$mandant_id,$file,true);
+ if($count===false){
+ echogetLastError()."<br>";
+ exit;
+
+===== kimibatch/coeo02_tagl_daten_fuer_elsbeth_import_neue.php =====
+--- orig
++++ dev
+@@ -13,7 +13,7 @@
+ if($result!==false){
+ //Ausgabeautomatischdurchführenlassen,AusgabealsANSI(letzterParameter)
+ $file="COEO_OUTBOUND_ELSBETH_neue_exp".date("YmdHis").".csv";
+-$count=exportQueryToCSV($result,$mandant_id,$file,false);
++$count=exportQueryToCSV($result,$mandant_id,$file,true);
+ if($count===false){
+ echogetLastError()."<br>";
+ exit;
+
+===== kimibatch/coeo02_tagl_daten_fuer_elsbeth_import.php =====
+--- orig
++++ dev
+@@ -13,7 +13,7 @@
+ if($result!==false){
+ //Ausgabeautomatischdurchführenlassen,AusgabealsANSI(letzterParameter)
+ $file="COEO_OUTBOUND_ELSBETHexp".date("YmdHis").".csv";
+-$count=exportQueryToCSV($result,$mandant_id,$file,false);
++$count=exportQueryToCSV($result,$mandant_id,$file,true);
+ if($count===false){
+ echogetLastError()."<br>";
+ exit;
+
+===== kimibatch/coeo02_tagl_daten_fuer_elsbeth_import_telefonnrfalsch.php =====
+--- orig
++++ dev
+@@ -13,7 +13,7 @@
+ if($result!==false){
+ //Ausgabeautomatischdurchführenlassen,AusgabealsANSI(letzterParameter)
+ $file="COEO_OUTBOUND_ELSBETH_telefonnrfalsch_exp".date("YmdHis").".csv";
+-$count=exportQueryToCSV($result,$mandant_id,$file,false);
++$count=exportQueryToCSV($result,$mandant_id,$file,true);
+ if($count===false){
+ echogetLastError()."<br>";
+ exit;
+
+===== kimibatch/coeo02_tagl_daten_fuer_elsbeth_RATENERINNERUNG_import.php =====
+--- orig
++++ dev
+@@ -13,7 +13,7 @@
+ if($result!==false){
+ //Ausgabeautomatischdurchführenlassen,AusgabealsANSI(letzterParameter)
+ $file="COEO_OUTBOUND_ELSBETH_RATENERINNERUNG_exp".date("YmdHis").".csv";
+-$count=exportQueryToCSV($result,$mandant_id,$file,false);
++$count=exportQueryToCSV($result,$mandant_id,$file,true);
+ if($count===false){
+ echogetLastError()."<br>";
+ exit;
+
+===== kimibatch/coeo02_tagl_daten_fuer_elsbeth_SONDERKAMPAGNE_import.php =====
+--- orig
++++ dev
+@@ -13,7 +13,7 @@
+ if($result!==false){
+ //Ausgabeautomatischdurchführenlassen,AusgabealsANSI(letzterParameter)
+ $file="COEO_OUTBOUND_ELSBETH_SONDERKAMPAGNE_exp".date("YmdHis").".csv";
+-$count=exportQueryToCSV($result,$mandant_id,$file,false);
++$count=exportQueryToCSV($result,$mandant_id,$file,true);
+ if($count===false){
+ echogetLastError()."<br>";
+ exit;
+
+===== kimibatch/db.php =====
+--- orig
++++ dev
+@@ -57,10 +57,10 @@
+ }
+ $convert_import_csvAnsi2Utf8=true;
+ $convert_export_csvUtf82Ansi=true;
+-$dbname="kimi_et";
++$dbname="kimidev_et";
+ $dbhost="localhost";
+-$dbuser="sql_kimi_et";
+-$dbpass="NS889Hs4bhL1aub7HyEH6AjdYpYAlx";
++$dbuser="sql_kimidev_et";
++$dbpass="4WB6HkdyFcAdsjNR0CB1LHXMOP18og";
+ $dbconn=mysqli_connect($dbhost,$dbuser,$dbpass);
+ mysqli_set_charset($dbconn,'utf8');
+ mysqli_select_db($dbconn,$dbname);
+
+===== kimibatch/inboundoutboundrep.php =====
+--- orig
++++ dev
+@@ -45,7 +45,7 @@
+ andticket.geaendert_am>='2022-05-01'
+ union
+ --OKO
+-select'OKO',ticketnr,
++select'INKODE',ticketnr,
+ benutzer.nachname,
+ DATE_FORMAT(ticket.geaendert_am,'%Y.%m.%d'),
+ dummy_id_referenz.text
+@@ -61,7 +61,7 @@
+ andticket.geaendert_am>='2022-05-01'
+ union
+ --SCHLAUSTROM
+-select'SCHLAUSTROM',ticketnr,
++select'INKODE',ticketnr,
+ benutzer.nachname,
+ DATE_FORMAT(ticket.geaendert_am,'%Y.%m.%d'),
+ dummy_id_referenz.text
+@@ -95,7 +95,7 @@
+ //
+ echo"<br>INBOUNDOUTBOUNDREPORT-Start2:".$heute;
+ while($line=dbFetchArray($result)){
+-//echo"<br>INBOUNDOUTBOUNDREPORT-Start3-WHILE:".$heute;
++echo"<br>INBOUNDOUTBOUNDREPORT-Start3-WHILE:".$heute;
+ //fputcsv($fp,array_keys($line));
+ $string=$line['projekt'].";".$line['id'].";".$line['benutzer'].";".$line['datum'].";".$line['inbound_outbound'];
+ $string=$string."\n";
+
+===== kimibatch/inko201603_verarbeitung_elsbeth_out.php =====
+--- orig
++++ dev
+@@ -28,22 +28,6 @@
+ }else{
+ echo"FalscheTelefonnummernsetzenOK<br>";
+ }
+-//2.1LOGEintragfürTELEFONAT-Gesprächszeitpunkt-MAN_STARTANRUF
+-$result=executeSQLDML($dbconn,$mandant_id,"inko201603_log_telefonat_start.sql");
+-if(!$result){
+-echogetLastError();
+-exit;
+-}else{
+-echo"LOGTelefonatSTARTOK<br>";
+-}
+-//2.2LOGEintragfürTELEFONAT-Gesprächszeitpunkt-MAN_ENDEANRUF
+-$result=executeSQLDML($dbconn,$mandant_id,"inko201603_log_telefonat_ende.sql");
+-if(!$result){
+-echogetLastError();
+-exit;
+-}else{
+-echo"LOGTelefonatENDEOK<br>";
+-}
+ //3.AktuelleINKO2016-Logsaufverarbeitetsetzen
+ $result=executeSQLDML($dbconn,$mandant_id,"inko201603_update_inko2016_log.sql");
+ if(!$result){
+
+===== kimibatch/inko201605_daten_email_fuer_elsbeth_import.php =====
+--- orig
++++ dev
+@@ -4,15 +4,15 @@
+ $headerCSV="";
+ //ZuordnungderMandanten-ID(mussdadurchnureinmalangepasstwerden)
+ $mandant_id=18;
+-echo"<b>inko2016_eMail_outbound_elsbeth</b><br><br>";
++echo"<b>inko2016_inA_outbound_elsbeth</b><br><br>";
+ //ErmittlungundAusgabederDateninCSVDatei
+ //VersorgendersPlatzhalterimSQL-StatementfürDatumseingränzung(z.B.Beginn)
+ $query_replace[PLACEHOLDER_SQL_DATUM]="2021-10-22";
+ //Queryabsetzen
+-$result=executeSQLQuery($dbconn,$mandant_id,"inko201605_select_elsbeth_import_email.sql",$query_replace);
++$result=executeSQLQuery($dbconn,$mandant_id,"inko201602_select_elsbeth_import_off.sql",$query_replace);
+ if($result!==false){
+ //Ausgabeautomatischdurchführenlassen,AusgabealsANSI(letzterParameter)
+-$file="INKO2016_OUTBOUND_ELSBETH_email".date("YmdHis").".csv";
++$file="INKO2016_OUTBOUND_ELSBETH_neu".date("YmdHis").".csv";
+ $count=exportQueryToCSV($result,$mandant_id,$file,false);
+ if($count===false){
+ echogetLastError()."<br>";
+
+===== kimibatch/inko2016exp.php =====
+--- orig
++++ dev
+@@ -81,9 +81,7 @@
+ 'Arb.Platz',
+ 'neuetel_vwa',
+ 'neuetel_hwa',
+-'telefon_apl_falsch',
+-'einzugam',
+-'ratenhoehe'
++'telefon_apl_falsch'
+ union
+ select
+ REPLACE(FORMAT(inko2016.indexa,0),',',''),
+@@ -192,17 +190,7 @@
+ inko2016.arbplatz,--Arbeitsplatz
+ dummy_text13,--neueTelAPLVWA
+ dummy_text14,--neueTelAPLHWA
+-dummy_text15,--neueTelAPLfalsch
+-CASE
+-WHENgrund.text='1teraktuellesMonat'THENconcat('01.',MONTH(CURDATE()),'.',YEAR(CURDATE()))
+-WHENgrund.text='15teraktuellesMonat'THENconcat('15.',MONTH(CURDATE()),'.',YEAR(CURDATE()))
+-WHENgrund.text='8teraktuellesMonat'THENconcat('8.',MONTH(CURDATE()),'.',YEAR(CURDATE()))
+-WHENgrund.text='1terFolgemonat'THENconcat('01.',MONTH(CURDATE())+1,'.',YEAR(CURDATE()))
+-WHENgrund.text='15terFolgemonat'THENconcat('15.',MONTH(CURDATE())+1,'.',YEAR(CURDATE()))
+-WHENgrund.text='8terFolgemonat'THENconcat('8.',MONTH(CURDATE())+1,'.',YEAR(CURDATE()))
+-ELSE'00.00.0000'
+-ENDeinzugam,
+-dummy_number6ratenhoehe
++dummy_text15--neueTelAPLfalsch
+ fromticket
+ leftouterjoinstatusstatusonstatus.id=ticket.status_id
+ leftouterjoinprioritaetprioritaetonprioritaet.id=ticket.prioritaet_id
+@@ -280,33 +268,10 @@
+ $string=$string.$line['neuetel_vwa'].";".$line['neuetel_hwa'].";".$line['telefon_apl_falsch'];
+ $string=$string.";"."\n";
+ */
+-//2024-09-28
+-$ausgabe=$line['antwort_frage1_telefonnummer'];
+-$inkoaktion=$line['Inko-Aktion'];
+-if($ausgabe=='EMAIL1Kontoauszug'){
+-$inkoaktion=$inkoaktion."-EMAILKontoauszugvonKIMIversendet";
+-echo"EMAIL1Kontoauszug";
+-echo$inkoaktion;
+-}
+-if($ausgabe=='EMAIL2Zahlungsvereinbarung'){
+-$inkoaktion=$inkoaktion."-EMAILZahlungsverinbarungvonKIMIversendet,Ratenhöhe:".$line['ratenhoehe']."/Zahlung:".$line['einzugam'];
+-echo"EMAIL2Kontoauszug";
+-echo$inkoaktion;
+-}
+-if($ausgabe=='EMAIL3Zahlungswunsch'){
+-$inkoaktion=$inkoaktion."-EMAILZahlungswunschvonKIMIversendet,Ratenhöhe:".$line['ratenhoehe']."/Zahlung:".$line['einzugam'];
+-echo"EMAIL3Kontoauszug";
+-echo$inkoaktion;
+-}
+-if($ausgabe=='SEPAJA'){
+-$inkoaktion=$inkoaktion."-SEPAvonKIMIversendet,Ratenhöhe:".$line['ratenhoehe']."/Zahlung:".$line['einzugam'];
+-echo"SEPA";
+-echo$inkoaktion;
+-}
+ //2020-06-02
+ $string=$line['IndexA'].";".$line['IndexB'].";".$line['IndexC'].";";
+ $string=$string.$line['CONNECT'].";".$line['RPC'].";".$line['PTP'].";";
+-$string=$string.$inkoaktion.";".$line['AdressNr'].";".$line['Anmerkung'].";".$line['Gespraechsdatum'].";".$line['Gespraechszeit'].";".$line['Fehlerstatus'].";".$line['AgentenAnrede'].";".$line['AgentenVorname'].";".$line['AgentenNachname'].";";
++$string=$string.$line['Inko-Aktion'].";".$line['AdressNr'].";".$line['Anmerkung'].";".$line['Gespraechsdatum'].";".$line['Gespraechszeit'].";".$line['Fehlerstatus'].";".$line['AgentenAnrede'].";".$line['AgentenVorname'].";".$line['AgentenNachname'].";";
+ $string=$string.$line['kontakttel_vw'].";".$line['kontkattel_hw'].";".$line['Email_neu'].";".$line['name_neu'].";".$line['vorname_neu'].";".$line['plz_neu'].";".$line['ort_neu'].";".$line['strasse_neu'].";";
+ $string=$string.$line['neuetel_vw1'].";".$line['neuetel_hw1'].";".$line['neuetel_vw2'].";".$line['neuetel_hw2'].";".$line['telefon1falsch'].";".$line['telefon2falsch'].";".$line['gebdatum_neu'].";";
+ $string=$string.$line['neuetel_vwa'].";".$line['neuetel_hwa'].";".$line['telefon_apl_falsch'];
+
+===== kimibatch/inko2016imp3.php =====
+--- orig
++++ dev
+@@ -80,15 +80,6 @@
+ echo"<br>1terSatz:".convert2Utf8($spaltenueberschrift);
+ }else{
+ $id=$id+1;
+-//2023-11-24Sonderzeichen"'"oder"*"
+-echo"<br>"."keinStern*->wirdersetztundauchEINHochkomma'.chr(39).'darfsindsein";
+-//ohneStern
+-$line=str_replace('*','',$line);
+-//echo"<br>".$line;
+-//ohneHochkomma
+-$line=str_replace(chr(39),'',$line);
+-echo"<br>".$line;
+-//2023-11-24
+ //
+ $indexa=substr($line,0,5);
+ //echo"<br>IndexA:".$indexa;
+
+===== kimibatch/inkode03_verarbeitung_elsbeth_out.php =====
+--- orig
++++ dev
+@@ -28,22 +28,6 @@
+ }else{
+ echo"FalscheTelefonnummernsetzenOK<br>";
+ }
+-//2.1LOGEintragfürTELEFONAT-Gesprächszeitpunkt-MAN_STARTANRUF
+-$result=executeSQLDML($dbconn,$mandant_id,"inkode03_log_telefonat_start.sql");
+-if(!$result){
+-echogetLastError();
+-exit;
+-}else{
+-echo"LOGTelefonatSTARTOK<br>";
+-}
+-//2.2LOGEintragfürTELEFONAT-Gesprächszeitpunkt-MAN_ENDEANRUF
+-$result=executeSQLDML($dbconn,$mandant_id,"inkode03_log_telefonat_ende.sql");
+-if(!$result){
+-echogetLastError();
+-exit;
+-}else{
+-echo"LOGTelefonatENDEOK<br>";
+-}
+ //3.AktuelleINKODE-Logsaufverarbeitetsetzen
+ $result=executeSQLDML($dbconn,$mandant_id,"inkode03_update_inkode_log.sql");
+ if(!$result){
+
+===== kimibatch/inkodeexp.php =====
+--- orig
++++ dev
+@@ -81,9 +81,7 @@
+ 'Arb.Platz',
+ 'neuetel_vwa',
+ 'neuetel_hwa',
+-'telefon_apl_falsch',
+-'einzugam',
+-'ratenhoehe'
++'telefon_apl_falsch'
+ union
+ select
+ REPLACE(FORMAT(inkode.indexa,0),',',''),
+@@ -192,17 +190,7 @@
+ inkode.arbplatz,--Arbeitsplatz
+ dummy_text13,--neueTelAPLVWA
+ dummy_text14,--neueTelAPLHWA
+-dummy_text15,--neueTelAPLfalsch
+-CASE
+-WHENgrund.text='1teraktuellesMonat'THENconcat('01.',MONTH(CURDATE()),'.',YEAR(CURDATE()))
+-WHENgrund.text='15teraktuellesMonat'THENconcat('15.',MONTH(CURDATE()),'.',YEAR(CURDATE()))
+-WHENgrund.text='8teraktuellesMonat'THENconcat('8.',MONTH(CURDATE()),'.',YEAR(CURDATE()))
+-WHENgrund.text='1terFolgemonat'THENconcat('01.',MONTH(CURDATE())+1,'.',YEAR(CURDATE()))
+-WHENgrund.text='15terFolgemonat'THENconcat('15.',MONTH(CURDATE())+1,'.',YEAR(CURDATE()))
+-WHENgrund.text='8terFolgemonat'THENconcat('8.',MONTH(CURDATE())+1,'.',YEAR(CURDATE()))
+-ELSE'00.00.0000'
+-ENDeinzugam,
+-dummy_number6ratenhoehe
++dummy_text15--neueTelAPLfalsch
+ fromticket
+ leftouterjoinstatusstatusonstatus.id=ticket.status_id
+ leftouterjoinprioritaetprioritaetonprioritaet.id=ticket.prioritaet_id
+@@ -268,7 +256,7 @@
+ */
+ $result=mysqli_query($dbconn,$query);
+ //
+-//echo"xxxx1<br>";
++echo"xxxx1<br>";
+ while($line=dbFetchArray($result)){
+ //fputcsv($fp,array_keys($line));
+ /*
+@@ -282,33 +270,10 @@
+ $string=$string.";"."\n";
+ */
+ //2020-06-02
+-//2024-09-28
+-$ausgabe=$line['antwort_frage1_telefonnummer'];
+-$inkoaktion=$line['Inko-Aktion'];
+-if($ausgabe=='EMAIL1Kontoauszug'){
+-$inkoaktion=$inkoaktion."-EMAILKontoauszugvonKIMIversendet";
+-echo"EMAIL1Kontoauszug";
+-echo$inkoaktion;
+-}
+-if($ausgabe=='EMAIL2Zahlungsvereinbarung'){
+-$inkoaktion=$inkoaktion."-EMAILZahlungsverinbarungvonKIMIversendet,Ratenhöhe:".$line['ratenhoehe']."/Zahlung:".$line['einzugam'];
+-echo"EMAIL2Kontoauszug";
+-echo$inkoaktion;
+-}
+-if($ausgabe=='EMAIL3Zahlungswunsch'){
+-$inkoaktion=$inkoaktion."-EMAILZahlungswunschvonKIMIversendet,Ratenhöhe:".$line['ratenhoehe']."/Zahlung:".$line['einzugam'];
+-echo"EMAIL3Kontoauszug";
+-echo$inkoaktion;
+-}
+-if($ausgabe=='SEPAJA'){
+-$inkoaktion=$inkoaktion."-SEPAvonKIMIversendet,Ratenhöhe:".$line['ratenhoehe']."/Zahlung:".$line['einzugam'];
+-echo"SEPA";
+-echo$inkoaktion;
+-}
+-//echo"xxxx2<br>";
++echo"xxxx2<br>";
+ $string=$line['IndexA'].";".$line['IndexB'].";".$line['IndexC'].";";
+ $string=$string.$line['CONNECT'].";".$line['RPC'].";".$line['PTP'].";";
+-$string=$string.$inkoaktion.";".$line['AdressNr'].";".$line['Anmerkung'].";".$line['Gespraechsdatum'].";".$line['Gespraechszeit'].";".$line['Fehlerstatus'].";".$line['AgentenAnrede'].";".$line['AgentenVorname'].";".$line['AgentenNachname'].";";
++$string=$string.$line['Inko-Aktion'].";".$line['AdressNr'].";".$line['Anmerkung'].";".$line['Gespraechsdatum'].";".$line['Gespraechszeit'].";".$line['Fehlerstatus'].";".$line['AgentenAnrede'].";".$line['AgentenVorname'].";".$line['AgentenNachname'].";";
+ $string=$string.$line['kontakttel_vw'].";".$line['kontkattel_hw'].";".$line['Email_neu'].";".$line['name_neu'].";".$line['vorname_neu'].";".$line['plz_neu'].";".$line['ort_neu'].";".$line['strasse_neu'].";";
+ $string=$string.$line['neuetel_vw1'].";".$line['neuetel_hw1'].";".$line['neuetel_vw2'].";".$line['neuetel_hw2'].";".$line['telefon1falsch'].";".$line['telefon2falsch'].";".$line['gebdatum_neu'].";";
+ $string=$string.$line['neuetel_vwa'].";".$line['neuetel_hwa'].";".$line['telefon_apl_falsch'];
+@@ -319,9 +284,9 @@
+ //echo$string;
+ //beingtransformedintoanewline
+ fwrite($fp,$string);//willproccess/nasnewline...
+-//echo"xxxx3<br>";
++echo"xxxx3<br>";
+ }
+-//echo"xxxx4CLOSE<br>";
++echo"xxxx4CLOSE<br>";
+ fclose($fp);
+ $file=$filename;
+ if(file_exists($file)){
+
+===== kimibatch/inkodeimp2.php =====
+--- orig
++++ dev
+@@ -88,15 +88,7 @@
+ echo"<br>1terSatz:".convert2Utf8($spaltenueberschrift);
+ }else{
+ $id=$id+1;
+-//2023-11-24Sonderzeichen"'"oder"*"
+-echo"<br>"."keinStern*->wirdersetztundauchEINHochkomma'.chr(39).'darfsindsein";
+-//ohneStern
+-$line=str_replace('*','',$line);
+-echo"<br>".$line;
+-//ohneHochkomma
+-$line=str_replace(chr(39),'',$line);
+-echo"<br>".$line;
+-//2023-11-24
++//
+ $indexa=substr($line,0,5);
+ echo"<br>IndexA:".$indexa;
+ $indexb=substr($line,6,10);
+
+===== kimibatch/kimibatchtree.php =====
+--- orig
++++ dev
+@@ -67,10 +67,6 @@
+ <ulclass="nested">
+ <li><ahref="./inkode03_verarbeitung_elsbeth_out.php"target="_blank">INKODEVerarbeitungElsbethOutboundergebnisse</a></li>
+ <li><ahref="./inkode05_daten_email_fuer_elsbeth_import.php"target="_blank">INKODEDatenfürEmailKampagneElsbeth</a></li>
+-<li><ahref="./inkodesepaexp.php"target="_blank">INKODESEPADATENEXPORTTÄGLICH</a></li>
+-<li><ahref="./inkodeemail1ktoexp.php"target="_blank">INKODEEMAIL1KontoauszugDATENEXPORTTÄGLICH</a></li>
+-<li><ahref="./inkodeemail2zvexp.php"target="_blank">INKODEEMAIL2ZahlungsvereinbarungDATENEXPORTTÄGLICH</a></li>
+-<li><ahref="./inkodeemail3zwexp.php"target="_blank">INKODEEMAIL3ZahlungswunschDATENEXPORTTÄGLICH</a></li>
+ </ul>
+ </li>
+ </ul>
+@@ -104,11 +100,7 @@
+ <li><spanclass="caret">OPTIONAL</span>
+ <ulclass="nested">
+ <li><ahref="./inko201603_verarbeitung_elsbeth_out.php"target="_blank">INKO2016VerarbeitungElsbethOutboundergebnisse</a></li>
+-<li><ahref="./inko201605_daten_email_fuer_elsbeth_import.php"target="_blank">INKO2016DatenfürEmailKampagneElsbeth</a></li>
+-<li><ahref="./inko2016sepaexp.php"target="_blank">INKO2016SEPADATENEXPORTTÄGLICH</a></li>
+-<li><ahref="./inko2016email1ktoexp.php"target="_blank">INKO2016EMAIL1KontoauszugDATENEXPORTTÄGLICH</a></li>
+-<li><ahref="./inko2016email2zvexp.php"target="_blank">INKO2016EMAIL2ZahlungsvereinbarungDATENEXPORTTÄGLICH</a></li>
+-<li><ahref="./inko2016email3zwexp.php"target="_blank">INKO2016EMAIL3ZahlungswunschDATENEXPORTTÄGLICH</a></li>
++<li><ahref="./inko201605_daten_email_fuer_elsbeth_import.php"target="_blank">INKODEDatenfürEmailKampagneElsbeth</a></li>
+ </ul>
+ </li>
+ </ul>
+@@ -144,11 +136,44 @@
+ <li><ahref="./oko01_daten_inA_fuer_elsbeth_import.php"target="_blank">EXPORTOKOinAOUTBOUND</a></li>
+ <li><ahref="./oko01_daten_inA_fuer_elsbeth_import_telefon1.php"target="_blank">EXPORTOKOinAOUTBOUNDNURTELEFONNR#1fürPredicitve</a></li>
+ <li><ahref="./oko01_daten_inA_fuer_elsbeth_import_telefon2.php"target="_blank">EXPORTOKOinAOUTBOUNDNURTELEFONNR#2fürPredicitve</a></li>
+-<li><ahref="./oko01_daten_inA_fuer_elsbeth_import_telefon3.php"target="_blank">EXPORTOKOinAOUTBOUNDNURTELEFONNR#3fürPredicitve</a></li>
+-<li><ahref="./oko01_daten_inA_fuer_elsbeth_import_telefon4.php"target="_blank">EXPORTOKOinAOUTBOUNDNURTELEFONNR#4fürmanuelleListe</a></li>
+ <li><spanclass="caret">OPTIONAL</span>
+ <ulclass="nested">
+ <li><ahref="./oko03_verarbeitung_elsbeth_out.php"target="_blank">OKOVerarbeitungElsbethOutboundergebnisse</a></li>
++</ul>
++</li>
++</ul>
++</li>
++</ul>
++</li>
++</ul>
++<ulid="myUL">
++<li><spanclass="caret">SCHLAUSTROM</span>
++<ulclass="nested">
++<li><spanclass="caret">TAGESBATCHSCHNITTSTELLEN</span>
++<ulclass="nested">
++<li><ahref="./schlaustrom01_import_telefonie_taeglich.php"target="_blank">SchlaustromIMPORTTicket-Daten</a></li>
++<li><ahref="./schlaustromcheck.php"target="_blank">CheckSchlaustromTicket-Daten</a></li>
++<li><ahref="./schlaustromexp20220703.php"target="_blank">EXPORTSchnittstelleSchlaustrom</a></li>
++<li><ahref="./schlaustromreport.php"target="_blank">REPORTSCHLAUSTROM</a></li>
++<li><ahref="./schlaustromschnupd.php"target="_blank">SchlaustromStatiupdaten</a></li>
++<li><spanclass="caret">OPTIONAL</span>
++<ulclass="nested">
++<li>xxx</li>
++<li>xxx</li>
++<li>xxx</li>
++<li>xxx</li>
++</ul>
++</li>
++</ul>
++</li>
++<li><spanclass="caret">ELSBETH</span>
++<ulclass="nested">
++<li><ahref="./schlaustrom02_daten_off_fuer_elsbeth_import.php"target="_blank">EXPORTSCHLAUSTROMoffOUTBOUND</a></li>
++<li><ahref="./schlaustrom01_daten_inA_fuer_elsbeth_import.php"target="_blank">EXPORTSCHLAUSTROMinAOUTBOUND</a></li>
++<li><ahref="./schlaustrom01SONDER_daten_inA_fuer_elsbeth_import.php"target="_blank">EXPORTSCHLAUSTROMSONDERinAOUTBOUND</a></li>
++<li><spanclass="caret">OPTIONAL</span>
++<ulclass="nested">
++<li><ahref="./schlaustrom03_verarbeitung_elsbeth_out.php"target="_blank">SCHLAUSTROMVerarbeitungElsbethOutboundergebnisse</a></li>
+ </ul>
+ </li>
+ </ul>
+@@ -181,8 +206,6 @@
+ <li><ahref="./coeo02_tagl_daten_fuer_elsbeth_SONDERKAMPAGNE_import.php"target="_blank">#2COEOtäglicheDatenfürElsbeth_ImportSONDERKAMPAGNEaufbereiten</a></li>
+ <li><ahref="./coeo02_tagl_daten_fuer_elsbeth_import_alle.php"target="_blank">#2COEOtäglicheDatenfürElsbeth_ImportALLEaufbereiten</a></li>
+ <li><ahref="./coeo02_tagl_daten_fuer_elsbeth_import_telefonnrfalsch.php"target="_blank">#2COEOtäglicheDatenfürElsbeth_ImportTELEFONNRFALSCHaufbereiten</a></li>
+-<li><ahref="./coeo02_tagl_daten_fuer_elsbeth_import_nur_klarna.php"target="_blank">#2COEOtäglicheDatenfürElsbeth_ImportALLENURKLARNAaufbereiten</a></li>
+-<li><ahref="./coeo02_tagl_daten_fuer_elsbeth_import_nicht_klarna.php"target="_blank">#2COEOtäglicheDatenfürElsbeth_ImportALLENICHTKLARNAaufbereiten</a></li>
+ </ul>
+ <li><spanclass="caret">TRENNUNGKAMPAGNENKLARNA&RATENERINNERUNGEN</span>
+ <ulclass="nested">
+@@ -197,8 +220,6 @@
+ </li>
+ <li><spanclass="caret">ELSBETH</span>
+ <ulclass="nested">
+-<li><ahref="./coeo02_tagl_daten_fuer_elsbeth_import_alle.php"target="_blank">EXPORTCOEOinAOUTBOUND-COEOtäglicheDatenfürElsbeth_ImportALLEaufbereiten</a></li>
+-<li></li>
+ <li><ahref="./coeo03_verarbeitung_elsbeth_out.php"target="_blank">#3.1COEOVerarbeitungElsbethOutboundergebnisselaufend</a></li>
+ <li><ahref="./coeo03_verarbeitung_elsbeth_out.php?abschluss=J"target="_blank">3.2COEOVerarbeitungElsbethOutboundergebnisseTagesabschluss</a></li>
+ <li><spanclass="caret">OPTIONAL</span>
+@@ -207,126 +228,6 @@
+ <li>xxx</li>
+ <li>xxx</li>
+ <li>xxx</li>
+-</ul>
+-</li>
+-</ul>
+-</li>
+-</ul>
+-</li>
+-</ul>
+-<ulid="myUL">
+-<li><spanclass="caret">COEODREI</span>
+-<ulclass="nested">
+-<li><spanclass="caret">TAGESBATCHSCHNITTSTELLEN</span>
+-<ulclass="nested">
+-<li><ahref="./coeodrei01_import_telnr_optimierung.php"target="_blank">IMPORTDATENCOEODREITelefonnummernOptimierung</a></li>
+-<li><ahref="./coeodrei01_import_telefonie_taeglich.php"target="_blank">#1COEODREIImportTelefoniedatentaeglich</a></</li>
+-<li><ahref="./coeodreicheck.php"target="_blank">CheckDREI1Ticket-Daten</a></</li>
+-<li><ahref="./coeodreireport.php"target="_blank">REPORTCOEODREI</a></</li>
+-<li><ahref="./coeodreischnupd.php"target="_blank">COEODREIStatiupdaten</a></</li>
+-<li><spanclass="caret">ELSBETH-COEODREItäglicheDatenfürElsbeth_Importaufbereiten</span>
+-<ulclass="nested">
+-<li><spanclass="caret">STANDARDALLE</span>
+-<ulclass="nested">
+-<li><ahref="./coeodrei02_tagl_daten_fuer_elsbeth_import.php"target="_blank">#2COEODREItäglicheDatenfürElsbeth_Importaufbereiten</a></li>
+-</ul>
+-<li><spanclass="caret">Sonderauswertungen</span>
+-<ulclass="nested">
+-<li><ahref="./coeodrei02_tagl_daten_fuer_elsbeth_import_neue.php"target="_blank">#2COEODREItäglicheNEUEDatenfürElsbeth_Importaufbereiten</a></li>
+-<li><ahref="./coeodrei02_tagl_daten_fuer_elsbeth_import_alle.php"target="_blank">#2COEODREItäglicheDatenfürElsbeth_ImportALLEaufbereiten</a></li>
+-</ul>
+-</ul>
+-</ul>
+-</li>
+-<li><spanclass="caret">ELSBETH</span>
+-<ulclass="nested">
+-<li><ahref="./coeodrei02_tagl_daten_fuer_elsbeth_import_alle.php"target="_blank">EXPORTCOEODREIinAOUTBOUND-COEOtäglicheDatenfürElsbeth_ImportALLEaufbereiten</a></li>
+-<li></li>
+-<li><ahref="./coeodrei03_verarbeitung_elsbeth_out.php"target="_blank">#3.1COEODREIVerarbeitungElsbethOutboundergebnisselaufend</a></li>
+-<li><ahref="./coeodrei03_verarbeitung_elsbeth_out.php?abschluss=J"target="_blank">3.2COEODREIVerarbeitungElsbethOutboundergebnisseTagesabschluss</a></li>
+-<li><spanclass="caret">OPTIONAL</span>
+-<ulclass="nested">
+-<li>xxx</li>
+-<li>xxx</li>
+-<li>xxx</li>
+-<li>xxx</li>
+-</ul>
+-</ul>
+-</li>
+-</ul>
+-</li>
+-</ul>
+-</li>
+-</ul>
+-<ulid="myUL">
+-<li><spanclass="caret">COEOCH-Schweiz</span>
+-<ulclass="nested">
+-<li><spanclass="caret">TAGESBATCHSCHNITTSTELLEN</span>
+-<ulclass="nested">
+-<li><ahref="./coeoch01_import_telnr_optimierung.php"target="_blank">IMPORTDATENCHTelefonnummernOptimierung</a></li>
+-<li><ahref="./coeoch01_import_telefonie_taeglich.php"target="_blank">#1COEOCHImportTelefoniedatentaeglich</a></</li>
+-<li><ahref="./coeochcheck.php"target="_blank">CheckCH1Ticket-Daten</a></</li>
+-<li><ahref="./coeochreport.php"target="_blank">REPORTCOEOCH</a></</li>
+-<li><ahref="./coeochschnupd.php"target="_blank">COEOCHStatiupdaten</a></</li>
+-<li><spanclass="caret">ELSBETH-COEOCHtäglicheDatenfürElsbeth_Importaufbereiten</span>
+-<ulclass="nested">
+-<li><spanclass="caret">STANDARDALLE</span>
+-<ulclass="nested">
+-<li><ahref="./coeoch02_tagl_daten_fuer_elsbeth_import.php"target="_blank">#2COEOtäglicheDatenfürElsbeth_Importaufbereiten</a></li>
+-</ul>
+-<li><spanclass="caret">Sonderauswertungen</span>
+-<ulclass="nested">
+-<li><ahref="./coeochde02_tagl_daten_fuer_elsbeth_import_neue.php"target="_blank">#2COEOCHtäglicheNEUEDatenfürElsbeth_Importaufbereiten</a></li>
+-<li><ahref="./coeochde02_tagl_daten_fuer_elsbeth_import_alle.php"target="_blank">#2COEOCHtäglicheDatenfürElsbeth_ImportALLEaufbereiten</a></li>
+-</ul>
+-</ul>
+-</li>
+-</ul>
+-</li>
+-<li><spanclass="caret">ELSBETH</span>
+-<ulclass="nested">
+-<li><ahref="./coeoch02_tagl_daten_fuer_elsbeth_import_alle.php"target="_blank">EXPORTCOEOinAOUTBOUND-COEOCHtäglicheDatenfürElsbeth_ImportALLEaufbereiten</a></li>
+-<li></li>
+-<li><ahref="./coeoch03_verarbeitung_elsbeth_out.php"target="_blank">#3.1COEOVerarbeitungElsbethOutboundergebnisselaufend</a></li>
+-<li><ahref="./coeoch03_verarbeitung_elsbeth_out.php?abschluss=J"target="_blank">3.2COEOVerarbeitungElsbethOutboundergebnisseTagesabschluss</a></li>
+-<li><spanclass="caret">REPORTING</span>
+-<ulclass="nested">
+-<li><ahref="./coeochdeexp.php"target="_blank">#2COEOCHDEtäglichesReportfile</a></li>
+-</ul>
+-</li>
+-</ul>
+-</li>
+-</ul>
+-</li>
+-</ul>
+-<ulid="myUL">
+-<li><spanclass="caret">QUESTER</span>
+-<ulclass="nested">
+-<li><spanclass="caret">TAGESBATCHSCHNITTSTELLEN</span>
+-<ulclass="nested">
+-<li><ahref="./schlaustrom01_import_telefonie_taeglich.php"target="_blank">QUESTERIMPORTTicket-Daten</a></li>
+-<li><ahref="./schlaustromcheck.php"target="_blank">CheckQUESTERTicket-Daten</a></li>
+-<li><ahref="./questerexp20250208.php"target="_blank">EXPORTSchnittstelleQUESTER</a></li>
+-<li><ahref="./schlaustromreport.php"target="_blank">REPORTQUESTER</a></li>
+-<li><ahref="./schlaustromschnupd.php"target="_blank">QUESTERStatiupdaten</a></li>
+-<li><spanclass="caret">OPTIONAL</span>
+-<ulclass="nested">
+-<li>xxx</li>
+-<li>xxx</li>
+-<li>xxx</li>
+-<li>xxx</li>
+-</ul>
+-</li>
+-</ul>
+-</li>
+-<li><spanclass="caret">ELSBETH</span>
+-<ulclass="nested">
+-<li><ahref="./schlaustrom02_daten_off_fuer_elsbeth_import.php"target="_blank">EXPORTSCHLAUSTROMoffOUTBOUND</a></li>
+-<li><ahref="./schlaustrom01_daten_inA_fuer_elsbeth_import.php"target="_blank">EXPORTSCHLAUSTROMinAOUTBOUND</a></li>
+-<li><ahref="./schlaustrom01SONDER_daten_inA_fuer_elsbeth_import.php"target="_blank">EXPORTSCHLAUSTROMSONDERinAOUTBOUND</a></li>
+-<li><spanclass="caret">OPTIONAL</span>
+-<ulclass="nested">
+-<li><ahref="./schlaustrom03_verarbeitung_elsbeth_out.php"target="_blank">SCHLAUSTROMVerarbeitungElsbethOutboundergebnisse</a></li>
+ </ul>
+ </li>
+ </ul>
+
+===== kimibatch/knp1check.php =====
+--- orig
++++ dev
+@@ -116,7 +116,6 @@
+ //Abfrageob""Gesprächszeit/Anrufer"gesetzt
+ $query_status_telefonat="selectcount(*)anzahl_n_verarbeitet
+ fromticket
+-/*
+ leftouterjoin
+ (selectletzt_log.*,ben.vorname,ben.nachname,ben.anredefrom(
+ select
+@@ -147,18 +146,15 @@
+ leftouterjoinbenutzerbenonben.name=letzt_log.benutzer
+ wheremandant_id=40
+ )knp1_logonknp1_log.id=ticket.idandticket.mandant_id=knp1_log.mandant_id
+-*/
+ whereticket.mandant_id=40andkampagne_id<>99andstatus_id<>66--wennstatusnichtoffen
+---andknp1_log.start_gesisnull
+-andgetLogAnrufVorhanden(ticket.id)=0andbeginn>=DATE_SUB(curdate(),INTERVAL1DAY);
++andknp1_log.start_gesisnull
+ ";
+ $query_status_telefonat_data="select
+-'ticketnr','beginn'
++'ticketnr'
+ union
+ select
+-ticketnr,beginn
++ticketnr
+ fromticket
+-/*
+ leftouterjoin
+ (selectletzt_log.*,ben.vorname,ben.nachname,ben.anredefrom(
+ select
+@@ -189,10 +185,8 @@
+ leftouterjoinbenutzerbenonben.name=letzt_log.benutzer
+ wheremandant_id=40
+ )knp1_logonknp1_log.id=ticket.idandticket.mandant_id=knp1_log.mandant_id
+-*/
+ whereticket.mandant_id=40andkampagne_id<>99--andticketnr=48
+---andknp1_log.start_gesisnull
+-andgetLogAnrufVorhanden(ticket.id)=0andbeginn>=DATE_SUB(curdate(),INTERVAL1DAY);
++andknp1_log.start_gesisnull
+ ";
+ //SelectfürSchnittstellen_DatenundReportingDaten
+ $query_schnitt_data="
+@@ -499,7 +493,7 @@
+ $result=mysqli_query($dbconn,$query_status_telefonat_data);
+ while($line=dbFetchArray($result)){?>
+ <?PHP
+-$drucksatz=$line['ticketnr'].";".$line['beginn'].";";
++$drucksatz=$line['ticketnr'].";";
+ echo"<br>".$drucksatz;
+ <?PHP
+ }
+
+===== kimibatch/knp1schnupd.php =====
+--- orig
++++ dev
+@@ -49,8 +49,6 @@
+ if(mysqli_query($dbconn,$update_knp1_erledigt))
+ {
+ echo"UpdateStatusERLEDIGTdurchgef&uuml;hrt<br>";
+-$heute=date("d.m.YH:i:s");
+-echo"<br><br>KNP1SchnittstellenUpdate-Ende:".$heute;
+ }
+ else
+ {
+@@ -59,8 +57,6 @@
+ if(mysqli_query($dbconn,$update_knp1_erreicht))
+ {
+ echo"UpdateStatusERREICHTdurchgef&uuml;hrt<br>";
+-$heute=date("d.m.YH:i:s");
+-echo"<br><br>KNP1SchnittstellenUpdate-Ende:".$heute;
+ }
+ else
+ {
+@@ -69,8 +65,6 @@
+ if(mysqli_query($dbconn,$update_knp1_erreichtap))
+ {
+ echo"UpdateStatusERREICHTAPdurchgef&uuml;hrt<br>";
+-$heute=date("d.m.YH:i:s");
+-echo"<br><br>KNP1SchnittstellenUpdate-Ende:".$heute;
+ }
+ else
+ {
+@@ -79,8 +73,6 @@
+ if(mysqli_query($dbconn,$update_knp1_telefonnummerfalsch))
+ {
+ echo"UpdateStatusTELEFONNUMMERFALSCHdurchgef&uuml;hrt<br>";
+-$heute=date("d.m.YH:i:s");
+-echo"<br><br>KNP1SchnittstellenUpdate-Ende:".$heute;
+ }
+ else
+ {
+@@ -89,8 +81,6 @@
+ if(mysqli_query($dbconn,$update_knp1_unerreichbar))
+ {
+ echo"UpdateStatusUNERREICHBARdurchgef&uuml;hrt<br>";
+-$heute=date("d.m.YH:i:s");
+-echo"<br><br>KNP1SchnittstellenUpdate-Ende:".$heute;
+ }
+ else
+ {
+
+===== kimibatch/oko03_verarbeitung_elsbeth_out.php =====
+--- orig
++++ dev
+@@ -28,22 +28,6 @@
+ }else{
+ echo"FalscheTelefonnummernsetzenOK<br>";
+ }
+-//2.1LOGEintragfürTELEFONAT-Gesprächszeitpunkt-MAN_STARTANRUF
+-$result=executeSQLDML($dbconn,$mandant_id,"oko03_log_telefonat_start.sql");
+-if(!$result){
+-echogetLastError();
+-exit;
+-}else{
+-echo"LOGTelefonatSTARTOK<br>";
+-}
+-//2.2LOGEintragfürTELEFONAT-Gesprächszeitpunkt-MAN_ENDEANRUF
+-$result=executeSQLDML($dbconn,$mandant_id,"oko03_log_telefonat_ende.sql");
+-if(!$result){
+-echogetLastError();
+-exit;
+-}else{
+-echo"LOGTelefonatENDEOK<br>";
+-}
+ //3.AktuelleOKO-Logsaufverarbeitetsetzen
+ $result=executeSQLDML($dbconn,$mandant_id,"oko03_update_oko_log.sql");
+ if(!$result){
+
+===== kimibatch/okoexp.php =====
+--- orig
++++ dev
+@@ -104,9 +104,7 @@
+ kimi_decrypt(ticket.geburtsdatum)geburtsdatum,
+ standortneuetelnr,
+ DATE_FORMAT(wiedervorlage,'%Y-%c-%d')wiedervorlage,
+-REPLACE(CONCAT(ergebnis,'Identifikation:',
+-casewhenjanein3.text='Ja'andanruf_status.text='Unerreichbar'thenifnull(janein2.text,'')elsejanein2.textend),
+-CHAR(13,10),'')ergebnis,
++REPLACE(CONCAT(ergebnis,'Identifikation:',janein2.text),CHAR(13,10),'')ergebnis,
+ status.textstatus_text,
+ anruf_status.textanruf_status_text,
+ --getLogZeit(ticket.id,'')zeit,--sec_to_time(inko_log.dauerinsec)zeit,
+
+===== kimibatch/okoimp.php =====
+--- orig
++++ dev
+@@ -23,7 +23,7 @@
+ dummy_number1,dummy_number2,dummy_number3,dummy_number4,
+ dummy_text1,dummy_text2,dummy_text3,dummy_text5,dummy_text6,dummy_text7,
+ geaendert_am,geaendert_von,status_id,beginn,ende,prioritaet_id,kampagne_id,
+-textinfo5,textinfo1,textinfo2,dummy_text10,dummy_text9,dummy_date2,dummy_text8,wiedervorlage_automatik,anzahl_anrufe,ergebnis)
++textinfo5,textinfo1,textinfo2,dummy_text10,dummy_text9,dummy_date2,dummy_text8,wiedervorlage_automatik,anzahl_anrufe)
+ SELECT
+ id,16,0,1,TRIM(CONCAT(aufgabe1,aufgabe2)),--CHAR(13)
+ 0,null,null,schuldner,'','',1,
+@@ -32,8 +32,8 @@
+ CASEWHENkimi_decrypt(geburtsdatum)like'%--%'THennullelseyear(now())-year(kimi_decrypt(geburtsdatum))endgeburtsdatum,
+ ratenanzahl,ratenhoehe,gesamtzahlung,saldo,
+ iban,bic,CONCAT(glaeubiger,'',glaeubiger_anschrift),sachbearb,
+-telnr4,--concat('+43',telnr1,'**33'),-->dummy_text620220627FT-Felderdeaktiviert--2023-07-19tele3undtele4aktiviert
+-telnr3,--concat('+43',telnr2,'**33'),-->dummy_text720220627FT-Felderdeaktiviert--2023-07-19tele3undtele4aktiviert
++null,--concat('+43',telnr1,'**33'),-->dummy_text620220627FT-Felderdeaktiviert
++null,--concat('+43',telnr2,'**33'),-->dummy_text720220627FT-Felderdeaktiviert
+ NOW(),'FranZ',58,CURDATE(),DATE_ADD(CURDATE(),INTERVAL
+ CASE
+ WHENDATE_FORMAT(CURDATE(),'%w')=1THEN5--Montag5
+@@ -44,7 +44,7 @@
+ '',--textinfo1
+ 'WiesiehtIhrLösungsvorschlagaus?BeiRatenzahlungaufRatenbriefhingewiesen?',--textinfo2
+ bemerkung,
+-concat(aktnr1,'/',aktnr2),faelligbis,mitschuldner,1,0,telefon3plus
++concat(aktnr1,'/',aktnr2),faelligbis,mitschuldner,1,0
+ fromokowhereimport>=DATE_ADD(CURDATE(),INTERVAL-0.1DAY)
+ ";
+ //
+@@ -75,9 +75,6 @@
+ $saldo=0;
+ $telefon1='';
+ $telefon2='';
+-$telefon3='';
+-$telefon4='';
+-$telefon5plus='';
+ $telefonintervention='';
+ $geburtsdatum;
+ $iban='AT552032000900103615';/*Allg.SparkasseLinz*/
+@@ -91,18 +88,9 @@
+ foreach($linesas$line_num=>$line){
+ //echo"Line#<b>{$line_num}</b>:".htmlspecialchars($line)."<br/>\n";
+ $z=$z+1;
+-$ausschnitt=(substr($line,0,10));
+-//2023-11-24Sonderzeichen"'"oder"*"
+-//echo"<br>"."keinStern*->wirdersetztundauchEINHochkomma'.chr(39).'darfnichtsein"."<BR>";
+-//ohneStern
+-$line=str_replace('*','',$line);
+-//echo"<br>".$line;
+-//ohneHochkomma
+-$line=str_replace(chr(39),'',$line);
+-//echo"<br>NachderKorrektur".$line."<BR>";
+-//2023-11-24
++$ausschnitt=(substr($line,7,10));
+ //echo"<br>ausschnitt:".$ausschnitt;
+-if(substr($line,0,21)=='Telefoninterventionf'){
++if(substr($line,7,21)=='Telefoninterventionf'){
+ if($erstersatz==1){
+ echo"<br><br>".convert2Utf8($telefonintervention);
+ echo"<br>";
+@@ -116,7 +104,7 @@
+ //
+ $id=$id+1;
+ //
+-$oko_ins="INSERTINTOoko(id,aktnr1,aktnr2,sachbearb,glaeubiger,glaeubiger_anschrift,schuldner,schuldner_strasse,schuldner_ort,mitschuldner,aufgabe1,aufgabe2,saldo,telnr1,telnr2,telnr3,telnr4,iban,bic,bemerkung,geburtsdatum,ratenanzahl,ratenhoehe,gesamtzahlung,faelligbis,import,email01,telefon3plus)
++$oko_ins="INSERTINTOoko(id,aktnr1,aktnr2,sachbearb,glaeubiger,glaeubiger_anschrift,schuldner,schuldner_strasse,schuldner_ort,mitschuldner,aufgabe1,aufgabe2,saldo,telnr1,telnr2,iban,bic,bemerkung,geburtsdatum,ratenanzahl,ratenhoehe,gesamtzahlung,faelligbis,import,email01)
+ values("."'".$id."'".",'".$aktnr1."'".",'".$aktnr2."'".",'".$sachbearb."','".$glaeubiger_name."','".$glaeubiger_anschrift."',
+ kimi_encrypt('".$schuldner_name."'),
+ kimi_encrypt('".$schuldner_strasse."'),
+@@ -124,9 +112,9 @@
+ kimi_encrypt('".$mitschuldner_name."'),
+ '".$aufgabe1."','".$aufgabe2."',TRIM(LEADING''FROMREPLACE('".$saldo."',',','.')),
+ kimi_encrypt('".$telefon1."'),
+-kimi_encrypt('".$telefon2."'),'".$telefon3."','".$telefon4."','".$iban."','".$bic."',substr('".$telefonintervention."',1,2000),
++kimi_encrypt('".$telefon2."'),'".$iban."','".$bic."',substr('".$telefonintervention."',1,2000),
+ kimi_encrypt('".$geburtsdatum."'),'".$ratenanzahl."','".$ratenhoehe."',REPLACE('".$gesamtzahlung."',',','.'),'".$faelligbis."',NOW()
+-,kimi_encrypt(TRIM('".$email01."')),'".$telefon3plus."')";
++,kimi_encrypt(TRIM('".$email01."')))";
+ //20170127AR:wennnichtUTF-8dannkonvertieren
+ echo"<br>".convert2Utf8($oko_ins);
+ if(!executeSQLCmdDML($dbconn,$mandant_id,'SETNAMESutf8')){
+@@ -155,10 +143,6 @@
+ $saldo=0;
+ $telefon1='';
+ $telefon2='';
+-$telefon3='';
+-$telefon4='';
+-$telefon3plus='';
+-$telefon3plus='';
+ $telefonintervention='';
+ $geburtsdatum;
+ $ratenhoehe=0;
+@@ -172,61 +156,49 @@
+ //
+ $telefonintervention=$telefonintervention.substr($line,0,80)."<br>";
+ //
+-if(substr($line,0,5)=='Aktnr'){
+-$aktnr1=substr($line,11,5);
++if(substr($line,7,5)=='Aktnr'){
++$aktnr1=substr($line,18,5);
+ echo"<br>aktnr1:".convert2Utf8($aktnr1);
+-$aktnr2=substr($line,17,8);
++$aktnr2=substr($line,24,8);
+ echo"<br>aktnr2:".convert2Utf8($aktnr2);
+ $data='Aktnr';
+ }
+-if(substr($line,0,10)=='Sachbearb:'){
+-$sachbearb=substr($line,11,50);
++if(substr($line,7,10)=='Sachbearb:'){
++$sachbearb=substr($line,18,50);
+ echo"<br>sachbearb:".convert2Utf8($sachbearb);
+ $data='Sachbearb:';
+ }
+-if(substr($line,3,7)=='ubiger:'){
+-$glaeubiger_name=substr($line,11,50);
++if(substr($line,10,7)=='ubiger:'){
++$glaeubiger_name=substr($line,18,50);
+ echo"<br>Glauebiger:".convert2Utf8($glaeubiger_name);
+ $data='Gläubiger:';
+ }
+-if($data=='Gläubiger:'andsubstr($line,3,7)==''){
+-$glaeubiger_anschrift=substr($line,11,50);
++if($data=='Gläubiger:'andsubstr($line,10,7)==''){
++$glaeubiger_anschrift=substr($line,18,50);
+ echo"<br>glaeubiger_anschrift:".convert2Utf8($glaeubiger_anschrift);
+ $data='Gläubigeranschrift';
+ }
+-if(substr($line,0,10)=='Schuldner:'){
+-$schuldner_name=substr($line,11,50);
++if(substr($line,7,10)=='Schuldner:'){
++$schuldner_name=substr($line,18,50);
+ echo"<br>Schuldner:".convert2Utf8($schuldner_name);
+ $data='Schuldner:';
+ }
+-if($data=='Schuldner:'andsubstr($line,48,3)=='GBM'){
+-$schuldner_strasse=substr($line,11,37);
++if($data=='Schuldner:'andsubstr($line,57,3)=='GBM'){
++$schuldner_strasse=substr($line,18,39);
+ echo"<br>schuldner_strasse:".convert2Utf8($schuldner_strasse);
+-$geburtsdatum=substr($line,59,4).'-'.substr($line,56,2).'-'.substr($line,53,2);
++$geburtsdatum=substr($line,68,4).'-'.substr($line,65,2).'-'.substr($line,62,2);
+ echo"<br>geburtsdatum:".convert2Utf8($geburtsdatum);
+ }
+-if($data=='Schuldner:'andsubstr($line,48,3)=='GBF'andsubstr($line,11,1)==''){
+-$schuldner_ort=substr($line,12,36);
++if($data=='Schuldner:'andsubstr($line,57,3)=='GBF'){
++$schuldner_ort=substr($line,18,39);
+ echo"<br>schuldner_ort:".convert2Utf8($schuldner_ort);
+ }
+-if($data=='Schuldner:'andsubstr($line,48,3)=='GBF'and(substr($line,11,2)=='AT')){
+-$schuldner_ort=substr($line,14,34);
+-echo"<br>schuldner_ort:".convert2Utf8($schuldner_ort);
+-}
+-if($data=='Schuldner:'andsubstr($line,48,3)=='GBF'and(substr($line,11,2)=='DE')){
+-$schuldner_ort=substr($line,14,34);
+-echo"<br>schuldner_ort:".convert2Utf8($schuldner_ort);
+-}
+-if($data=='Schuldner:'andsubstr($line,48,3)=='GBF'and(substr($line,11,1)<>'')){
+-$schuldner_ort=substr($line,14,34);
+-echo"<br>schuldner_ort:".convert2Utf8($schuldner_ort);
+-}
+-if(substr($line,0,10)=='Mitsch.:'){
+-$mitschuldner_name=substr($line,11,50);
++if(substr($line,7,10)=='Mitsch.:'){
++$mitschuldner_name=substr($line,18,50);
+ echo"<br>mitschuldner:".convert2Utf8($mitschuldner_name);
+ $data='Mitschuldner:';
+ }
+-if(substr($line,0,10)=='Ford.Begr:'){
++if(substr($line,7,10)=='Ford.Begr:'){
+ $data='Ford.Begr:';
+ $lz=$z;
+ echo"<br>lz:".convert2Utf8($lz);
+@@ -236,85 +208,40 @@
+ $aufgabe1=substr($line,0,80);
+ echo"<br>aufgabe1:".convert2Utf8($aufgabe1);
+ }
+-if($data=='Ford.Begr:'andsubstr($line,0,5)=='Offen'){
++if($data=='Ford.Begr:'andsubstr($line,7,5)=='Offen'){
+ $aufgabe2=substr($line,0,80);
+ echo"<br>aufgabe2:".convert2Utf8($aufgabe2);
+-$saldo=substr($line,53,15);
++$saldo=substr($line,60,15);
+ echo"<br>saldo:".convert2Utf8($saldo);
+ }
+-if(substr($line,0,6)=='Tele1:'){
+-$telefon1=substr($line,8,13);
++if(substr($line,7,6)=='TEL.1:'){
++$telefon1=substr($line,15,15);
+ echo"<br>telefon1:".convert2Utf8($telefon1);
+ $data='telefon1:';
+ }
+-if(substr($line,0,6)=='Tele2:'){
+-$telefon2=substr($line,8,13);
++if(substr($line,7,6)=='TEL.2:'){
++$telefon2=substr($line,15,15);
+ echo"<br>telefon2:".convert2Utf8($telefon2);
+ $data='telefon2:';
+ }
+-if(substr($line,0,6)=='Tele3:'){
+-$telefon3=substr($line,8,13);
+-echo"<br>telefon3:".convert2Utf8($telefon3);
+-$data='telefon3:';
+-$telefon3plus=$telefon3plus."Tele3:".substr($line,8,13)."/";
+-echo"<br>telefon3plus:".convert2Utf8($telefon3plus);
+-}
+-if(substr($line,0,6)=='Tele4:'){
+-$telefon4=substr($line,8,13);
+-$telefon4=$telefon4."$";
+-echo"<br>telefon4:".convert2Utf8($telefon4);
+-$data='telefon4';
+-$telefon3plus=$telefon3plus."Tele4:".substr($line,8,13)."/";
+-echo"<br>telefon3plus:".convert2Utf8($telefon3plus);
+-}
+-if(substr($line,0,6)=='Tele5:'){
+-$telefon3plus=$telefon3plus."Tele5:".substr($line,8,13)."/";
+-echo"<br>telefon3plus:".convert2Utf8($telefon3plus);
+-$data='$telefon3plus';
+-}
+-if(substr($line,0,6)=='Tele6:'){
+-$telefon3plus=$telefon3plus."Tele6:".substr($line,8,13)."/";
+-echo"<br>telefon3plus:".convert2Utf8($telefon3plus);
+-$data='$telefon3plus';
+-}
+-if(substr($line,0,6)=='Tele7:'){
+-$telefon3plus=$telefon3plus."Tele7:".substr($line,8,13)."/";
+-echo"<br>telefon3plus:".convert2Utf8($telefon3plus);
+-$data='$telefon3plus';
+-}
+-if(substr($line,0,6)=='Tele8:'){
+-$telefon3plus=$telefon3plus."Tele8:".substr($line,8,13)."/";
+-echo"<br>telefon3plus:".convert2Utf8($telefon3plus);
+-$data='$telefon3plus';
+-}
+-if(substr($line,0,6)=='Tele9:'){
+-$telefon3plus=$telefon3plus."Tele9:".substr($line,8,13)."/";
+-echo"<br>telefon3plus:".convert2Utf8($telefon3plus);
+-$data='$telefon3plus';
+-}
+-if(substr($line,0,6)=='Tele10:'){
+-$telefon3plus=$telefon3plus."Tele10:".substr($line,8,13)."/";
+-echo"<br>telefon3plus:".convert2Utf8($telefon3plus);
+-$data='$telefon3plus';
+-}
+-if(substr($line,11,14)=='Gesamtzahlung/'){
+-$ratenanzahl=substr($line,26,2);
++if(substr($line,18,14)=='Gesamtzahlung/'){
++$ratenanzahl=substr($line,33,2);
+ echo"<br>ratenanzahl:".convert2Utf8($ratenanzahl);
+-$gesamtzahlung=substr($line,33,12);
++$gesamtzahlung=substr($line,40,12);
+ echo"<br>gesamtzahlung:".convert2Utf8($gesamtzahlung);
+ $gesamtzahlung2=str_replace('.','',$gesamtzahlung);
+ $ratenhoehe=$gesamtzahlung2/$ratenanzahl;
+ $ratenhoehe=round($ratenhoehe,2);
+ echo"<br>ratenhoehe:".convert2Utf8($ratenhoehe);
+-$data='ratenhoehe:';
+-}
+-if(substr($line,11,13)=='Gesamtsaldof'){
+-$faelligbis=substr($line,56,4).'-'.substr($line,53,2).'-'.substr($line,50,2);
++$data='ratenhohe:';
++}
++if(substr($line,18,13)=='Gesamtsaldof'){
++$faelligbis=substr($line,63,4).'-'.substr($line,60,2).'-'.substr($line,57,2);
+ echo"<br>faelligbis:".convert2Utf8($faelligbis);
+ }
+-if(substr($line,0,6)=='Mail1:'){
+-$email01=substr($line,7,50);
+-echo"<br>Mail1:".convert2Utf8($email01);
++if(substr($line,7,7)=='MAIL01:'){
++$email01=substr($line,15,50);
++echo"<br>MAIL01:".convert2Utf8($email01);
+ }
+ }
+ //
+
+===== kimibatch/schlaustrom01_daten_inA_fuer_elsbeth_import.php =====
+--- orig
++++ dev
+@@ -13,7 +13,7 @@
+ if($result!==false){
+ //Ausgabeautomatischdurchführenlassen,AusgabealsANSI(letzterParameter)
+ $file="SCHLAUSTROM_OUTBOUND_ELSBETH_inA".date("YmdHis").".csv";
+-$count=exportQueryToCSV($result,$mandant_id,$file,false);
++$count=exportQueryToCSV($result,$mandant_id,$file,true);
+ if($count===false){
+ echogetLastError()."<br>";
+ exit;
+
+===== kimibatch/schlaustrom01SONDER_daten_inA_fuer_elsbeth_import.php =====
+--- orig
++++ dev
+@@ -13,7 +13,7 @@
+ if($result!==false){
+ //Ausgabeautomatischdurchführenlassen,AusgabealsANSI(letzterParameter)
+ $file="SCHLAUSTROM_SONDER_OUTBOUND_ELSBETH_inA".date("YmdHis").".csv";
+-$count=exportQueryToCSV($result,$mandant_id,$file,false);
++$count=exportQueryToCSV($result,$mandant_id,$file,true);
+ if($count===false){
+ echogetLastError()."<br>";
+ exit;
+
+===== kimibatch/schlaustrom02_daten_off_fuer_elsbeth_import.php =====
+--- orig
++++ dev
+@@ -13,7 +13,7 @@
+ if($result!==false){
+ //Ausgabeautomatischdurchführenlassen,AusgabealsANSI(letzterParameter)
+ $file="SCHLAUSTROM_OUTBOUND_ELSBETH_off".date("YmdHis").".csv";
+-$count=exportQueryToCSV($result,$mandant_id,$file,false);
++$count=exportQueryToCSV($result,$mandant_id,$file,true);
+ if($count===false){
+ echogetLastError()."<br>";
+ exit;
+
+===== kimibatch/telematica_import_callmanager_log.php =====
+--- orig
++++ dev
+@@ -6,7 +6,7 @@
+ error_reporting(E_WARNING);
+ //include_once'./config/config.php';
+ include_once'./db.php';
+-$errorFile="../ajax/log/telematica_import_callmanager_log_error.log";
++echo"DB:".$dbname."<br>";
+ //AllgemeineglobaleFunktionen
+ functiongetTestData(){
+ return'{
+@@ -25,7 +25,7 @@
+ "talk_duration":0,
+ "client_reference":"",
+ "project_reference":"INKO2016:KatharinaPemmer",
+-"ticket_reference":"-",
++"ticket_reference":"2635",
+ "action_url":"https://10.196.69.11/kimi_ET/index.php?autologin=true&loginuser=userReferenz&mandant=18&kId=10&ticket_id=92769&site=ticket&selected_tickets=92769&selected_ticket_index=0",
+ "pickup_user_id":"0",
+ "outgoing_number":"436765032357"
+@@ -91,11 +91,9 @@
+ $errmsg='';
+ $auth='c82c7aa2b7a6aff583ef70ed3db2e672';
+ $url='https://vbox6813.telematica.at/admin/apimodules/callmanager/?auth='.$auth.'&command=list';
+-if($startId>-1){
++if($startId>0){
+ $url=$url."&start_id=".$startId;
+ }
+-$result=file_get_contents($url);
+-return$result;
+ $curl=curl_init();
+ curl_setopt($curl,CURLOPT_RETURNTRANSFER,true);
+ curl_setopt($curl,CURLOPT_URL,$url);
+@@ -109,7 +107,7 @@
+ $sql="selectlast_idfromimport_config_lastkeyswhereimport_name='TELEMATICA_CALLMANAGER'";
+ $res=mysqli_query($db,$sql);
+ if(!$res){
+-$result=-1;
++$result=0;
+ $errMsg=mysqli_error($db)."\n".$sql;
+ }else{
+ $row=mysqli_fetch_array($res,MYSQLI_BOTH);
+@@ -171,9 +169,6 @@
+ $this->mandantId=0;
+ $this->ticketId=0;
+ $this->dauer_sec=0;
+-if($this->ticket_reference===""){
+-$this->ticket_reference=0;
+-}
+ if($this->start_time!=""){
+ $setTime=false;
+ $diff=0;
+@@ -293,7 +288,7 @@
+ "client_reference,project_reference,ticket_reference,action_url,pickup_user_id,outgoing_number,call_id,mandant_id,ticket_id,dauer_sec)".
+ "values('$this->status',sysdate(),'$this->cdr_unique_id','$this->source_num','$this->target_num','$this->start_time','$this->connect_time',".
+ "'$this->end_time','$this->call_duration','$this->talk_duration',".
+-"'$this->client_reference','$this->project_reference','$this->ticket_reference','$this->action_url','$this->pickup_user_id',".
++"'$this->client_reference','$this->project_reference',$this->ticket_reference,'$this->action_url','$this->pickup_user_id',".
+ "'$this->outgoing_number',$this->id,$this->mandantId,$this->ticketId,$this->dauer_sec)";
+ if(!mysqli_query($db,$sql)){
+ $result=false;
+@@ -323,7 +318,6 @@
+ $i=0;
+ $count=0;
+ $count_log=0;
+-$error=0;
+ $savelast_key=$last_key;
+ if($hasData&&$obj->result===true){
+ $count=count($dataarr);
+@@ -342,12 +336,6 @@
+ }
+ $errText="";
+ $ret=$request->insert_callmanager($dbconn,$errText);
+-if(!$ret){
+-//echo$errText."<br>";
+-$error=$error+1;
+-file_put_contents($errorFile,$startTime.':ERROR->'.$errText.PHP_EOL,FILE_APPEND);
+-file_put_contents($errorFile,$startTime.':DATA->'.var_export($dataarr[$i],true).PHP_EOL,FILE_APPEND);
+-}
+ $aktkey=$request->getId();
+ if($aktkey>$last_key){
+ $last_key=$aktkey;
+@@ -360,10 +348,5 @@
+ }
+ }
+ mysqli_close($dbconn);
+-echo"Anzahlimportiert:".$count-$error."<br>";
+-if($error>0){
+-echo"<spanstyle='color:#FF0000;'>";
+-echo"<b>AnzahlFehler:".$error."</b><br>";
+-echo"</span>";
+-}
++echo"Anzahlimportiert:".$count."<br>";
+ echo"<br><br>"."TELEMATICA-IMPORTCALLMANAGER-Ende:".$heute;
+
+===== libs/application.php =====
+--- orig
++++ dev
+@@ -86,7 +86,6 @@
+ $mandant=$this->MANDANT;
+ $role=Role::get_role($user,$mandant);
+ $permissions=Permission::get_permissions($role->get_id(),$site.'.php',$permission);
+-//20220503/ab
+ if($permissions===null){
+ returnfalse;
+ }
+
+===== modules/gui/templates/tickets/10/ticket.php =====
+--- orig
++++ dev
+@@ -45,18 +45,18 @@
+ <td><?phpecho'Indexnummer'?></td>
+ <td><inputvalue="<?phpecho$ticket->get_dummy_text9()?>"placeholder="<?phpecho'Indexnummer'?>"class="column"type="text"name="dummy_text9"/></td>
+ <td>&nbsp;</td>
+-<td><ahref="https://10.196.69.11/kimi_ET/kimibatch/inko2016doku.pdf"target="_blank"><b>INKO2016DOKU</b></a>
+-<ahref="https://10.196.69.11/kimi_ET/kimibatch/INKO20220627.pdf"target="_blank"><b>INKODOKUNEU</b></a>
+-<ahref="https://10.196.69.11/kimi_ET/kimibatch/INKOSEPA.pdf"target="_blank"><b>SEPA</b></a>
+-</td>
+-<td>&nbsp;</td>
+-<td><ahref="https://10.196.69.11/kimi_ET/kimibatch/inko2016check.php"target="_blank"><b>INKO2016_Check</b></a></td>
++<td><ahref="https://10.196.69.21/kimidev_ET/kimibatch/inko2016doku.pdf"target="_blank"><b>INKO2016DOKU</b></a>
++<ahref="https://10.196.69.21/kimidev_ET/kimibatch/INKO20220627.pdf"target="_blank"><b>INKODOKUNEU</b></a>
++<ahref="https://10.196.69.21/kimidev_ET/kimibatch/INKOSEPA.pdf"target="_blank"><b>SEPA</b></a>
++</td>
++<td>&nbsp;</td>
++<td><ahref="https://10.196.69.21/kimidev_ET/kimibatch/inko2016check.php"target="_blank"><b>INKO2016_Check</b></a></td>
+ </tr>
+ <trbgcolor="#D3D3D3">
+ <td><?phpechoTXT_LBL_KDNR?></td>
+ <td><inputvalue="<?phpecho$ticket->get_kundennummer()?>"placeholder="<?phpechoTXT_LBL_KDNR?>"class="column"name="kundennummer"type="text"/></td>
+-<td><?phpecho'AKTNR'?></td>
+-<td><inputclass="column"value="<?phpecho$ticket->get_dummy_text16()?>"placeholder="<?phpecho'AKTNR'?>"type="text"name="dummy_text16"/></td>
++<td></td>
++<td></td>
+ <tdbgcolor=#FF00000><?phpecho'Saldo'?></td></td>
+ <tdbgcolor=#FF00000><inputvalue="<?phpecho$ticket->get_dummy_number4()?>"placeholder="<?phpecho'Saldo'?>"class="column"type="decimal"name="dummy_number4"/></td>
+ <tdcolspan="2"bgcolor=#FF8C00><inputclass="column"value="<?phpecho$ticket->get_dummy_text6()?>"placeholder="<?phpecho'Ratenhinweis'?>"style="width:100%;background-color:orange;"type="text"name="dummy_text6"/>
+
+===== modules/gui/templates/tickets/10/ticketuebersicht.php =====
+--- orig
++++ dev
+@@ -8,64 +8,30 @@
+ //EMail-Subject
+ emailSubject="KIMI-Plus-INKO-Projekt2016-Telefonatmit"+formRef.elements['vorname'].value+""+formRef.elements['nachname'].value+"Indexnummer:#"+formRef.elements['dummy_text9'].value;
+ //EMail-Inhalt
+-//EMAIL1
+-emailBody+="EMAIL&nbsp;1&nbsp;==========================================================================================================================="+"<br>";
++emailBody="SehrgeehrteDamenundHerren,<br><br>";
++emailBody+="hiermitmöchtenwirSieüberfolgendesINKO-Projekt2016Gespräch,daswirfürSiegeführthaben,informieren:<br><br>";
++emailBody+="Indexnummer:"+formRef.elements['dummy_text9'].value+"<br>";
++emailBody+="Name:"+formRef.elements['vorname'].value+""+formRef.elements['nachname'].value+"<br>";
+ emailBody+=""+"<br>";
+-emailBody+="EMAILAN:"+formRef.elements['email'].value+"<br>";
+-emailBody+="BETREFF&nbsp;:"+"UnserTelefonatvonsoeben-"+formRef.elements['fahrgestellnummer'].value+"<br>";
+-emailBody+=""+"<br><b>";
+-emailBody+="GutenTag"+formRef.elements['vorname'].value+""+formRef.elements['nachname'].value+",</b><br>";
+-emailBody+="<br>wiesoebenbesprochensendeichIhnendieKontakt-undBankdatenzuroffenenForderung:<br><br>";
+-emailBody+="Indexnummer:<b>"+formRef.elements['dummy_text16'].value+"=ReferenznummerbeiÜberweisung<u>bitteunbedingtalsVerwendungszweckanführen</u></b><br>";
++emailBody+="Anschrift:"+formRef.elements['plz'].value+""+formRef.elements['ort'].value+""+formRef.elements['strasse'].value+"<br>";
++emailBody+="Telefon1:"+formRef.elements['telefon'].value+"<br>";
++emailBody+="Telefon2:"+formRef.elements['telefon2'].value+"<br>";
++emailBody+="email:"+formRef.elements['email'].value+"<br>";
+ emailBody+=""+"<br>";
+-emailBody+="&nbsp;&nbsp;•Gläubiger:<b>"+formRef.elements['fahrgestellnummer'].value+""+formRef.elements['ort'].value+""+formRef.elements['strasse'].value+"</b><br>";
+-emailBody+="&nbsp;&nbsp;•Kontaktdaten:<b>"+formRef.elements['kenner'].value+"</b><br>";
+-emailBody+="&nbsp;&nbsp;•Bankdaten:IBAN<b>"+formRef.elements['dummy_text1'].value+"</b>BIC<b>"+formRef.elements['dummy_text2'].value+"</b><br>";
+-emailBody+="&nbsp;&nbsp;•Zahlungsbetragoffen:€&nbsp;<b>"+formRef.elements['dummy_number4'].value+"</b><br>";
+-emailBody+="<br>WietelefonischbesprochenerwartenwirumgehendeineZahlungvonIhnen.<br>";
+-emailBody+="<br>NutzenSiedieseletzteGelegenheitundersparenSiesichdadurchweiterenichtunerheblicheKostenundUnannehmlichkeiten.<br>";
+-emailBody+="<br>BeiFragenoderZahlungsproblemensetzenSiesichbitteumgehendmit"+formRef.elements['kenner'].value+"inVerbindung.";
+-emailBody+=""+"<br><br><br><br>";
+-//EMAIL2
+-emailBody+="EMAIL&nbsp;2&nbsp;==========================================================================================================================="+"<br>";
+-emailBody+=""+"<br>";
+-emailBody+="EMAILAN:"+formRef.elements['email'].value+"<br>";
+-emailBody+="BETREFF&nbsp;:"+"UnserTelefonatvonsoeben-"+formRef.elements['fahrgestellnummer'].value+"-Ratenzahlungsangebot<br>";
+-emailBody+=""+"<br><b>";
+-emailBody+="GutenTag"+formRef.elements['vorname'].value+""+formRef.elements['nachname'].value+",</b><br>";
+-emailBody+="<br>wiesoebenbesprochensendeichIhnendieGesprächsnotizzurunserertelefonischen";
+-emailBody+="<br>Zahlungsvereinbarung:<br>";
+-emailBody+=""+"<br>";
+-emailBody+="&nbsp;&nbsp;•Gläubiger:<b>"+formRef.elements['fahrgestellnummer'].value+""+formRef.elements['ort'].value+""+formRef.elements['strasse'].value+"</b><br>";
+-emailBody+="&nbsp;&nbsp;•Zahlungsbetragoffen:€&nbsp;<b>"+formRef.elements['dummy_number4'].value+"</b><br>";
+-emailBody+="&nbsp;&nbsp;•GewünschteRate:€&nbsp<b>"+"99,99</b><br>";
+-emailBody+="&nbsp;&nbsp;•ErsteRatenzahlungfälligbis:<b>"+"TT.MM.YYYY</b><br>";
+-emailBody+="&nbsp;&nbsp;•Bankdaten:IBAN<b>"+formRef.elements['dummy_text1'].value+"</b>BIC<b>"+formRef.elements['dummy_text2'].value+"</b><br>";
+-emailBody+="&nbsp;&nbsp;•Indexnummer:<b>"+formRef.elements['dummy_text16'].value+"=ReferenznummerbeiÜberweisung<u>bitteunbedingtalsVerwendungszweckanführen</u></b><br>";
+-emailBody+="<br>BittehaltenSiedieVereinbarungunbedingtein.<br>";
+-emailBody+="<br>SieersparensichdadurchweiterenichtunerheblicheKostenundUnannehmlichkeiten.<br>";
+-emailBody+="<br>BeiFragenoderZahlungsproblemensetzenSiesichbitteumgehendmit<b>"+formRef.elements['kenner'].value+"</b>inVerbindung.";
+-emailBody+=""+"<br><br><br><br>";
+-//EMAIL3
+-emailBody+="EMAIL&nbsp;3&nbsp;==========================================================================================================================="+"<br>";
+-emailBody+=""+"<br>";
+-emailBody+="EMAILAN:"+formRef.elements['email'].value+"<br>";
+-emailBody+="BETREFF&nbsp;:"+"UnserTelefonatvonsoeben-"+formRef.elements['fahrgestellnummer'].value+"-Ratenzahlungswunsch<br>";
+-emailBody+=""+"<br><b>";
+-emailBody+="GutenTag"+formRef.elements['vorname'].value+""+formRef.elements['nachname'].value+",</b><br>";
+-emailBody+="<br>wiesoebenbesprochensendeichIhnendieGesprächsnotizzurzuIhremZahlungswunsch:";
+-emailBody+=""+"<br>";
+-emailBody+="&nbsp;&nbsp;•Gläubiger:<b>"+formRef.elements['fahrgestellnummer'].value+""+formRef.elements['ort'].value+""+formRef.elements['strasse'].value+"</b><br>";
+-emailBody+="&nbsp;&nbsp;•Zahlungsbetragoffen:€&nbsp;<b>"+formRef.elements['dummy_number4'].value+"</b><br>";
+-emailBody+="&nbsp;&nbsp;•GewünschteRate:€&nbsp<b>"+"99,99</b><br>";
+-emailBody+="&nbsp;&nbsp;•ErsteRatezahlungfälligbis:<b>"+"TT.MM.YYYY</b><br>";
+-emailBody+="&nbsp;&nbsp;•Bankdaten:IBAN<b>"+formRef.elements['dummy_text1'].value+"</b>BIC<b>"+formRef.elements['dummy_text2'].value+"</b><br>";
+-emailBody+="&nbsp;&nbsp;•Indexnummer:<b>"+formRef.elements['dummy_text16'].value+"=ReferenznummerbeiÜberweisung<u>bitteunbedingtalsVerwendungszweckanführen</u></b><br>";
+-emailBody+="<br>IhrRatenvorschlagwirdinterngeprüft.<br>";
+-emailBody+="<br>BeiFragenoderZahlungsproblemensetzenSiesichbitteumgehendmit<b>"+formRef.elements['kenner'].value+"</b>inVerbindung.";
+-emailBody+=""+"<br><br><br><br>";
+-emailBody+="ENDEEMAIL==========================================================================================================================="+"<br>";
+-emailBody+="====================================================================================================================================="+"<br>";
++emailBody+="Ergebnis:"+formRef.elements['ergebnis'].value+"<br>";
++varselection=formRef.elements['textant11_janein_id']
++varselectedText=selection.options[selection.selectedIndex].text;
++emailBody+="Lösungsbereitschaft:"+selectedText+"<br>";
++varselection=formRef.elements['produkt_id']
++varselectedText=selection.options[selection.selectedIndex].text;
++emailBody+="Telefonnummer:"+selectedText+"<br>";
++varselection=formRef.elements['textant22_nummern_id']
++varselectedText=selection.options[selection.selectedIndex].text;
++emailBody+="Lösungsvorschlag:"+selectedText+"<br>";
++varselection=formRef.elements['grund_id']
++varselectedText=selection.options[selection.selectedIndex].text;
++emailBody+="Hintergrund:"+selectedText+"<br>";
++emailBody+="<br><br>";
+ //Gruß
+ emailBody+="<br><br>";
+ emailBody+="MitfreundlichemGruß"+"<br><br>";
+@@ -74,7 +40,7 @@
+ emailBody+="<br>";
+ emailBody+="imAuftragder:"+"<br>";
+ emailBody+="<br>";
+-emailBody+="KIMI-PlusGmbH,HaiderStraße40/2,4052Ansfelden,Österreich"+"<br>";
++emailBody+="KIMI-PlusGmbH,Hafenstraße1-3,4020Linz,Österreich"+"<br>";
+ emailBody+="Telefon:+43(0)7322099,mail:<ahref='mailto:kundenservice@kimi-plus.at'>kundenservice@kimi-plus.at</a>,Internet:<ahref='http://www.kimi-plus.at'target='_blank'>www.kimi-plus.at</a>"+"<br>";
+ emailBody+="<br><br><br>";
+ emailForm+="<formid=\"formTicketView\"action=\"./libs/addons/phpmail/send_ticket_mail.php\"method=\"post\"accept-charset=\"UTF-8\">";
+
+===== modules/gui/templates/tickets/10/ticketvalidate.js =====
+--- orig
++++ dev
+@@ -217,16 +217,14 @@
+ check_element=getElementFromName('produkt_id');
+ }
+ vartelefon=getComboSelectedId(getElementFromName('produkt_id'));
+-if(errMsg==''&&anrufStatusId==234&&(telefon==39||telefon==2||telefon==3)&&getElementFromName('dummy_number6').value==''){
+-errMsg=telefon;
+-errMsg=getElementFromName('dummy_number6').value;
+-errMsg='BeiSEPA/Email2und3mussRatenh�hevorhandensein!';
++if(errMsg==''&&anrufStatusId==234&&telefon==39&&getElementFromName('dummy_number6').value==''){
++errMsg='BeiSEPAmussRatenh�hevorhandensein!';
+ check_element=getElementFromName('produkt_id');
+ }
+ vartelefon=getComboSelectedId(getElementFromName('produkt_id'));
+ vareinzugam=getComboSelectedId(getElementFromName('grund_id'));
+-if(errMsg==''&&anrufStatusId==234&&(telefon==39||telefon==2||telefon==3)&&einzugam==-1){
+-errMsg='BeiSEPA,EMail2,3mussEINZUGAMvorhandensein!';
++if(errMsg==''&&anrufStatusId==234&&telefon==39&&einzugam==-1){
++errMsg='BeiSEPAmussEINZUGAMvorhandensein!';
+ check_element=getElementFromName('produkt_id');
+ }
+ //WennderAnrufstatusauferreichtgesetztwirdundeineZahlungsvereinbarunggibt,dannmussL�sungsvorscgkagbelegtsein!
+@@ -267,14 +265,14 @@
+ //Wenn"SEPA=JAmussAnredebelegtsein"--20220613/Tafr
+ varsepa_janein=getComboSelectedId(getElementFromName('produkt_id'));
+ varsepa_anrede=getComboSelectedId(getElementFromName('dummy_id2'));
+-if(errMsg==''&&statusId==68&&anrufStatusId==234&&(sepa_janein==39||sepa_janein==1||sepa_janein==2||sepa_janein==3)&&sepa_anrede==-1){
+-errMsg='SEPA,EMail1,2,3Anredemussbelegtsein!';
++if(errMsg==''&&statusId==68&&anrufStatusId==234&&sepa_janein==39&&sepa_anrede==-1){
++errMsg='SEPAAnredemussbelegtsein!';
+ check_element=getElementFromName('dummy_id1');
+ }
+ //Wenn"SEPA=JAmussEMAILbelegtsein"--20220617/Tafr
+ varsepa_janein=getComboSelectedId(getElementFromName('produkt_id'));
+-if(errMsg==''&&statusId==68&&anrufStatusId==234&&(sepa_janein==39||sepa_janein==1||sepa_janein==2||sepa_janein==3)&&getElementFromName('email').value==''){
+-errMsg='EMAILmussbeiSEPA,EMail1,2,3belegtsein!';
++if(errMsg==''&&statusId==68&&anrufStatusId==234&&sepa_janein==39&&getElementFromName('email').value==''){
++errMsg='EMAILmussbeiSEPAbelegtsein!';
+ check_element=getElementFromName('email');
+ }
+ }
+
+===== modules/gui/templates/tickets/16/ticket.php =====
+--- orig
++++ dev
+@@ -45,18 +45,18 @@
+ <td><?phpecho'Indexnummer'?></td>
+ <td><inputvalue="<?phpecho$ticket->get_dummy_text9()?>"placeholder="<?phpecho'Indexnummer'?>"class="column"type="text"name="dummy_text9"/></td>
+ <td>&nbsp;</td>
+-<td><ahref="https://10.196.69.11/kimi_ET/kimibatch/inkode.pdf"target="_blank"><b>INKODEDOKU</b></a>
+-<ahref="https://10.196.69.11/kimi_ET/kimibatch/INKO20220627.pdf"target="_blank"><b>INKODOKUNEU</b></a>
+-<ahref="https://10.196.69.11/kimi_ET/kimibatch/INKOSEPA.pdf"target="_blank"><b>SEPA</b></a>
+-</td>
+-<td>&nbsp;</td>
+-<td><ahref="https://10.196.69.11/kimi_ET/kimibatch/inkodecheck.php"target="_blank"><b>INKODE_Check</b></a></td>
++<td><ahref="https://10.196.69.21/kimidev_ET/kimibatch/inkode.pdf"target="_blank"><b>INKODEDOKU</b></a>
++<ahref="https://10.196.69.21/kimidev_ET/kimibatch/INKO20220627.pdf"target="_blank"><b>INKODOKUNEU</b></a>
++<ahref="https://10.196.69.21/kimidev_ET/kimibatch/INKOSEPA.pdf"target="_blank"><b>SEPA</b></a>
++</td>
++<td>&nbsp;</td>
++<td><ahref="https://10.196.69.21/kimidev_ET/kimibatch/inkodecheck.php"target="_blank"><b>INKODE_Check</b></a></td>
+ </tr>
+ <trbgcolor="#D3D3D3">
+ <td><?phpechoTXT_LBL_KDNR?></td>
+ <td><inputvalue="<?phpecho$ticket->get_kundennummer()?>"placeholder="<?phpechoTXT_LBL_KDNR?>"class="column"name="kundennummer"type="text"/></td>
+-<td><?phpecho'AKTNR'?></td>
+-<td><inputclass="column"value="<?phpecho$ticket->get_dummy_text16()?>"placeholder="<?phpecho'AKTNR'?>"type="text"name="dummy_text16"/></td>
++<td></td>
++<td></td>
+ <tdbgcolor=#FF00000><?phpecho'Saldo'?></td></td>
+ <tdbgcolor=#FF00000><inputvalue="<?phpecho$ticket->get_dummy_number4()?>"placeholder="<?phpecho'Saldo'?>"class="column"type="decimal"name="dummy_number4"/></td>
+ <tdcolspan="2"bgcolor=#FF8C00><inputclass="column"value="<?phpecho$ticket->get_dummy_text6()?>"placeholder="<?phpecho'Ratenhinweis'?>"style="width:100%;background-color:orange;"type="text"name="dummy_text6"/>
+
+===== modules/gui/templates/tickets/16/ticketsuch.php =====
+--- orig
++++ dev
+@@ -64,7 +64,6 @@
+ <td><inputclass="column"value="<?phpecho$hausnummer?>"placeholder="<?phpechoTXT_LBL_HNR?>"type="text"name="hausnummer"/></td>
+ <td><?phpecho'Aktnr'?></td>
+ <td><inputclass="column"name="dummy_text9"placeholder="<?phpecho'Aktnr'?>"type="text"value="<?phpecho$dummy_text9?>"/></td>
+-</tr>
+ </tr>
+ <tr>
+ <td><?phpechoTXT_LBL_PRIORITY?></td>
+
+===== modules/gui/templates/tickets/16/ticketuebersicht.php =====
+--- orig
++++ dev
+@@ -8,64 +8,30 @@
+ //EMail-Subject
+ emailSubject="KIMI-Plus-INKO-ProjektDUBIO-Telefonatmit"+formRef.elements['vorname'].value+""+formRef.elements['nachname'].value+"Indexnummer:#"+formRef.elements['dummy_text9'].value;
+ //EMail-Inhalt
+-//EMAIL1
+-emailBody+="EMAIL&nbsp;1&nbsp;==========================================================================================================================="+"<br>";
++emailBody="SehrgeehrteDamenundHerren,<br><br>";
++emailBody+="hiermitmöchtenwirSieüberfolgendesINKO-ProjektDUBIOGespräch,daswirfürSiegeführthaben,informieren:<br><br>";
++emailBody+="Indexnummer:"+formRef.elements['dummy_text9'].value+"<br>";
++emailBody+="Name:"+formRef.elements['vorname'].value+""+formRef.elements['nachname'].value+"<br>";
+ emailBody+=""+"<br>";
+-emailBody+="EMAILAN:"+formRef.elements['email'].value+"<br>";
+-emailBody+="BETREFF&nbsp;:"+"UnserTelefonatvonsoeben-"+formRef.elements['fahrgestellnummer'].value+"<br>";
+-emailBody+=""+"<br><b>";
+-emailBody+="GutenTag"+formRef.elements['vorname'].value+""+formRef.elements['nachname'].value+",</b><br>";
+-emailBody+="<br>wiesoebenbesprochensendeichIhnendieKontakt-undBankdatenzuroffenenForderung:<br><br>";
+-emailBody+="Indexnummer:<b>"+formRef.elements['dummy_text16'].value+"=ReferenznummerbeiÜberweisung<u>bitteunbedingtalsVerwendungszweckanführen</u></b><br>";
++emailBody+="Anschrift:"+formRef.elements['plz'].value+""+formRef.elements['ort'].value+""+formRef.elements['strasse'].value+"<br>";
++emailBody+="Telefon1:"+formRef.elements['telefon'].value+"<br>";
++emailBody+="Telefon2:"+formRef.elements['telefon2'].value+"<br>";
++emailBody+="email:"+formRef.elements['email'].value+"<br>";
+ emailBody+=""+"<br>";
+-emailBody+="&nbsp;&nbsp;•Gläubiger:<b>"+formRef.elements['fahrgestellnummer'].value+""+formRef.elements['ort'].value+""+formRef.elements['strasse'].value+"</b><br>";
+-emailBody+="&nbsp;&nbsp;•Kontaktdaten:<b>"+formRef.elements['kenner'].value+"</b><br>";
+-emailBody+="&nbsp;&nbsp;•Bankdaten:IBAN<b>"+formRef.elements['dummy_text1'].value+"</b>BIC<b>"+formRef.elements['dummy_text2'].value+"</b><br>";
+-emailBody+="&nbsp;&nbsp;•Zahlungsbetragoffen:€&nbsp;<b>"+formRef.elements['dummy_number4'].value+"</b><br>";
+-emailBody+="<br>WietelefonischbesprochenerwartenwirumgehendeineZahlungvonIhnen.<br>";
+-emailBody+="<br>NutzenSiedieseletzteGelegenheitundersparenSiesichdadurchweiterenichtunerheblicheKostenundUnannehmlichkeiten.<br>";
+-emailBody+="<br>BeiFragenoderZahlungsproblemensetzenSiesichbitteumgehendmit"+formRef.elements['kenner'].value+"inVerbindung.";
+-emailBody+=""+"<br><br><br><br>";
+-//EMAIL2
+-emailBody+="EMAIL&nbsp;2&nbsp;==========================================================================================================================="+"<br>";
+-emailBody+=""+"<br>";
+-emailBody+="EMAILAN:"+formRef.elements['email'].value+"<br>";
+-emailBody+="BETREFF&nbsp;:"+"UnserTelefonatvonsoeben-"+formRef.elements['fahrgestellnummer'].value+"-Ratenzahlungsangebot<br>";
+-emailBody+=""+"<br><b>";
+-emailBody+="GutenTag"+formRef.elements['vorname'].value+""+formRef.elements['nachname'].value+",</b><br>";
+-emailBody+="<br>wiesoebenbesprochensendeichIhnendieGesprächsnotizzurunserertelefonischen";
+-emailBody+="<br>Zahlungsvereinbarung:<br>";
+-emailBody+=""+"<br>";
+-emailBody+="&nbsp;&nbsp;•Gläubiger:<b>"+formRef.elements['fahrgestellnummer'].value+""+formRef.elements['ort'].value+""+formRef.elements['strasse'].value+"</b><br>";
+-emailBody+="&nbsp;&nbsp;•Zahlungsbetragoffen:€&nbsp;<b>"+formRef.elements['dummy_number4'].value+"</b><br>";
+-emailBody+="&nbsp;&nbsp;•GewünschteRate:€&nbsp<b>"+"99,99</b><br>";
+-emailBody+="&nbsp;&nbsp;•ErsteRatenzahlungfälligbis:<b>"+"TT.MM.YYYY</b><br>";
+-emailBody+="&nbsp;&nbsp;•Bankdaten:IBAN<b>"+formRef.elements['dummy_text1'].value+"</b>BIC<b>"+formRef.elements['dummy_text2'].value+"</b><br>";
+-emailBody+="&nbsp;&nbsp;•Indexnummer:<b>"+formRef.elements['dummy_text16'].value+"=ReferenznummerbeiÜberweisung<u>bitteunbedingtalsVerwendungszweckanführen</u></b><br>";
+-emailBody+="<br>BittehaltenSiedieVereinbarungunbedingtein.<br>";
+-emailBody+="<br>SieersparensichdadurchweiterenichtunerheblicheKostenundUnannehmlichkeiten.<br>";
+-emailBody+="<br>BeiFragenoderZahlungsproblemensetzenSiesichbitteumgehendmit<b>"+formRef.elements['kenner'].value+"</b>inVerbindung.";
+-emailBody+=""+"<br><br><br><br>";
+-//EMAIL3
+-emailBody+="EMAIL&nbsp;3&nbsp;==========================================================================================================================="+"<br>";
+-emailBody+=""+"<br>";
+-emailBody+="EMAILAN:"+formRef.elements['email'].value+"<br>";
+-emailBody+="BETREFF&nbsp;:"+"UnserTelefonatvonsoeben-"+formRef.elements['fahrgestellnummer'].value+"-Ratenzahlungswunsch<br>";
+-emailBody+=""+"<br><b>";
+-emailBody+="GutenTag"+formRef.elements['vorname'].value+""+formRef.elements['nachname'].value+",</b><br>";
+-emailBody+="<br>wiesoebenbesprochensendeichIhnendieGesprächsnotizzurzuIhremZahlungswunsch:";
+-emailBody+=""+"<br>";
+-emailBody+="&nbsp;&nbsp;•Gläubiger:<b>"+formRef.elements['fahrgestellnummer'].value+""+formRef.elements['ort'].value+""+formRef.elements['strasse'].value+"</b><br>";
+-emailBody+="&nbsp;&nbsp;•Zahlungsbetragoffen:€&nbsp;<b>"+formRef.elements['dummy_number4'].value+"</b><br>";
+-emailBody+="&nbsp;&nbsp;•GewünschteRate:€&nbsp<b>"+"99,99</b><br>";
+-emailBody+="&nbsp;&nbsp;•ErsteRatezahlungfälligbis:<b>"+"TT.MM.YYYY</b><br>";
+-emailBody+="&nbsp;&nbsp;•Bankdaten:IBAN<b>"+formRef.elements['dummy_text1'].value+"</b>BIC<b>"+formRef.elements['dummy_text2'].value+"</b><br>";
+-emailBody+="&nbsp;&nbsp;•Indexnummer:<b>"+formRef.elements['dummy_text16'].value+"=ReferenznummerbeiÜberweisung<u>bitteunbedingtalsVerwendungszweckanführen</u></b><br>";
+-emailBody+="<br>IhrRatenvorschlagwirdinterngeprüft.<br>";
+-emailBody+="<br>BeiFragenoderZahlungsproblemensetzenSiesichbitteumgehendmit<b>"+formRef.elements['kenner'].value+"</b>inVerbindung.";
+-emailBody+=""+"<br><br><br><br>";
+-emailBody+="ENDEEMAIL==========================================================================================================================="+"<br>";
+-emailBody+="====================================================================================================================================="+"<br>";
++emailBody+="Ergebnis:"+formRef.elements['ergebnis'].value+"<br>";
++varselection=formRef.elements['textant11_janein_id']
++varselectedText=selection.options[selection.selectedIndex].text;
++emailBody+="Lösungsbereitschaft:"+selectedText+"<br>";
++varselection=formRef.elements['produkt_id']
++varselectedText=selection.options[selection.selectedIndex].text;
++emailBody+="Telefonnummer:"+selectedText+"<br>";
++varselection=formRef.elements['textant22_nummern_id']
++varselectedText=selection.options[selection.selectedIndex].text;
++emailBody+="Lösungsvorschlag:"+selectedText+"<br>";
++varselection=formRef.elements['grund_id']
++varselectedText=selection.options[selection.selectedIndex].text;
++emailBody+="Hintergrund:"+selectedText+"<br>";
++emailBody+="<br><br>";
+ //Gruß
+ emailBody+="<br><br>";
+ emailBody+="MitfreundlichemGruß"+"<br><br>";
+@@ -74,7 +40,7 @@
+ emailBody+="<br>";
+ emailBody+="imAuftragder:"+"<br>";
+ emailBody+="<br>";
+-emailBody+="KIMI-PlusGmbH,HaiderStraße40/2,4052Ansfelden,Österreich"+"<br>";
++emailBody+="KIMI-PlusGmbH,Hafenstraße1-3,4020Linz,Österreich"+"<br>";
+ emailBody+="Telefon:+43(0)7322099,mail:<ahref='mailto:kundenservice@kimi-plus.at'>kundenservice@kimi-plus.at</a>,Internet:<ahref='http://www.kimi-plus.at'target='_blank'>www.kimi-plus.at</a>"+"<br>";
+ emailBody+="<br><br><br>";
+ emailForm+="<formid=\"formTicketView\"action=\"./libs/addons/phpmail/send_ticket_mail.php\"method=\"post\"accept-charset=\"UTF-8\">";
+
+===== modules/gui/templates/tickets/16/ticketvalidate.js =====
+--- orig
++++ dev
+@@ -217,14 +217,14 @@
+ check_element=getElementFromName('produkt_id');
+ }
+ vartelefon=getComboSelectedId(getElementFromName('produkt_id'));
+-if(errMsg==''&&anrufStatusId==333&&(telefon==64||telefon==5||telefon==6)&&getElementFromName('dummy_number6').value==''){
+-errMsg='BeiSEPA/EMAIL2und3mussRatenh�hevorhandensein!';
++if(errMsg==''&&anrufStatusId==333&&telefon==64&&getElementFromName('dummy_number6').value==''){
++errMsg='BeiSEPAmussRatenh�hevorhandensein!';
+ check_element=getElementFromName('produkt_id');
+ }
+ vartelefon=getComboSelectedId(getElementFromName('produkt_id'));
+ vareinzugam=getComboSelectedId(getElementFromName('grund_id'));
+-if(errMsg==''&&anrufStatusId==333&&(telefon==64||telefon==5||telefon==6)&&einzugam==-1){
+-errMsg='BeiSEPA/EMail2,3mussEINZUGAMvorhandensein!';
++if(errMsg==''&&anrufStatusId==333&&telefon==64&&einzugam==-1){
++errMsg='BeiSEPAmussEINZUGAMvorhandensein!';
+ check_element=getElementFromName('produkt_id');
+ }
+ //WennderAnrufstatusauferreichtgesetztwirdundeineZahlungsvereinbarunggibt,dannmussL�sungsvorscgkagbelegtsein!
+@@ -262,17 +262,17 @@
+ errMsg='SEPANEINmussmitGrundgenauerangegebensein!';
+ check_element=getElementFromName('dummy_id1');
+ }
+-//Wenn"SEPA=JAmussAnredebelegtsein"--20220613/Tafr+20240928
++//Wenn"SEPA=JAmussAnredebelegtsein"--20220613/Tafr
+ varsepa_janein=getComboSelectedId(getElementFromName('produkt_id'));
+ varsepa_anrede=getComboSelectedId(getElementFromName('dummy_id2'));
+-if(errMsg==''&&statusId==101&&anrufStatusId==333&&(sepa_janein==64||sepa_janein==4||sepa_janein==5||sepa_janein==6)&&sepa_anrede==-1){
+-errMsg='SEPA/EMail1,2,3Anredemussbelegtsein!';
++if(errMsg==''&&statusId==101&&anrufStatusId==333&&sepa_janein==64&&sepa_anrede==-1){
++errMsg='SEPAAnredemussbelegtsein!';
+ check_element=getElementFromName('dummy_id1');
+ }
+-//Wenn"SEPA=JAmussEMAILbelegtsein"--20220617/Tafr+20240928
++//Wenn"SEPA=JAmussEMAILbelegtsein"--20220617/Tafr
+ varsepa_janein=getComboSelectedId(getElementFromName('produkt_id'));
+-if(errMsg==''&&statusId==101&&anrufStatusId==333&&(sepa_janein==64||sepa_janein==4||sepa_janein==5||sepa_janein==6)&&getElementFromName('email').value==''){
+-errMsg='EMAILmussbeiSEPA/EMail1,2,3belegtsein!';
++if(errMsg==''&&statusId==101&&anrufStatusId==333&&sepa_janein==64&&getElementFromName('email').value==''){
++errMsg='EMAILmussbeiSEPAbelegtsein!';
+ check_element=getElementFromName('email');
+ }
+ }
+
+===== modules/gui/templates/tickets/19/ticketoptimize.js =====
+--- orig
++++ dev
+@@ -24,7 +24,7 @@
+ newAnrufStatusIdTelFaschl=0;
+ //ZuordnungderWertejeMandant
+ switch(pnMandantId){
+-case27://KNP
++case27://INKODE
+ newStatusIdErledigt=117;
+ newAnrufStatusIdTelFaschl=378;
+ telNrSubStrStart=0;
+@@ -35,10 +35,22 @@
+ _setComboSelectedId(getElementFromName('anruf_status_id'),newAnrufStatusIdTelFaschl);
+ _setComboSelectedId(getElementFromName('benutzer_id'),pnCurrentUserId);
+ telNrSubStrStart=parseInt(telNrSubStrStart);
+-sTelNr=getElementFromName('telefon').value;
++//sTelNr=getElementFromName('telefon').value;
+ //getElementFromName('modell').value=sTelNr.substring(telNrSubStrStart,100);
+-sTelNr=getElementFromName('telefon2').value;
++//sTelNr=getElementFromName('telefon2').value;
+ //getElementFromName('amtliches_kennzeichen').value=sTelNr.substring(telNrSubStrStart,100);
++aktAnrufstatus=parseInt(_getComboSelectedId(getElementFromName('anruf_status_id')));
++if(aktAnrufstatus==378){//Telefonnummerfalsch-Vorlageauf"Nein"
++_setComboSelectedId(getElementFromName('textant31_janein_id'),19);
++}
++//setzeVorlage,Lösungsbereitschaft,Lösungsvorschlag
++newLoesungVorschlag=111;
++newVorlage=42;
++newDatenkorrekt=43;
++_setComboSelectedId(getElementFromName('textant31_janein_id'),newVorlage);
++_setComboSelectedId(getElementFromName('textant22_nummern_id'),newLoesungVorschlag);
++_setComboSelectedId(getElementFromName('textant11_janein_id'),newDatenkorrekt);
++getElementFromName('ergebnis').value="Telefonnummerfalsch";
+ }//EndeTelefonnummerfalsch
+ elseif(psAction=='OnTelNotReachable'){
+ //nichterreichbar
+@@ -55,7 +67,7 @@
+ newAnrufstatus=aktAnrufstatus;
+ newStatus=aktStatus;
+ switch(pnMandantId){
+-case27://DREI
++case27://INKODE
+ //Anrufstatus
+ switch(aktAnrufstatus){
+ case-1://keineAngabe
+@@ -83,7 +95,7 @@
+ newStatus=117;//erledigt
+ }
+ //Ergebnis
+-if(newAnrufstatus==545){//unerreichbar
++if(newAnrufstatus==379){//unerreichbar
+ //PrüfeobTextschoneingetragen
+ ergtext="5AnrufversuchekeinRückruf";
+ if(newErgebnis.search(ergtext)<0){
+@@ -94,12 +106,30 @@
+ }
+ getElementFromName('ergebnis').value=newErgebnis;
+ }
++//Vorlage
++//alert(newStatus);
++//alert(newAnrufstatus);
++if(newAnrufstatus==379){//unerreichbar-Vorlageauf"Nein"
++//_setComboSelectedId(getElementFromName('textant31_janein_id'),20);
++//6Vorlageauf"NEIN"TABELLEJANEIN
++aktVorlage=parseInt(_getComboSelectedId(getElementFromName('textant31_janein_id')));
++newVorlage=43;
++//7Lösungsvorschlagauf"Ratenzahlung"TabelleNUMMERN
++aktLoesungVorschlag=parseInt(_getComboSelectedId(getElementFromName('textant22_nummern_id')));
++newLoesungVorschlag=111;
++//alert(newStatus);
++//alert(newAnrufstatus);
++}
++//
++//
+ break;
+ }
+ //setzeStatus,AnrufstatusundBenutzer
+ _setComboSelectedId(getElementFromName('status_id'),newStatus);
+ _setComboSelectedId(getElementFromName('anruf_status_id'),newAnrufstatus);
+ _setComboSelectedId(getElementFromName('benutzer_id'),pnCurrentUserId);
++_setComboSelectedId(getElementFromName('textant31_janein_id'),newVorlage);
++_setComboSelectedId(getElementFromName('textant22_nummern_id'),newLoesungVorschlag);
+ }//Ende"nichterreichbar"
+ elseif(psAction=='OnTelReachable'){
+ //
+@@ -123,25 +153,39 @@
+ if(telnr===""){
+ telnr=getElementFromName('telefon2').value
+ }
+-pos=telnr.search("");
+-vorwahl="";
+-hauptwahl="";
+-if(pos>0){
+-vorwahl=telnr.substring(0,pos);
+-hauptwahl=telnr.substring(pos+1,telnr.length);
+-}else{
+-vorwahl=telnr.substring(0,99);
+-}
+-getElementFromName('verkaeufercode').value=vorwahl;
++getElementFromName('dummy_text4').value=telnr;
+ //2Status"Erledigt"undAnrufstatue"Erreicht"setzen
+ switch(pnMandantId){
+-case27://KNP
++case27://INKO2016
+ newStatus=117;
+ newAnrufstatus=373;
+-//3Connect-parameteralleauf"1"setzen
++//4Adresscheckauf"JA"TABELLEJANEIN
++aktAdresscheck=parseInt(_getComboSelectedId(getElementFromName('textant21_janein_id')));
++newAdresscheck=42;
++//5EMailcheckauf"JA"TABELLEJANEIN
++aktEMailcheck=parseInt(_getComboSelectedId(getElementFromName('textant41_janein_id')));
++newEMailcheck=42;
++//6Vorlageauf"NEIN"TABELLEJANEIN
++aktVorlage=parseInt(_getComboSelectedId(getElementFromName('textant31_janein_id')));
++newVorlage=43;
++//7Lösungsvorschlagauf"Ratenzahlung"TabelleNUMMERN
++aktLoesungVorschlag=parseInt(_getComboSelectedId(getElementFromName('textant22_nummern_id')));
++newLoesungVorschlag=109;
++//8Datumfälligbisübernehmen
++gesamtoffen=getElementFromName('dummy_number4').value;
++getElementFromName('dummy_number6').value=gesamtoffen;
++//9Datenkorrektauf"JA"TABELLEJANEIN
++aktDatenkorrekt=parseInt(_getComboSelectedId(getElementFromName('textant11_janein_id')));
++newDatenkorrekt=42;
++//10Benutzer
+ break;
+ }
+-//setzeStatus,AnrufstatusundBenutzer
++//setzeStatus,AnrufstatusundBenutzer,Lösungsbereitschaft,Lösungsvorschlag
++_setComboSelectedId(getElementFromName('textant21_janein_id'),newAdresscheck);
++_setComboSelectedId(getElementFromName('textant41_janein_id'),newEMailcheck);
++_setComboSelectedId(getElementFromName('textant31_janein_id'),newVorlage);
++_setComboSelectedId(getElementFromName('textant22_nummern_id'),newLoesungVorschlag);
++_setComboSelectedId(getElementFromName('textant11_janein_id'),newDatenkorrekt);
+ //
+ _setComboSelectedId(getElementFromName('status_id'),newStatus);
+ _setComboSelectedId(getElementFromName('anruf_status_id'),newAnrufstatus);
+
+===== modules/gui/templates/tickets/19/ticket.php =====
+--- orig
++++ dev
+@@ -2,22 +2,15 @@
+ <trbgcolor="#D3D3D3">
+ <td><?phpechoTXT_LBL_TICKETNR?></td>
+ <td><inputrequiredclass="column"name="ticketnr"placeholder="<?phpechoTXT_LBL_TICKETNR?>"type="text"value="<?phpecho$ticket->get_ticketnr()?>"/></td>
+-<td><?phpecho"Art"?></td>
+-<tdbgcolor=#98FB98><selectclass="column"name="grund_id">
+-<optionvalue="-1"><?phpechoTXT_LBL_NOONE?></option>
+-<?phpforeach($grundas$p){?>
+-<option<?phpif($ticket->get_grund_id()==$p->get_id())echo"selected";?>value="<?phpecho$p->get_id()?>"><?phpecho$p->get_text()?></option>
+-<?php}?>
+-</select>
+-</td>
+-<tdbgcolor=#98FB98><?phpecho'Betreibung'?></td>
+-<tdbgcolor=#FF00000>
+-<selectclass="column"name="prioritaet_id">
+-<optionvalue="-1"><?phpechoTXT_LBL_NOONE?></option>
+-<?phpforeach($prioritaetas$p){?>
+-<option<?phpif($ticket->get_prioritaet_id()==$p->get_id())echo"selected";?>value="<?phpecho$p->get_id()?>"><?phpecho$p->get_text()?></option>
+-<?php}?>
+-</select>
++<tdbgcolor=#F7D358><?phpecho'Art'?></td>
++<tdbgcolor=#F7D358>
++<selectclass="column"name="dummy_id1">
++<optionvalue="-1"><?phpechoTXT_LBL_NOONE?></option>
++<?phpforeach($dummy_id1as$p){?>
++<option<?phpif($ticket->get_dummy_id1()==$p->get_id())echo"selected";?>value="<?phpecho$p->get_id()?>"><?phpecho$p->get_text()?></option>
++<?php}?>
++</select>
++</td>
+ <td><?phpechoTXT_LBL_USER?></td>
+ <td>
+ <selectrequiredclass="column"name="benutzer_id"id="benutzer_id">
+@@ -26,98 +19,67 @@
+ <?php}?>
+ </select>
+ </td>
+-<!--Kommentarzeileein
+-<tdbgcolor=#98FB98><?phpecho'StatusForderung/nächsterSchritt'?></td>
++<tdbgcolor=#98FB98><?phpechoTXT_LBL_INFO1?></td>
+ <tdbgcolor=#98FB98colspan="3"style="padding-right:14px"><inputvalue="<?phpecho$ticket->get_textinfo5()?>"placeholder="<?phpechoTXT_LBL_INFO1?>"style="width:100%"name="textinfo5"type="text"/></td>
+-Kommentaraus//-->
+ </tr>
+ <trbgcolor="#D3D3D3">
+ <td><?phpechoTXT_LBL_TASK?></td>
+-<tdbgcolor=#98FB98colspan="5"style="padding-right:14px"><textarearows="2"style="width:100%"placeholder="<?phpecho'Aufgabe'?>"name="beschreibung_detail"><?phpecho$ticket->get_beschreibung_detail()?></textarea></td>
+-<!--Kommentarzeileein
+-<tdcolspan="5"style="padding-right:14px"><inputvalue="<?phpecho$ticket->get_beschreibung_detail()?>"placeholder="<?phpechoTXT_LBL_TASK?>"style="width:100%"name="beschreibung_detail"type="text"/></td>
+-<tdbgcolor=#98FB98colspan="5"style="padding-right:14px"><textarearows="2"style="width:100%"placeholder="<?phpecho'Aufgabe'?>"name="beschreibung_detail"><?phpecho$ticket->get_beschreibung_detail()?></textarea></td>
+-<td>Sachbearbeiter</td>
+-<tdcolspan="3"style="padding-right:14px"><inputvalue="<?phpecho$ticket->get_kenner()?>"placeholder="<?phpecho'Sachbearbeiterinformationen'?>"style="width:100%"name="kenner"type="text"/></td>
+-Kommentaraus//-->
+-<td><ahref="http://192.168.68.69:3210/cti?preset=kimiOutbound&user=r.reich&az=<?phpecho$ticket->get_dummy_text9()?>"target="_blank"</td><b>CTIFRANZ</b></a>
+-</td>
+-<td>
+-<ahref="http://192.168.68.69:3210/cti?preset=kimiOutbound&user=s.lauer&az=<?phpecho$ticket->get_dummy_text9()?>"target="_blank"</td><b>CTISUSI</b></a>
+-</td>
+-<td>
+-<ahref="http://192.168.68.69:3210/cti?preset=kimiOutbound&user=a.obran&az=<?phpecho$ticket->get_dummy_text9()?>"target="_blank"</td><b>CTIANITA</b></a>
+-</td>
+-</tr>
+-<trbgcolor="#D3D3D3">
+-<tdbgcolor=#F7D358><?phpecho'GLName'?></td>
+-<tdcolspan="3"style="padding-right:20px"><inputreadonly="readonly"value="<?phpecho$ticket->get_fahrgestellnummer()?>"placeholder="<?phpecho'GLName/Ort'?>"class="column"type="text"style="background-color:#F7D358;border:0px;"style="width:100%"name="fahrgestellnummer"/></td>
+-<td><?phpecho'Kundenummer'?></td>
++<tdcolspan="5"style="padding-right:14px"><textarearows="2"style="width:95%"placeholder="<?phpechoTXT_LBL_TASK?>"name="beschreibung_detail"><?phpecho$ticket->get_beschreibung_detail()?></textarea></td>
++<td><?phpecho'Sachbearbeiter'?></td>
++<td><inputclass="column"value="<?phpecho$ticket->get_dummy_text5()?>"placeholder="<?phpecho'Sachbearbeiter'?>"type="text"name="dummy_text5"/></td>
++<td><ahref="http://10.196.69.11/kimi_ET/SCHLAUSTROM_LEITFADEN.pdf"target="_blank"><b>Leitfaden</b></a></td>
++<td><ahref="http://10.196.69.11/kimi_ET/kimibatch/schlaustromcheck.php"target="_blank"><b>Check</b>
++<ahref="https://www.schlaucrm.de/index.php?module=Accounts&action=index&parenttab=Sales"target="_blank"><b>VTigerCRM</b></a>
++</td>
++</tr>
++<trbgcolor="#D3D3D3">
++<td><?phpecho'Gl-Name'?></td>
++<tdcolspan="3"><inputclass="column"value="<?phpecho$ticket->get_dummy_text3()?>"placeholder="<?phpecho'Gl-Name'?>"style="width:95%"type="text"name="dummy_text3"/></td>
++<td><?phpecho'Kundennummer:'?></td>
+ <td><inputvalue="<?phpecho$ticket->get_dummy_text9()?>"placeholder="<?phpecho'Kundennummer'?>"class="column"type="text"name="dummy_text9"/></td>
+-<td>
+-<ahref="http://192.168.68.69:3210/cti?preset=kimiOutbound&user=a.grossbichler&az=<?phpecho$ticket->get_dummy_text9()?>"target="_blank"</td><b>CTIALEXANDRA</b></a>
+-</td>
+-<td>
+-<ahref="http://192.168.68.69:3210/cti?preset=kimiOutbound&user=j.posch&az=<?phpecho$ticket->get_dummy_text9()?>"target="_blank"</td><b>CTIJACKI</b></a>
+-</td>
+-<td>
+-<!--Kommentarzeileein
+-<ahref="http://192.168.68.69:3210/cti?preset=kimiOutbound&user=a.omar&az=<?phpecho$ticket->get_dummy_text9()?>"target="_blank"</td><b>CTIOMAR</b></a>
+-</td>
+-<td>
+-<ahref="http://192.168.68.69:3210/cti?preset=kimiOutbound&user=s.fladerer&az=<?phpecho$ticket->get_dummy_text9()?>"target="_blank"</td><b>CTISYLVIA</b></a>
+-</td>
+-<td><ahref="http://10.20.12.14/kimi/kimi_ET/modules/gui/templates/tickets/10/knpdoku.pdf"target="_blank"><b>KNPFinancialServiceDOKU</b></a></td>
+-<td>&nbsp;</td>
+-<td><ahref="http://10.20.12.14/kimi/kimi_ET/kimibatch/knp1check.php"target="_blank"><b>KNPFinancialServiceCHECK</b></a></td>
+-Kommentaraus//-->
+-</tr>
+-<!--Kommentarzeileein
+-<trbgcolor="#D3D3D3">
+-<td><?phpechoTXT_LBL_KDNR?></td>
+-<td><inputvalue="<?phpecho$ticket->get_kundennummer()?>"placeholder="<?phpechoTXT_LBL_KDNR?>"class="column"name="kundennummer"type="text"/></td>
+-Kommentaraus//-->
+-<td><?phpecho'Anrede'?></td>
+-<td><inputvalue="<?phpecho$ticket->get_anrede()?>"placeholder="<?phpecho'Anrede'?>"class="column"name="anrede"type="text"/></td>
+-<td></td>
+-<td></td>
+-<tdbgcolor=#FF00000><?phpecho'Saldo'?></td></td>
+-<tdbgcolor=#FF00000><inputvalue="<?phpecho$ticket->get_dummy_number4()?>"placeholder="<?phpecho'Saldo'?>"class="column"type="decimal"name="dummy_number4"/></td>
+-<!--Kommentarzeileein
+-<td>
+-<ahref="http://192.168.68.69:3210/cti?preset=kimiOutbound&user=a.grossbichler&az=<?phpecho$ticket->get_dummy_text9()?>"target="_blank"</td><b>CTIALEXANDRA</b></a>
+-</td>
+-<td>
+-<ahref="http://192.168.68.69:3210/cti?preset=kimiOutbound&user=d.oezdemir&az=<?phpecho$ticket->get_dummy_text9()?>"target="_blank"</td><b>CTIDÖNE</b></a>
+-</td>
+-<td>
+-<ahref="http://192.168.68.69:3210/cti?preset=kimiOutbound&user=s.grimm&az=<?phpecho$ticket->get_dummy_text9()?>"target="_blank"</td><b>CTISOPHIE</b></a>
+-</td>
+ <td><?phpecho'IBAN'?></td>
+ <td><inputvalue="<?phpecho$ticket->get_dummy_text1()?>"placeholder="<?phpecho'IBAN'?>"class="column"type="text"name="dummy_text1"/></td>
+ <td><?phpecho'BIC'?></td>
+ <td><inputvalue="<?phpecho$ticket->get_dummy_text2()?>"placeholder="<?phpecho'BIC'?>"class="column"type="text"name="dummy_text2"/></td>
++</tr>
++<trbgcolor="#D3D3D3">
++<td><?phpecho'Stadium-Betreibung'?></td>
++<td><inputvalue="<?phpecho$ticket->get_kenner()?>"placeholder="<?phpecho'Stadium-Betreibung'?>"class="column"name="kenner"type="text"/></td>
++<td><?phpechoTXT_LBL_KDNR?></td>
++<td><inputvalue="<?phpecho$ticket->get_kundennummer()?>"placeholder="<?phpechoTXT_LBL_KDNR?>"class="column"name="kundennummer"type="text"/></td>
++<tdbgcolor=#FF00000><?phpecho'KundeGesamtoffen'?></td></td>
++<tdbgcolor=#FF00000><inputvalue="<?phpecho$ticket->get_dummy_number4()?>"placeholder="<?phpecho'KundeGesamtoffen'?>"class="column"type="decimal"name="dummy_number4"/></td>
++<tdbgcolor=#FF00000><?phpecho'TotalinklRLE+MSp+Bearbg'?></td>
++<tdbgcolor=#FF00000><inputvalue="<?phpecho$ticket->get_dummy_number3()?>"placeholder="<?phpecho'TotalinklRLE+MSp+Bearbg'?>"class="column"type="decimal"name="dummy_number3"/></td></td>
++<td></td>
++<td></td>
++<!--Kommentarzeileein
++<tdbgcolor=#FF00000><?phpecho'FälligBis'?></td>
++<tdbgcolor=#FF00000><inputclass="column"value="<?phpecho$ticket->get_dummy_date2()?>"placeholder="<?phpecho'FälligBis'?>"type="date"name="dummy_date2"/></td>
+ Kommentaraus//-->
+ </tr>
+ <trbgcolor="#D3D3D3">
+ <td><?phpechoTXT_LBL_LASTNAME?></td>
+-<td><inputvalue="<?phpecho$ticket->get_nachname()?>"placeholder="<?phpechoTXT_LBL_LASTNAME?>"class="column"type="text"name="nachname"/></td>
++<td><inputvalue="<?phpecho$ticket->get_nachname()?>"placeholder="<?phpechoTXT_LBL_LASTNAME?>"class="column"style="width:95%"maxlength="50"type="text"name="nachname"/></td>
+ <td><?phpechoTXT_LBL_FIRSTNAME?></td>
+ <td><inputvalue="<?phpecho$ticket->get_vorname()?>"placeholder="<?phpechoTXT_LBL_FIRSTNAME?>"class="column"type="text"name="vorname"/></td>
+-<td></td><td></td>
+-<!--Kommentarzeileein
+-<td>
+-<ahref="https://10.196.69.11/kimi_ET/kimibatch/COEO_NeueMandanten20230523.pdf"target="_blank"><b>Mandantenblätter</b></a>
+-</td>
+-<tdbgcolor=#FF00000><?phpecho'Verzzinsen'?></td>
+-<tdbgcolor=#FF00000><inputclass="column"value="<?phpecho$ticket->get_dummy_text8()?>"placeholder="<?phpecho'Verzinsen'?>"type="text"name="dummy_text8"/></td>
+-<tdbgcolor=#FFA500><?phpecho'CONNECT(Telefonnrgibtes)'?></td>
+-<tdbgcolor=#FFA500><inputclass="column"value="<?phpecho$ticket->get_dummy_text3()?>"placeholder="<?phpecho'CONNECT(Telefonnrgibtes)'?>"type="text"name="dummy_text3"id="dummy_text3"/></td>
+-<tdbgcolor=#FFA500><?phpecho'RPC(Schuldnerereicht)'?></td>
+-<tdbgcolor=#FFA500><inputclass="column"value="<?phpecho$ticket->get_dummy_text4()?>"placeholder="<?phpecho'(Schuldnerereicht'?>"type="text"name="dummy_text4"id="dummy_text4"/></td>
+-Kommentaraus//-->
+-</tr>
+-<trbgcolor="#D3D3D3">
++<tdbgcolor=#FF00000><?phpecho'RechnungTotal'?></td>
++<tdbgcolor=#FF00000><inputvalue="<?phpecho$ticket->get_dummy_number2()?>"placeholder="<?phpecho'RechnungTotal'?>"class="column"type="decimal"name="dummy_number2"/></td></td>
++<!--Kommentarzeileein
++<tdbgcolor=#FF00000><?phpecho'Mitschuldner'?></td>
++<tdbgcolor=#FF00000><inputclass="column"value="<?phpecho$ticket->get_dummy_text8()?>"placeholder="<?phpecho'Mitschuldner'?>"type="text"name="dummy_text8"/></td>
++Kommentaraus//-->
++<tdbgcolor=#FF00000><?phpecho'RückleitungsentgeltBank'?></td>
++<tdbgcolor=#FF00000><inputvalue="<?phpecho$ticket->get_dummy_number1()?>"placeholder="<?phpecho'RückleitungsentgeltBank'?>"class="column"type="decimal"name="dummy_number1"/></td></td>
++<td></td>
++<td></td>
++<!--Kommentarzeileein
++<tdbgcolor=#FF00000><?phpecho'Ratenhoehe'?></td>
++<tdbgcolor=#FF00000><inputvalue="<?phpecho$ticket->get_dummy_number2()?>"placeholder="<?phpecho'Ratenhoehe'?>"class="column"type="decimal"name="dummy_number2"/></td></td>
++Kommentaraus//-->
++</tr>
++<trbgcolor="#D3D3D3">
++<!--Kommentarzeileein
+ <td><?phpechoTXT_LBL_PLZ?></td>
+ <td>
+ <selectrequiredname="land_id">
+@@ -132,56 +94,59 @@
+ }
+ </select>
+ <inputvalue="<?phpecho$ticket->get_plz()?>"placeholder="<?phpechoTXT_LBL_PLZ?>"style="width:150px"type="text"name="plz"/></td>
+-<td><?phpechoTXT_LBL_ORT?></td>
+-<td><inputclass="column"value="<?phpecho$ticket->get_ort()?>"placeholder="<?phpechoTXT_LBL_ORT?>"type="text"name="ort"/></td>
++Kommentaraus//-->
++<trbgcolor="#D3D3D3">
++<td><?phpechoTXT_LBL_PLZ?></td>
++<td><inputvalue="<?phpecho$ticket->get_plz()?>"placeholder="<?phpechoTXT_LBL_PLZ?>"style="width:150px"type="text"name="plz"/></td>
++<td><?phpecho'Ort'?></td>
++<td><inputclass="column"value="<?phpecho$ticket->get_ort()?>"placeholder="<?phpechoTXT_LBL_ORT?>"style="width:95%"maxlength="50"type="text"name="ort"/></td>
+ <td><?phpecho'Geburtsdatum'?></td>
+ <td><inputclass="column"value="<?phpecho$ticket->get_geburtsdatum()?>"placeholder="<?phpecho'Geburtsdatum'?>"type="date"name="geburtsdatum"/></td>
+-<!--Kommentarzeileein
+-<tdbgcolor=#FFA500><?phpecho'PTP(VereinbarungBezahlung)<fontcolor="#fffafa">[0=NEIN,1=JA]</font>'?></td>
+-<tdbgcolor=#FFA500><inputclass="column"value="<?phpecho$ticket->get_dummy_text5()?>"placeholder="<?phpecho'(VereinbarungBezahlung)'?>"type="text"name="dummy_text5"id="dummy_text5"/></td>
+-<td><?phpecho'IndexA'?></td>
+-<td><inputclass="column"value="<?phpecho$ticket->get_dummy_number1()?>"placeholder="<?phpecho'IndexA'?>"type="text"name="dummy_number1"/></td>
+-<td></td>
+-<td></td>
+-<tdbgcolor=#F7D358><?phpecho'ANGEBOTZahlung'?></td>
+-<tdstyle="padding-right:14px"><inputreadonly="readonly"style="width:170px"placeholder="<?phpecho'ANGEBOTZahlung'?>"name="dummy_text11"class="column"type="text"value="<?phpecho$ticket->get_dummy_text11()?>"/></td>
+-Kommentaraus//-->
++<td>&nbsp;</td>
++<td>&nbsp;</td>
++<td>&nbsp;</td>
++<td>&nbsp;</td>
+ </tr>
+ <trbgcolor="#D3D3D3">
+ <td><?phpechoTXT_LBL_STR?></td>
+-<td><inputclass="column"value="<?phpecho$ticket->get_strasse()?>"placeholder="<?phpechoTXT_LBL_STR?>"type="text"name="strasse"/></td>
+-<!--Kommentarzeileein
++<td><inputclass="column"value="<?phpecho$ticket->get_strasse()?>"placeholder="<?phpechoTXT_LBL_STR?>"style="width:95%"maxlength="50"type="text"name="strasse"/></td>
+ <td><?phpechoTXT_LBL_HNR?></td>
+ <tdstyle="width:200px">
+ <tablestyle="width:200px!important;">
+ <tr>
++<!--Kommentarzeileein
+ <td>
+ <inputstyle="width:90px"placeholder="<?phpechoTXT_LBL_HNR?>"name="hausnummer"type="text"value="<?phpecho$ticket->get_hausnummer()?>"/>
+ </td>
++Kommentaraus//-->
+ <td>
+ <inputstyle="width:90px"placeholder="<?phpechoTXT_LBL_HNR_EXTENDED?>"name="hausnummer_erw"type="text"value="<?phpecho$ticket->get_hausnummer_erw()?>"/>
+ </td>
+ </tr>
+ </table>
+ </td>
+-Kommentaraus//-->
+-<td></td>
+-<td></td>
+ <tdbgcolor=#FF00000><?phpecho'Alter'?></td>
+-<!--Kommentarzeileein
+ <tdbgcolor=#FF00000><inputclass="column"value="<?phpecho$ticket->get_dummy_number5()?>"placeholder="<?phpecho'Alter'?>"type="text"name="dummy_number5"/></td>
+-<tdcolspan="2"bgcolor=#FF8C00><inputclass="column"value="<?phpecho$ticket->get_dummy_text6()?>"placeholder="<?phpecho'Ratenhinweis'?>"style="width:100%;background-color:orange;"type="text"name="dummy_text6"/>
+-<?phpecho'<br>'?>
+-<inputclass="column"value="<?phpecho$ticket->get_dummy_text7()?>"placeholder="<?phpecho'Aktion'?>"style="width:100%;background-color:orange;"type="text"name="dummy_text7"/></td>
+-<td><?phpecho'IndexB'?></td>
+-<td><inputclass="column"value="<?phpecho$ticket->get_dummy_number2()?>"placeholder="<?phpecho'IndexB'?>"type="text"name="dummy_number2"/></td>
+-<td><?phpecho'IndexC'?></td>
+-<td><inputclass="column"value="<?phpecho$ticket->get_dummy_number3()?>"placeholder="<?phpecho'IndexC'?>"type="text"name="dummy_number3"/></td>
+-<tdbgcolor=#FFFF00><?phpecho'möglicheRaten'?></td>
+-<tdcolspan="3"style="padding-right:14px"bgcolor=#FFFF00><inputplaceholder="<?phpecho'möglicheRaten'?>"name="dummy_text11"class="column"style="width:100%"type="text"value="<?phpecho$ticket->get_dummy_text11()?>"/></td>
+-<tdbgcolor=#F7D358><?phpecho'MINDESTZahlung'?></td>
+-<tdstyle="padding-right:14px"><inputreadonly="readonly"style="width:170px"placeholder="<?phpecho'MindestZahlung'?>"name="dummy_text12"class="column"type="text"value="<?phpecho$ticket->get_dummy_text12()?>"/></td>
+-Kommentaraus//-->
++<!--Kommentarzeileein
++<tdbgcolor=#98FB98><?phpechoTXT_LBL_QUEST1?></td>
++<tdcolspan="3"style="padding-right:14px"><inputvalue="<?phpecho$ticket->get_textinfo1()?>"placeholder="<?phpechoTXT_LBL_QUEST1?>"style="width:100%"name="textinfo1"type="text"/></td>
++Kommentaraus//-->
++<tdbgcolor=#FF00000><?phpecho'Adresscheck'?></td>
++<tdbgcolor=#FF00000><selectrequiredclass="column"name="textant21_janein_id"id="textant21_janein_id">
++<optionvalue="-1"><?phpechoTXT_LBL_NOONE?></option>
++<?phpforeach($janeinas$p){?>
++<option<?phpif($ticket->get_textant21_janein_id()==$p->get_id())echo"selected";?>value="<?phpecho$p->get_id()?>"><?phpecho$p->get_text()?></option>
++<?php}?>
++</select>
++</td>
++<tdbgcolor=#FF00000><?phpecho'eMail-Check'?></td>
++<tdbgcolor=#FF00000><selectrequiredclass="column"name="textant41_janein_id"id="textant41_janein_id">
++<optionvalue="-1"><?phpechoTXT_LBL_NOONE?></option>
++<?phpforeach($janeinas$p){?>
++<option<?phpif($ticket->get_textant41_janein_id()==$p->get_id())echo"selected";?>value="<?phpecho$p->get_id()?>"><?phpecho$p->get_text()?></option>
++<?php}?>
++</select>
++</td>
+ </tr>
+ <trbgcolor="#D3D3D3">
+ <td><?phpechoTXT_LBL_TEL?></td>
+@@ -191,7 +156,7 @@
+ </td>
+ <td><?phpechoTXT_LBL_TELEFON2?></td>
+ <td>
+-<inputstyle="width:170px"placeholder="<?phpechoTXT_LBL_TELEFON2?>"name="telefon2"class="column"type="text"value="<?phpecho$ticket->get_telefon2()?>"/>
++<inputstyle="width:170px"placeholder="<?phpecho'Mobiltelefon'?>"name="telefon2"class="column"type="text"value="<?phpecho$ticket->get_telefon2()?>"/>
+ <imgstyle="vertical-align:middle;"src="../images/telephone.png"id="callTelco2"name="callTelco2"onClick="callTelco2('telefon')"width="16"height="16"/>
+ </td>
+ <td><?phpechoTXT_LBL_EMAIL?></td>
+@@ -199,33 +164,73 @@
+ <inputplaceholder="<?phpechoTXT_LBL_EMAIL?>"name="email"class="column"type="email"value="<?phpecho$ticket->get_email()?>"/><br/>
+ </td>
+ <!--Kommentarzeileein
+-<tdbgcolor=#FFA500><?phpecho'GrundZahlungsverzug'?></td>
+-<tdbgcolor=#FFA500>
+-<selectrequiredclass="column"name="textant41_janein_id"id="textant41_janein_id">
+-<optionvalue="-1"><?phpechoTXT_LBL_NOONE?></option>
+-<?phpforeach($janeinas$p){?>
+-<option<?phpif($ticket->get_textant41_janein_id()==$p->get_id())echo"selected";?>value="<?phpecho$p->get_id()?>"><?phpecho$p->get_text()?></option>
+-<?php}?>
+-</select>
+-</td>
++<tdbgcolor=#98FB98><?phpechoTXT_LBL_ANSW11?></td>
++<tdbgcolor=#98FB98><selectrequiredclass="column"name="textant11_janein_id"id="textant11_janein_id">
++<optionvalue="-1"><?phpechoTXT_LBL_NOONE?></option>
++<?phpforeach($janeinas$p){?>
++<option<?phpif($ticket->get_textant11_janein_id()==$p->get_id())echo"selected";?>value="<?phpecho$p->get_id()?>"><?phpecho$p->get_text()?></option>
++<?php}?>
++</select>
++</td>
++<tdbgcolor=#98FB98><?phpecho'Telefon'?></td>
++<tdbgcolor=#98FB98><selectclass="column"name="produkt_id">
++<optionvalue="-1"><?phpechoTXT_LBL_NOONE?></option>
++<?phpforeach($produktas$p){?>
++<option<?phpif($ticket->get_produkt_id()==$p->get_id())echo"selected";?>value="<?phpecho$p->get_id()?>"><?phpecho$p->get_text()?></option>
++<?php}?>
++</select>
++</td>
++Kommentaraus//-->
++<tdbgcolor=#ff00ff><?phpecho'Vorlage'?></td>
++<tdbgcolor=#ff00ff><selectrequiredclass="column"name="textant31_janein_id"id="textant31_janein_id">
++<optionvalue="-1"><?phpechoTXT_LBL_NOONE?></option>
++<?phpforeach($janeinas$p){?>
++<option<?phpif($ticket->get_textant31_janein_id()==$p->get_id())echo"selected";?>value="<?phpecho$p->get_id()?>"><?phpecho$p->get_text()?></option>
++<?php}?>
++</select>
++</td>
++<tdbgcolor=#98FB98><?phpecho'Datenkorrekt?'?></td>
++<tdbgcolor=#98FB98><selectrequiredclass="column"name="textant11_janein_id"id="textant11_janein_id">
++<optionvalue="-1"><?phpechoTXT_LBL_NOONE?></option>
++<?phpforeach($janeinas$p){?>
++<option<?phpif($ticket->get_textant11_janein_id()==$p->get_id())echo"selected";?>value="<?phpecho$p->get_id()?>"><?phpecho$p->get_text()?></option>
++<?php}?>
++</select>
++</td></tr>
++<tr>
++<td>&nbsp;</td>
++<td>&nbsp;</td>
++<td>&nbsp;</td>
++<td>&nbsp;</td>
++<!--Kommentarzeileein
++<tdbgcolor=#FFFF00><?phpechoTXT_LBL_TEL?></td>
++<tdbgcolor=#FFFF00><inputplaceholder="<?phpechoTXT_LBL_TEL?>"name="dummy_text6"class="column"type="text"value="<?phpecho$ticket->get_dummy_text6()?>"/><br/></td>
++<tdbgcolor=#FFFF00><?phpechoTXT_LBL_TELEFON2?></td>
++<tdbgcolor=#FFFF00><inputplaceholder="<?phpechoTXT_LBL_TELEFON2?>"name="dummy_text7"class="column"type="text"value="<?phpecho$ticket->get_dummy_text7()?>"/><br/></td>
++laKommentaraus//-->
++<td>&nbsp;</td>
++<td>&nbsp;</td>
+ <tdbgcolor=#98FB98><?phpechoTXT_LBL_QUEST1?></td>
+-<tdcolspan="3"style="padding-right:14px"><inputvalue="<?phpecho$ticket->get_textinfo1()?>"placeholder="<?phpechoTXT_LBL_QUEST1?>"style="width:100%"name="textinfo1"type="text"/></td>
+-</tr>
+-<tr>
+-<tdbgcolor=#FF00000><?phpecho'Telefon1Falsch'?></td>
+-<tdbgcolor=#FF00000><inputclass="column"value="<?phpecho$ticket->get_modell()?>"placeholder="<?phpecho'Telefon1Falsch'?>"type="text"name="modell"/></td>
+-<tdbgcolor=#FF00000><?phpecho'Telefon2Falsch'?></td>
+-<tdbgcolor=#FF00000><inputclass="column"value="<?phpecho$ticket->get_amtliches_kennzeichen()?>"placeholder="<?phpecho'Telefon2Falsch'?>"type="text"name="amtliches_kennzeichen"/></td>
+-<!--Kommentarzeileein
+-<tdbgcolor=#FFFF00><?phpecho'TelnrApl'?></td>
+-<td>
+-<inputstyle="width:170px"placeholder="<?phpecho'TelnrApl'?>"name="dummy_text11"class="column"type="text"value="<?phpecho$ticket->get_dummy_text11()?>"/>
+-<imgstyle="vertical-align:middle;"src="../images/telephone.png"id="callTelco1"name="callTelco1"width="16"height="16"/>
+-</td>
+-<tdbgcolor=#FFFF00><?phpecho'ArbPlatz'?></td>
+-<td>
+-<inputstyle="width:170px"placeholder="<?phpecho'ArbPlatz'?>"name="dummy_text12"class="column"type="text"value="<?phpecho$ticket->get_dummy_text12()?>"/>
+-</td>
++<tdcolspan="3"style="padding-right:14px"><inputvalue="<?phpecho$ticket->get_textinfo2()?>"placeholder="<?phpechoTXT_LBL_QUEST1?>"style="width:100%"name="textinfo2"type="text"/></td>
++<!--Kommentarzeileein
++<tdbgcolor=#98FB98><?phpechoTXT_LBL_ANSW12?></td>
++<tdbgcolor=#98FB98><selectrequiredclass="column"name="textant12_nummern_id"id="textant12_nummern_id">
++<optionvalue="-1"><?phpechoTXT_LBL_NOONE?></option>
++<?phpforeach($nummernas$p){?>
++<option<?phpif($ticket->get_textant12_nummern_id()==$p->get_id())echo"selected";?>value="<?phpecho$p->get_id()?>"><?phpecho$p->get_text()?></option>
++<?php}?>
++</select>
++</td>
++Kommentaraus//-->
++</tr>
++<tr>
++<tdbgcolor=#FF00000><?phpecho'KontaktTelefon'?></td>
++<tdbgcolor=#FF00000><inputclass="column"value="<?phpecho$ticket->get_dummy_text4()?>"placeholder="<?phpecho'KontaktTelefon'?>"type="text"name="dummy_text4"/></td>
++<tdbgcolor=#FF00000><?phpecho'KontaktMobiltelefon'?></td>
++<tdbgcolor=#FF00000><inputclass="column"value="<?phpecho$ticket->get_standort()?>"placeholder="<?phpecho'KontaktMobiletelefon'?>"type="text"name="standort"/></td>
++<td></td>
++<td></td>
++<!--Kommentarzeileein
+ <tdbgcolor=#98FB98><?phpecho'Anrufzeitpunkt'?></td>
+ <td><selectclass="column"name="firma_id">
+ <optionvalue="-1"><?phpechoTXT_LBL_NOONE?></option>
+@@ -233,25 +238,16 @@
+ <option<?phpif($ticket->get_firma_id()==$p->get_id())echo"selected";?>value="<?phpecho$p->get_id()?>"><?phpecho$p->get_text()?></option>
+ <?php}?>
+ </select></td>
+-<!--Kommentarzeileein
+-<tdbgcolor=#98FB98><?phpecho'Lösungsbereitschaft'?></td>
+-<tdbgcolor=#98FB98><selectrequiredclass="column"name="textant11_janein_id"id="textant11_janein_id">
+-<optionvalue="-1"><?phpechoTXT_LBL_NOONE?></option>
+-<?phpforeach($janeinas$p){?>
+-<option<?phpif($ticket->get_textant11_janein_id()==$p->get_id())echo"selected";?>value="<?phpecho$p->get_id()?>"><?phpecho$p->get_text()?></option>
+-<?php}?>
+-</select>
+-</td>
+-<tdbgcolor=#98FB98><?phpecho'VorlageJa/Nein'?></td>
+-<tdbgcolor=#98FB98><selectclass="column"name="produkt_id">
+-<optionvalue="-1"><?phpechoTXT_LBL_NOONE?></option>
+-<?phpforeach($produktas$p){?>
+-<option<?phpif($ticket->get_produkt_id()==$p->get_id())echo"selected";?>value="<?phpecho$p->get_id()?>"><?phpecho$p->get_text()?></option>
+-<?php}?>
+-</select>
+-</td>
+-<!--Kommentarzeileein
+-<tdbgcolor=#98FB98><?phpechoTXT_LBL_ANSW12?></td>
++Kommentaraus//-->
++<tdbgcolor=#98FB98><?phpecho'Lösungsvorschlag'?></td>
++<tdbgcolor=#98FB98><selectrequiredclass="column"name="textant22_nummern_id"id="textant22_nummern_id">
++<optionvalue="-1"><?phpechoTXT_LBL_NOONE?></option>
++<?phpforeach($nummernas$p){?>
++<option<?phpif($ticket->get_textant22_nummern_id()==$p->get_id())echo"selected";?>value="<?phpecho$p->get_id()?>"><?phpecho$p->get_text()?></option>
++<?php}?>
++</select>
++</td>
++<tdbgcolor=#98FB98><?phpecho'Objektart'?></td>
+ <tdbgcolor=#98FB98><selectrequiredclass="column"name="textant12_nummern_id"id="textant12_nummern_id">
+ <optionvalue="-1"><?phpechoTXT_LBL_NOONE?></option>
+ <?phpforeach($nummernas$p){?>
+@@ -259,19 +255,39 @@
+ <?php}?>
+ </select>
+ </td>
+-<tdbgcolor=#F7D358><?phpecho'spätesteFälligkeit'?></td>
+-<tdstyle="padding-right:14px"><inputreadonly="readonly"style="width:170px"placeholder="<?phpecho'spätesteFälligkeit'?>"name="dummy_text13"class="column"type="text"value="<?phpecho$ticket->get_dummy_text13()?>"/></td>
+-Kommentaraus//-->
+-</tr>
+-<tr>
+-<tdbgcolor=#FF00000><?phpecho'KontaktTelnr'?></td>
+-<tdbgcolor=#FF00000><inputclass="column"value="<?phpecho$ticket->get_verkaeufercode()?>"placeholder="<?phpecho'KontaktTelnr'?>"type="text"name="verkaeufercode"/></td>
+-<td></td>
+-<td></td>
+-<!--Kommentarzeileein
+-<tdbgcolor=#FF00000><?phpecho'KontaktTelnrHW'?></td>
+-<tdbgcolor=#FF00000><inputclass="column"value="<?phpecho$ticket->get_standort()?>"placeholder="<?phpecho'KontaktTelnrHW'?>"type="text"name="standort"/></td>
+-Kommentaraus//-->
++<!--Kommentarzeileein
++<tdbgcolor=#98FB98><?phpecho'RatenbriefHinweis'?></td>
++<tdbgcolor=#98FB98><selectclass="column"name="grund_id">
++<optionvalue="-1"><?phpechoTXT_LBL_NOONE?></option>
++<?phpforeach($grundas$p){?>
++<option<?phpif($ticket->get_grund_id()==$p->get_id())echo"selected";?>value="<?phpecho$p->get_id()?>"><?phpecho$p->get_text()?></option>
++<?php}?>
++</select>
++</td>
++Kommentaraus//-->
++</tr>
++<tr>
++<tdbgcolor=#98FB98><?phpechoTXT_LBL_STATUS?></td>
++<tdbgcolor=#98FB98>
++<selectclass="column"name="status_id">
++<optionvalue="-1"><?phpechoTXT_LBL_NOONE?></option>
++<?phpforeach($statusas$p){?>
++<option<?phpif($ticket->get_status_id()==$p->get_id())echo"selected";?>value="<?phpecho$p->get_id()?>"><?phpecho$p->get_text()?></option>
++<?php}?>
++</select>
++</td>
++<tdbgcolor=#98FB98><?phpechoTXT_LBL_CALL_STATE?></td>
++<tdbgcolor=#98FB98>
++<selectclass="column"name="anruf_status_id">
++<optionvalue="-1"><?phpechoTXT_LBL_NOONE?></option>
++<?phpforeach($anruf_statusas$p){?>
++<option<?phpif($ticket->get_anruf_status_id()==$p->get_id())echo"selected";?>value="<?phpecho$p->get_id()?>"><?phpecho$p->get_text()?></option>
++<?php}?>
++</select>
++</td>
++<td></td>
++<td></td>
++<!--Kommentarzeileein
+ <tdbgcolor=#98FB98><?phpechoTXT_LBL_WIEDERVORLAGE?></td>
+ <tdbgcolor=#98FB98>
+ <inputstyle="width:80px;"class="column"value="<?phpecho$ticket->get_wiedervorlage()?>"placeholder="<?phpechoTXT_LBL_WIEDERVORLAGE?>"type="date"name="wiedervorlage"/>
+@@ -284,93 +300,19 @@
+ <?phpecho"<br>"?>
+ <inputtype="checkbox"name="wiedervorlage_automatik"value="<?phpecho$ticket->get_wiedervorlage_automatik()?>"<?phpif($ticket->get_wiedervorlage_automatik()==1)echo"checked"?>/><?phpechoTXT_LBL_AUTOMATISCH?>
+ </td>
+-<!--Kommentarzeileein
+-<tdbgcolor=#98FB98><?phpechoTXT_LBL_QUEST2?></td>
+-<tdcolspan="3"style="padding-right:14px"><inputvalue="<?phpecho$ticket->get_textinfo2()?>"placeholder="<?phpechoTXT_LBL_QUEST2?>"style="width:100%"name="textinfo2"type="text"/></td>
+-<tdbgcolor=#FFA500><?phpecho'Lösung/Vereinbarung'?></td>
+-<tdbgcolor=#FFA500><selectrequiredclass="column"name="textant22_nummern_id"id="textant22_nummern_id">
+-<optionvalue="-1"><?phpechoTXT_LBL_NOONE?></option>
+-<?phpforeach($nummernas$p){?>
+-<option<?phpif($ticket->get_textant22_nummern_id()==$p->get_id())echo"selected";?>value="<?phpecho$p->get_id()?>"><?phpecho$p->get_text()?></option>
+-<?php}?>
+-</select>
+-</td>
+-<tdbgcolor=#FFA500><?phpecho'Zahlungsdatum'?></td>
+-<tdbgcolor=#FFA500><inputclass="column"value="<?phpecho$ticket->get_dummy_date1()?>"placeholder="<?phpecho'Zahlungsdatum'?>"type="date"name="dummy_date1"/></td>
+-Kommentaraus//-->
+-</tr>
+-<tr>
+-<tdbgcolor=#FF00000><?phpecho'NEUETelnr'?></td>
+-<tdbgcolor=#FF00000><inputclass="column"value="<?phpecho$ticket->get_verkaeufername()?>"placeholder="<?phpecho'NEUETelnr'?>"type="text"name="verkaeufername"/></td>
+-<!--Kommentarzeileein
+-<tdbgcolor=#FF00000><inputclass="column"value="<?phpecho$ticket->get_markencode()?>"placeholder="<?phpecho'NEUETelnrHW'?>"type="text"name="markencode"/></td>
+-Kommentaraus//-->
+-<tdbgcolor=#FF00000><?phpecho'Telefon1Falsch'?></td>
+-<tdbgcolor=#FF00000><inputclass="column"value="<?phpecho$ticket->get_modell()?>"placeholder="<?phpecho'Telefon1Falsch'?>"type="text"name="modell"/></td>
+-<tdbgcolor=#FF00000><?phpecho'Telefon2Falsch'?></td>
+-<tdbgcolor=#FF00000><inputclass="column"value="<?phpecho$ticket->get_amtliches_kennzeichen()?>"placeholder="<?phpecho'Telefon2Falsch'?>"type="text"name="amtliches_kennzeichen"/></td>
+-<!--Kommentarzeileein
+-<tdbgcolor=#FFFF00><?phpecho'AplTelnrVW'?></td>
+-<tdbgcolor=#FFFF00><inputclass="column"value="<?phpecho$ticket->get_dummy_text13()?>"placeholder="<?phpecho'AplTelnrVW'?>"type="text"name="dummy_text13"/></td>
+-<tdbgcolor=#FFFF00><?phpecho'AplTelnrHW'?></td>
+-<tdbgcolor=#FFFF00><inputclass="column"value="<?phpecho$ticket->get_dummy_text14()?>"placeholder="<?phpecho'AplTelnrHW'?>"type="text"maxlength="9"name="dummy_text14"/></td>
+-<tdbgcolor=#FFFF00><?phpecho'AplTelFalsch'?></td>
+-<tdbgcolor=#FFFF00><inputclass="column"value="<?phpecho$ticket->get_dummy_text15()?>"placeholder="<?phpecho'AplTelFalsch'?>"type="text"name="dummy_text15"/></td>
+-<td></td>
+-<td></td>
+-<tdbgcolor=#FFA500><?phpecho'Zahlungsbetrag/Ratevereinbart'?></td>
+-<tdbgcolor=#FFA500><inputvalue="<?phpecho$ticket->get_dummy_number6()?>"placeholder="<?phpecho'Zahlungsbetrag/Ratevereinbart'?>"class="column"type="decimal"name="dummy_number6"/></td></td>
+-Kommentaraus//-->
+-<!--Kommentarzeileein
+-<tdbgcolor=#98FB98><?phpecho'Lösungsvorschlag'?></td>
+-<tdbgcolor=#98FB98><selectrequiredclass="column"name="textant22_nummern_id"id="textant22_nummern_id">
+-<optionvalue="-1"><?phpechoTXT_LBL_NOONE?></option>
+-<?phpforeach($nummernas$p){?>
+-<option<?phpif($ticket->get_textant22_nummern_id()==$p->get_id())echo"selected";?>value="<?phpecho$p->get_id()?>"><?phpecho$p->get_text()?></option>
+-<?php}?>
+-</select>
+-</td>
+-<tdbgcolor=#98FB98><?phpecho'BeschäftigunsStatus'?></td>
+-<tdbgcolor=#98FB98><selectclass="column"name="grund_id">
+-<optionvalue="-1"><?phpechoTXT_LBL_NOONE?></option>
+-<?phpforeach($grundas$p){?>
+-<option<?phpif($ticket->get_grund_id()==$p->get_id())echo"selected";?>value="<?phpecho$p->get_id()?>"><?phpecho$p->get_text()?></option>
+-<?php}?>
+-</select>
+-</td>
+-Kommentaraus//-->
+-</tr>
+-<trbgcolor="#D3D3D3">
+-<td></td>
+-<td></td>
+-<td></td>
+-<td></td>
+-<td></td>
+-<td></td>
+-<!--Kommentarzeileein
+-<tdbgcolor=#FFFF00><?phpecho'Zahlbetrag'?></td>
+-<tdbgcolor=#FFFF00><inputvalue="<?phpecho$ticket->get_dummy_number6()?>"placeholder="<?phpecho'Zahlbetrag'?>"class="column"type="decimal"name="dummy_number6"/></td></td>
+-<tdbgcolor=#FFFF00><?phpecho'Zahlungam'?></td>
+-<tdbgcolor=#FFFF00><inputclass="column"value="<?phpecho$ticket->get_dummy_date1()?>"placeholder="<?phpecho'Zahlungam'?>"type="date"name="dummy_date1"/></td>
+-Kommentaraus//-->
+-<td></td>
+-</tr>
+-<tr>
+-<tdbgcolor=#98FB98><?phpechoTXT_LBL_STATUS?></td>
+-<tdbgcolor=#98FB98>
+-<selectclass="column"name="status_id">
+-<optionvalue="-1"><?phpechoTXT_LBL_NOONE?></option>
+-<?phpforeach($statusas$p){?>
+-<option<?phpif($ticket->get_status_id()==$p->get_id())echo"selected";?>value="<?phpecho$p->get_id()?>"><?phpecho$p->get_text()?></option>
+-<?php}?>
+-</select>
+-</td>
+-<tdbgcolor=#98FB98><?phpechoTXT_LBL_CALL_STATE?></td>
+-<tdbgcolor=#98FB98>
+-<selectclass="column"name="anruf_status_id">
+-<optionvalue="-1"><?phpechoTXT_LBL_NOONE?></option>
+-<?phpforeach($anruf_statusas$p){?>
+-<option<?phpif($ticket->get_anruf_status_id()==$p->get_id())echo"selected";?>value="<?phpecho$p->get_id()?>"><?phpecho$p->get_text()?></option>
++Kommentaraus//-->
++<tdbgcolor=#98FB98><?phpecho'Ratenhöhe/Einmalzahlung'?></td></td>
++<tdbgcolor=#98FB98><inputvalue="<?phpecho$ticket->get_dummy_number6()?>"placeholder="<?phpecho'Ratenhöhe/Einmalzahlung'?>"class="column"type="decimal"name="dummy_number6"/></td>
++<tdbgcolor=#98FB98><?phpecho'Zahlungam'?></td>
++<tdbgcolor=#98FB98><inputclass="column"value="<?phpecho$ticket->get_dummy_date1()?>"placeholder="<?phpecho'Zahlungam'?>"type="date"name="dummy_date1"/></td>
++</tr>
++<tr>
++<tdbgcolor=#00BFFF><?phpecho'Liste'?></td>
++<tdbgcolor=#00BFFF>
++<selectclass="column"name="prioritaet_id">
++<optionvalue="-1"><?phpechoTXT_LBL_NOONE?></option>
++<?phpforeach($prioritaetas$p){?>
++<option<?phpif($ticket->get_prioritaet_id()==$p->get_id())echo"selected";?>value="<?phpecho$p->get_id()?>"><?phpecho$p->get_text()?></option>
+ <?php}?>
+ </select>
+ </td>
+@@ -378,13 +320,17 @@
+ <tdbgcolor=#98FB98>
+ <inputdisabledclass="column"value="<?phpecho$ticket->get_letzter_anruf()."".TXT_LBL_LETZTER_ANRUF_GESAMT."".$ticket->get_anzahl_anrufe()?>"type="date"name="anruf_info"/>
+ </td>
+-<!--Kommentarzeileein
+ <tdbgcolor=#98FB98><?phpecho"LetzteVorlage"?></td>
+ <tdbgcolor=#98FB98>
+ <inputdisabledstyle="width:180px;"class="column"value="<?phpecho$ticket->get_letzte_wiedervorlage()."".$ticket->get_letzte_wiedervorlage_zeitpunkt()?>"type="date"name="letzte_wiedervorlage_info"/>
+ </td>
+-<tdbgcolor=#FF00000><?phpecho"Abschlussgrund"?></td>
+-<tdbgcolor=#FF00000>
++<td></td>
++<td></td>
++</tr>
++<!--Kommentarzeileein
++<tr>
++<tdbgcolor=#00BFFF><?phpecho'SCB-KorrKZ'?></td>
++<tdbgcolor=#00BFFF>
+ <selectclass="column"name="prioritaet_id">
+ <optionvalue="-1"><?phpechoTXT_LBL_NOONE?></option>
+ <?phpforeach($prioritaetas$p){?>
+@@ -392,28 +338,12 @@
+ <?php}?>
+ </select>
+ </td>
+-<tdbgcolor=#FFA500><?phpecho'VorlageJa/Nein'?></td>
+-<tdbgcolor=#FFA500><selectclass="column"name="produkt_id">
+-<optionvalue="-1"><?phpechoTXT_LBL_NOONE?></option>
+-<?phpforeach($produktas$p){?>
+-<option<?phpif($ticket->get_produkt_id()==$p->get_id())echo"selected";?>value="<?phpecho$p->get_id()?>"><?phpecho$p->get_text()?></option>
+-<?php}?>
+-</select>
+-</td>
+-Kommentaraus//-->
+-</tr>
+-<trbgcolor="#D3D3D3">
+-<td</td>
+-<!--20210215-->
+-<td>&nbsp;</td>
+-<td>&nbsp;</td>
+-<td>&nbsp;</td>
+-<td>&nbsp;</td>
+-<td>&nbsp;</td>
+-<td>&nbsp;</td>
+-<tr>
+-<tdbgcolor=#98FB98><?phpechoTXT_LBL_RESULT?></td>
+-<tdbgcolor=#98FB98colspan="5"style="padding-right:14px"><textarearows="6"style="width:100%"placeholder="<?phpechoTXT_LBL_RESULT?>"name="ergebnis"><?phpecho$ticket->get_ergebnis()?></textarea></td>
++<tdcolspan="6">BelegenwennGläubiger"SantanderConsumerBankGmbH,WagramerStraße19,1220Wien"</td>
++</tr>
++Kommentaraus//-->
++<tr>
++<tdbgcolor=#98FB98><?phpechoTXT_LBL_RESULT?><br><buttononmouseover="copyToClipboard('ergebnis')"id="copy-button">Kopieren</button></td>
++<tdbgcolor=#98FB98colspan="5"style="padding-right:14px"><textarearows="6"maxlength="420"style="width:100%"placeholder="<?phpechoTXT_LBL_RESULT?>"name="ergebnis"><?phpecho$ticket->get_ergebnis()?></textarea></td>
+ <!--Kommentarzeileein
+ <td><?phpechoTXT_LBL_ANSW21?></td>
+ <td><selectrequiredclass="column"name="textant21_janein_id"id="textant21_janein_id">
+@@ -432,7 +362,7 @@
+ </select>
+ </td>
+ Kommentaraus//-->
+-<tdbgcolor=#98FB98colspan="6"style="padding-right:14px"><textarearows="6"style="width:100%"placeholder="<?phpecho'INFO'?>"name="dummy_text10"><?phpecho$ticket->get_dummy_text10()?></textarea></td>
++<tdbgcolor=#98FB98colspan="4"style="padding-right:14px"><textarearows="6"style="width:100%"placeholder="<?phpecho'INFO'?>"name="dummy_text10"><?phpecho$ticket->get_dummy_text10()?></textarea></td>
+ </tr>
+ <tr>
+ <td><?phpechoTXT_LBL_BEGIN?></td>
+@@ -441,9 +371,39 @@
+ <td><inputrequiredvalue="<?phpecho$ticket->get_ende()?>"placeholder="<?phpechoTXT_LBL_END?>"class="column"type="date"name="ende"/></td>
+ <td><?phpechoTXT_LBL_STUNDEN?></td>
+ <td><inputclass="column"value="<?phpecho$ticket->get_aufwand()?>"placeholder="<?phpechoTXT_LBL_STUNDEN?>"type="text"name="aufwand"/></td>
+-<td>&nbsp;</td>
+-<td><aclass="button"onclick="kopieren()"><?phpechoTXT_LBL_COPYTICKET?></a></td>
+-<td>&nbsp;</td>
+-<td>&nbsp;</td>
++<!--Kommentarzeileein
++<td><?phpechoTXT_LBL_QUEST4?></td>
++<tdcolspan="3"style="padding-right:14px"><inputvalue="<?phpecho$ticket->get_textinfo4()?>"placeholder="<?phpechoTXT_LBL_QUEST4?>"style="width:100%"name="textinfo4"type="text"/></td>
++Kommentaraus//-->
++<tdcolspan="3"><aclass="button"onclick="kopieren()"><?phpechoTXT_LBL_COPYTICKET?></a></td>
++</tr>
++<tr>
++<td></td>
++<td></td>
++<td></td>
++<td></td>
++<td></td>
++<td></td>
++<!--Kommentarzeileein
++<td><?phpechoTXT_LBL_ANSW41?></td>
++<td><selectrequiredclass="column"name="textant41_janein_id"id="textant41_janein_id">
++<optionvalue="-1"><?phpechoTXT_LBL_NOONE?></option>
++<?phpforeach($janeinas$p){?>
++<option<?phpif($ticket->get_textant41_janein_id()==$p->get_id())echo"selected";?>value="<?phpecho$p->get_id()?>"><?phpecho$p->get_text()?></option>
++<?php}?>
++</select>
++</td>
++<!--Kommentarzeileein
++<td><?phpechoTXT_LBL_ANSW42?></td>
++<td><selectrequiredclass="column"name="textant42_nummern_id"id="textant42_nummern_id">
++<optionvalue="-1"><?phpechoTXT_LBL_NOONE?></option>
++<?phpforeach($nummernas$p){?>
++<option<?phpif($ticket->get_textant42_nummern_id()==$p->get_id())echo"selected";?>value="<?phpecho$p->get_id()?>"><?phpecho$p->get_text()?></option>
++<?php}?>
++</select>
++</td>
++Kommentaraus//-->
++<td></td>
++<td></td>
+ </tr>
+ </table>
+
+===== modules/gui/templates/tickets/19/ticketsuch.php =====
+--- orig
++++ dev
+@@ -52,8 +52,8 @@
+ <td><inputvalue="<?phpecho$vorname?>"placeholder="<?phpechoTXT_LBL_FIRSTNAME?>"class="column"type="text"name="vorname"/></td>
+ <td><?phpechoTXT_LBL_PLZ?></td>
+ <td><inputvalue="<?phpecho$plz?>"placeholder="<?phpechoTXT_LBL_PLZ?>"class="column"type="text"name="plz"/></td>
+-<td></td>
+-<td></td>
++<td><?phpecho'Gläubiger'?></td>
++<td><inputclass="column"name="dummy_text3"placeholder="<?phpecho'Gläubiger'?>"type="text"value="<?phpecho$dummy_text3?>"/></td>
+ </tr>
+ <tr>
+ <td><?phpechoTXT_LBL_ORT?></td>
+@@ -62,11 +62,11 @@
+ <td><inputclass="column"value="<?phpecho$strasse?>"placeholder="<?phpechoTXT_LBL_STR?>"type="text"name="strasse"/></td>
+ <td><?phpechoTXT_LBL_HNR?></td>
+ <td><inputclass="column"value="<?phpecho$hausnummer?>"placeholder="<?phpechoTXT_LBL_HNR?>"type="text"name="hausnummer"/></td>
+-<td><?phpecho'Aktnr'?></td>
++<td><?phpecho'aktnr'?></td>
+ <td><inputclass="column"name="dummy_text9"placeholder="<?phpecho'Aktnr'?>"type="text"value="<?phpecho$dummy_text9?>"/></td>
+ </tr>
+ <tr>
+-<td><?phpechoTXT_LBL_PRIORITY?></td>
++<td><?phpecho'Liste'?></td>
+ <td>
+ <selectclass="column"name="prioritaet_id">
+ <optionvalue="-1"><?phpechoTXT_LBL_NOONE?></option>
+@@ -119,6 +119,7 @@
+ <th><?phpechoTXT_LBL_CALL_STATE?></th>
+ <th><?phpechoTXT_LBL_BEGIN?></th>
+ <th><?phpechoTXT_LBL_USER?></th>
++<th><?phpechoTXT_LBL_KDNR?></th>
+ <th><?phpechoTXT_LBL_LASTNAME?></th>
+ <th><?phpechoTXT_LBL_FIRSTNAME?></th>
+ <th><?phpechoTXT_LBL_PLZ?></th>
+@@ -134,13 +135,14 @@
+ <td><?phpecho$t->get_anruf_status()?></td>
+ <td><?phpecho$t->get_beginn()?></td>
+ <td><?phpecho$t->get_benutzer()?></td>
++<td><?phpecho$t->get_kundennummer()?></td>
+ <td><?phpecho$t->get_nachname()?></td>
+ <td><?phpecho$t->get_vorname()?></td>
+ <td><?phpecho$t->get_plz()?></td>
+ <td><?phpecho$t->get_ort()?></td>
+ <td><?phpecho$t->get_strasse()?></td>
+ <td><?phpecho$t->get_hausnummer()?></td>
++</tr>
+ <?php$selected=$selected+1;?>
+-</tr>
+ <?php}?>
+ </table>
+
+===== modules/gui/templates/tickets/19/ticketuebersicht.php =====
+--- orig
++++ dev
+@@ -6,46 +6,43 @@
+ varemailSubject="";
+ varformRef=document.forms['formTicket'];
+ //EMail-Subject
+-emailSubject="KIMI-Plus-KNPProjekt1-Telefonatmit"+formRef.elements['vorname'].value+""+formRef.elements['nachname'].value+"AKT-Nummer:#"+formRef.elements['dummy_text9'].value;
++emailSubject="KIMI-Plus-SchlaustromTelefonatmit"+formRef.elements['nachname'].value+"Kundennummer:#"+formRef.elements['dummy_text9'].value;
+ //EMail-Inhalt
+ emailBody="SehrgeehrteDamenundHerren,<br><br>";
+-emailBody+="hiermitmöchtenwirSieüberfolgendesKNPProjekt1Gespräch,daswirfürSiegeführthaben,informieren:<br><br>";
+-emailBody+="AKT-Nummer:"+formRef.elements['dummy_text9'].value+"<br>";
+-emailBody+="Name:"+formRef.elements['vorname'].value+""+formRef.elements['nachname'].value+"<br>";
++emailBody+="hiermitmöchtenwirSieüberfolgendesSCHLAUSTROMGespräch,daswirfürSiegeführthaben,informieren:<br><br>";
++emailBody+="kundennummer:"+formRef.elements['dummy_text9'].value+"<br>";
++emailBody+="Name:"+formRef.elements['nachname'].value+""+formRef.elements['vorname'].value+"<br>";
+ emailBody+=""+"<br>";
+-emailBody+="Anschrift:"+formRef.elements['plz'].value+""+formRef.elements['ort'].value+""+formRef.elements['strasse'].value+"<br>";
++emailBody+="Anschrift:"+formRef.elements['plz'].value+""+formRef.elements['ort'].value+""+formRef.elements['strasse'].value+""+formRef.elements['hausnummer_erw'].value+"<br>";
+ emailBody+="Telefon1:"+formRef.elements['telefon'].value+"<br>";
+ emailBody+="Telefon2:"+formRef.elements['telefon2'].value+"<br>";
+-emailBody+="email:"+formRef.elements['email'].value+"<br>";
++emailBody+="EMail:"+formRef.elements['email'].value+"<br>";
+ emailBody+=""+"<br>";
+-varselection=formRef.elements['status_id']
+-varselectedText=selection.options[selection.selectedIndex].text;
+-emailBody+="Status:"+selectedText+"<br>";
+-varselection=formRef.elements['anruf_status_id']
+-varselectedText=selection.options[selection.selectedIndex].text;
+-emailBody+="Anruf-Status:"+selectedText+"<br>";
+-varselection=formRef.elements['prioritaet_id']
+-varselectedText=selection.options[selection.selectedIndex].text;
+-emailBody+="Abschlusscode:"+selectedText+"<br>";
++emailBody+="Aufgabe:"+formRef.elements['beschreibung_detail'].value+"<br>";
+ emailBody+=""+"<br>";
+ emailBody+="Ergebnis:"+formRef.elements['ergebnis'].value+"<br>";
+-varselection=formRef.elements['textant11_janein_id']
+-varselectedText=selection.options[selection.selectedIndex].text;
+-emailBody+="Lösungsbereitschaft:"+selectedText+"<br>";
+-varselection=formRef.elements['produkt_id']
++emailBody+=""+"<br>";
++varselection=formRef.elements['textant22_nummern_id']
++varselectedText=selection.options[selection.selectedIndex].text;
++emailBody+="Lösungsvorschlag:"+selectedText+"<br>";
++/*20191030/frta
++varselection=formRef.elements['textant21_janein_id']
++varselectedText=selection.options[selection.selectedIndex].text;
++emailBody+="Zahlschein:"+selectedText+"<br>";
++varselection=formRef.elements['textant31_janein_id']
+ varselectedText=selection.options[selection.selectedIndex].text;
+ emailBody+="Vorlage:"+selectedText+"<br>";
+-varselection=formRef.elements['textant22_nummern_id']
+-varselectedText=selection.options[selection.selectedIndex].text;
+-emailBody+="Lösungsvorschlag:"+selectedText+"<br>";
++varselection=formRef.elements['textant41_janein_id']
++varselectedText=selection.options[selection.selectedIndex].text;
++emailBody+="Mahnsperre:"+selectedText+"<br>";
++*/
++/*20191030/ar
+ varselection=formRef.elements['grund_id']
+ varselectedText=selection.options[selection.selectedIndex].text;
+-emailBody+="Beschäftigungsstatus:"+selectedText+"<br>";
+-emailBody+=""+"<br>";
+-emailBody+="Zahlbetrag:"+formRef.elements['dummy_number6'].value+"<br>";
++emailBody+="Ratenbriefhinweis:"+selectedText+"<br>";
++*/
++emailBody+="Ratenhöhe/Einmalzahlung:"+formRef.elements['dummy_number6'].value+"<br>";
+ emailBody+="Zahlungam:"+formRef.elements['dummy_date1'].value+"<br>";
+-emailBody+=""+"<br>";
+-emailBody+="DatenzumAkt:"+formRef.elements['beschreibung_detail'].value+"<br>";
+ emailBody+="<br><br>";
+ //Gruß
+ emailBody+="<br><br>";
+@@ -55,7 +52,7 @@
+ emailBody+="<br>";
+ emailBody+="imAuftragder:"+"<br>";
+ emailBody+="<br>";
+-emailBody+="KIMI-PlusGmbH,HaiderStraße40/3,4052Ansfelden,Österreich"+"<br>";
++emailBody+="KIMI-PlusGmbH,Haiderstraße40/3,4052Ansfelden,Österreich"+"<br>";
+ emailBody+="Telefon:+43(0)7322099,mail:<ahref='mailto:kundenservice@kimi-plus.at'>kundenservice@kimi-plus.at</a>,Internet:<ahref='http://www.kimi-plus.at'target='_blank'>www.kimi-plus.at</a>"+"<br>";
+ emailBody+="<br><br><br>";
+ emailForm+="<formid=\"formTicketView\"action=\"./libs/addons/phpmail/send_ticket_mail.php\"method=\"post\"accept-charset=\"UTF-8\">";
+@@ -68,6 +65,7 @@
+ <?php}?>
+ emailForm+="</form>";
+ //INFO:wirdabhierbiszumreturnauskommentiertwirddiebisherigeÜbersichtangezeigt!
++//20191030/ar
+ htmlText+="<html><head>";
+ htmlText+="<title>Ticket-Zusammenfassung</title>";
+ htmlText+="<metacharset=\"utf-8\">";
+@@ -94,6 +92,7 @@
+ infowindow.document.write(htmlText);
+ infowindow.document.close();
+ return;
++/*
+ //abhieristdiebisherigeTicketübersicht!!!
+ htmlText+="<html><head>"
+ htmlText+="<title>Ticket-Zusammenfassung</title>"
+@@ -116,6 +115,7 @@
+ htmlText+="<TD>"+formRef.elements['ticketnr'].value
+ htmlText+="</TD>"
+ htmlText+="</TR>"
++/*
+ varselection=formRef.elements['prioritaet_id']
+ varselectedText=selection.options[selection.selectedIndex].text;
+ htmlText+="<TR>"
+@@ -273,7 +273,6 @@
+ htmlText+="<TD>"+selectedText
+ htmlText+="</TD>"
+ htmlText+="</TR>"
+-/*
+ varselection=formRef.elements['textant21_janein_id']
+ varselectedText=selection.options[selection.selectedIndex].text;
+ htmlText+="<TR>"
+
+===== modules/gui/templates/tickets/19/ticketvalidate.js =====
+--- orig
++++ dev
+@@ -8,71 +8,102 @@
+ functiongetElementFromName(element_name){
+ returndocument.getElementsByName(element_name)[0];
+ }
+-functioncheckNum(input)
+-{
+-//alert(input);
+-//alert('beforefor');
+-//feld=input;
+-//alert(feld);
+-return(input-0)==input&&(''+input).trim().length>0;
+-}
+ functionvalidateFormOnSave(){
+ varerrMsg='';
+ //Hierk�nnendiePr�fungenvorgenommenwerden,isteinFehler,soistderFehlertextder
+ //dieVariableerrMsgzuzuweisen,wodurchautomatischdieMeldungerfolgtunddasSpeichern
+ //verhindertwird.
+ //Starteigene�berpr�fungen
+-//20210702/ar
+-//Pr�fungBenutzerElsbeth
+-varloginUserName=document.getElementById("loginUserName").value;
+-if(loginUserName=='elsbeth'){
+-vare=document.getElementById("benutzer_id");
+-varselectedUser=e.options[e.selectedIndex].text;
+-if(selectedUser=='elsbeth'){
+-alert('Benutzerdarfnichtelsbethsein!');
+-returnfalse;
+-}elseif(selectedUser=='tausch'){
+-alert('Benutzerdarfnichttauschsein!');
+-returnfalse;
++//Pr�fungVorlage
++varcheck_element=getElementFromId('textant31_janein_id');
++varselectedID=getComboSelectedId(check_element);
++varstatusId=getComboSelectedId(getElementFromName('status_id'));
++varloesungId=getComboSelectedId(getElementFromName('textant22_nummern_id'));
++if(statusId==117){
++if(selectedID=='-1'){
++errMsg='Vorlagemussgewaehltwerden!';
+ }
+-//LogEintrag
+-varticketid=document.getElementsByName("ticket_id")[0].value;
+-if(ticketid!=''){
+-$.ajax({
+-url:"./index.php?site=add_log&ajax=true",
+-type:"POST",
+-data:{
+-'objekt':'TICKET',
+-'objekt_id':ticketid,
+-'logart':'MAN_START',
+-'logUserName':selectedUser
+ }
+-});
++if(statusId==117){
++if(loesungId=='-1'){
++errMsg='L�sungsvorschlagmussgewaehltwerden!';
++}
++}
++//Pr�fungL�sungsvorschlagJA-Einmal,JA-Raten
++if(errMsg==''){
++check_element=getElementFromId('textant22_nummern_id');
++selectedID=getComboSelectedId(check_element);
++//Pr�feobJA-Ratengew�hlt
++if(selectedID==109|selectedID==110){//Einmal,Raten-JA,oderSondervereinbarung
++//Pr�feobRatenh�hebelegtist
++check_element=getElementFromName('dummy_number6');
++if(check_element.value==''){
++errMsg='Ratenhoehe/Einmalbetragmusseingetragenwerden';
++}
++//Pr�fungZahlungam
++if(errMsg==''){
++check_element=getElementFromName('dummy_date1');
++if(check_element.value==''){
++errMsg='Zahlungammusseingetragenwerden';
++}
++}
++//Pr�fungObjektart
++check_element=getElementFromId('textant12_nummern_id');
++selectedID=getComboSelectedId(check_element);
++if(errMsg==''){
++if(selectedID=='-1'){
++errMsg='Objektartammussausgew�hltwerden';
++}
++}
+ }
+ }
+ //Pr�fungStatus/Anrufstatus
+ if(errMsg==''){
+ varstatusId=getComboSelectedId(getElementFromName('status_id'));
+ varanrufStatusId=getComboSelectedId(getElementFromName('anruf_status_id'));
+-varbetreibung=getComboSelectedId(getElementFromName('prioritaet_id'));
+-varart=getComboSelectedId(getElementFromName('grund_id'));
+-//Wenn"Statuserledigt"undArt"R�ckrufOutbund"mussBetreibungbelegtsein--20211226/Tafr
+-if(errMsg==''&&statusId==117&&art==101&&betreibung==-1){
+-errMsg='Betreibungmussbelegtsein!';
+-check_element=getElementFromName('prioritaet_id');
+-}
+-//ErledigtundAnrufstatusin536544545
+-if(errMsg==''&&statusId==117&&!(anrufStatusId==373|anrufStatusId==378|anrufStatusId==379|anrufStatusId==372)){
++varadressCheck=getComboSelectedId(getElementFromName('textant21_janein_id'));
++varemailCheck=getComboSelectedId(getElementFromName('textant41_janein_id'));
++vardatenCheck=getComboSelectedId(getElementFromName('textant11_janein_id'));
++//ErledigtundAnrufstatusin197,203,204
++if(statusId==117&&!(anrufStatusId==373|anrufStatusId==378|anrufStatusId==379)){
+ errMsg='UngueltigerAnfrufstatusfuerStatuserledigt!';
+ check_element=getElementFromName('anruf_status_id');
+ }
+-//Pr�fungobFehlerundevtl.Abbruch
+-if(errMsg!=''){
+-alert(errMsg);
+-check_element.focus();
+-returnfalse;
++//Checkbeierledigt-underreicht
++if(errMsg==''&&statusId==117){
++//Adress
++if((anrufStatusId==373)&&adressCheck==-1){
++errMsg='Adresscheckmussgesetztwerden!';
++check_element=getElementFromName('textant21_janein_id');
++}
++//EMailcheck
++if(errMsg==''&&(anrufStatusId==373)&&emailCheck==-1){
++errMsg='EMail-Checkmussgesetztwerden!';
++check_element=getElementFromName('textant41_janein_id');
++}
++//Datenkorrekt
++if(errMsg==''&&(anrufStatusId==373)&&datenCheck==-1){
++errMsg='Daten-Checkmussgesetztwerden!';
++check_element=getElementFromName('textant11_janein_id');
++}
++//Kontakttelefonnummer
++if(errMsg==''&&anrufStatusId==373&&getElementFromName('dummy_text4').value==''){
++errMsg='Kontakttelefonnummermusseingetragenwerden!';
++check_element=getElementFromName('dummy_text4');
++}
++if(errMsg==''&&anrufStatusId==373&&getElementFromName('dummy_text4').value=='-'){
++errMsg='Kontakttelefonnummermusseingetragenwerden!';
++check_element=getElementFromName('dummy_text4');
++}
++//Wenn"Statuserledigtunderreicht"mussArtbelegtsein--20220528/Tafr
++varart=getComboSelectedId(getElementFromName('dummy_id1'));
++if(errMsg==''&&statusId==117&&anrufStatusId==373&&art==-1){
++errMsg='ArtOUTBOUND/INBOUNDmussbelegtsein!';
++check_element=getElementFromName('dummy_id1');
+ }
+ }
++}
++//
+ //Endeeigene�berpr�fungen
+ //Pr�fungobFehlerundevtl.Abbruch
+ if(errMsg!=''){
+
+===== modules/gui/templates/tickets/34/ticket.php =====
+--- orig
++++ dev
+@@ -56,18 +56,15 @@
+ <td><?phpecho'AKTnummer'?></td>
+ <td><inputvalue="<?phpecho$ticket->get_dummy_text9()?>"placeholder="<?phpecho'AKTnummer'?>"class="column"type="text"name="dummy_text9"/></td>
+ <td>
+-<ahref="http://192.168.68.69:3210/cti?preset=kimiOutbound&user=a.grossbichler&az=<?phpecho$ticket->get_dummy_text9()?>"target="_blank"</td><b>CTIALEXANDRA</b></a>
+-</td>
+-<td>
+ <ahref="http://192.168.68.69:3210/cti?preset=kimiOutbound&user=j.posch&az=<?phpecho$ticket->get_dummy_text9()?>"target="_blank"</td><b>CTIJACKI</b></a>
+ </td>
+ <td>
+-<!--Kommentarzeileein
+ <ahref="http://192.168.68.69:3210/cti?preset=kimiOutbound&user=a.omar&az=<?phpecho$ticket->get_dummy_text9()?>"target="_blank"</td><b>CTIOMAR</b></a>
+ </td>
+ <td>
+ <ahref="http://192.168.68.69:3210/cti?preset=kimiOutbound&user=s.fladerer&az=<?phpecho$ticket->get_dummy_text9()?>"target="_blank"</td><b>CTISYLVIA</b></a>
+ </td>
++<!--Kommentarzeileein
+ <td><ahref="http://10.20.12.14/kimi/kimi_ET/modules/gui/templates/tickets/10/knpdoku.pdf"target="_blank"><b>KNPFinancialServiceDOKU</b></a></td>
+ <td>&nbsp;</td>
+ <td><ahref="http://10.20.12.14/kimi/kimi_ET/kimibatch/knp1check.php"target="_blank"><b>KNPFinancialServiceCHECK</b></a></td>
+@@ -84,9 +81,8 @@
+ <td></td>
+ <tdbgcolor=#FF00000><?phpecho'Saldo'?></td></td>
+ <tdbgcolor=#FF00000><inputvalue="<?phpecho$ticket->get_dummy_number4()?>"placeholder="<?phpecho'Saldo'?>"class="column"type="decimal"name="dummy_number4"/></td>
+-<!--Kommentarzeileein
+-<td>
+-<ahref="http://192.168.68.69:3210/cti?preset=kimiOutbound&user=a.grossbichler&az=<?phpecho$ticket->get_dummy_text9()?>"target="_blank"</td><b>CTIALEXANDRA</b></a>
++<td>
++<ahref="http://192.168.68.69:3210/cti?preset=kimiOutbound&user=s.hochmayr&az=<?phpecho$ticket->get_dummy_text9()?>"target="_blank"</td><b>CTISABINA</b></a>
+ </td>
+ <td>
+ <ahref="http://192.168.68.69:3210/cti?preset=kimiOutbound&user=d.oezdemir&az=<?phpecho$ticket->get_dummy_text9()?>"target="_blank"</td><b>CTIDÖNE</b></a>
+@@ -94,6 +90,7 @@
+ <td>
+ <ahref="http://192.168.68.69:3210/cti?preset=kimiOutbound&user=s.grimm&az=<?phpecho$ticket->get_dummy_text9()?>"target="_blank"</td><b>CTISOPHIE</b></a>
+ </td>
++<!--Kommentarzeileein
+ <td><?phpecho'IBAN'?></td>
+ <td><inputvalue="<?phpecho$ticket->get_dummy_text1()?>"placeholder="<?phpecho'IBAN'?>"class="column"type="text"name="dummy_text1"/></td>
+ <td><?phpecho'BIC'?></td>
+@@ -105,10 +102,6 @@
+ <td><inputvalue="<?phpecho$ticket->get_nachname()?>"placeholder="<?phpechoTXT_LBL_LASTNAME?>"class="column"type="text"name="nachname"/></td>
+ <td><?phpechoTXT_LBL_FIRSTNAME?></td>
+ <td><inputvalue="<?phpecho$ticket->get_vorname()?>"placeholder="<?phpechoTXT_LBL_FIRSTNAME?>"class="column"type="text"name="vorname"/></td>
+-<td></td><td></td>
+-<td>
+-<ahref="https://10.196.69.11/kimi_ET/kimibatch/COEO_NeueMandanten20230523.pdf"target="_blank"><b>Mandantenblätter</b></a>
+-</td>
+ <!--Kommentarzeileein
+ <tdbgcolor=#FF00000><?phpecho'Verzzinsen'?></td>
+ <!--Kommentarzeileein
+
+===== modules/gui/templates/tickets/34/ticketvalidate.js =====
+--- orig
++++ dev
+@@ -57,8 +57,7 @@
+ varbetreibung=getComboSelectedId(getElementFromName('prioritaet_id'));
+ varart=getComboSelectedId(getElementFromName('grund_id'));
+ //Wenn"Statuserledigt"undArt"R�ckrufOutbund"mussBetreibungbelegtsein--20211226/Tafr
+-//if(errMsg==''&&statusId==187&&art==183&&betreibung==-1){20241212BetreibungimmerPflicht
+-if(errMsg==''&&statusId==187&&betreibung==-1){
++if(errMsg==''&&statusId==187&&art==183&&betreibung==-1){
+ errMsg='Betreibungmussbelegtsein!';
+ check_element=getElementFromName('prioritaet_id');
+ }
+
+===== modules/gui/templates/tickets/8/ticket.php =====
+--- orig
++++ dev
+@@ -29,15 +29,15 @@
+ <td><?phpecho'Sachbearbeiter'?></td>
+ <td><inputclass="column"value="<?phpecho$ticket->get_dummy_text5()?>"placeholder="<?phpecho'Sachbearbeiter'?>"type="text"name="dummy_text5"/></td>
+ <!--Kommentarzeileein
+-<td><ahref="https://10.196.69.11/kimi_ET/modules/gui/templates/tickets/8/OKO_Sachbearbeiter.pdf"target="_blank"><b>OKO_Sachbearbeiter</b></a></td>
+-<td>
+-<ahref="https://10.196.69.11/kimi_ET/modules/gui/templates/tickets/8/OKO_Leitfaden.pdf"target="_blank"><b>OKO_Leitfaden</b></a>
+-<ahref="https://10.196.69.11/kimi_ET/kimibatch/OKO_Leitfaden.pdf"target="_blank"><b>OKO_Leitfaden</b></a>
++<td><ahref="https://10.196.69.21/kimidev_ET/modules/gui/templates/tickets/8/OKO_Sachbearbeiter.pdf"target="_blank"><b>OKO_Sachbearbeiter</b></a></td>
++<td>
++<ahref="https://10.196.69.21/kimidev_ET/modules/gui/templates/tickets/8/OKO_Leitfaden.pdf"target="_blank"><b>OKO_Leitfaden</b></a>
++<ahref="https://10.196.69.21/kimidev_ET/kimibatch/OKO_Leitfaden.pdf"target="_blank"><b>OKO_Leitfaden</b></a>
+ <!--KommentarzeileeinKommentaraus//-->
+-<td><ahref="https://10.196.69.11/kimi_ET/kimibatch/OKO_SachbearbeiterNEU.pdf"target="_blank"><b>OKO_Sachbearbeiter</b></a></td>
+-<td><ahref="https://10.196.69.11/kimi_ET/kimibatch/OKO_Leitfaden.pdf"target="_blank"><b>OKO_Leitfaden</b></a>
+-<ahref="https://10.196.69.11/kimi_ET/kimibatch/OKO_Leitfaden_20220627.pdf"target="_blank"><b>OKO_LeitfadenNEU</b></a>
+-<ahref="https://10.196.69.11/kimi_ET/kimibatch/okocheck.php"target="_blank"><b>OKO_Check</b></a>
++<td><ahref="https://10.196.69.21/kimidev_ET/kimibatch/OKO_SachbearbeiterNEU.pdf"target="_blank"><b>OKO_Sachbearbeiter</b></a></td>
++<td><ahref="https://10.196.69.21/kimidev_ET/kimibatch/OKO_Leitfaden.pdf"target="_blank"><b>OKO_Leitfaden</b></a>
++<ahref="https://10.196.69.21/kimidev_ET/kimibatch/OKO_Leitfaden_20220627.pdf"target="_blank"><b>OKO_LeitfadenNEU</b></a>
++<ahref="https://10.196.69.21/kimidev_ET/kimibatch/okocheck.php"target="_blank"><b>OKO_Check</b></a>
+ </td>
+ </tr>
+ <trbgcolor="#D3D3D3">
+@@ -206,8 +206,8 @@
+ <td>&nbsp;</td>
+ <td>&nbsp;</td>
+ <tr>
+-<tdbgcolor=#FFFF00><?phpecho"weitereTelefonnummern(tele4+)?"?></td>
+-<tdbgcolor=#FFFF00><inputplaceholder="<?phpecho"weitereTelefonnummern(tele4+)"?>"name="dummy_text6"class="column"type="text"value="<?phpecho$ticket->get_dummy_text6()?>"/><br/></td>
++<tdbgcolor=#FFFF00><?phpecho"eineTelefonnrfalsch?"?></td>
++<tdbgcolor=#FFFF00><inputplaceholder="<?phpecho"eineTelefonnrfalsch?"?>"name="dummy_text6"class="column"type="text"value="<?phpecho$ticket->get_dummy_text6()?>"/><br/></td>
+ <tdbgcolor=#FFFF00><?phpecho"Telefon3"?></td>
+ <td>
+ <inputstyle="width:170px"placeholder="<?phpecho"Telefon3"?>"name="dummy_text7"class="column"type="text"value="<?phpecho$ticket->get_dummy_text7()?>"/>
+
+===== testpost.php =====
+--- orig
++++ dev
+@@ -10,7 +10,24 @@
+ return$response;
+ }
+ $myurl='./setticketcallinfo2.php';
+-$data=array('key1'=>'value1','key2'=>'value2');
++$url='https://10.196.69.21/kimidev_ET/setticketcallinfo.php';
++//$data=array('key1'=>'value1','key2'=>'value2');
++$data=array('status'=>'MISSED',
++'cdr_unique_id'=>'1663365514.65887',
++'source_num'=>'436603498600',
++'target_num'=>'queue:groupqueue32_l1',
++'start_time'=>'2022-09-1623:58:35',
++'connect_time'=>'',
++'end_time'=>'2022-09-1623:58:36',
++'call_duration'=>'0',
++'talk_duration'=>'0',
++'client_reference'=>'',
++'project_reference'=>'INKO2016:FriedrichLacher',
++'ticket_reference'=>'1475',
++'action_url'=>'https://10.196.69.11/kimi_ET/index.php?autologin=true&loginuser=userReferenz&mandant=18&kId=10&ticket_id=60979&site=ticket&selected_tickets=60979&selected_ticket_index=0',
++'pickup_user_id'=>'0',
++'outgoing_number'=>'436765032357',
++'id'=>'6240');
+ $JsonData=json_encode($data,JSON_UNESCAPED_UNICODE);
+ //usekey'http'evenifyousendtherequesttohttps://...
+ $options=array(
+@@ -22,12 +39,21 @@
+ );
+ //$result=httpPost($myurl,$data);
+ $curl=curl_init($url);
++var_dump($curl);
++echo"<br>".curl_error($curl)."<br><br>";
++echo"<br>init";
+ //curl_setopt($ch,CURLOPT_HTTPHEADER,array('Content-Type:application/json'));
+ //curl_setopt($curl,CURLOPT_RETURNTRANSFER,true);
++curl_setopt($curl,CURLOPT_SSL_VERIFYPEER,false);
+ curl_setopt($curl,CURLOPT_POST,true);
++echo"post";
+ curl_setopt($curl,CURLOPT_POSTFIELDS,http_build_query($data));
++echo"fields";
+ curl_setopt($curl,CURLOPT_RETURNTRANSFER,true);
++echo"trans";
+ $result=curl_exec($curl);
++echo"<br>".curl_error($curl)."<br><br>";
++echo"exec";
+ curl_close($curl);
+ //var_dump($response);
+ //$context=stream_context_create($options);

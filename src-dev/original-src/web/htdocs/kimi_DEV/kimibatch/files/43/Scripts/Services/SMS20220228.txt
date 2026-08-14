@@ -1,0 +1,4 @@
+SMS 20220228091441: Ticket-ID=986113, TicketNr=, HauptticketNr=, Service-Kontakt=+436606590009, Parameter=4711;100,90;zahlungshilfe@sberbank-collections.de;0732/12345;TESTNACHRICHT;kundenservice@kimi-plus.at;Kundenservice;;;;;
+   Templateinhalt: 
+Bitte kontaktieren Sie uns zu Ihrer Verbindlichkeit zum KK:4711 - zahlungshilfe@sberbank-collections.de
+

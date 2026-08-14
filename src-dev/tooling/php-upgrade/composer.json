@@ -1,0 +1,24 @@
+{
+  "name": "kimi-plus/upgraded-src-tooling",
+  "description": "Upgrade tooling for the modernized KIMI Portal source tree.",
+  "type": "project",
+  "require": {
+    "php": "^8.4 || ^8.5"
+  },
+  "require-dev": {
+    "dealerdirect/phpcodesniffer-composer-installer": "^1.1",
+    "phpcompatibility/php-compatibility": "^10.0.0@dev",
+    "rector/rector": "^2.4"
+  },
+  "config": {
+    "allow-plugins": {
+      "dealerdirect/phpcodesniffer-composer-installer": true
+    },
+    "sort-packages": true
+  },
+  "scripts": {
+    "phpcs:compat": "phpcs",
+    "rector:dry-run": "rector process --dry-run",
+    "rector:process": "rector process"
+  }
+}

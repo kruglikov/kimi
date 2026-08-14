@@ -1,0 +1,1 @@
+<h2><?php echo TXT_LBL_NOPERMISISON ?></h2>

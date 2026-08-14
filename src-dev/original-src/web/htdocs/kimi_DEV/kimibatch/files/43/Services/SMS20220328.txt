@@ -1,0 +1,20 @@
+SMS 20220328090218: Ticket-ID=1, TicketNr=, HauptticketNr=, Service-Kontakt=+436606590009, Parameter=4711;100,90;zahlungshilfe@sberbank-collections.de;0732/12345;TESTNACHRICHT;kundenservice@kimi-plus.at;Kundenservice;;;;;
+   Templateinhalt: 
+Bitte kontaktieren Sie uns zu Ihrer Verbindlichkeit zum KK:4711 - zahlungshilfe@sberbank-collections.de
+
+SMS 20220328155005: Ticket-ID=, TicketNr=, HauptticketNr=, Service-Kontakt=0043676845222500, Parameter=49-9-1644426480-550;599,81;zahlungshilfe@sberbank-collections.de;+49 69 50958953;;;;;
+   Templateinhalt: 
+Bitte kontaktieren Sie uns zu Ihrer Verbindlichkeit zum KK:49-9-1644426480-550 - zahlungshilfe@sberbank-collections.de
+
+SMS 20220328155005: Ticket-ID=, TicketNr=, HauptticketNr=, Service-Kontakt=0043676845222500, Parameter=49-9-1644426480-550;599,81;zahlungshilfe@sberbank-collections.de;+49 69 50958953;;;;;
+   Templateinhalt: 
+Wir konnten Sie nicht erreichen-bitte kontaktieren Sie uns zu Ihrer Verbindlichkeit KK: 49-9-1644426480-550-zahlungshilfe@sberbank-collections.de, Tel. NR: +49 69 50958953
+
+SMS 20220328155006: Ticket-ID=, TicketNr=, HauptticketNr=, Service-Kontakt=0043676845222500, Parameter=49-9-1644426480-550;599,81;zahlungshilfe@sberbank-collections.de;+49 69 50958953;;;;;
+   Templateinhalt: 
+Ihre Kreditrate ist %129berf%132llig! Bitte bezahlen Sie Ihre Rate sofort ein, oder rufen Sie uns an: +49 69 50958953. Ihr Kredit wird sonst gesamt f%132llig gestellt!
+
+SMS 20220328155006: Ticket-ID=, TicketNr=, HauptticketNr=, Service-Kontakt=0043676845222500, Parameter=49-9-1644426480-550;599,81;zahlungshilfe@sberbank-collections.de;+49 69 50958953;;;;;
+   Templateinhalt: 
+Die vereinbarte Kreditrate ist heute f%132llig. Bitte zahlen Sie die %129berf%132llige Rate sofort ein oder Tel.NR: +49 69 50958953. Vermeiden Sie weitere Schritte.
+

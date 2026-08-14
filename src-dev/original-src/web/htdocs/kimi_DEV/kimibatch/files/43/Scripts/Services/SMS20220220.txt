@@ -1,0 +1,8 @@
+SMS 20220220102929: Ticket-ID=1431061, TicketNr=7001, HauptticketNr=7000, Service-Kontakt=0043676845222500, Parameter=49-9-1670771080-550;;zahlungshilfe@sberbank-collections.de;r;Herr;Stefan Pohl;;Stefan Pohl
+   Templateinhalt: 
+Bitte kontaktieren Sie uns zu Ihrer Verbindlichkeit zum KK:49-9-1670771080-550 - zahlungshilfe@sberbank-collections.de
+
+SMS 20220220102929: Ticket-ID=1431062, TicketNr=8001, HauptticketNr=8000, Service-Kontakt=0043676845222500, Parameter=49-9-1613880580-550;;zahlungshilfe@sberbank-collections.de;r;Herr;Mario Jürgens;;Mario Jürgens
+   Templateinhalt: 
+Bitte kontaktieren Sie uns zu Ihrer Verbindlichkeit zum KK:49-9-1613880580-550 - zahlungshilfe@sberbank-collections.de
+

@@ -1,0 +1,67 @@
+Verwaltungssatz;CHECK Verarbeitung Buchungstag durchführen;CHECK ob Buchungstag ordnungsgemäß verarbeitet
+Verwaltungssatz;Verwaltungssatz Planung durchführen;Planung Buchungs- und Stichtage und Eintragung in die Verwaltungssatzsteuerung, wöchentlich
+Verwaltungssatz;aktullen Verwaltungssatz anzeigen;aktuellen Verwaltungssatz anzeigen
+Verwaltungssatz;Verwaltungssatz Salden berechnen;Berechnungen Tages- und Gesamtsalden
+Verwaltungssatz;Check Verwaltungssatz Salden;Prüfen Tages- und Gesamtsalden
+Verwaltungssatz;SET Verwaltungssatz KZ_AKTUELL;
+Stichtag Teil 1;Stichtagskonten festlegen;
+Stichtag Teil 1;Stichtags Liste erstellen;
+Stichtag Teil 1;Endkapitalisierung Guthabenskonten… ;
+Stichtag Teil 1;XX und SZ;
+Stichtag Teil 1;Restrate mit Abbucher;
+Überwachung IK01 02 und ATIN;Überwachung IK 01/02 und ATIN;
+Kundenhistorie Vorlage;Kundenhistorie Vorlage;
+Stichtag Teil 2;Stichtags-Liste abarbeiten;
+Stichtag Teil 2;Stichtagsdaten aus Subkonten ermittlen;
+Stichtag Teil 2;Check Batch1 - Anzahl TMP_Stichtag;NEU seit Mai 15: Anzahl durchgeführter STICHTAGsBuchungen prüfen
+Stichtag Teil 2;Stichtagsdaten speichern;Stichtagsdaten speichern
+Stichtag Teil 2;Check Batch2 - Stichtagsdaten prüfen;NEU seit Mai 15: Div. Daten der STICHTAGsBuchungen prüfen
+Kontoauszug;Kontoauszug-Daten erstellen für Druck;Erstellung Kontoauszug Ausgabefile für Druck Kontoauszüge
+Kontoauszug;Kontoauszug-Druckdatei erstellen;
+ATIN-M4-mahnungen;ATIN-M4-Mahnungen erstellen;NEU seit Mai 15
+;Restraten älter 1 Monat;NEU seit Mai 15
+Lastschrift;Lastschrift erstellen;
+Lastschrift;Lastschrift als EXCELFile;NEU seit Mai 15: Lastschrift als EXCELFile erstellen
+Lastschrift;Lastschrift IMPORT-File;NEU seit Mai 15: Lastschrift IMPORT-File für ELBA
+;manuelle und maschinelle Zahlungen prüfen;NEU seit Mai 15:
+Stichtag Teil 3;Stichtag am Konto setzen;
+Stichtag Teil 3;Stichtagende setzen;
+;ELBA-Datenübertragung;ELBA-Datenübertragung
+Zahlungen;Zahlungen;Erstellung Zahlungs-Eingabedatei aus ELBA EDIFactV2 MIT INSERT (Neu ab 201506)
+Zahlungen;ZahlungenListe;
+Zahlungen;Zahlungen-Stichtag-Überschneidung;Anzeige Zahlungen-Stichtag-Überschneidung (ab 201506)
+Zahlungen;manuelle Zahlungen RAIFFE und OBERBANK aufbereiten;
+Zahlungen;Zahlungen einspielen;
+Rücklastschriften;Rücklastschriften ermitteln und melden;
+Rücklastschriften;ELBA - Lastschriften und Gutschriften übertragen;
+Tagesabschlusscheck;Tagesabschlusscheck durchführen;
+Saldenkontrolle;Saldenkontrolle erstellen;
+Saldenkontrolle;Saldenkontrolle-Differenzliste erstellen;
+Journale;Fehlerjournal erstellen;
+Kontostatistik;Kontostatistik erstellen;
+Journale;Buchungsjournal erstellen;
+Journale;Zahlungsjournal erstellen;
+Journale;BelegartenjournalTAG erstellen;
+Journale;BelegartenjournalMONAT erstellen;
+KRSV Liste;KRS-Versicherungsänderungen;
+Tagesabschluss;Abschluss Buchungstag;SET Buchungstag Verarbeitung OK
+Inkassoabrechnungen;Inkassoabrechnungen;Erstellung Inkasso-Abrechnungsdateien
+Inkassovorschlagsliste;Inkassovorschlagsliste;Erstellung Inkassovorschlagsliste
+Inkassokontoauszug;Inkassokontoauszug;"Erstellung Inkassokontoauszuuml;ge"
+Inkassosaldoaufstellung;Inkassosaldoaufstellung;Erstellung Inkassosaldoaufstellung
+Inkassorechnungen;Inkassorechnungen Rechnungsnummer;Inkassorechnungen-Rechnungsdaten ermitteln
+Inkassorechnungen;Inkassorechnungen drucken;Inkassorechnungen drucken
+Inkassouumlübergabe ;Abtretungsätze ermitteln und Ausgabefile erstellen;
+Inkassouumlübergabe;Mitteilungssätze erstellen;
+Inkassouumlübergabe;Statusänderungen feststellen und Schnittstelle erzeugen;
+Debitorenaussenstand;Debitorenaussenstand erstellen;Debitorenaussenstand täglich erstellen und monatlich weiterleiten
+;;Erstellung Reporting MONATLICH
+Kontobewegungen;Kontobewegungen erstellen;Kontobewegungen - wöchentlich bzw. zum Monatsabschluss
+Inkasso-Kontobewegungen;Inkasso-Kontobewegungen;Inkasso-Kontobewegungen - wöchentlich bzw. zum Monatsabschluss
+Zahlungen Österreich und Südtirol;Zahlungen Österreich und Südtirol erstellen;Reporting Zahlungen Österreich und Südtirol monatlich
+Buchungsbeleg Prämie Cardif;Buchungsbeleg Prämie Cardif erstellen;Beleg für Auszahlung Cardifprämie - monatlich
+;Buchungen Prämie Cardif erstellen;Buchungen für Berechnung Cardifprämie - monatlich - MUSS IMMER IM NEUEN MONAT GEFAHREN WERDEN !!!
+Abrechnung Inkasso;Abrechnung Inkasso durchführen;Abrechungen Inkassobüros - monatlich
+Überzahlungen Österreich;Überzahlungen AT erstellen;Reporting Überzahlungen Österreich(Guthaben AT) jährlich
+Überzahlungen Südtirol;Überzahlungen ST erstellen;Reporting Überzahlungen Südtirol (Guthaben ST) jährlich
+Kontenabstimmgung Kleefeld;Kontoabstimmung - ELBA und Lastschriften und Journal;wöchentlich - Anfang der Woche

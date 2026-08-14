@@ -1,0 +1,74 @@
+:20:20150423000000
+:21:20150422000000
+:25://AT34000/00001143700/EUR
+:28C:15078/001
+:61R:15042200118113TXT
+:86E:0134000 Raiffeisenlandesbank OÖ    www.rlbooe.at 22.04.15 Seite  1
+02      Raiffeisenlandesbank Oberösterreich AG        DVR: 2110419
+03
+04DTR - SAMMELGUTSCHRIFT  - EUR              118113      1.143.700
+05
+06LFNR VERWENDUNGSZWECK/NAME                    WERT       BETRAG
+07
+08   1 Absender: Zimmermann-Panzirsch Regina 8383 ST.MARTIN/RAAB
+09     , SCHAFFERECK 6
+10     Zahlungsreferenz: 000091877704
+11     SEPA GUTSCHRIFT                          2204       105,00
+12
+13   2 Absender: Holland Constance 8462 GAMLITZ, RECHBAUERSIEDLU
+14     NG 477
+15     Zahlungsreferenz: 000079628061
+16     SEPA GUTSCHRIFT                          2204       100,00
+17
+18   3 Absender: Tippel Markus 8501 LIEBOCH, SIEDLUNGSSTRASSE 41
+19     Zahlungsreferenz: 000000617639
+20     SEPA GUTSCHRIFT                          2204        99,50
+21
+22   4 Absender: Muster Otto/Manuela Pleysteinplatz 403/1 8462 G
+23     amlitz
+24     Zahlungsreferenz: 000075736884
+25     SEPA GUTSCHRIFT                          2204        66,00
+26
+27   5 Absender: Monika Bartl
+28     Zahlungsreferenz: 000079137725
+29     SEPA GUTSCHRIFT                          2204        55,00
+:86E:0134000 Raiffeisenlandesbank OÖ    www.rlbooe.at 22.04.15 Seite  2
+02      Raiffeisenlandesbank Oberösterreich AG        DVR: 2110419
+03
+04DTR - SAMMELGUTSCHRIFT  - EUR              118113      1.143.700
+05
+06                                    ÜBERTRAG             425,50
+07LFNR VERWENDUNGSZWECK/NAME                    WERT       BETRAG
+08
+09   6 Absender: Andrea Schwarz
+10     Zahlungsreferenz: 000047034343
+11     SEPA GUTSCHRIFT                          2204        50,00
+12
+13   7 Absender: Marinko Petrovic
+14     Zahlungsreferenz: 000064865140
+15     SEPA GUTSCHRIFT                          2204        44,00
+16
+17   8 Absender: ELMEDIN CEMALOVIC SCOTTGASSE 1 /49,TOP 3 1210
+18     WIEN
+19     Zahlungsreferenz: 000085635837
+20     SEPA GUTSCHRIFT                          2204        36,00
+21
+22   9                             000079163739 2204        27,00
+23
+24DT REF RZKDT502                 9 EUR UMSÄTZE 2204       582,50
+:61R:15042200118112TXT
+:86E:0134000 Raiffeisenlandesbank OÖ    www.rlbooe.at 22.04.15 Seite  1
+02      Raiffeisenlandesbank Oberösterreich AG        DVR: 2110419
+03
+04      SAMMELGUTSCHRIFT  - EUR              118112      1.143.700
+05
+06LFNR VERWENDUNGSZWECK/NAME                    WERT       BETRAG
+07
+08   1                                          2204       100,00 B
+09
+10   2 SEPA GUTSCHRIFT                          2204        65,00 B
+11
+12   3                                          2204        25,00 B
+13
+14   SNR  118112                  3 EUR UMSÄTZE 2204       190,00
+

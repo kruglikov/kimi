@@ -1,0 +1,4 @@
+IndexA;IndexB;IndexC;CONNECT;RPC;PTP;Inko-Aktion;;Anmerkung;Gespraechsdatum;Gespraechszeit;Fehlerstatus;AgentenAnrede;AgentenVorname;AgentenNachname;kontakttel_vw;kontkattel_hw;Email_neu;name_neu;vorname_neu;plz_neu;ort_neu;strasse_neu;neuetel_vw1;neuetel_hw1;neuetel_vw2;neuetel_hw2;telefon1falsch;telefon2falsch;gebdatum_neu;neuetel_vwa;neuetel_hwa;telefon_apl_falsch;
+2222;312721;0;1;1;1;Franz Test;;;19.10.2021;08:10:28;erreicht;Frau;Susanne;Lauer;660;5238654;;;;;;;;;;;;;;;;;
+4810;18828538;0;0;0;0;Fran Test;;;29.11.2021;15:44:06;Telefonnummer falsch;Herr;FranZ;Tausch;;;;;;;;;;;;;;66499301500;;;;;
+2222;309573;0;0;0;0;Franz Test, 5 Anrufversuche kein Rückruf;;;29.11.2021;15:46:11;Unerreichbar;Herr;FranZ;Tausch;;;;;;;;;;;;;;;;;;;

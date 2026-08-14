@@ -1,0 +1,45 @@
+name: kimi-plus-dev
+
+services:
+  db:
+    image: mariadb:12.3
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: kimidev_et
+      MYSQL_USER: sql_kimidev_et
+      MYSQL_PASSWORD: 4WB6HkdyFcAdsjNR0CB1LHXMOP18og
+    volumes:
+      - db_data:/var/lib/mysql
+      - db_socket:/var/run/mysqld
+      - ./docker/mariadb/init:/docker-entrypoint-initdb.d
+    ports:
+      - "3308:3306"
+    healthcheck:
+      test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  web:
+    build: ./docker/php
+    restart: unless-stopped
+    ports:
+      - "8082:80"
+    volumes:
+      - ./original-src/web/htdocs:/var/www/html
+      - ./tests:/opt/tests2
+      - db_socket:/var/run/mysqld
+    # Neutralize external endpoints so the smoke suite stays hermetic:
+    # these hosts resolve to localhost, so validphone.php / telematica outbound
+    # calls fail instantly instead of contacting real services (or leaking creds).
+    extra_hosts:
+      - "validphone.validdata.eu:127.0.0.1"
+      - "vbox6813.telematica.at:127.0.0.1"
+    depends_on:
+      db:
+        condition: service_healthy
+
+volumes:
+  db_data:
+  db_socket:

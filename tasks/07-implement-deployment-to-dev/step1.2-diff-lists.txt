@@ -1,0 +1,275 @@
+# Full diff: src/original-src/kimi_ET (REPO)  vs  src-dev/.../kimidev_ET (DEV)
+# Generated 2026-08-12 via diff -rq
+
+## Differing CORE-CODE files (excludes kimibatch/files data + logs)
+Files [REPO]/config/config.php <> config/config.php differ
+Files [REPO]/getticketurl.php <> getticketurl.php differ
+Files [REPO]/index.php <> index.php differ
+Files [REPO]/kimibatch/coeo01_import_telefonie_taeglich.php <> kimibatch/coeo01_import_telefonie_taeglich.php differ
+Files [REPO]/kimibatch/coeo02_tagl_daten_fuer_elsbeth_import_alle.php <> kimibatch/coeo02_tagl_daten_fuer_elsbeth_import_alle.php differ
+Files [REPO]/kimibatch/coeo02_tagl_daten_fuer_elsbeth_import_l2tage_klarna.php <> kimibatch/coeo02_tagl_daten_fuer_elsbeth_import_l2tage_klarna.php differ
+Files [REPO]/kimibatch/coeo02_tagl_daten_fuer_elsbeth_import_l2tage.php <> kimibatch/coeo02_tagl_daten_fuer_elsbeth_import_l2tage.php differ
+Files [REPO]/kimibatch/coeo02_tagl_daten_fuer_elsbeth_import_l2tage_raten.php <> kimibatch/coeo02_tagl_daten_fuer_elsbeth_import_l2tage_raten.php differ
+Files [REPO]/kimibatch/coeo02_tagl_daten_fuer_elsbeth_import_l3tage_klarna.php <> kimibatch/coeo02_tagl_daten_fuer_elsbeth_import_l3tage_klarna.php differ
+Files [REPO]/kimibatch/coeo02_tagl_daten_fuer_elsbeth_import_l3tage.php <> kimibatch/coeo02_tagl_daten_fuer_elsbeth_import_l3tage.php differ
+Files [REPO]/kimibatch/coeo02_tagl_daten_fuer_elsbeth_import_l3tage_raten.php <> kimibatch/coeo02_tagl_daten_fuer_elsbeth_import_l3tage_raten.php differ
+Files [REPO]/kimibatch/coeo02_tagl_daten_fuer_elsbeth_import_neue.php <> kimibatch/coeo02_tagl_daten_fuer_elsbeth_import_neue.php differ
+Files [REPO]/kimibatch/coeo02_tagl_daten_fuer_elsbeth_import.php <> kimibatch/coeo02_tagl_daten_fuer_elsbeth_import.php differ
+Files [REPO]/kimibatch/coeo02_tagl_daten_fuer_elsbeth_import_telefonnrfalsch.php <> kimibatch/coeo02_tagl_daten_fuer_elsbeth_import_telefonnrfalsch.php differ
+Files [REPO]/kimibatch/coeo02_tagl_daten_fuer_elsbeth_RATENERINNERUNG_import.php <> kimibatch/coeo02_tagl_daten_fuer_elsbeth_RATENERINNERUNG_import.php differ
+Files [REPO]/kimibatch/coeo02_tagl_daten_fuer_elsbeth_SONDERKAMPAGNE_import.php <> kimibatch/coeo02_tagl_daten_fuer_elsbeth_SONDERKAMPAGNE_import.php differ
+Files [REPO]/kimibatch/db.php <> kimibatch/db.php differ
+Files [REPO]/kimibatch/inboundoutboundrep.php <> kimibatch/inboundoutboundrep.php differ
+Files [REPO]/kimibatch/inko201603_verarbeitung_elsbeth_out.php <> kimibatch/inko201603_verarbeitung_elsbeth_out.php differ
+Files [REPO]/kimibatch/inko201605_daten_email_fuer_elsbeth_import.php <> kimibatch/inko201605_daten_email_fuer_elsbeth_import.php differ
+Files [REPO]/kimibatch/inko2016exp.php <> kimibatch/inko2016exp.php differ
+Files [REPO]/kimibatch/inko2016imp3.php <> kimibatch/inko2016imp3.php differ
+Files [REPO]/kimibatch/inkode03_verarbeitung_elsbeth_out.php <> kimibatch/inkode03_verarbeitung_elsbeth_out.php differ
+Files [REPO]/kimibatch/inkodeexp.php <> kimibatch/inkodeexp.php differ
+Files [REPO]/kimibatch/inkodeimp2.php <> kimibatch/inkodeimp2.php differ
+Files [REPO]/kimibatch/kimibatchtree.php <> kimibatch/kimibatchtree.php differ
+Files [REPO]/kimibatch/knp1check.php <> kimibatch/knp1check.php differ
+Files [REPO]/kimibatch/knp1schnupd.php <> kimibatch/knp1schnupd.php differ
+Files [REPO]/kimibatch/oko03_verarbeitung_elsbeth_out.php <> kimibatch/oko03_verarbeitung_elsbeth_out.php differ
+Files [REPO]/kimibatch/okoexp.php <> kimibatch/okoexp.php differ
+Files [REPO]/kimibatch/okoimp.php <> kimibatch/okoimp.php differ
+Files [REPO]/kimibatch/schlaustrom01_daten_inA_fuer_elsbeth_import.php <> kimibatch/schlaustrom01_daten_inA_fuer_elsbeth_import.php differ
+Files [REPO]/kimibatch/schlaustrom01SONDER_daten_inA_fuer_elsbeth_import.php <> kimibatch/schlaustrom01SONDER_daten_inA_fuer_elsbeth_import.php differ
+Files [REPO]/kimibatch/schlaustrom02_daten_off_fuer_elsbeth_import.php <> kimibatch/schlaustrom02_daten_off_fuer_elsbeth_import.php differ
+Files [REPO]/kimibatch/telematica_import_callmanager_log.php <> kimibatch/telematica_import_callmanager_log.php differ
+Files [REPO]/libs/application.php <> libs/application.php differ
+Files [REPO]/libs/entities/akt.php <> libs/entities/akt.php differ
+Files [REPO]/libs/entities/anrede.php <> libs/entities/anrede.php differ
+Files [REPO]/libs/entities/anrufzeiten.php <> libs/entities/anrufzeiten.php differ
+Files [REPO]/libs/entities/anstoss.php <> libs/entities/anstoss.php differ
+Files [REPO]/libs/entities/ausbuchungsgrund.php <> libs/entities/ausbuchungsgrund.php differ
+Files [REPO]/libs/entities/bankleitzahl.php <> libs/entities/bankleitzahl.php differ
+Files [REPO]/libs/entities/benutzer.php <> libs/entities/benutzer.php differ
+Files [REPO]/libs/entities/buchungen.php <> libs/entities/buchungen.php differ
+Files [REPO]/libs/entities/buchungsart.php <> libs/entities/buchungsart.php differ
+Files [REPO]/libs/entities/buchungsgrund.php <> libs/entities/buchungsgrund.php differ
+Files [REPO]/libs/entities/country.php <> libs/entities/country.php differ
+Files [REPO]/libs/entities/customer.php <> libs/entities/customer.php differ
+Files [REPO]/libs/entities/erled_qual.php <> libs/entities/erled_qual.php differ
+Files [REPO]/libs/entities/inkassoinformation.php <> libs/entities/inkassoinformation.php differ
+Files [REPO]/libs/entities/inkassostatus.php <> libs/entities/inkassostatus.php differ
+Files [REPO]/libs/entities/kampagne.php <> libs/entities/kampagne.php differ
+Files [REPO]/libs/entities/kategorie.php <> libs/entities/kategorie.php differ
+Files [REPO]/libs/entities/kundenhistorie.php <> libs/entities/kundenhistorie.php differ
+Files [REPO]/libs/entities/lastschrift.php <> libs/entities/lastschrift.php differ
+Files [REPO]/libs/entities/mandant.php <> libs/entities/mandant.php differ
+Files [REPO]/libs/entities/menu_item.php <> libs/entities/menu_item.php differ
+Files [REPO]/libs/entities/permission.php <> libs/entities/permission.php differ
+Files [REPO]/libs/entities/portal_text.php <> libs/entities/portal_text.php differ
+Files [REPO]/libs/entities/prioritaet.php <> libs/entities/prioritaet.php differ
+Files [REPO]/libs/entities/ra_ikbuero.php <> libs/entities/ra_ikbuero.php differ
+Files [REPO]/libs/entities/ratenrechner.php <> libs/entities/ratenrechner.php differ
+Files [REPO]/libs/entities/role.php <> libs/entities/role.php differ
+Files [REPO]/libs/entities/schadensfall_art.php <> libs/entities/schadensfall_art.php differ
+Files [REPO]/libs/entities/schadensfall.php <> libs/entities/schadensfall.php differ
+Files [REPO]/libs/entities/stammdaten.php <> libs/entities/stammdaten.php differ
+Files [REPO]/libs/entities/status_schadensfall.php <> libs/entities/status_schadensfall.php differ
+Files [REPO]/libs/entities/subkonto_1.php <> libs/entities/subkonto_1.php differ
+Files [REPO]/libs/entities/subkonto.php <> libs/entities/subkonto.php differ
+Files [REPO]/libs/entities/subkonto_s.php <> libs/entities/subkonto_s.php differ
+Files [REPO]/libs/entities/text.php <> libs/entities/text.php differ
+Files [REPO]/libs/entities/ticket_historie.php <> libs/entities/ticket_historie.php differ
+Files [REPO]/libs/entities/ticket.php <> libs/entities/ticket.php differ
+Files [REPO]/libs/entities/ticket_sich20150208.php <> libs/entities/ticket_sich20150208.php differ
+Files [REPO]/libs/entities/titel.php <> libs/entities/titel.php differ
+Files [REPO]/libs/entities/user.php <> libs/entities/user.php differ
+Files [REPO]/libs/entities/user_sich20150208.php <> libs/entities/user_sich20150208.php differ
+Files [REPO]/libs/entities/versicherung.php <> libs/entities/versicherung.php differ
+Files [REPO]/libs/entities/verwaltungssatz.php <> libs/entities/verwaltungssatz.php differ
+Files [REPO]/libs/entities/zahlart.php <> libs/entities/zahlart.php differ
+Files [REPO]/libs/init.php <> libs/init.php differ
+Files [REPO]/login.php <> login.php differ
+Files [REPO]/modules/gui/templates/tickets/10/ticket.php <> modules/gui/templates/tickets/10/ticket.php differ
+Files [REPO]/modules/gui/templates/tickets/10/ticketuebersicht.php <> modules/gui/templates/tickets/10/ticketuebersicht.php differ
+Files [REPO]/modules/gui/templates/tickets/10/ticketvalidate.js <> modules/gui/templates/tickets/10/ticketvalidate.js differ
+Files [REPO]/modules/gui/templates/tickets/16/ticket.php <> modules/gui/templates/tickets/16/ticket.php differ
+Files [REPO]/modules/gui/templates/tickets/16/ticketsuch.php <> modules/gui/templates/tickets/16/ticketsuch.php differ
+Files [REPO]/modules/gui/templates/tickets/16/ticketuebersicht.php <> modules/gui/templates/tickets/16/ticketuebersicht.php differ
+Files [REPO]/modules/gui/templates/tickets/16/ticketvalidate.js <> modules/gui/templates/tickets/16/ticketvalidate.js differ
+Files [REPO]/modules/gui/templates/tickets/19/ticketoptimize.js <> modules/gui/templates/tickets/19/ticketoptimize.js differ
+Files [REPO]/modules/gui/templates/tickets/19/ticket.php <> modules/gui/templates/tickets/19/ticket.php differ
+Files [REPO]/modules/gui/templates/tickets/19/ticketsuch.php <> modules/gui/templates/tickets/19/ticketsuch.php differ
+Files [REPO]/modules/gui/templates/tickets/19/ticketuebersicht.php <> modules/gui/templates/tickets/19/ticketuebersicht.php differ
+Files [REPO]/modules/gui/templates/tickets/19/ticketvalidate.js <> modules/gui/templates/tickets/19/ticketvalidate.js differ
+Files [REPO]/modules/gui/templates/tickets/34/ticket.php <> modules/gui/templates/tickets/34/ticket.php differ
+Files [REPO]/modules/gui/templates/tickets/34/ticketvalidate.js <> modules/gui/templates/tickets/34/ticketvalidate.js differ
+Files [REPO]/modules/gui/templates/tickets/8/ticket.php <> modules/gui/templates/tickets/8/ticket.php differ
+Files [REPO]/modules/initial/ticket.php <> modules/initial/ticket.php differ
+Files [REPO]/testpost.php <> testpost.php differ
+
+## Files ONLY IN DEV (excludes kimibatch/files data + logs) — on-server, not in repo
+Only in [DEV]/config: callinfo.log
+Only in [DEV]/css: default.css
+Only in [DEV]/css: default-Lantargo.css
+Only in [DEV]/css: kimi-blue
+Only in [DEV]/css: kimi-blue-modern
+Only in [DEV]/css: kimi-green
+Only in [DEV]/css: mt94b.dat
+Only in [DEV]/css: nivo-slider.css
+Only in [DEV]/css: slider-theme
+Only in [DEV]/css: theme-modern.css
+Only in [DEV]/css: zahlungen.txt
+Only in [DEV]/kimibatch: ifscheck20181128.php
+Only in [DEV]/kimibatch: inkodeimp2_test.php
+Only in [DEV]/kimibatch: php_errors.log
+Only in [DEV]/kimibatch: temp
+Only in [DEV]/kimibatch: test.txt
+Only in [DEV]/kimibatch/vendor: autoload.php
+Only in [DEV]/kimibatch/vendor: composer
+Only in [DEV]/kimibatch/vendor: phpmailer
+Only in [DEV]: log
+Only in [DEV]/modules/gui: bankleitzahl.php
+Only in [DEV]/modules/gui: buchungen.php
+Only in [DEV]/modules/gui: inkassoinformation.php
+Only in [DEV]/modules/gui: kunde_details.php
+Only in [DEV]/modules/gui: kundenhistorie.php
+Only in [DEV]/modules/gui: kunde.php
+Only in [DEV]/modules/gui: lastschrift.php
+Only in [DEV]/modules/gui: ratenrechner.php
+Only in [DEV]/modules/gui: schadensfall_art.php
+Only in [DEV]/modules/gui: schadensfall.php
+Only in [DEV]/modules/gui: stammdaten.php
+Only in [DEV]/modules/gui: stammsuche.php
+Only in [DEV]/modules/gui: status_schadensfall.php
+Only in [DEV]/modules/gui: subdetail.php
+Only in [DEV]/modules/gui: subsuche.php
+Only in [DEV]/modules/gui: subuebersicht.php
+Only in [DEV]/modules/gui: subverwalt.php
+Only in [DEV]/modules/gui/templates/tickets/19: 17
+Only in [DEV]/modules/gui/templates/tickets/8: OKO_Leitfaden.pdf
+Only in [DEV]/modules/gui/templates/tickets/8: OKO_Sachbearbeiter.pdf
+Only in [DEV]/modules/gui: ticket_201502071142.php
+Only in [DEV]/modules/gui: ticket_sich20150208.php
+Only in [DEV]/modules/gui: ticket_sich20150414.php
+Only in [DEV]/modules/gui: ticketsuch_sich20150208.php
+Only in [DEV]/modules/gui: versicherung.php
+
+## Scripts ONLY IN REPO under kimibatch (excludes kimibatch/files data)
+Only in [REPO]/kimibatch: coeo02_tagl_daten_fuer_elsbeth_import_nicht_klarna.php
+Only in [REPO]/kimibatch: coeo02_tagl_daten_fuer_elsbeth_import_nur_klarna.php
+Only in [REPO]/kimibatch: coeoch01_import_telefonie_taeglich.php
+Only in [REPO]/kimibatch: coeoch01_import_telnr_optimierung.php
+Only in [REPO]/kimibatch: coeoch02_tagl_daten_fuer_elsbeth_import.php
+Only in [REPO]/kimibatch: coeoch03_verarbeitung_elsbeth_out.php
+Only in [REPO]/kimibatch: coeochcheck.php
+Only in [REPO]/kimibatch: coeochchecktest.php
+Only in [REPO]/kimibatch: coeochde02_tagl_daten_fuer_elsbeth_import_alle.php
+Only in [REPO]/kimibatch: coeochde02_tagl_daten_fuer_elsbeth_import_neue.php
+Only in [REPO]/kimibatch: coeochdeexp.php
+Only in [REPO]/kimibatch: coeochdeexptest.php
+Only in [REPO]/kimibatch: coeochdeexpx.php
+Only in [REPO]/kimibatch: coeochreport.php
+Only in [REPO]/kimibatch: coeochschnupd.php
+Only in [REPO]/kimibatch: coeodrei01_import_telefonie_taeglich.php
+Only in [REPO]/kimibatch: coeodrei01_import_telnr_optimierung.php
+Only in [REPO]/kimibatch: coeodrei02_tagl_daten_fuer_elsbeth_import_alle.php
+Only in [REPO]/kimibatch: coeodrei02_tagl_daten_fuer_elsbeth_import_neue.php
+Only in [REPO]/kimibatch: coeodrei02_tagl_daten_fuer_elsbeth_import.php
+Only in [REPO]/kimibatch: coeodrei03_verarbeitung_elsbeth_out.php
+Only in [REPO]/kimibatch: coeodreicheck.php
+Only in [REPO]/kimibatch: coeodreichecktest.php
+Only in [REPO]/kimibatch: coeodreireport.php
+Only in [REPO]/kimibatch: coeodreischnupd.php
+Only in [REPO]/kimibatch: COEO_NeueMandanten20230523.pdf
+Only in [REPO]/kimibatch: inboundoutboundrepx.php
+Only in [REPO]/kimibatch: inko2016email1ktoexp.php
+Only in [REPO]/kimibatch: inko2016email2zvexp.php
+Only in [REPO]/kimibatch: inko2016email3zwexp.php
+Only in [REPO]/kimibatch: inko2016sepaexp.php
+Only in [REPO]/kimibatch: inkodeemail1ktoexp.php
+Only in [REPO]/kimibatch: inkodeemail2zvexp.php
+Only in [REPO]/kimibatch: inkodeemail3zwexp.php
+Only in [REPO]/kimibatch: inkodesepaexp.php
+Only in [REPO]/kimibatch: inkoinboundreport.php
+Only in [REPO]/kimibatch: kimiphpinfo.php
+Only in [REPO]/kimibatch: knp1checktest.php
+Only in [REPO]/kimibatch: kpiscsv.php
+Only in [REPO]/kimibatch: kpisemail.php
+Only in [REPO]/kimibatch: kpisemailtest.php
+Only in [REPO]/kimibatch: kpis.php
+Only in [REPO]/kimibatch: oko01_daten_inA_fuer_elsbeth_import_telefon3.php
+Only in [REPO]/kimibatch: oko01_daten_inA_fuer_elsbeth_import_telefon4.php
+Only in [REPO]/kimibatch: okoexp_ansi2.php
+Only in [REPO]/kimibatch: okoexp_ansi.php
+Only in [REPO]/kimibatch: okoexp_ansi-roni.php
+Only in [REPO]/kimibatch: okoexp_dev.php
+Only in [REPO]/kimibatch: OKO_Protokoll-Export.docx
+Only in [REPO]/kimibatch: phpinfo.php
+Only in [REPO]/kimibatch: pos30cc.txt
+Only in [REPO]/kimibatch: pwgen.php
+Only in [REPO]/kimibatch: questerexp20250208.php
+Only in [REPO]/kimibatch: schlaustromexp20190924.php
+Only in [REPO]/kimibatch: wl.php
+Only in [REPO]/kimibatch: zeichenersetzen.php
+
+## Non-kimibatch files ONLY IN REPO
+Only in [REPO]: adminer-4.8.1.php
+Only in [REPO]/ajax/log: telematica_import_callmanager_log_error.log
+Only in [REPO]/kimibatch: coeo02_tagl_daten_fuer_elsbeth_import_nicht_klarna.php
+Only in [REPO]/kimibatch: coeo02_tagl_daten_fuer_elsbeth_import_nur_klarna.php
+Only in [REPO]/kimibatch: coeoch01_import_telefonie_taeglich.php
+Only in [REPO]/kimibatch: coeoch01_import_telnr_optimierung.php
+Only in [REPO]/kimibatch: coeoch02_tagl_daten_fuer_elsbeth_import.php
+Only in [REPO]/kimibatch: coeoch03_verarbeitung_elsbeth_out.php
+Only in [REPO]/kimibatch: coeochcheck.php
+Only in [REPO]/kimibatch: coeochchecktest.php
+Only in [REPO]/kimibatch: coeochde02_tagl_daten_fuer_elsbeth_import_alle.php
+Only in [REPO]/kimibatch: coeochde02_tagl_daten_fuer_elsbeth_import_neue.php
+Only in [REPO]/kimibatch: coeochdeexp.php
+Only in [REPO]/kimibatch: coeochdeexptest.php
+Only in [REPO]/kimibatch: coeochdeexpx.php
+Only in [REPO]/kimibatch: coeochreport.php
+Only in [REPO]/kimibatch: coeochschnupd.php
+Only in [REPO]/kimibatch: coeodrei01_import_telefonie_taeglich.php
+Only in [REPO]/kimibatch: coeodrei01_import_telnr_optimierung.php
+Only in [REPO]/kimibatch: coeodrei02_tagl_daten_fuer_elsbeth_import_alle.php
+Only in [REPO]/kimibatch: coeodrei02_tagl_daten_fuer_elsbeth_import_neue.php
+Only in [REPO]/kimibatch: coeodrei02_tagl_daten_fuer_elsbeth_import.php
+Only in [REPO]/kimibatch: coeodrei03_verarbeitung_elsbeth_out.php
+Only in [REPO]/kimibatch: coeodreicheck.php
+Only in [REPO]/kimibatch: coeodreichecktest.php
+Only in [REPO]/kimibatch: coeodreireport.php
+Only in [REPO]/kimibatch: coeodreischnupd.php
+Only in [REPO]/kimibatch: COEO_NeueMandanten20230523.pdf
+Only in [REPO]/kimibatch: inboundoutboundrepx.php
+Only in [REPO]/kimibatch: inko2016email1ktoexp.php
+Only in [REPO]/kimibatch: inko2016email2zvexp.php
+Only in [REPO]/kimibatch: inko2016email3zwexp.php
+Only in [REPO]/kimibatch: inko2016sepaexp.php
+Only in [REPO]/kimibatch: inkodeemail1ktoexp.php
+Only in [REPO]/kimibatch: inkodeemail2zvexp.php
+Only in [REPO]/kimibatch: inkodeemail3zwexp.php
+Only in [REPO]/kimibatch: inkodesepaexp.php
+Only in [REPO]/kimibatch: inkoinboundreport.php
+Only in [REPO]/kimibatch: kimiphpinfo.php
+Only in [REPO]/kimibatch: knp1checktest.php
+Only in [REPO]/kimibatch: kpiscsv.php
+Only in [REPO]/kimibatch: kpisemail.php
+Only in [REPO]/kimibatch: kpisemailtest.php
+Only in [REPO]/kimibatch: kpis.php
+Only in [REPO]/kimibatch: oko01_daten_inA_fuer_elsbeth_import_telefon3.php
+Only in [REPO]/kimibatch: oko01_daten_inA_fuer_elsbeth_import_telefon4.php
+Only in [REPO]/kimibatch: okoexp_ansi2.php
+Only in [REPO]/kimibatch: okoexp_ansi.php
+Only in [REPO]/kimibatch: okoexp_ansi-roni.php
+Only in [REPO]/kimibatch: okoexp_dev.php
+Only in [REPO]/kimibatch: OKO_Protokoll-Export.docx
+Only in [REPO]/kimibatch: phpinfo.php
+Only in [REPO]/kimibatch: pos30cc.txt
+Only in [REPO]/kimibatch: pwgen.php
+Only in [REPO]/kimibatch: questerexp20250208.php
+Only in [REPO]/kimibatch: schlaustromexp20190924.php
+Only in [REPO]/kimibatch: wl.php
+Only in [REPO]/kimibatch: zeichenersetzen.php
+Only in [REPO]/modules/gui: old_delete
+Only in [REPO]/modules/gui/templates/tickets: 1
+Only in [REPO]/modules/gui/templates/tickets/19: knpdoku.pdf
+Only in [REPO]/modules/gui/templates/tickets: 2
+Only in [REPO]/modules/gui/templates/tickets: 3
+Only in [REPO]/modules/gui/templates/tickets: 35
+Only in [REPO]: xhangup.php

@@ -1,0 +1,61 @@
+table.log {
+  border-collapse: collapse;
+}
+
+table.log td {
+  padding: 10px;
+}
+
+table#kbf_console {
+  border-collapse: collapse;
+}
+
+table#kbf_console td {
+  border: 5px double #000;
+  padding: 4px;
+  width: 150px;
+}
+
+table#kbf_console tr.category {
+  background-color: #FFFFCC;
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
+table#kbf_console td.topic {
+  font-weight: bold;
+}
+
+tr.activity td {
+  border-style: solid;
+  border-width: 3px;
+  border-color: black;
+}
+
+tr.entry td:first-child {
+
+  /*border-style: solid;*/
+  border-left: 3px solid black;
+
+}
+
+tr.entry td:last-child {
+  border-right: 3px solid black;
+}
+
+tr.entry {
+  border-bottom: 1px solid black;
+}
+
+
+tr.status_fehler {
+  background-color: orangeRed;
+}
+
+tr.status_ok {
+  background-color: limeGreen;
+}
+
+tr.status_kontrolle {
+  background-color: orange;
+}

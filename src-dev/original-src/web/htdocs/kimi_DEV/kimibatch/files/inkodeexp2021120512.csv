@@ -1,0 +1,9 @@
+IndexA;IndexB;IndexC;CONNECT;RPC;PTP;Inko-Aktion;;Anmerkung;Gespraechsdatum;Gespraechszeit;Fehlerstatus;AgentenAnrede;AgentenVorname;AgentenNachname;kontakttel_vw;kontkattel_hw;Email_neu;name_neu;vorname_neu;plz_neu;ort_neu;strasse_neu;neuetel_vw1;neuetel_hw1;neuetel_vw2;neuetel_hw2;telefon1falsch;telefon2falsch;gebdatum_neu;neuetel_vwa;neuetel_hwa;telefon_apl_falsch;
+8022;26334160;0;0;0;0; 5 Anrufversuche kein Rückruf;;;05.12.2021;10:37:37;Unerreichbar;Frau;Susanne;Lauer;;;;;;;;;;;;;;;;;;;
+8022;26262189;0;0;0;0;5 Anrufversuche kein Rückruf;;;05.12.2021;11:13:00;Unerreichbar;Frau;Susanne;Lauer;;;;;;;;;;;;;;;;;;;
+8022;26679614;0;0;0;0;;;;05.12.2021;11:14:12;Telefonnummer falsch;Frau;Susanne;Lauer;;;;;;;;;;;;;44895625;;;;;;
+8022;26697881;0;1;1;1;montliche Rate 25,00 ab 15.01.2022 bitte Info an Postadresse arbeitslos, Hatz 4;;;05.12.2021;11:16:23;erreicht;Frau;Susanne;Lauer;382;22;;;;;;;;;;;;;;;;;
+88100;921038;5561;1;1;1;monatliche Rate 50,00 ab 15.12.2021 neue Adresse Schloßgasse 4, 4020 Linz, neue Email: franz.tausch@kimi-plus.at, neuer Name Sonntag, neues Geburtsdatum 12.11.1953 ;;;05.12.2021;11:21:04;erreicht;Frau;Susanne;Lauer;177;7423668;franz.tausch@kimi-plus.at;Sonntag         ;;4020;Linz                  ;Schloßgasse 4            ;;;;;;;1953.11.12;;;;
+8022;26445025;0;1;1;1;Telefonnummer von Mutter erhalten, 1591 800000, 6781 6696420 falsch, monatliche Rate 30,00 ab 01.12.2021;;;05.12.2021;11:23:58;erreicht;Frau;Susanne;Lauer;1591;800000;;;;;;;1591;800000;;;67816696420;;;;;;
+8661;510020236;0;1;1;1;monatliche Rate 100,00 ab 01.01.2022 Sepa;;;05.12.2021;11:25:09;erreicht;Frau;Susanne;Lauer;174;3932773;;;;;;;;;;;;;;;;;
+8022;12848081;0;1;1;0;Vater veranlasst RR, , 5 Anrufversuche kein Rückruf;;;05.12.2021;11:34:24;erreicht;Frau;Susanne;Lauer;2173;1066101;;;;;;;;;;;;;;;;;

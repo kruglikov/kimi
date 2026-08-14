@@ -19,3 +19,8 @@ src/upgraded-src/web/htdocs/kimi_ET/kimibatch/files/**/*.csv
 src/upgraded-src/web/htdocs/kimi_ET/kimibatch/files/**/*.CSV
 src/upgraded-src/web/htdocs/kimi_ET/kimibatch/files/**/*.txt
 src/upgraded-src/web/htdocs/kimi_ET/kimibatch/files/**/*.txt2
+
+# Dev-server mirror and DB dumps — contain imported PRODUCTION PII (GDPR). Never commit.
+src-dev-db-dumps/
+# Dev sources have different git:
+/src-dev/original-src/web/htdocs/kimidev_ET/

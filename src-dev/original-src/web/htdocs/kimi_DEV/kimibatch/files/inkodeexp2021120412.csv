@@ -1,0 +1,7 @@
+IndexA;IndexB;IndexC;CONNECT;RPC;PTP;Inko-Aktion;;Anmerkung;Gespraechsdatum;Gespraechszeit;Fehlerstatus;AgentenAnrede;AgentenVorname;AgentenNachname;kontakttel_vw;kontkattel_hw;Email_neu;name_neu;vorname_neu;plz_neu;ort_neu;strasse_neu;neuetel_vw1;neuetel_hw1;neuetel_vw2;neuetel_hw2;telefon1falsch;telefon2falsch;gebdatum_neu;neuetel_vwa;neuetel_hwa;telefon_apl_falsch;
+8022;25089947;0;0;0;0;dsfadsfasdf, 5 Anrufversuche kein Rückruf Test Franz;;;04.12.2021;15:15:29;Unerreichbar;Herr;FranZ;Tausch;;;;;;;;;;;;;;;;;;;
+8022;27378696;0;1;1;1;test Franz;;;04.12.2021;15:13:57;erreicht;Herr;FranZ;Tausch;176;60143352;;;;;;;;;;;;;;;;;
+8022;27367722;0;0;0;0;test  Franz;;;04.12.2021;15:14:19;Telefonnummer falsch;Herr;FranZ;Tausch;;;;;;;;;;;;;;17620953340;;;;;
+8022;25920405;0;1;1;1;Schuldner mehrfach vorhanden test franz;;;04.12.2021;18:35:04;erreicht;Herr;FranZ;Tausch;178;6861093;;;;;;;;;;;;;;;;;
+8022;27501725;0;0;0;0;5 Anrufversuche kein Rückruf test franz;;;04.12.2021;18:35:27;Unerreichbar;Herr;FranZ;Tausch;;;;;;;;;;;;;;;;;;;
+8620;9250242;0;0;0;0;Schuldner mehrfach vorhanden testfranz;;;04.12.2021;18:35:43;Telefonnummer falsch;Herr;FranZ;Tausch;;;;;;;;;;;;;;16091787804;;;;;

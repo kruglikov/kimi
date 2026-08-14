@@ -1,0 +1,1 @@
+drop table sberbankmehrfach2
