@@ -26,6 +26,9 @@ class GuiSmokeTest extends TestCase
         if (in_array($name, Quarantine::DEAD_BACKUP_MODULES, true)) {
             $this->markTestSkipped("$name is a dated backup/dead module (inventory §4/§7)");
         }
+        if (in_array($name, Quarantine::CONTEXT_DEPENDENT_MODULES, true)) {
+            $this->markTestSkipped("$name needs a full case/customer context the direct-include runner doesn't build (covered via RouterSmokeTest / Phase 3.3)");
+        }
 
         exec('php ' . escapeshellarg($this->runner) . ' ' . escapeshellarg($path) . ' 2>&1', $lines, $code);
         $out = implode("\n", $lines);

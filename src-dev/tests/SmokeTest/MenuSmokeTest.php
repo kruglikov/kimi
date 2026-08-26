@@ -23,6 +23,9 @@ class MenuSmokeTest extends TestCase
         if (in_array($name, Quarantine::ABSENT_FEATURE_MODULES, true)) {
             $this->markTestSkipped("$name references insurance/claims tables absent from this DB (inventory §1)");
         }
+        if (in_array($name, Quarantine::CONTEXT_DEPENDENT_MODULES, true)) {
+            $this->markTestSkipped("$name needs a full case/customer context the direct-include runner doesn't build (covered via RouterSmokeTest / Phase 3.3)");
+        }
 
         exec(
             'php ' . escapeshellarg($this->runner) . ' menu ' . escapeshellarg($path) . ' 2>&1',

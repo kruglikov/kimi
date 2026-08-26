@@ -4,8 +4,6 @@ namespace KimiTest\SmokeTest;
 
 use PHPUnit\Framework\TestCase;
 
-require_once __DIR__ . '/Quarantine.php';
-
 class BatchSmokeTest extends TestCase
 {
     /**
@@ -13,10 +11,6 @@ class BatchSmokeTest extends TestCase
      */
     public function testBatchScriptParsesOnPhp85(string $name, string $path): void
     {
-        if (in_array($name, Quarantine::LEGACY_MYSQL_SCRIPTS, true)) {
-            $this->markTestSkipped("$name uses the mysql_* API removed in PHP 7.0 — pending client decision (inventory §2)");
-        }
-
         // Batch scripts are data-import/mutating jobs: executing them would run
         // INSERT/UPDATE against the DB and echo record data. We verify PHP 8.5
         // compatibility with a syntax check (`php -l`) instead — no side effects.
