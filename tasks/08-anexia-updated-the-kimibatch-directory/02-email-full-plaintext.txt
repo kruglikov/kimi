@@ -1,0 +1,1742 @@
+---------- Forwarded message ---------
+From: Franz Tausch <franz.tausch@kimi-plus.at>
+Date: Wed, Sep 9, 2026 at 11:27 AM
+Subject: AW: Follow-up on the Innowise x KIMI-Plus Meeting (26.05.2026)
+To: Darya Nestserava <darya.nestserava@innowise.com>
+Cc: Michael Bortnik <michael.bortnik@innowise.com>, Lizaveta Akulenka <
+lizaveta.akulenka@innowise.com>
+
+
+Guten Tag liebe Frau Nestserava
+
+
+
+gestern Abend hat ANEXIA das Verzeichnis upgedated.
+
+
+
+Etwas spät aber doch.
+
+Bitte um Info an Viktar.
+
+
+
+Danke und noch einen schönen Tag,
+
+herzliche Grüße
+FranZ
+
+
+
+
+
+
+
+*Von:* Franz Tausch
+*Gesendet:* Montag, 31. August 2026 12:07
+*An:* 'Darya Nestserava' <darya.nestserava@innowise.com>
+*Cc:* Michael Bortnik <michael.bortnik@innowise.com>; Lizaveta Akulenka <
+lizaveta.akulenka@innowise.com>
+*Betreff:* AW: Follow-up on the Innowise x KIMI-Plus Meeting (26.05.2026)
+
+
+
+Danke für den Termin und noch einen schönen Tag
+
+
+
+*Von:* Darya Nestserava <darya.nestserava@innowise.com>
+*Gesendet:* Montag, 31. August 2026 10:56
+*An:* Franz Tausch <franz.tausch@kimi-plus.at>
+*Cc:* Michael Bortnik <michael.bortnik@innowise.com>; Lizaveta Akulenka <
+lizaveta.akulenka@innowise.com>
+*Betreff:* Re: Follow-up on the Innowise x KIMI-Plus Meeting (26.05.2026)
+
+
+
+Guten Morgen, Herr Tausch!
+
+Ich habe die Einladung für morgen (Dienstag) versendet.
+Vielen Dank und bis dann!
+
+
+
+On Sun, Aug 30, 2026 at 10:09 PM Franz Tausch <franz.tausch@kimi-plus.at>
+wrote:
+
+Guten Abend liebe Frau Nestserava,
+
+
+
+ich habe mir die Informationen angesehen und doch bleiben Frage offen:
+
+
+
+Zwei erste Terminvorschläge:
+
+
+
+   - Dienstag, 1.9.2026 von 13:00 bis 14:00 Uhr
+
+alternativ
+
+   - Mittwoch  2.9.2026 von 14:30 bis 16:00 Uhr
+
+
+
+Ich hoffe einer der Termin passt.
+
+
+
+Ich freue mich auf Ihre Rückmeldung.
+
+
+
+Herzliche Grüße
+
+
+
+Franz Tausch
+
+
+
+
+
+*Von:* Franz Tausch
+*Gesendet:* Freitag, 28. August 2026 05:58
+*An:* 'Darya Nestserava' <darya.nestserava@innowise.com>
+*Cc:* Michael Bortnik <michael.bortnik@innowise.com>; Lizaveta Akulenka <
+lizaveta.akulenka@innowise.com>
+*Betreff:* AW: Follow-up on the Innowise x KIMI-Plus Meeting (26.05.2026)
+
+
+
+
+
+Guten Morgen liebe Frau Nestserava,
+
+
+
+danke für Ihre E-Mail.
+
+Ich werde mir die Informationen gleich ansehen und am Montag sende ich
+Ihnen Terminvorschläge für die kommende Wochen.
+
+
+
+Eine gute Zeit, ein schönes Wochenende und herzliche Grüße
+
+FranZ
+
+*Von:* Darya Nestserava <darya.nestserava@innowise.com>
+*Gesendet:* Mittwoch, 26. August 2026 17:13
+*An:* Franz Tausch <franz.tausch@kimi-plus.at>
+*Cc:* Michael Bortnik <michael.bortnik@innowise.com>; Lizaveta Akulenka <
+lizaveta.akulenka@innowise.com>
+*Betreff:* Re: Follow-up on the Innowise x KIMI-Plus Meeting (26.05.2026)
+
+
+
+Guten Abend, Herr Tausch!
+
+Entschuldigen Sie bitte die Verzögerung. Ich habe Viktor alle Fragen
+geschickt und bereits die aktuellen Informationen erhalten.
+Für den Call organisiere ich gerne ein Google-Meet zu einer für Sie
+passenden Zeit:
+
+
+
+*> **Meine ersten Batch-Tests:*
+
+*> Die Programme laufen ganz gut, nur habe ich den verdacht das etwas nicht
+mit dem Fileverzeichnis stimmt bzw. Ich die Importdateien auf das falschen
+Verzeichnis gelegte haben??“!*
+
+*> Bitte um Prüfung und Rückmeldung und auch ob es einen Abstimmtermin** geben
+kann.*
+
+
+
+
+
+*> NOK – Datensätze passen nicht mit der Eingabedatei zusammen 29 zu 32 –
+welches File wird da wirklich verwendetn*
+
+
+
+Yes, it seems like you really used different folder. The screenshot above
+shows file
+ /home/kimiportaldev.at/web/*kimidev_ET_backup_20260813*
+/kimibatch/files/INKODE.CSV
+while the script should process the file
+/home/kimiportaldev.at/web/htdocs/*kimidev_ET*/kimibatch/files/INKODE.CSV
+
+
+
+
+*> **NOK – Import 4 Datensätze anstelle 46*
+
+
+
+This is also seems like different folder:
+/home/kimiportaldev.at/web/*kimidev_ET_backup_20260813*
+/kimibatch/files/INKO2016.CSV
+(1 header + 4 data rows)
+vs
+/home/kimiportaldev.at/web/htdocs/*kimidev_ET*/kimibatch/files/INKO2016.CSV
+(1 header + 46 data rows)
+
+
+> OKO auch hier stimmt der tatsächliche Import nicht mit der Eingabedatei
+zusammen?!? IST: 28 zu SOLL 16?!?
+
+Seems same problem with *kimidev_ET_backup_20260813*/ vs *kimidev_ET*/
+folder.
+
+
+
+
+
+
+
+
+*> danke für Ihre Nachricht. Bei mir ist alles ok, ich hoffe bei Ihnen
+auch. > Ich habe die ersten 2 Schritte Test gemacht. > Das Ziel war die
+Testumgebung und die Daten zu prüfen. > Unter Firefox komme ich nicht – das
+Session-Cookie Problem scheint hier noch vorhanden zu sein. > Dann habe ich
+mit Alternative Cliq getestet > Daher wäre es mir wichtig das wir vor dem
+Start der Test vielleicht gemeinsam mit Viktor die Testumgebung abklären.*
+
+I applied the fix and at least for me now it works fine.
+
+Please check and let us know if you still able to reproduce the problem.
+
+
+
+
+
+*> Auch weil die Frage wegen des Datenbankstandes waren und das die Liste
+im google- Doc sehr lange ist wäre es besser wenn wir uns abstimmen. > Ich
+bitte daher um einen Terminvorschlag. Bitte immer Nachmittags- DANKE: > Bis
+dahin werden ich die Fragen in GoogleDocs durcharbeiten und die Test
+fortführen*
+
+Sure. Please feel free to schedule a meeting when it's convenient for you.
+
+
+
+
+
+Also I commented in the docs:
+
+https://docs.google.com/document/d/1ZvnoYLuQxBI8MtmPjtA5KHgd7YK4sGJuU2OMGXZDZHg/edit?usp=sharing
+
+
+
+I also commented in the docuemnt
+
+
+
+On Sun, Aug 23, 2026 at 10:22 PM Franz Tausch <franz.tausch@kimi-plus.at>
+wrote:
+
+
+
+Liebe Frau Nestserava,
+
+
+
+ich habe meine Antworten zu den Frage im GoogleDocs eingetragen.
+
+
+
+Beispiel.
+
+
+
+
+
+
+
+
+
+Meine ersten Batch-Tests:
+
+
+
+Die Programme laufen ganz gut, nur habe ich den verdacht das etwas nicht
+mit dem Fileverzeichnis stimmt bzw. Ich die Importdateien auf das falschen
+Verzeichnis gelegte haben??“!
+
+
+
+Bitte um Prüfung und Rückmeldung und auch ob es einen Abstimmtermin geben
+kann.
+
+
+Danke und herzliche Grüße
+
+FranZ
+
+
+
+
+
+NOK – Datensätze passen nicht mit der Eingabedatei zusammen 29 zu 32 –
+welches File wird da wirklich verwendetn
+
+
+
+
+
+OK – Anzeige der wirklich eingespielten …
+
+
+
+
+
+OK
+
+
+
+
+
+OK
+
+
+
+
+
+
+
+OK
+
+
+
+
+
+OK
+
+
+
+
+
+OK
+
+
+
+
+
+
+
+
+
+NOK – Import 4 Datensätze anstelle 46
+
+
+
+Eingabedatei
+
+
+
+
+
+OK
+
+
+
+
+
+
+
+OK
+
+
+
+OK
+
+
+
+
+
+OK
+
+
+
+
+
+OKO auch hier stimmt der tatsächliche Import nicht mit der Eingabedatei
+zusammen?!? IST: 28 zu SOLL 16?!?
+
+
+
+
+
+v
+
+
+
+
+
+*Von:* Franz Tausch
+*Gesendet:* Mittwoch, 19. August 2026 13:56
+*An:* Darya Nestserava <darya.nestserava@innowise.com>
+*Cc:* Michael Bortnik <michael.bortnik@innowise.com>; Lizaveta Akulenka <
+lizaveta.akulenka@innowise.com>
+*Betreff:* AW: Follow-up on the Innowise x KIMI-Plus Meeting (26.05.2026)
+
+
+
+Liebe Frau Nestserava,
+
+
+
+danke für Ihre Nachricht. Bei mir ist alles ok, ich hoffe bei Ihnen auch.
+
+
+
+Ich habe die ersten 2 Schritte Test gemacht.
+
+Das Ziel war die Testumgebung und die Daten zu prüfen.
+
+
+
+
+
+Unter Firefox komme ich nicht – das Session-Cookie Problem scheint hier
+noch vorhanden zu sein.
+
+Dann habe ich mit Alternative Cliq getestet
+
+
+
+Daher wäre es mir wichtig das wir vor dem Start der Test vielleicht
+gemeinsam mit Viktor die Testumgebung abklären.
+
+Auch weil die Frage wegen des Datenbankstandes waren und das die Liste im
+google- Doc sehr lange ist wäre es besser wenn wir uns abstimmen.
+
+Ich bitte daher um einen Terminvorschlag. Bitte immer Nachmittags- DANKE:
+
+Bis dahin werden ich die Fragen in GoogleDocs durcharbeiten und die Test
+fortführen
+
+
+
+Danke im Voraus.
+
+
+
+Ich freue mich auf eure Rückmeldung.
+
+
+
+Herzliche Grüße
+
+
+FranZ
+
+
+
+#1 Session-Cookie?!? Komme in Firefox nicht über in die Suchmaske.
+
+
+
+IST in Firefox – komme nicht in Kampagnenauswahl
+
+
+
+
+
+Soll
+
+
+
+
+
+
+
+
+
+
+
+
+
+*Von:* Darya Nestserava <darya.nestserava@innowise.com>
+*Gesendet:* Dienstag, 18. August 2026 12:34
+*An:* Franz Tausch <franz.tausch@kimi-plus.at>
+*Cc:* Michael Bortnik <michael.bortnik@innowise.com>; Lizaveta Akulenka <
+lizaveta.akulenka@innowise.com>
+*Betreff:* Re: Follow-up on the Innowise x KIMI-Plus Meeting (26.05.2026)
+
+
+
+Guten Tag, Herr Tausch!
+
+Ich hoffe, Ihre Woche verläuft bisher wunderbar!
+Viktor hat mir ein Update geschickt, das ich Ihnen hiermit weiterleite:
+---
+Good afternoon, Franz!
+I updated the code on the test site, and when over the test scenarios that
+you provided.
+It appeared that the code that was deployed to test server significantly
+diverged from the original code you sent us before. And I was have to run
+PHP8.0 -> PHP 8.5 upgrade again which took additional efforst. But I stayed
+within initial estimate.
+Also, it seems that the dump migration was done without the migration of
+database functions\procedured - I recredaed them on the test server from
+the previous dump.
+I created list of problems in the code that I found. Some of them are
+pre-existing issues and some of them are fixed my me. Here is the report:
+https://docs.google.com/document/d/1ZvnoYLuQxBI8MtmPjtA5KHgd7YK4sGJuU2OMGXZDZHg/edit?usp=sharing
+
+*1. *Please could you go over the test scrnarios from your side (and test
+if anything is wrong.)
+I went over the test scearios (and fixed bugs that I found), but since the
+database if different, i'm not 100% sure that I catched all the issues.
+
+*2. *If you find any issues, please let us know. If all works fine - please
+let us know either.
+
+See the curreltly spent time for the task vs estimated efforst in the
+estimate file:
+https://docs.google.com/spreadsheets/d/1pGXd2-RhUVA6CnJoXNFUrTcEF6-Cjz_s/edit?usp=sharing&ouid=102104514313633945938&rtpof=true&sd=true
+---
+
+Ich wünsche Ihnen einen wunderschönen Tag!
+
+
+
+On Fri, Aug 14, 2026 at 8:55 AM Franz Tausch <franz.tausch@kimi-plus.at>
+wrote:
+
+
+
+Guten Tag liebe Frau Nestserava,
+
+
+
+danke für den Update.
+
+Natürlich ih werde keine Änderungen durchführen.
+
+
+
+Ich drücke die Daumen für einen problemlosen und erfolgreiche Umsetzung.
+
+
+
+Wir freuen uns auf die ersten Test.
+
+
+
+Herzlichhe Grüße
+
+
+
+FranZ
+
+*Von:* Darya Nestserava <darya.nestserava@innowise.com>
+*Gesendet:* Donnerstag, 13. August 2026 14:30
+*An:* Franz Tausch <franz.tausch@kimi-plus.at>
+*Cc:* Michael Bortnik <michael.bortnik@innowise.com>; Lizaveta Akulenka <
+lizaveta.akulenka@innowise.com>
+*Betreff:* Re: Follow-up on the Innowise x KIMI-Plus Meeting (26.05.2026)
+
+
+
+Guten Tag Herr Tausch,
+Ich habe Feedback von Viktor erhalten:
+
+Die Arbeiten sind derzeit auf dem Testserver *In Progress*.
+Wir bitten Sie, bis auf Weiteres keine Änderungen am Systemcode
+vorzunehmen, damit keine Abweichungen zwischen dem Code auf dem Testserver
+und dem Code auf dem Produktionsserver entstehen.
+Wir werden Ihnen Bescheid geben, sobald das Testen der aktualisierten
+Systemfunktionen auf dem Testserver seitens Kimi möglich ist.
+
+Mit freundlichen Grüßen,
+Darya
+
+
+
+On Tue, Aug 4, 2026 at 4:27 AM Franz Tausch <franz.tausch@kimi-plus.at>
+wrote:
+
+Liebe Frau Nestserava,
+
+folgende Information zur Datenbank.
+
+Ich hoffe die Antwort hilft weiter ansonsten müssen wir uns direkt
+abstimmen ?!
+
+Danke und einen schönen Tag, herzliche Grüße
+
+FranZ Tausch
+
+
+Anexia:
+
+Bernhard Schreitl:
+
+Hallo Herr Tausch,
+
+es wurde die DB kimi_et vom Prod-System in die DB kimidev_et auf dem
+Testsystem importiert. Die DB kimiportal war auf dem Prod-System leer also
+gab es da nichts zu importieren in die DB kimiportaldev auf dem Testsystem.
+Nachdem die DB kimiportal auf dem Prod-System anscheinend nicht mehr
+verwendet wird, soll ich diese und die DB kimiportaldev auf dem Testsystem
+evtl. löschen?
+
+MfG
+Bernhard Schreitl
+
+
+
+Hello Mr Tausch,
+
+The `kimi_et` database was imported from the production system into the
+`kimidev_et` database on the test system. The kimiportal database on the
+production system was empty, so there was nothing to import into the
+kimiportaldev database on the test system. As the kimiportal database on
+the production system appears to no longer be in use, should I perhaps
+delete it and the kimiportaldev database on the test system?
+
+Kind regards
+
+
+
+ ‌
+
+This is shared with Franz Tausch.
+
+
+
+*Von:* Franz Tausch
+*Gesendet:* Dienstag, 28. Juli 2026 22:34
+*An:* 'Darya Nestserava' <darya.nestserava@innowise.com>
+*Cc:* Michael Bortnik <michael.bortnik@innowise.com>; Lizaveta Akulenka <
+lizaveta.akulenka@innowise.com>
+*Betreff:* AW: Follow-up on the Innowise x KIMI-Plus Meeting (26.05.2026)
+
+
+
+Liebe Frau Nestserava,
+
+
+
+sorry – ich habe die Fragen nicht beachtet.
+
+
+
+Anbei meine Antworten:
+
+
+
+
+
+
+
+I managed to connect to the dev server with SSH, thank you!
+And accessed the dev site: https://10.196.69.21/kimidev_ET/login.php
+I see that old code base was deployed to the dev server.
+1. Am I right that everything is ready to start the update on the codebase?
+
+They can get started
+
+
+2. Can you please remind me - what database dump was applied on the dev
+server - was it 2022 dump or the latest?
+
+
+
+According to the information provided by Mr Brunner, “the PROD database was
+imported onto the test system” – I have tried to check this myself and can
+see different data – I have forwarded the question to Mr Brunner and hope
+to receive a reply soon.
+
+
+
+
+
+
+
+
+
+Herzliche Grüße
+
+Franz Tausch
+
+
+
+*Von:* Darya Nestserava <darya.nestserava@innowise.com>
+*Gesendet:* Dienstag, 28. Juli 2026 11:29
+*An:* Franz Tausch <franz.tausch@kimi-plus.at>
+*Cc:* Michael Bortnik <michael.bortnik@innowise.com>; Lizaveta Akulenka <
+lizaveta.akulenka@innowise.com>
+*Betreff:* Re: Follow-up on the Innowise x KIMI-Plus Meeting (26.05.2026)
+
+
+
+Guten Morgen Herr Tausch,
+
+Ich hoffe, es geht Ihnen gut.
+Könnten Sie mir bitte sagen, ob Sie die Fragen von Viktor, die ich Ihnen
+zuvor geschickt habe, bereits angesehen haben?
+
+Mit freundlichen Grüßen
+
+
+
+On Wed, Jul 22, 2026 at 12:56 PM Darya Nestserava <
+darya.nestserava@innowise.com> wrote:
+
+Guten Tag Herr Tausch,
+Ich habe Feedback von Viktor erhalten:
+
+I managed to connect to the dev server with SSH, thank you!
+And accessed the dev site: https://10.196.69.21/kimidev_ET/login.php
+I see that old code base was deployed to the dev server.
+1. Am I right that everything is ready to start the update on the codebase?
+2. Can you please remind me - what database dump was applied on the dev
+server - was it 2022 dump or the latest?
+
+
+
+On Mon, Jul 20, 2026 at 10:48 AM Darya Nestserava <
+darya.nestserava@innowise.com> wrote:
+
+Guten Tag Herr Tausch,
+
+vielen Dank für Ihre Updates - wir werden uns in Kürze mit unserem Feedback
+bei Ihnen melden.
+Herzlichen Dank!
+
+Mit freundlichen Grüßen
+
+
+
+On Mon, Jul 20, 2026 at 4:39 AM Franz Tausch <franz.tausch@kimi-plus.at>
+wrote:
+
+Guten Morgen Frau Nestserava,
+
+
+
+ich hoffe es geht Ihnen gut.
+
+Anbei der aktuelle Status von ANEXIA vom 16.7.2026 – ist auch im Dokument
+vermerkt.
+
+Herzliche Grüße
+
+Franz Tausch
+
+
+
+
+
+The current status of Anexia as at 16 July 2026
+
+
+
+Daniel Brunner:
+
+Hello Mr Tausch,
+
+The following tasks were carried out on the test system yesterday during
+the maintenance window:
+
+Imported the PROD DB onto the test system
+
+OS update to Debian 13
+
+PHP update (8.5)
+
+MariaDB update (12.3 LTS)
+
+A new public key has been added for the existing user “kimiportaldev.at”
+
+Please could you briefly confirm whether everything is working as expected
+and when the production environment can be migrated.
+
+Kind regards,
+
+Daniel Brunner
+
+
+
+
+
+In Deutsch:
+
+Hallo Herr Tausch,
+
+ folgendes wurde am Test System gestern im Wartungsfenster durchgeführt:
+
+
+
+·         PROD DB auf Test System importieren
+
+·         OS Update auf Debian 13
+
+·         PHP Update (8.5)
+
+·         MariaDB Update (12.3 LTS)
+
+·         neuer Public Key wurde beim bestehenden User "kimiportaldev.at"
+hinzugefügt
+
+
+
+Bitte um kurze Bestätigung ob alles wie erwartet funktioniert und wann PROD
+umgestellt werden darf.
+
+
+
+Mit freundlichen Grüßen
+
+Daniel Brunner
+
+
+
+
+
+*Von:* Darya Nestserava <darya.nestserava@innowise.com>
+*Gesendet:* Donnerstag, 2. Juli 2026 11:29
+*An:* Franz Tausch <franz.tausch@kimi-plus.at>
+*Cc:* Michael Bortnik <michael.bortnik@innowise.com>; Lizaveta Akulenka <
+lizaveta.akulenka@innowise.com>
+*Betreff:* Re: Follow-up on the Innowise x KIMI-Plus Meeting (26.05.2026)
+
+
+
+Guten Tag Herr Tausch,
+
+Viktor hat Ihre Fragen im Dokument kommentiert.
+Melden Sie sich gerne, falls noch etwas gebraucht wird!
+
+Einen schönen Tag! 😉
+
+Beste Grüße
+
+
+
+On Wed, Jul 1, 2026 at 7:45 AM Franz Tausch <franz.tausch@kimi-plus.at>
+wrote:
+
+Guten Morgen Frau Nestserava,
+
+
+
+ich hoffe es geht Ihnen gut.
+
+
+
+Ich habe noch 2 Punkte/Frage im Dokument ergänzt:
+
+
+
+#1
+
+
+
+2026-07-01: Frage zur Version MariaDB von Anexia
+
+   - Unter Debian 13 wäre MariaDB 11.8 LTS Standard. Wäre das auch in
+   Ordnung?
+
+
+
+1 July 2026: Question regarding the MariaDB version from Anexia
+
+On Debian 13, MariaDB 11.8 LTS would be the default. Would that be fine?
+
+
+
+
+
+#2 SSH access
+
+Schlüsseldatei und Passwort - wie bereitstellen ??
+
+Key file and password – how do I provide them??
+
+
+
+
+
+Ich freue mich über Ihre Rückmeldung.
+
+
+
+Herzliche Grüße
+
+
+Franz Tausch
+
+
+
+*Von:* Darya Nestserava <darya.nestserava@innowise.com>
+*Gesendet:* Donnerstag, 25. Juni 2026 16:48
+*An:* Franz Tausch <franz.tausch@kimi-plus.at>
+*Cc:* Michael Bortnik <michael.bortnik@innowise.com>; Lizaveta Akulenka <
+lizaveta.akulenka@innowise.com>
+*Betreff:* Re: Follow-up on the Innowise x KIMI-Plus Meeting (26.05.2026)
+
+
+
+Guten Tag Herr Tausch,
+
+Viktor hat seine Kommentare in Blau hinterlassen.
+Falls Sie noch weitere Informationen oder Hilfe benötigen, melden Sie sich
+gerne!
+
+Ich wünsche Ihnen einen schönen Tag!
+
+
+
+On Tue, Jun 23, 2026 at 4:41 PM Franz Tausch <franz.tausch@kimi-plus.at>
+wrote:
+
+Guten Tag liebe Frau Nestserava,
+
+
+
+ich habe unser Dokument den Punkt´“*Erstellung VPN User mit Einschränkung
+auf bestimmte Dienste - SSLVPN User „kimiportal“ eingerichtet und die
+Verbindung zum DEV-Server mit der IP 10.196.69.21 auf der Firewall
+freigegeben“ *eingefügt
+
+
+
+es geht um den User kimiportal und den Zugriff über unsere Firewall auf den
+Entwicklungsserver über unserer Firewall
+
+Könnten Sie probieren ob Sie Zugriff an den Entwichklungsserver haben
+
+Auch über die Einrichtung MFA.
+
+
+
+Ich freue mich auf Ihre Rückmeldung.
+
+
+
+Danke im Voraus.
+
+
+
+Herzliche Grüße
+
+
+
+Franz Tausch
+
+*Von:* Franz Tausch
+*Gesendet:* Montag, 22. Juni 2026 15:57
+*An:* Darya Nestserava <darya.nestserava@innowise.com>
+*Cc:* Michael Bortnik <michael.bortnik@innowise.com>; Lizaveta Akulenka <
+lizaveta.akulenka@innowise.com>
+*Betreff:* AW: Follow-up on the Innowise x KIMI-Plus Meeting (26.05.2026)
+
+
+
+Guten Tag liebe Frau Nestserava,
+
+
+
+Danke für die übersichtliche Aufbereitung.
+
+ich habe meine Anmerkungen eingefügt.
+
+
+
+Herzliche Grüße
+
+FranZ
+
+
+
+*Von:* Darya Nestserava <darya.nestserava@innowise.com>
+*Gesendet:* Mittwoch, 17. Juni 2026 15:20
+*An:* Franz Tausch <franz.tausch@kimi-plus.at>
+*Cc:* Michael Bortnik <michael.bortnik@innowise.com>; Lizaveta Akulenka <
+lizaveta.akulenka@innowise.com>
+*Betreff:* Re: Follow-up on the Innowise x KIMI-Plus Meeting (26.05.2026)
+
+
+
+Guten Tag Herr Tausch,
+ich habe Ihr Feedback gesammelt und ein Dokument mit Viktors Antworten
+vorbereitet, da es doch recht viele Informationen sind – so ist es für Sie
+hoffentlich übersichtlicher -- Link
+<https://docs.google.com/document/d/1eGG6hPPvaXNYCyglOOkk9vlsItWCLNY-sSQxO9STPDs/edit?usp=sharing>
+.
+
+Falls Sie möchten, können Sie gerne Kommentare oder neue Fragen direkt im
+Dokument hinterlassen.
+Viktor antwortet dann zeitnah, und ich halte Sie über Updates im Dokument
+auf dem Laufenden.
+
+Beste Grüße
+
+
+
+On Tue, Jun 16, 2026 at 4:02 PM Franz Tausch <franz.tausch@kimi-plus.at>
+wrote:
+
+
+
+Liebe Frau Nestserava,
+
+
+
+noch eine Ergänzung.
+
+   - Ich lasse den Test-Server Anfang kommender Woche dann umstellen.
+   - Kommende Woche soll dann auch der VPN-Zugang eingerichtet werden.
+
+
+
+Herzliche Grüße
+
+
+
+FranZ Tausch
+
+
+
+
+
+*Von:* Franz Tausch
+*Gesendet:* Dienstag, 16. Juni 2026 15:33
+*An:* Darya Nestserava <darya.nestserava@innowise.com>
+*Cc:* Michael Bortnik <michael.bortnik@innowise.com>; Lizaveta Akulenka <
+lizaveta.akulenka@innowise.com>
+*Betreff:* AW: Follow-up on the Innowise x KIMI-Plus Meeting (26.05.2026)
+
+
+
+Liebe Frau Nestserava,
+
+
+
+danke für die rasche Rückmeldung.
+
+
+
+Anbei meine Antworten:
+
+
+
+Zu #1 :
+
+> Ich weiß momentan nicht wie ich die Testcases beschreiben soll, bzw. wie
+ich die ganzen Testdaten bereitstelle.
+
+I think that you described the test cases in the
+KIMIPortal_Tests_DEV_20260607.pdf file that you provided. Does this file
+cover all the main test scenarios?
+
+Answer:
+
+These are just the key test cases for the batch processes.
+
+There are a number of PHP scripts which, in principle, all do the same
+thing: they execute SQL queries, read CSV files and write CSV files – so,
+in my opinion, they are meaningful if they run. However, you mentioned in
+the status update that bug fixes are still required here.
+
+My preference is to carry out the further tests in the KIMI test environment
+
+
+
+Zu #2
+
+> Mir wäre es recht, das wie die Tests dann schon in der KIMI-Testumgebung
+machen.
+> Bitte dazu um Ihre Meinung.
+
+I suppose that with the database dump with 2022 data you provided, I can go
+over the test scenarios locally first. And after the deploy to the test
+server, you'll be able to test the same steps from the file
+KIMIPortal_Tests_DEV_20260607.pdf file. Is that correct, or do you have
+some doubts that these scenarios in KIMIPortal_Tests_DEV_20260607.pdf are
+enough?
+
+Answer: See answer #1
+
+
+
+Zu #3
+
+> Es wäre super wenn wir diese Frage unabhängig von der Migration klären
+könnten, weil die Änderung ein große Arbeitserleichterung für die Agenten
+ist.
+> Können Sie sich das zusätzlich ansehen?
+
+Do you want this task to be done together with the upgrade to PHP 8.5, or
+it should be done separately?
+Am I understand right the task:
+1. add 6 new columns to the oko table (telnr5–telnr10):
+ALTER TABLE oko
+ADD COLUMN telnr5 VARCHAR(45),
+ADD COLUMN telnr6 VARCHAR(45),
+ADD COLUMN telnr7 VARCHAR(45),
+ADD COLUMN telnr8 VARCHAR(45),
+ADD COLUMN telnr9 VARCHAR(45),
+ADD COLUMN telnr10 VARCHAR(45);
+2. update /kimi_ET/kimibatch/okoimp.php batch script to store the data in
+the new fileds telnr5–telnr10
+3. Add /modules/gui/templates/tickets/35/ticket.php table rows with table
+cell with a text input, a telefon icon image. Clicking on the icon triggers
+the outbound call
+Is that correct?
+
+The problem I see here is that to update the database with ALTER TABLE oko,
+it  should be executed on the production later.
+Am I understand right that usually to update the database, you run the SQL
+query rught in the production database?
+
+Answer:
+
+
+
+Yes, separately: this involves implementing the ONClick functions in the
+existing PHP file. It would be helpful if we could do this as soon as
+possible.
+
+
+
+The changes to ticket.php and okoimp.php have already been made. The
+ONCLICK functions (see HTML) aren’t working; I don’t know how or where to
+place this JS code ?!? or how it is generated. So the issue is with the
+ONCLICK functions.
+
+And we don’t want to lose these changes during migration.
+
+
+
+At the moment, database changes are being made directly in the production
+environment. We currently have no deployment process. Suggestions for
+improvement are very welcome. We also don’t use any development tools; we
+just edit the files manually. Here too, we’d appreciate any recommendations
+or suggestions on how to improve this.
+
+
+
+Zu #4
+
+Außerdem zur letzten Frage: Die PHP-Version ist 8.5. Für MariaDB kann die
+Version 12.3 LTS verwendet werden.
+
+
+
+Answer: Danke
+
+
+
+Liebe Grüße
+
+FranZ
+
+
+
+*Von:* Darya Nestserava <darya.nestserava@innowise.com>
+*Gesendet:* Dienstag, 16. Juni 2026 13:57
+*An:* Franz Tausch <franz.tausch@kimi-plus.at>
+*Cc:* Michael Bortnik <michael.bortnik@innowise.com>; Lizaveta Akulenka <
+lizaveta.akulenka@innowise.com>
+*Betreff:* Re: Follow-up on the Innowise x KIMI-Plus Meeting (26.05.2026)
+
+
+
+Guten Tag Herr Tausch,
+ich habe Feedback von Viktor erhalten und leite Ihnen seine Antwort weiter:
+
+---
+Thank you for your answers!
+> Ich weiß momentan nicht wie ich die Testcases beschreiben soll, bzw. wie
+ich die ganzen Testdaten bereitstelle.
+
+I think that you described the test cases in the
+KIMIPortal_Tests_DEV_20260607.pdf file that you provided. Does this file
+cover all the main test scenarios?
+
+> Mir wäre es recht, das wie die Tests dann schon in der KIMI-Testumgebung
+machen.
+> Bitte dazu um Ihre Meinung.
+
+I suppose that with the database dump with 2022 data you provided, I can go
+over the test scenarios locally first. And after the deploy to the test
+server, you'll be able to test the same steps from the file
+KIMIPortal_Tests_DEV_20260607.pdf file. Is that correct, or do you have
+some doubts that these scenarios in KIMIPortal_Tests_DEV_20260607.pdf are
+enough?
+
+> Es wäre super wenn wir diese Frage unabhängig von der Migration klären
+könnten, weil die Änderung ein große Arbeitserleichterung für die Agenten
+ist.
+> Können Sie sich das zusätzlich ansehen?
+
+Do you want this task to be done together with the upgrade to PHP 8.5, or
+it should be done separately?
+Am I understand right the task:
+1. add 6 new columns to the oko table (telnr5–telnr10):
+ALTER TABLE oko
+ADD COLUMN telnr5 VARCHAR(45),
+ADD COLUMN telnr6 VARCHAR(45),
+ADD COLUMN telnr7 VARCHAR(45),
+ADD COLUMN telnr8 VARCHAR(45),
+ADD COLUMN telnr9 VARCHAR(45),
+ADD COLUMN telnr10 VARCHAR(45);
+2. update /kimi_ET/kimibatch/okoimp.php batch script to store the data in
+the new fileds telnr5–telnr10
+3. Add /modules/gui/templates/tickets/35/ticket.php table rows with table
+cell with a text input, a telefon icon image. Clicking on the icon triggers
+the outbound call
+Is that correct?
+
+The problem I see here is that to update the database with ALTER TABLE oko,
+it  should be executed on the production later.
+Am I understand right that usually to update the database, you run the SQL
+query rught in the production database?
+---
+
+Außerdem zur letzten Frage: Die PHP-Version ist 8.5. Für MariaDB kann die
+Version 12.3 LTS verwendet werden.
+
+Mit freundlichen Grüßen
+
+
+
+On Mon, Jun 15, 2026 at 12:55 PM Franz Tausch <franz.tausch@kimi-plus.at>
+wrote:
+
+Guten Tag liebe Frau Nestserava,
+
+
+
+die Anexia startet mit den Vorbereitungen.
+
+
+
+Das sind der Ablauf und die Fragen:
+
+
+
+   - PROD DB auf Test System importieren
+   - OS Update auf Debian 13
+   - PHP Update (bitte teilen Sie mir hier noch die gewünschte Version mit)
+   - MariaDB Update ((bitte teilen Sie mir hier noch die gewünschte Version
+   mit)
+   - Bitte teilen Sie uns noch ein Wartungsfenster für das Update der Test
+   VM mit
+   - Nach erfolgreicher Umstellung erfolgt nach Rücksprache mit Ihnen das
+   Update der PROD VM.
+
+Können Sie bitte die Versionsnummern PHP und MariaDB mitteilen.
+
+Dann kann ich diese gleiche weitergeben und die Kollegen von Anexia können
+loslegen.
+
+
+
+Danke im Voraus.
+
+
+
+Herzliche Grüße
+
+
+FranZ
+
+
+
+*Von:* Franz Tausch
+*Gesendet:* Montag, 15. Juni 2026 04:52
+*An:* 'Darya Nestserava' <darya.nestserava@innowise.com>
+*Cc:* Michael Bortnik <michael.bortnik@innowise.com>; Lizaveta Akulenka <
+lizaveta.akulenka@innowise.com>
+*Betreff:* AW: Follow-up on the Innowise x KIMI-Plus Meeting (26.05.2026)
+
+
+
+Guten Morgen Frau Nestserava,
+
+
+
+danke für den Update.
+
+
+
+Zu den Fragen / Hinweisen:
+
+
+
+#1 Eine Frage zu den Test Cases: Beim letzten Szenario „Batch – Übersicht
+/kimidev_ET/kimibatch/kimibatchtree.php“ – brauchen wir dafür eine separate
+CSV-Datei, oder ist das nicht nötig?
+
+
+
+Testdaten INKO2016.CSV in der Anlage
+
+Zielpfad:
+
+
+
+#2 Wird Anexia die aktuellen Produktionsserver-Einstellungen inklusive
+Projektordner übernehmen, oder bekommen wir einen leeren Server und müssen
+alles neu aufsetzen?
+
+Der Server wird nicht leer sein, sondern wir sollen genau definieren was
+ist benötigen und Anexia wird die Versionen installieren. Dann müssen wir
+nur mehr prüfen bzw. notwendigen Einstellungen konfigurieren.
+
+Das ist der Plan. Daher wäre es gut zu wissen welche Versionen wir genau
+installieren müssen.
+
+
+
+#3 Es gibt eine rot markierte Bugfixing-Aufgabe. Wir rechnen nicht mit
+größeren Problemen, möchten aber darauf hinweisen, dass ein gewisses Risiko
+bleibt – vor allem bei der Batch-Verarbeitung könnten zusätzliche Aufwände
+entstehen.
+
+
+
+Danke für den Hinweis. Das ist in Ordnung.
+
+Ich weiß momentan nicht wie ich die Testcases beschreiben soll, bzw. wie
+ich die ganzen Testdaten bereitstelle.
+
+Mir wäre es recht, das wie die Tests dann schon in der KIMI-Testumgebung
+machen.
+
+Bitte dazu um Ihre Meinung.
+
+
+
+Ich habe noch eine Information bzw. eine Frage/Bitte/kleine Erweiterung:
+
+Wie gehen wir mit zwischenzeitlichen Änderungen um ?
+
+
+
+Und zwar bei  OKO :
+
+Wir benötigen eine Erweiterung der Telefonfelder in der Maske, damit die
+Telefonnummer 4 bis 10 auch einfach und schnell telefoniert werden können.
+
+Es soll bei jeden Feld Telefon 4 bis 10 ein Telefonsymbol sein.
+
+
+
+Beispiel neu:
+
+            </td>
+
+            <td bgcolor=#FFFF00><?php echo "Telefon 4" ?></td>
+
+            <td>
+
+                <input style="width: 170px" placeholder="<?php echo
+"Telefon 4" ?>" name="dummy_text6" class="column" type="text" value="<?php
+echo $ticket->get_dummy_text6() ?>" />
+
+                                                               <img
+style="vertical-align: middle;" src="../images/telephone.png"
+id="callTelco4"  name="callTelco4" onClick="callTelco3()" width="16"
+height="16" alt="dummy_text6"  />
+
+
+
+            </td>
+
+
+
+Es geht jetzt um onClick="callTelco3()" bzw. wie man diese richtig macht.
+
+
+
+So wie es aussieht müssen für jedes Telefonsymbol eigene Cklick-Functions
+gemacht werden.
+
+Im HTML- Code sieht es  so aus.
+
+Die Frage ist, wo bzw. wie diese generiert  werden bzw. welche Änderungen
+notwendig sind.
+
+
+
+Es wäre super wenn wir diese Frage unabhängig von der Migration klären
+könnten, weil die Änderung ein große Arbeitserleichterung für die Agenten
+ist.
+
+Können Sie sich das zusätzlich ansehen?
+
+
+
+
+
+      $("#callTelco3").click(function(e) {
+
+            $this = $(this);
+
+            e.preventDefault();
+
+
+
+            $("#btnStart").click();
+
+
+$('#telefon_status').val('senden...');
+
+                                               kampagne_iptel_destclid =
+document.getElementsByName("kampagne_iptel_destclid")[0].value;
+
+                                               kampagne_iptel_auto_vorwahl
+= document.getElementsByName("kampagne_iptel_auto_vorwahl")[0].value;
+
+                                               benutzer_iptel_durchwahl =
+document.getElementsByName("benutzer_iptel_durchwahl")[0].value;
+
+                                               telNr =
+document.getElementsByName(e.target.alt)[0].value;
+
+                                               clientIp =
+document.getElementsByName("client_ip")[0].value;
+
+            nebenstelle =
+document.getElementsByName("nebenstelle")[0].value;
+
+
+
+            $.ajax({
+
+                url: "./index.php?site=callInntelco&ajax=true",
+
+                type: "POST",
+
+                data: {
+
+                    'objekt': 'callTelNo',
+
+
+'user': 'tauschfranz',
+
+
+'iptel_durchwahl': benutzer_iptel_durchwahl,
+
+
+'kampagne_iptel_destclid': kampagne_iptel_destclid,
+
+
+'kampagne_iptel_auto_vorwahl': kampagne_iptel_auto_vorwahl,
+
+
+'dest': telNr,
+
+
+'client_ip': clientIp,
+
+                    'nebenstelle': nebenstelle
+
+                },
+
+                success: function(data) {
+
+
+var data = $.parseJSON(data);
+
+
+if (data.retcode != "0") {
+
+
+alert(data.msg);
+
+
+$('#telefon_status').val('Fehler');
+
+
+} else {
+
+
+$('#telefon_status').val('Fertig');
+
+
+}
+
+                },
+
+                error: function(error) {
+
+                    alert(error);
+
+
+$('#telefon_status').val('Fehler');
+
+                }
+
+            });
+
+        });
+
+
+
+
+
+
+
+
+
+DB-Änderung:
+
+ALTER TABLE oko
+
+ADD COLUMN telnr5 VARCHAR(45),
+
+ADD COLUMN telnr6 VARCHAR(45),
+
+ADD COLUMN telnr7 VARCHAR(45),
+
+ADD COLUMN telnr8 VARCHAR(45),
+
+ADD COLUMN telnr9 VARCHAR(45),
+
+ADD COLUMN telnr10 VARCHAR(45);
+
+
+
+
+
+Ich freue mich auf Ihre Rückmeldung.
+
+
+
+Einen schönen Tag,
+
+herzliche Grüße
+
+
+Franz Tausch
+
+*Von:* Darya Nestserava <darya.nestserava@innowise.com>
+*Gesendet:* Mittwoch, 10. Juni 2026 17:53
+*An:* Franz Tausch <franz.tausch@kimi-plus.at>
+*Cc:* Michael Bortnik <michael.bortnik@innowise.com>; Lizaveta Akulenka <
+lizaveta.akulenka@innowise.com>
+*Betreff:* Re: Follow-up on the Innowise x KIMI-Plus Meeting (26.05.2026)
+
+
+
+Guten Abend Herr Tausch,
+
+*die Test Cases sind gut und klar* – herzlichen Dank!
+Viktor hat sich alles angeschaut. Eine Frage zu den Test Cases: Beim
+letzten Szenario „Batch – Übersicht
+/kimidev_ET/kimibatch/kimibatchtree.php“ – brauchen wir dafür eine separate
+CSV-Datei, oder ist das nicht nötig?
+
+*Den Dump haben wir erfolgreich heruntergeladen und decoded* – danke!
+
+> Einen VPN-Zugang zur Anexia fordere ich gerade an.
+Wir freuen uns auf den Zugang. Wird Anexia die aktuellen
+Produktionsserver-Einstellungen inklusive Projektordner übernehmen, oder
+bekommen wir einen leeren Server und müssen alles neu aufsetzen?
+
+Wir haben ein Estimate für das finale Testing, Bugfixing und Deployment
+vorbereitet – die Tabelle ist im Anhang und auch per Link
+<https://docs.google.com/spreadsheets/d/1pGXd2-RhUVA6CnJoXNFUrTcEF6-Cjz_s/edit?usp=sharing&ouid=102104514313633945938&rtpof=true&sd=true>
+verfügbar.
+
+Das Estimate umfasst zwei große Teile:
+
+1. *Test & lokales Debugging* – Dump einspielen, lokal testen und mögliche
+Bugs beheben.
+2. *Deployment auf den Testserver* – finales Deployment.
+
+Es gibt eine rot markierte Bugfixing-Aufgabe. Wir rechnen nicht mit
+größeren Problemen, möchten aber darauf hinweisen, dass ein gewisses Risiko
+bleibt – vor allem bei der Batch-Verarbeitung könnten zusätzliche Aufwände
+entstehen.
+
+Beste Grüße
+
+
+
+On Mon, Jun 8, 2026 at 1:29 PM Darya Nestserava <
+darya.nestserava@innowise.com> wrote:
+
+Guten Tag Franz,
+herzlichen Dank für die Updates!
+
+Wir melden uns bald mit unserem Feedback.
+
+Beste Grüße
+
+
+
+On Sun, Jun 7, 2026 at 4:34 PM Franz Tausch <franz.tausch@kimi-plus.at>
+wrote:
+
+Liebe Frau Nestserava,
+
+
+
+anbei sende ich Ihnen eine Testbeschreibung der wichtigsten Dialogschritte
+und der wichtigsten Prozess-Schritte im Batch anhand Mandant INKO2016 –
+siehe Anlage-
+
+
+
+Den DB-dump werde ich über WE-Transfer an Sie übermitteln – Passwort der
+ZIP-Datei: $Kimi$Innowise2026
+
+
+
+Der VPN Zugang ist in Arbeit.
+
+
+
+Bitte um Rückmeldung ob die Tests bzw. der DB-dump soweit in Ordnung sind.
+
+
+
+Danke und herzliche Grüße
+
+
+
+Franz Tausch
+
+
+
+
+
+*Von:* Franz Tausch
+*Gesendet:* Dienstag, 2. Juni 2026 13:58
+*An:* Darya Nestserava <darya.nestserava@innowise.com>
+*Cc:* Michael Bortnik <michael.bortnik@innowise.com>; Lizaveta Akulenka <
+lizaveta.akulenka@innowise.com>
+*Betreff:* AW: Follow-up on the Innowise x KIMI-Plus Meeting (26.05.2026)
+
+
+
+Liebe Frau Nestserava,
+
+
+
+kurzer Update:
+
+
+
+   - Der  DB-dump ist von Aneia in Arbeit – sobald er vorliegt melde ich
+   mich bzgl. Bereitstelllung
+   - Für die Testbeschreibung werde ich ein Muster erstellen
+   - Einen VPN-Zugang zur Anexia fordere ich gerade an.
+
+
+
+Nächster Status auf jeden Fall Anfang kommender Woche.
+
+
+
+Einen schönen Tag,
+
+herzliche Grüße
+
+
+
+Fran Tausch
+
+
+
+*Von:* Franz Tausch
+*Gesendet:* Donnerstag, 28. Mai 2026 15:19
+*An:* 'Darya Nestserava' <darya.nestserava@innowise.com>
+*Cc:* Michael Bortnik <michael.bortnik@innowise.com>; Lizaveta Akulenka <
+lizaveta.akulenka@innowise.com>
+*Betreff:* AW: Follow-up on the Innowise x KIMI-Plus Meeting (26.05.2026)
+
+
+
+Liebe Frau Nestserava,
+
+
+
+auch von meiner Seite Danke für das angenehme und konstruktive Meeting.
+
+
+
+Ich habe das Dokument von Viktor soweit ich es jetzt beantworten kann
+bearbeitet und meine Hinweise eingetragen.
+
+
+
+Bei mir als nächsten Schritt ist jetzt die Abstimmung mit Anexia.
+
+Ich halte sie gerne am Laufenden.
+
+
+
+Einen schönen Tag, herzliche Grüße
+
+
+
+FranZ
+
+
+
+*Von:* Darya Nestserava <darya.nestserava@innowise.com>
+*Gesendet:* Mittwoch, 27. Mai 2026 13:47
+*An:* Franz Tausch <franz.tausch@kimi-plus.at>
+*Cc:* Michael Bortnik <michael.bortnik@innowise.com>; Lizaveta Akulenka <
+lizaveta.akulenka@innowise.com>
+*Betreff:* Follow-up on the Innowise x KIMI-Plus Meeting (26.05.2026)
+
+
+
+Guten Tag Herr Tausch,
+nochmals herzlichen Dank für das produktive und offene Gespräch! 😌
+
+Wir schätzen Ihre Zeit und die hilfreichen Einblicke, die Sie mit uns
+geteilt haben, wirklich sehr.
+Wie besprochen, sehen die nächsten Schritte folgendermaßen aus:
+
+
+
+
+
+*1. Setup new test environment 2. Deploy the updated PHP 8.5 code base and
+test database 3. Test & bugfix 4. Final deploy to production 5. Auto-login
+issue*
+
+Viktor hat ein Dokument vorbereitet, in dem er die Ideen beschrieben hat.
+Schauen Sie es sich bitte kurz an, um zu prüfen, ob alles stimmt – Ihre
+Antworten und Kommentare zu den offenen Fragen können Sie gerne direkt im
+Dokument hinterlassen: Link
+<https://docs.google.com/document/d/1_2J5qPiPK7xZduQtUNovNjBvTsBXihJ9kFAxpRHtt6I/edit?usp=sharing>
+
+Bei Fragen oder Anregungen zu diesen Schritten melden Sie sich einfach –
+wir besprechen alles gerne nochmal.
+Wir freuen uns immer über Ihr Feedback und unterstützen Sie gerne bei jedem
+Schritt!
+
+Einen schönen Tag noch!
+
+-- 
+
+Darya Nestserava
+Service Delivery Specialist (DACH)
+
+*INNOWISE*
+
+darya.nestserava@innowise.com
+
+https://innowise.com/
+
+
+
+<https://innowise-group.com/>

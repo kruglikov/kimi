@@ -24,3 +24,7 @@ src/upgraded-src/web/htdocs/kimi_ET/kimibatch/files/**/*.txt2
 src-dev-db-dumps/
 # Dev sources have different git:
 /src-dev/original-src/web/htdocs/kimidev_ET/
+
+# Large local copies of the dev server, pulled for analysis — never committed
+tasks/*/updated-code-snapshot/
+tasks/*/live-docroot-snapshot-*/

@@ -13,6 +13,9 @@ return RectorConfig::configure()
     ->withSkip([
         dirname(__DIR__, 2) . '/original-src/web/htdocs/kimidev_ET/adminer-4.8.1.php',
         dirname(__DIR__, 2) . '/original-src/web/htdocs/kimidev_ET/kimibatch/vendor',
+        // Second vendored PHPMailer copy, delivered with the production tree on
+        // 2026-09-08. Third-party code is never rewritten.
+        dirname(__DIR__, 2) . '/original-src/web/htdocs/kimidev_ET/kimibatch/files/vendor',
         dirname(__DIR__, 2) . '/original-src/web/htdocs/kimidev_ET/libs/addons/phpmail',
         RemoveFuncCallRector::class,
     ])

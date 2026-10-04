@@ -1,0 +1,2593 @@
+
+52 files with changes
+=====================
+
+1) ../../original-src/web/htdocs/kimidev_ET/kimibatch/coeo01_import_telefonie_taeglich.php:41
+
+    ---------- begin diff ----------
+@@ Line 41 @@
+ 	echo "Line #<b>{$x}</b> : " . htmlspecialchars(implode(";", $row)) . "<br />\n";
+ 	//$indexc = $index3arr;
+ 	// #2 Daten Prüfen oder Umformatieren
+-	$row['geburtsdatum'] = substr($row['geburtsdatum'],0,4)."-".str_pad(substr($row['geburtsdatum'],5,2),2,'0',STR_PAD_LEFT)."-".str_pad(substr($row['geburtsdatum'],8,2),2,'0',STR_PAD_LEFT);
++	$row['geburtsdatum'] = substr((string) $row['geburtsdatum'],0,4)."-".str_pad(substr((string) $row['geburtsdatum'],5,2),2,'0',STR_PAD_LEFT)."-".str_pad(substr((string) $row['geburtsdatum'],8,2),2,'0',STR_PAD_LEFT);
+
+     // #2.1 Daten ausgeben zum Prüfen
+
+@@ Line 54 @@
+     echo "<br>Telefon: ".$row['telefon'];
+     echo "<br>EMail: ".$row['email'];			
+ 	$gebdatum= $row['geburtsdatum'];
+-	$gebdatumX= substr($gebdatum,0,4)."-".str_pad(substr($geburtsdatum,5,2),2,'0',STR_PAD_LEFT)."-".str_pad(substr($geburtsdatum,8,2),2,'0',STR_PAD_LEFT);
++	$gebdatumX= substr($gebdatum,0,4)."-".str_pad(substr((string) $geburtsdatum,5,2),2,'0',STR_PAD_LEFT)."-".str_pad(substr((string) $geburtsdatum,8,2),2,'0',STR_PAD_LEFT);
+ 	$gebdatum= $gebdatumX;
+     echo "<br>GebDatum: ".$gebdatum;	
+ echo "<br>GebDatum2: ".$row['geburtsdatum'];
+    ----------- end diff -----------
+
+Applied rules:
+ * NullToStrictStringFuncCallArgRector
+
+
+2) ../../original-src/web/htdocs/kimidev_ET/kimibatch/coeo01_import_telnr_optimierung.php:32
+
+    ---------- begin diff ----------
+@@ Line 32 @@
+     // echo "Line #<b>{$line_num}</b> : " . htmlspecialchars($line) . "<br />\n";
+ 	
+ 	// String auf 2 Teile für die evtl. Korrektur vorbereiten
+-	$telnr = substr($line, 0,strpos($line, ";"));   // Telefonnummer - und erster Teil des Strings
++	$telnr = substr((string) $line, 0,strpos((string) $line, ";"));   // Telefonnummer - und erster Teil des Strings
+ 	
+-	$line_abtelnr = substr($line, strpos($line, ";")+1,strlen($line));   // 2ter Teil des Strings
++	$line_abtelnr = substr((string) $line, strpos((string) $line, ";")+1,strlen((string) $line));   // 2ter Teil des Strings
+ 	$telnrneu = $telnr; // telnrneu auf jeden Fall Default mit telnr belegen damit diese sicher belegt ist
+ 	// Prüfungen
+-	$telnrlw = substr($line, 0,2);   // Landesvorwahl Stelle 1-2
+-	$telnrlw3 = substr($line, 0,3);   // Landesvorwahl Stelle 1-3
+-	$telnrlw4 = substr($line, 0,4);   // Landesvorwahl Stelle 1-4
++	$telnrlw = substr((string) $line, 0,2);   // Landesvorwahl Stelle 1-2
++	$telnrlw3 = substr((string) $line, 0,3);   // Landesvorwahl Stelle 1-3
++	$telnrlw4 = substr((string) $line, 0,4);   // Landesvorwahl Stelle 1-4
+ 	
+ 	// echo "Landesvorwahl: ".$telnrlw."<br>";
+ 	// #1 keine Landesvorwahl
+    ----------- end diff -----------
+
+Applied rules:
+ * NullToStrictStringFuncCallArgRector
+
+
+3) ../../original-src/web/htdocs/kimidev_ET/kimibatch/coeodrei01_import_telefonie_taeglich.php:41
+
+    ---------- begin diff ----------
+@@ Line 41 @@
+ 	echo "Line #<b>{$x}</b> : " . htmlspecialchars(implode(";", $row)) . "<br />\n";
+ 	//$indexc = $index3arr;
+ 	// #2 Daten Prüfen oder Umformatieren
+-	$row['geburtsdatum'] = substr($row['geburtsdatum'],0,4)."-".str_pad(substr($row['geburtsdatum'],5,2),2,'0',STR_PAD_LEFT)."-".str_pad(substr($row['geburtsdatum'],8,2),2,'0',STR_PAD_LEFT);
++	$row['geburtsdatum'] = substr((string) $row['geburtsdatum'],0,4)."-".str_pad(substr((string) $row['geburtsdatum'],5,2),2,'0',STR_PAD_LEFT)."-".str_pad(substr((string) $row['geburtsdatum'],8,2),2,'0',STR_PAD_LEFT);
+
+     // #2.1 Daten ausgeben zum Prüfen
+
+@@ Line 54 @@
+     echo "<br>Telefon: ".$row['telefon'];
+     echo "<br>EMail: ".$row['email'];			
+ 	$gebdatum= $row['geburtsdatum'];
+-	$gebdatumX= substr($gebdatum,0,4)."-".str_pad(substr($geburtsdatum,5,2),2,'0',STR_PAD_LEFT)."-".str_pad(substr($geburtsdatum,8,2),2,'0',STR_PAD_LEFT);
++	$gebdatumX= substr($gebdatum,0,4)."-".str_pad(substr((string) $geburtsdatum,5,2),2,'0',STR_PAD_LEFT)."-".str_pad(substr((string) $geburtsdatum,8,2),2,'0',STR_PAD_LEFT);
+ 	$gebdatum= $gebdatumX;
+     echo "<br>GebDatum: ".$gebdatum;	
+ echo "<br>GebDatum2: ".$row['geburtsdatum'];
+    ----------- end diff -----------
+
+Applied rules:
+ * NullToStrictStringFuncCallArgRector
+
+
+4) ../../original-src/web/htdocs/kimidev_ET/kimibatch/db.php:19
+
+    ---------- begin diff ----------
+@@ Line 19 @@
+
+ function convert2ANSI($value)
+ {
+-	$retval = iconv( "UTF-8", 'Windows-1252//TRANSLIT', $value );
++	$retval = iconv( "UTF-8", 'Windows-1252//TRANSLIT', (string) $value );
+ 	return $retval;
+ }
+    ----------- end diff -----------
+
+Applied rules:
+ * NullToStrictStringFuncCallArgRector
+
+
+5) ../../original-src/web/htdocs/kimidev_ET/kimibatch/files/27/Scripts/okoexp.php:283
+
+    ---------- begin diff ----------
+@@ Line 283 @@
+ 		$email = $line['email']; 
+ 		$neuetelnr = $line['neuetelnr']; 
+ 		
+-		if (strlen($email)>0 OR strlen($neuetelnr)>0) {
++		if (strlen((string) $email)>0 OR strlen((string) $neuetelnr)>0) {
+ 	 	   $contactdata = '';
+-		   if (strlen($email)>0) {
++		   if (strlen((string) $email)>0) {
+ 			 // $contactdata = $contactdata.' email :'.$email;
+ 			 $vorlage = 91; /* Vorlage automatisch setzen */
+ 			 // ausgabe in eigener Zeile
+ 		   }
+-		   if (strlen($neuetelnr)>0) {
++		   if (strlen((string) $neuetelnr)>0) {
+ 			 $contactdata = $contactdata.' Telnr :'.$neuetelnr;
+ 			 $vorlage = 91; /* Vorlage automatisch setzen */
+ 		   }
+@@ Line 305 @@
+ 		$ag_nachname = $line['ag_nachname']; 	
+         $calldata = 'GesprDat: '.$gespraechsdatum.' GesprZeit: '.$gespraechszeit.' Agent: '.$ag_vorname.' '.$ag_nachname  ;		
+ 		// email 20170328
+-		if (strlen($email)>0 ) {
++		if (strlen((string) $email)>0 ) {
+ 	 	   $email01 = '';
+-		   if (strlen($email)>0) {
++		   if (strlen((string) $email)>0) {
+ 			 $email01 = $email01.'Mail: '.$email;
+ 		   }
+ 		   }  else {
+    ----------- end diff -----------
+
+Applied rules:
+ * NullToStrictStringFuncCallArgRector
+
+
+6) ../../original-src/web/htdocs/kimidev_ET/kimibatch/coeoch01_import_telefonie_taeglich.php:43
+
+    ---------- begin diff ----------
+@@ Line 43 @@
+ 	echo "Line #<b>{$x}</b> : " . htmlspecialchars(implode(";", $row)) . "<br />\n";
+ 	//$indexc = $index3arr;
+ 	// #2 Daten Prüfen oder Umformatieren
+-	$row['geburtsdatum'] = substr($row['geburtsdatum'],0,4)."-".str_pad(substr($row['geburtsdatum'],5,2),2,'0',STR_PAD_LEFT)."-".str_pad(substr($row['geburtsdatum'],8,2),2,'0',STR_PAD_LEFT);
++	$row['geburtsdatum'] = substr((string) $row['geburtsdatum'],0,4)."-".str_pad(substr((string) $row['geburtsdatum'],5,2),2,'0',STR_PAD_LEFT)."-".str_pad(substr((string) $row['geburtsdatum'],8,2),2,'0',STR_PAD_LEFT);
+
+     // #2.1 Daten ausgeben zum Prüfen
+
+@@ Line 60 @@
+     echo "<br>Telefon: ".$row['telefon'];
+     echo "<br>EMail: ".$row['email'];			
+ 	$gebdatum= $row['geburtsdatum'];
+-	$gebdatumX= substr($gebdatum,0,4)."-".str_pad(substr($geburtsdatum,5,2),2,'0',STR_PAD_LEFT)."-".str_pad(substr($geburtsdatum,8,2),2,'0',STR_PAD_LEFT);
++	$gebdatumX= substr($gebdatum,0,4)."-".str_pad(substr((string) $geburtsdatum,5,2),2,'0',STR_PAD_LEFT)."-".str_pad(substr((string) $geburtsdatum,8,2),2,'0',STR_PAD_LEFT);
+ 	$gebdatum= $gebdatumX;
+     echo "<br>GebDatum: ".$gebdatum;	
+ echo "<br>GebDatum2: ".$row['geburtsdatum'];
+    ----------- end diff -----------
+
+Applied rules:
+ * NullToStrictStringFuncCallArgRector
+
+
+7) ../../original-src/web/htdocs/kimidev_ET/kimibatch/telematica_import_callmanager_log.php:202
+
+    ---------- begin diff ----------
+@@ Line 202 @@
+ 		$setTime = false;
+ 		$diff = 0;
+ 		if ($this->end_time != "") {
+-			$this->dauer_sec  = strtotime($this->end_time) - strtotime($this->start_time);
++			$this->dauer_sec  = strtotime((string) $this->end_time) - strtotime((string) $this->start_time);
+ 		} elseif($this->connect_time != "") {
+-			$this->dauer_sec  = strtotime($this->connect_time) - strtotime($this->start_time);			
++			$this->dauer_sec  = strtotime((string) $this->connect_time) - strtotime((string) $this->start_time);			
+ 		}
+
+ 	}
+@@ Line 222 @@
+ 	public function getItemValue($value, $search) {
+ 	  
+ 	  $ret = "";
+-	  $pos = strpos($value, $search);
++	  $pos = strpos((string) $value, (string) $search);
+ 	  if ($pos !== false) {
+-		  $pos2 = strpos($value, '&', $pos);
++		  $pos2 = strpos((string) $value, '&', $pos);
+ 		  if ($pos2 !== false) {
+-			  $ret = substr($value, $pos+strlen($search), $pos2-$pos-strlen($search));
++			  $ret = substr((string) $value, $pos+strlen((string) $search), $pos2-$pos-strlen((string) $search));
+ 		  }
+ 	  }
+ 	  return $ret;
+@@ Line 360 @@
+
+ $hasData = false;
+ if ($data != '' && $data != null) {
+-	$obj = json_decode($data);
++	$obj = json_decode((string) $data);
+ 	$dataarr = $obj->data;
+ 	$hasData = true;
+ }
+    ----------- end diff -----------
+
+Applied rules:
+ * NullToStrictStringFuncCallArgRector
+
+
+8) ../../original-src/web/htdocs/kimidev_ET/modules/gui/subuebersicht.php:141
+
+    ---------- begin diff ----------
+@@ Line 141 @@
+             $sum_saldo = 0;
+         }
+         $sum_cardif = 0;
+-        if ($sum_saldo > 0 && isset($stammdaten) && substr($stammdaten->get_krsv(), 0, 1) == 1) {
++        if ($sum_saldo > 0 && isset($stammdaten) && substr((string) $stammdaten->get_krsv(), 0, 1) == 1) {
+             $sum_cardif = $sum_saldo / 100 * CONF_CARDIF_ZINSSATZ;
+             $sum_cardif = number_format((float) round($sum_cardif, 2), 2, ',', '.');
+         }
+    ----------- end diff -----------
+
+Applied rules:
+ * NullToStrictStringFuncCallArgRector
+
+
+9) ../../original-src/web/htdocs/kimidev_ET/kimibatch/inko2016imp3.php:81
+
+    ---------- begin diff ----------
+@@ Line 81 @@
+ 	//20170127 AR: wenn nicht UTF-8 dann konvertieren
+ 	$line = convert2Utf8($line);
+
+-    echo "Line #<b>{$line_num}</b> : " . htmlspecialchars($line) . "<br />\n";
++    echo "Line #<b>{$line_num}</b> : " . htmlspecialchars((string) $line) . "<br />\n";
+ 	
+ }
+ // Loop through our array, show HTML source as HTML source; and line numbers too.
+    ----------- end diff -----------
+
+Applied rules:
+ * NullToStrictStringFuncCallArgRector
+
+
+10) ../../original-src/web/htdocs/kimidev_ET/libs/entities/lastschrift.php:166
+
+    ---------- begin diff ----------
+@@ Line 166 @@
+     }
+
+     public function set_dat_lastschrift($val, $sql_valid = FALSE) { {
+-            if (strlen($val) == 0) {
++            if (strlen((string) $val) == 0) {
+                 $this->item["dat_lastschrift"] = NULL;
+                 return;
+             }
+@@ Line 193 @@
+     }
+
+     public function set_dat_unterschrift($val, $sql_valid = FALSE) { {
+-            if (strlen($val) == 0) {
++            if (strlen((string) $val) == 0) {
+                 $this->item["dat_unterschrift"] = NULL;
+                 return;
+             }
+@@ Line 220 @@
+     }
+
+     public function set_dat_inaktiv($val, $sql_valid = FALSE) { {
+-            if (strlen($val) == 0) {
++            if (strlen((string) $val) == 0) {
+                 $this->item["dat_inaktiv"] = NULL;
+                 return;
+             }
+@@ Line 288 @@
+     }
+
+     public function set_dat_einzbetrag($val, $sql_valid = FALSE) { {
+-            if (strlen($val) == 0) {
++            if (strlen((string) $val) == 0) {
+                 $this->item["dat_einzbetrag"] = NULL;
+                 return;
+             }
+    ----------- end diff -----------
+
+Applied rules:
+ * NullToStrictStringFuncCallArgRector
+
+
+11) ../../original-src/web/htdocs/kimidev_ET/libs/entities/schadensfall.php:87
+
+    ---------- begin diff ----------
+@@ Line 87 @@
+     }
+
+     public function set_dat_schadenseintritt($val, $sql_valid = FALSE) { {
+-            if (strlen($val) == 0) {
++            if (strlen((string) $val) == 0) {
+                 $this->item["dat_schadenseintritt"] = NULL;
+                 return;
+             }
+@@ Line 114 @@
+     }
+
+     public function set_dat_ende_schadensleistung($val, $sql_valid = FALSE) { {
+-            if (strlen($val) == 0) {
++            if (strlen((string) $val) == 0) {
+                 $this->item["dat_ende_schadensleistung"] = NULL;
+                 return;
+             }
+@@ Line 141 @@
+     }
+
+     public function set_dat_gemeldet($val, $sql_valid = FALSE) { {
+-            if (strlen($val) == 0) {
++            if (strlen((string) $val) == 0) {
+                 $this->item["dat_gemeldet"] = NULL;
+                 return;
+             }
+@@ Line 168 @@
+     }
+
+     public function set_dat_pruefung($val, $sql_valid = FALSE) { {
+-            if (strlen($val) == 0) {
++            if (strlen((string) $val) == 0) {
+                 $this->item["dat_pruefung"] = NULL;
+                 return;
+             }
+@@ Line 195 @@
+     }
+
+     public function set_dat_leistung($val, $sql_valid = FALSE) { {
+-            if (strlen($val) == 0) {
++            if (strlen((string) $val) == 0) {
+                 $this->item["dat_leistung"] = NULL;
+                 return;
+             }
+@@ Line 222 @@
+     }
+
+     public function set_dat_zahlungseingang($val, $sql_valid = FALSE) { {
+-            if (strlen($val) == 0) {
++            if (strlen((string) $val) == 0) {
+                 $this->item["dat_zahlungseingang"] = NULL;
+                 return;
+             }
+@@ Line 249 @@
+     }
+
+     public function set_dat_erledigt($val, $sql_valid = FALSE) { {
+-            if (strlen($val) == 0) {
++            if (strlen((string) $val) == 0) {
+                 $this->item["dat_erledigt"] = NULL;
+                 return;
+             }
+@@ Line 340 @@
+     }
+
+     public function set_leistung_ab($val, $sql_valid = FALSE) { {
+-            if (strlen($val) == 0) {
++            if (strlen((string) $val) == 0) {
+                 $this->item["leistung_ab"] = NULL;
+                 return;
+             }
+    ----------- end diff -----------
+
+Applied rules:
+ * NullToStrictStringFuncCallArgRector
+
+
+12) ../../original-src/web/htdocs/kimidev_ET/kimibatch/inkodeimp2.php:93
+
+    ---------- begin diff ----------
+@@ Line 93 @@
+ 	//20170127 AR: wenn nicht UTF-8 dann konvertieren
+ 	$line = convert2Utf8($line);
+
+-    echo "Line #<b>{$line_num}</b> : " . htmlspecialchars($line) . "<br />\n";
++    echo "Line #<b>{$line_num}</b> : " . htmlspecialchars((string) $line) . "<br />\n";
+ 	
+ }
+ // Loop through our array, show HTML source as HTML source; and line numbers too.
+    ----------- end diff -----------
+
+Applied rules:
+ * NullToStrictStringFuncCallArgRector
+
+
+13) ../../original-src/web/htdocs/kimidev_ET/kimibatch/inkodeimp2x.php:84
+
+    ---------- begin diff ----------
+@@ Line 84 @@
+ 	//20170127 AR: wenn nicht UTF-8 dann konvertieren
+ 	$line = convert2Utf8($line);
+
+-    echo "Line #<b>{$line_num}</b> : " . htmlspecialchars($line) . "<br />\n";
++    echo "Line #<b>{$line_num}</b> : " . htmlspecialchars((string) $line) . "<br />\n";
+ 	
+ }
+ // Loop through our array, show HTML source as HTML source; and line numbers too.
+    ----------- end diff -----------
+
+Applied rules:
+ * NullToStrictStringFuncCallArgRector
+
+
+14) ../../original-src/web/htdocs/kimidev_ET/kimibatch/kimi_general.php:140
+
+    ---------- begin diff ----------
+@@ Line 140 @@
+ 		}
+ 		$head = true;
+ 	} else {
+-		$keydata = explode($delm,$csvxrow[0]);
++		$keydata = explode($delm,(string) $csvxrow[0]);
+ 	}
+     $keynumb = count($keydata);
+    
+@@ Line 151 @@
+ 			if ($ansi2Utf8) {
+ 				$csvxrow[$x] = convert2Utf8($csvxrow[$x]);
+ 			}
+-			$csvxrow[$x] = chop($csvxrow[$x]);
++			$csvxrow[$x] = chop((string) $csvxrow[$x]);
+ 			//$csvxrow[$x] = str_replace($encl,'',$csvxrow[$x]);
+ 			$csv_data[$x] = explode($delm,$csvxrow[$x]);
+ 			$i=0;
+@@ Line 172 @@
+ 			if ($ansi2Utf8) {
+ 				$item = convert2Utf8($item);
+ 			}
+-            $item = chop($item);
++            $item = chop((string) $item);
+             //$item = str_replace($encl,'',$item);
+             $csv_data = explode($delm,$item);
+             for ($y=0; $y<$keynumb; $y++) {
+@@ Line 359 @@
+ function replaceFromArray(&$value, &$replaceArray, $checkEmpty=true) {
+
+ 	foreach($replaceArray as $key => $replValue ) {
+-		if ($replValue==="" && (strpos($value, $key) !== false) && $checkEmpty ) {
++		if ($replValue==="" && (strpos((string) $value, (string) $key) !== false) && $checkEmpty ) {
+ 			setLastError("Platzhalter für ".$key ." vorhanden, Wert zum Ersetzen nicht definiert!");
+ 			return false;
+ 		}
+@@ Line 430 @@
+ }
+
+ function utf8ToAnsi($value) {
+-	return iconv("UTF-8", "WINDOWS-1252", $value);
++	return iconv("UTF-8", "WINDOWS-1252", (string) $value);
+ 	$retval = $value;
+
+ 	if (!mb_check_encoding($retval, 'CP1252')) {
+@@ Line 462 @@
+ 			}
+
+ 			if ($lineFile !== false) {
+-				fwrite($fh, $lineFile);
++				fwrite($fh, (string) $lineFile);
+ 			}
+ 		}
+ 					
+@@ Line 557 @@
+
+ 	if ( $fromHauptTicket) {
+ 		$param[PARAM_ANREDE_SGH] = "";
+-		$param[PARAM_ANREDE] = trim($hauptTicket['anrede']);
++		$param[PARAM_ANREDE] = trim((string) $hauptTicket['anrede']);
+
+ 		if (substr($param[PARAM_ANREDE], -1, 1) === "r") {
+ 			$param[PARAM_ANREDE_SGH] = "r";
+@@ Line 564 @@
+ 		}
+ 		
+ 		$param[PARAM_NAME] = "";
+-		$param[PARAM_VORNAME] = trim($hauptTicket['vorname']);
+-		$param[PARAM_NACHNAME] = trim($hauptTicket['nachname']);
++		$param[PARAM_VORNAME] = trim((string) $hauptTicket['vorname']);
++		$param[PARAM_NACHNAME] = trim((string) $hauptTicket['nachname']);
+ 		if ($hauptTicket['vorname'] !== "") {
+-			$param[PARAM_NAME] = trim($hauptTicket['vorname']);
++			$param[PARAM_NAME] = trim((string) $hauptTicket['vorname']);
+ 		}
+-		if (trim($hauptTicket['nachname']) !== "") {
++		if (trim((string) $hauptTicket['nachname']) !== "") {
+ 			if ($param[PARAM_NAME] !== ""){
+ 				$param[PARAM_NAME].=" ";
+ 			}
+-			$param[PARAM_NAME].= trim($hauptTicket['nachname']);
++			$param[PARAM_NAME].= trim((string) $hauptTicket['nachname']);
+ 		}
+ 	}
+    ----------- end diff -----------
+
+Applied rules:
+ * NullToStrictStringFuncCallArgRector
+
+
+15) ../../original-src/web/htdocs/kimidev_ET/ajax/callInntelco.php:99
+
+    ---------- begin diff ----------
+@@ Line 99 @@
+ }
+
+ if ($auto_vorwahl != "") {
+-	if (substr($target_number, 0, strlen($auto_vorwahl)) != $auto_vorwahl) {
++	if (substr($target_number, 0, strlen((string) $auto_vorwahl)) != $auto_vorwahl) {
+ 		if (substr($target_number, 0, 1) == "0") {
+ 			$target_number = substr($target_number, 1, strlen($target_number)-1);
+ 		}
+    ----------- end diff -----------
+
+Applied rules:
+ * NullToStrictStringFuncCallArgRector
+
+
+16) ../../original-src/web/htdocs/kimidev_ET/modules/subkonto.php:94
+
+    ---------- begin diff ----------
+@@ Line 94 @@
+     }
+
+     public function set_eroeffnet_am($val) { {
+-            if (strlen($val) == 0) {
++            if (strlen((string) $val) == 0) {
+                 $this->item["eroeffnet_am"] = NULL;
+                 return;
+             }
+@@ Line 219 @@
+     }
+
+     public function set_buchungsdatum($val) {
+-        if (strlen($val) == 0) {
++        if (strlen((string) $val) == 0) {
+             $this->item["buchungsdatum"] = NULL;
+             return;
+         }
+@@ Line 247 @@
+     }
+
+     public function set_belegdatum($val) {
+-        if (strlen($val) == 0) {
++        if (strlen((string) $val) == 0) {
+             $this->item["belegdatum"] = NULL;
+             return;
+         }
+    ----------- end diff -----------
+
+Applied rules:
+ * NullToStrictStringFuncCallArgRector
+
+
+17) ../../original-src/web/htdocs/kimidev_ET/setticketcallinfo.php:85
+
+    ---------- begin diff ----------
+@@ Line 85 @@
+ 		$setTime = false;
+ 		$diff = 0;
+ 		if ($this->end_time != "") {
+-			$this->dauer_sec  = strtotime($this->end_time) - strtotime($this->start_time);
++			$this->dauer_sec  = strtotime((string) $this->end_time) - strtotime((string) $this->start_time);
+ 		} elseif($this->connect_time != "") {
+-			$this->dauer_sec  = strtotime($this->connect_time) - strtotime($this->start_time);			
++			$this->dauer_sec  = strtotime((string) $this->connect_time) - strtotime((string) $this->start_time);			
+ 		}
+
+ 	}
+@@ Line 105 @@
+ 	public function getItemValue($value, $search) {
+ 	  
+ 	  $ret = "";
+-	  $pos = strpos($value, $search);
++	  $pos = strpos((string) $value, (string) $search);
+ 	  if ($pos !== false) {
+-		  $pos2 = strpos($value, '&', $pos);
++		  $pos2 = strpos((string) $value, '&', $pos);
+ 		  if ($pos2 !== false) {
+-			  $ret = substr($value, $pos+strlen($search), $pos2-$pos-strlen($search));
++			  $ret = substr((string) $value, $pos+strlen((string) $search), $pos2-$pos-strlen((string) $search));
+ 		  }
+ 	  }
+ 	  return $ret;
+    ----------- end diff -----------
+
+Applied rules:
+ * NullToStrictStringFuncCallArgRector
+
+
+18) ../../original-src/web/htdocs/kimidev_ET/modules/initial/stammsuche.php:14
+
+    ---------- begin diff ----------
+@@ Line 14 @@
+
+ $site = param("s", 0);
+ $site_count = CONF_PORTAL_LINE_PER_SITE;
+-$kdnr = ltrim(param("kdnr", sess("kdnr", "", "ss-")), "0");
++$kdnr = ltrim((string) param("kdnr", sess("kdnr", "", "ss-")), "0");
+ $zahltag = param("zahltag", sess("zahltag", "", "ss-"));
+ $abrechnungstag = param("abrechnungstag", sess("abrechnungstag", "", "ss-"));
+ $mahnsperre = param("mahnsperre", sess("mahnsperre", "", "ss-"));
+@@ Line 40 @@
+     unset($_SESSION["ss-zahltag"]);
+ }
+
+-if (strlen($abrechnungstag) != 0) {
++if (strlen((string) $abrechnungstag) != 0) {
+     $new_date = date_create($abrechnungstag);
+     $new_date = date_format($new_date, "Y-m-d");
+     $filter["stichtag"] = "s.stichtag = '$new_date'";
+@@ Line 50 @@
+     unset($filter["stichtag"]);
+     unset($_SESSION["ss-abrechnungstag"]);
+ }
+-if (strlen($mahnsperre) != 0) {
++if (strlen((string) $mahnsperre) != 0) {
+     $filter["mahnsperre"] = "s.mahnsperre LIKE '$mahnsperre'";
+     $_SESSION["ss-mahnsperre"] = $mahnsperre;
+ }
+@@ Line 59 @@
+     unset($_SESSION["ss-mahnsperre"]);
+ }
+
+-if (strlen($mahnsperre_datum) != 0) {
++if (strlen((string) $mahnsperre_datum) != 0) {
+     $new_date = date_create($mahnsperre_datum);
+     $new_date = date_format($new_date, "Y-m-d");
+     $filter["mahnsperre_datum"] = "s.mahnsperre_datum = '$new_date'";
+    ----------- end diff -----------
+
+Applied rules:
+ * NullToStrictStringFuncCallArgRector
+
+
+19) ../../original-src/web/htdocs/kimidev_ET/modules/initial/subdetail.php:18
+
+    ---------- begin diff ----------
+@@ Line 18 @@
+ $default_is_plus = FALSE;
+ $button_calc_label = TXT_LBL_SK_BTN_CALC;
+ $default_bugru_typ = 0;
+-if ($user_default_bua_bgr_key != "" && strpos(CONF_SKBUCH_ENABLE_BTN_NRATE,$user_default_bua_bgr_key)!==FALSE) {
++if ($user_default_bua_bgr_key != "" && strpos(CONF_SKBUCH_ENABLE_BTN_NRATE,(string) $user_default_bua_bgr_key)!==FALSE) {
+     $default_enable_calc_button = TRUE;
+     $default_bugru_typ = 1;
+ }
+-else if ($user_default_bua_bgr_key != "" && strpos(CONF_SKBUCH_ENABLE_BTN_MAHNGEB,$user_default_bua_bgr_key)!==FALSE) {
++else if ($user_default_bua_bgr_key != "" && strpos(CONF_SKBUCH_ENABLE_BTN_MAHNGEB,(string) $user_default_bua_bgr_key)!==FALSE) {
+     $default_enable_calc_button = TRUE;
+     $default_bugru_typ = 2;
+ }
+@@ Line 89 @@
+     $current->add_informations($_POST, FALSE);
+     $current->set_kz_aktuell($kz_aktuell);
+
+-    if (substr($current->get_bua_bgr_man_id(), strlen($current->get_bua_bgr_man_id()) - 4, 4) == CONF_SKBUCH_CLEAR_BETRAG) {
++    if (substr((string) $current->get_bua_bgr_man_id(), strlen((string) $current->get_bua_bgr_man_id()) - 4, 4) == CONF_SKBUCH_CLEAR_BETRAG) {
+         $current->set_buchungsbetrag(0);
+     }
+    ----------- end diff -----------
+
+Applied rules:
+ * NullToStrictStringFuncCallArgRector
+
+
+20) ../../original-src/web/htdocs/kimidev_ET/modules/initial/subsuche.php:1
+
+    ---------- begin diff ----------
+@@ Line 1 @@
+ <?php
+
+ $filter = array();
+-$kunde_nr = ltrim(param("kundennummer"), "0");
++$kunde_nr = ltrim((string) param("kundennummer"), "0");
+ $rechnungsnr = param("rechnungsnummer", NULL);
+
+ if (isset($_SESSION["sd-kunde"]) && !isset($kunde_nr)) {
+    ----------- end diff -----------
+
+Applied rules:
+ * NullToStrictStringFuncCallArgRector
+
+
+21) ../../original-src/web/htdocs/kimidev_ET/modules/initial/subuebersicht.php:41
+
+    ---------- begin diff ----------
+@@ Line 41 @@
+     $stammdaten = Stammdaten::get_by_kunde($kunde_id);
+ }
+ if ($buch_tgz) {
+-    $tgz_summen = explode("@", param("Summen"));
+-    $tgz_ids = explode("@", param("SummenIDs"));
++    $tgz_summen = explode("@", (string) param("Summen"));
++    $tgz_ids = explode("@", (string) param("SummenIDs"));
+     $trans_ok = TRUE;
+
+     // eigene Transaktion
+@@ Line 97 @@
+         App::$CURRENT->DB->rollback($db);
+     }
+
+-    if ( $trans_ok && substr($stammdaten->get_krsv(), 0, 1) == 1) {
++    if ( $trans_ok && substr((string) $stammdaten->get_krsv(), 0, 1) == 1) {
+         $sk_gessaldo = number_format((float) Subkonto::get_gessaldo_kunde_oid(App::$CURRENT->MANDANT->get_id(), $kunde_id), 2, ".", "");
+     }
+
+     // Prüfe KRSV
+-    if ( isset($sk_gessaldo) && $sk_gessaldo > 0 &&  $trans_ok && substr($stammdaten->get_krsv(), 0, 1) == 1) {
++    if ( isset($sk_gessaldo) && $sk_gessaldo > 0 &&  $trans_ok && substr((string) $stammdaten->get_krsv(), 0, 1) == 1) {
+         // Lese Geamtsaldo
+         //$sk_gessaldo = number_format((float) Subkonto::get_gessaldo_kunde_oid(App::$CURRENT->MANDANT->get_id(), $kunde_id), 2, ".", "");
+         $betrag_cardif = $sk_gessaldo / 100 * CONF_CARDIF_ZINSSATZ;
+    ----------- end diff -----------
+
+Applied rules:
+ * NullToStrictStringFuncCallArgRector
+
+
+22) ../../original-src/web/htdocs/kimidev_ET/modules/initial/subverwalt.php:15
+
+    ---------- begin diff ----------
+@@ Line 15 @@
+
+ if ($mode == "INS") {
+     $ratenhoehe = param("ratenhoehe");
+-    if (strlen($ratenhoehe) == 0) {
++    if (strlen((string) $ratenhoehe) == 0) {
+         $ratenhoehe = "NULL";
+     }
+    ----------- end diff -----------
+
+Applied rules:
+ * NullToStrictStringFuncCallArgRector
+
+
+23) ../../original-src/web/htdocs/kimidev_ET/modules/initial/ticketsuch.php:51
+
+    ---------- begin diff ----------
+@@ Line 51 @@
+ $nachname = param("nachname", "");
+ $vorname = param("vorname", "");
+ $benutzer_id = param("benutzer_id", "");
+-$kdnr = ltrim(param("kundennummer", ""), "0");
++$kdnr = ltrim((string) param("kundennummer", ""), "0");
+ $plz = param("plz", "");
+ $ort = param("ort", "");
+ $strasse = param("strasse", "");
+@@ Line 76 @@
+ // 20211215 - Prüfe ob Encryption aktiv
+ $isEncryption = App::$CURRENT->isEncryptionEnabled();
+
+-if (strlen($tnr) > 0) {
++if (strlen((string) $tnr) > 0) {
+     array_push($filter, "t.ticketnr = $tnr");
+ }
+-if (strlen($status_id) > 0 && $status_id != -1) {
++if (strlen((string) $status_id) > 0 && $status_id != -1) {
+     array_push($filter, "t.status_id = $status_id");
+ }
+-if (strlen($aufgabe) > 0) {
++if (strlen((string) $aufgabe) > 0) {
+     array_push($filter, "t.beschreibung_detail LIKE '%$aufgabe%'");
+ }
+-if (strlen($nachname) > 0) {
++if (strlen((string) $nachname) > 0) {
+ 	if ($isEncryption) {
+ 		array_push($filter, "kimi_decrypt(t.nachname) LIKE '%$nachname%'");
+ 	} else {
+@@ Line 92 @@
+ 		array_push($filter, "t.nachname LIKE '%$nachname%'");
+ 	}
+ }
+-if (strlen($vorname) > 0) {
++if (strlen((string) $vorname) > 0) {
+ 	if ($isEncryption) {
+ 		array_push($filter, "kimi_decrypt(t.vorname) LIKE '%$vorname%'");
+ 	} else {
+@@ Line 99 @@
+ 		array_push($filter, "t.vorname LIKE '%$vorname%'");
+ 	}
+ }
+-if (strlen($benutzer_id) > 0 && $benutzer_id != -1) {
++if (strlen((string) $benutzer_id) > 0 && $benutzer_id != -1) {
+     array_push($filter, "t.benutzer_id = $benutzer_id");
+ }
+ if (strlen($kdnr) > 0) {
+     array_push($filter, "t.kundennummer = '$kdnr'");
+ }
+-if (strlen($plz) > 0) {
++if (strlen((string) $plz) > 0) {
+ 	if ($isEncryption) {
+ 		array_push($filter, "kimi_decrypt(t.plz) LIKE '%$plz%'");
+ 	} else {
+@@ Line 112 @@
+ 		array_push($filter, "t.plz LIKE '%$plz%'");
+ 	}	
+ }
+-if (strlen($ort) > 0) {
++if (strlen((string) $ort) > 0) {
+ 	if ($isEncryption) {
+ 		array_push($filter, "kimi_decrypt(t.ort) LIKE '%$ort%'");
+ 	} else {
+@@ Line 119 @@
+ 		array_push($filter, "t.ort LIKE '%$ort%'");
+ 	}
+ }
+-if (strlen($strasse) > 0) {
++if (strlen((string) $strasse) > 0) {
+ 	if ($isEncryption) {
+ 		array_push($filter, "kimi_decrypt(t.strasse) LIKE '%$strasse%'");
+ 	} else {
+@@ Line 126 @@
+ 		array_push($filter, "t.strasse LIKE '%$strasse%'");
+ 	}
+ }
+-if (strlen($hausnummer) > 0) {
++if (strlen((string) $hausnummer) > 0) {
+ 	if ($isEncryption) {
+ 		array_push($filter, "kimi_decrypt(t.hausnummer) LIKE '%$hausnummer%'");
+ 	} else {
+@@ Line 133 @@
+ 		array_push($filter, "t.hausnummer LIKE '%$hausnummer%'");
+ 	}
+ }
+-if (strlen($prioritaet_id) > 0 && $prioritaet_id != -1) {
++if (strlen((string) $prioritaet_id) > 0 && $prioritaet_id != -1) {
+     array_push($filter, "t.prioritaet_id = $prioritaet_id");
+ }
+-if (strlen($beginn) > 0) {
++if (strlen((string) $beginn) > 0) {
+     $date = date_create($beginn);
+     array_push($filter, "t.beginn = '" . date_format($date, "Y-m-d H:i:s") . "'");
+ }
+-if (strlen($ende) > 0) {
++if (strlen((string) $ende) > 0) {
+     $date = date_create($ende);
+     array_push($filter, "t.ende = '" . date_format($date, "Y-m-d H:i:s") . "'");
+ }
+-if (strlen($aufwand) > 0) {
++if (strlen((string) $aufwand) > 0) {
+     array_push($filter, "t.aufwand = $aufwand");
+ }
+-if (strlen($wiedervorlage) > 0) {
++if (strlen((string) $wiedervorlage) > 0) {
+     $date = date_create($wiedervorlage);
+     array_push($filter, "t.wiedervorlage = '" . date_format($date, "Y-m-d H:i:s") . "'");
+ }
+@@ Line 154 @@
+ if (strlen($ergebnis) > 0) {
+     array_push($filter, "t.ergebnis LIKE '%$ergebnis%'");
+ }
+-if (strlen($markencode) > 0) {
++if (strlen((string) $markencode) > 0) {
+     array_push($filter, "t.markencode LIKE '%$markencode%'");
+ }
+-if (strlen($anruf_status_id) > 0 && $anruf_status_id != -1) {
++if (strlen((string) $anruf_status_id) > 0 && $anruf_status_id != -1) {
+     array_push($filter, "t.anruf_status_id = $anruf_status_id");
+ }
+-if (strlen($firma_id) > 0 && $firma_id != -1) {
++if (strlen((string) $firma_id) > 0 && $firma_id != -1) {
+     array_push($filter, "t.firma_id = $firma_id");
+ }
+-if (strlen($telefon) > 0) {
++if (strlen((string) $telefon) > 0) {
+ 	if ($isEncryption) {
+ 		array_push($filter, "kimi_decrypt(t.telefon) LIKE '%$telefon%'");
+ 	} else {
+@@ Line 170 @@
+ 		array_push($filter, "t.telefon LIKE '%$telefon%'");
+ 	}
+ }
+-if (strlen($telefon2) > 0) {
++if (strlen((string) $telefon2) > 0) {
+ 	if ($isEncryption) {
+ 		array_push($filter, "kimi_decrypt(t.telefon2) LIKE '%$telefon2%'");
+ 	} else {
+@@ Line 177 @@
+ 		array_push($filter, "t.telefon2 LIKE '%$telefon2%'");
+ 	}
+ }
+-if (strlen($dummy_text1) > 0) {
++if (strlen((string) $dummy_text1) > 0) {
+     array_push($filter, "t.dummy_text1 LIKE '%$dummy_text1%'");
+ }
+-if (strlen($dummy_text9) > 0) {
++if (strlen((string) $dummy_text9) > 0) {
+     array_push($filter, "t.dummy_text9 LIKE '%$dummy_text9%'");
+ }
+ // TODO: hier evtl. neu benötigte Suchfelder hinzufügen!!
+    ----------- end diff -----------
+
+Applied rules:
+ * NullToStrictStringFuncCallArgRector
+
+
+24) ../../original-src/web/htdocs/kimidev_ET/modules/initial/ticketsuch2.php:51
+
+    ---------- begin diff ----------
+@@ Line 51 @@
+ $nachname = param("nachname", "");
+ $vorname = param("vorname", "");
+ $benutzer_id = param("benutzer_id", "");
+-$kdnr = ltrim(param("kundennummer", ""), "0");
++$kdnr = ltrim((string) param("kundennummer", ""), "0");
+ $plz = param("plz", "");
+ $ort = param("ort", "");
+ $strasse = param("strasse", "");
+@@ Line 73 @@
+ // TODO: hier evtl. neu benötigte Variablen hinzufügen!!
+
+
+-if (strlen($tnr) > 0) {
++if (strlen((string) $tnr) > 0) {
+     array_push($filter, "t.ticketnr = $tnr");
+ }
+-if (strlen($status_id) > 0 && $status_id != -1) {
++if (strlen((string) $status_id) > 0 && $status_id != -1) {
+     array_push($filter, "t.status_id = $status_id");
+ }
+-if (strlen($aufgabe) > 0) {
++if (strlen((string) $aufgabe) > 0) {
+     array_push($filter, "t.beschreibung_detail LIKE '%$aufgabe%'");
+ }
+-if (strlen($nachname) > 0) {
++if (strlen((string) $nachname) > 0) {
+     array_push($filter, "t.nachname LIKE '%$nachname%'");
+ }
+-if (strlen($vorname) > 0) {
++if (strlen((string) $vorname) > 0) {
+     array_push($filter, "t.vorname LIKE '%$vorname%'");
+ }
+-if (strlen($benutzer_id) > 0 && $benutzer_id != -1) {
++if (strlen((string) $benutzer_id) > 0 && $benutzer_id != -1) {
+     array_push($filter, "t.benutzer_id = $benutzer_id");
+ }
+ if (strlen($kdnr) > 0) {
+     array_push($filter, "t.kundennummer = '$kdnr'");
+ }
+-if (strlen($plz) > 0) {
++if (strlen((string) $plz) > 0) {
+     array_push($filter, "t.plz LIKE '%$plz%'");
+ }
+-if (strlen($ort) > 0) {
++if (strlen((string) $ort) > 0) {
+     array_push($filter, "t.ort LIKE '%$ort%'");
+ }
+-if (strlen($strasse) > 0) {
++if (strlen((string) $strasse) > 0) {
+     array_push($filter, "t.strasse LIKE '%$strasse%'");
+ }
+-if (strlen($hausnummer) > 0) {
++if (strlen((string) $hausnummer) > 0) {
+     array_push($filter, "t.hausnummer = $hausnummer");
+ }
+-if (strlen($prioritaet_id) > 0 && $prioritaet_id != -1) {
++if (strlen((string) $prioritaet_id) > 0 && $prioritaet_id != -1) {
+     array_push($filter, "t.prioritaet_id = $prioritaet_id");
+ }
+-if (strlen($beginn) > 0) {
++if (strlen((string) $beginn) > 0) {
+     $date = date_create($beginn);
+     array_push($filter, "t.beginn = '" . date_format($date, "Y-m-d H:i:s") . "'");
+ }
+-if (strlen($ende) > 0) {
++if (strlen((string) $ende) > 0) {
+     $date = date_create($ende);
+     array_push($filter, "t.ende = '" . date_format($date, "Y-m-d H:i:s") . "'");
+ }
+-if (strlen($aufwand) > 0) {
++if (strlen((string) $aufwand) > 0) {
+     array_push($filter, "t.aufwand = $aufwand");
+ }
+-if (strlen($wiedervorlage) > 0) {
++if (strlen((string) $wiedervorlage) > 0) {
+     $date = date_create($wiedervorlage);
+     array_push($filter, "t.wiedervorlage = '" . date_format($date, "Y-m-d H:i:s") . "'");
+ }
+@@ Line 127 @@
+ if (strlen($ergebnis) > 0) {
+     array_push($filter, "t.ergebnis LIKE '%$ergebnis%'");
+ }
+-if (strlen($markencode) > 0) {
++if (strlen((string) $markencode) > 0) {
+     array_push($filter, "t.markencode LIKE '%$markencode%'");
+ }
+-if (strlen($anruf_status_id) > 0 && $anruf_status_id != -1) {
++if (strlen((string) $anruf_status_id) > 0 && $anruf_status_id != -1) {
+     array_push($filter, "t.anruf_status_id = $anruf_status_id");
+ }
+-if (strlen($firma_id) > 0 && $firma_id != -1) {
++if (strlen((string) $firma_id) > 0 && $firma_id != -1) {
+     array_push($filter, "t.firma_id = $firma_id");
+ }
+-if (strlen($telefon) > 0) {
++if (strlen((string) $telefon) > 0) {
+     array_push($filter, "t.telefon LIKE '%$telefon%'");
+ }
+-if (strlen($telefon2) > 0) {
++if (strlen((string) $telefon2) > 0) {
+     array_push($filter, "t.telefon2 LIKE '%$telefon2%'");
+ }
+-if (strlen($dummy_text1) > 0) {
++if (strlen((string) $dummy_text1) > 0) {
+     array_push($filter, "t.dummy_text1 LIKE '%$dummy_text1%'");
+ }
+-if (strlen($dummy_text9) > 0) {
++if (strlen((string) $dummy_text9) > 0) {
+     array_push($filter, "t.dummy_text9 LIKE '%$dummy_text9%'");
+ }
+ // TODO: hier evtl. neu benötigte Suchfelder hinzufügen!!
+    ----------- end diff -----------
+
+Applied rules:
+ * NullToStrictStringFuncCallArgRector
+
+
+25) ../../original-src/web/htdocs/kimidev_ET/modules/initial/ticketsuch_sich20150208.php:19
+
+    ---------- begin diff ----------
+@@ Line 19 @@
+ $nachname = param("nachname", "");
+ $vorname = param("vorname", "");
+ $benutzer_id = param("benutzer_id", "");
+-$kdnr = ltrim(param("kundennummer", ""), "0");
++$kdnr = ltrim((string) param("kundennummer", ""), "0");
+ $plz = param("plz", "");
+ $ort = param("ort", "");
+ $strasse = param("strasse", "");
+@@ Line 33 @@
+ $site = param("s", 0);
+
+
+-if (strlen($tnr) > 0) {
++if (strlen((string) $tnr) > 0) {
+     array_push($filter, "t.ticketnr = $tnr");
+ }
+-if (strlen($status_id) > 0 && $status_id != -1) {
++if (strlen((string) $status_id) > 0 && $status_id != -1) {
+     array_push($filter, "t.status_id = $status_id");
+ }
+-if (strlen($aufgabe) > 0) {
++if (strlen((string) $aufgabe) > 0) {
+     array_push($filter, "t.beschreibung_detail LIKE '%$aufgabe%'");
+ }
+-if (strlen($nachname) > 0) {
++if (strlen((string) $nachname) > 0) {
+     array_push($filter, "t.nachname LIKE '%$nachname%'");
+ }
+-if (strlen($vorname) > 0) {
++if (strlen((string) $vorname) > 0) {
+     array_push($filter, "t.nachname LIKE '%$vorname%'");
+ }
+-if (strlen($benutzer_id) > 0 && $benutzer_id != -1) {
++if (strlen((string) $benutzer_id) > 0 && $benutzer_id != -1) {
+     array_push($filter, "t.benutzer_id = $benutzer_id");
+ }
+ if (strlen($kdnr) > 0) {
+     array_push($filter, "t.kundennummer = '$kdnr'");
+ }
+-if (strlen($plz) > 0) {
++if (strlen((string) $plz) > 0) {
+     array_push($filter, "t.plz LIKE '%$plz%'");
+ }
+-if (strlen($ort) > 0) {
++if (strlen((string) $ort) > 0) {
+     array_push($filter, "t.ort LIKE '%$ort%'");
+ }
+-if (strlen($strasse) > 0) {
++if (strlen((string) $strasse) > 0) {
+     array_push($filter, "t.strasse LIKE '%$strasse%'");
+ }
+-if (strlen($hausnummer) > 0) {
++if (strlen((string) $hausnummer) > 0) {
+     array_push($filter, "t.hausnummer = $hausnummer");
+ }
+-if (strlen($prioritaet_id) > 0 && $prioritaet_id != -1) {
++if (strlen((string) $prioritaet_id) > 0 && $prioritaet_id != -1) {
+     array_push($filter, "t.prioritaet_id = $prioritaet_id");
+ }
+-if (strlen($beginn) > 0) {
++if (strlen((string) $beginn) > 0) {
+     $date = date_create($beginn);
+     array_push($filter, "t.beginn = '" . date_format($date, "Y-m-d H:i:s") . "'");
+ }
+-if (strlen($ende) > 0) {
++if (strlen((string) $ende) > 0) {
+     $date = date_create($ende);
+     array_push($filter, "t.ende = '" . date_format($date, "Y-m-d H:i:s") . "'");
+ }
+-if (strlen($aufwand) > 0) {
++if (strlen((string) $aufwand) > 0) {
+     array_push($filter, "t.aufwand = $aufwand");
+ }
+-if (strlen($wiedervorlage) > 0) {
++if (strlen((string) $wiedervorlage) > 0) {
+     $date = date_create($wiedervorlage);
+     array_push($filter, "t.wiedervorlage = '" . date_format($date, "Y-m-d H:i:s") . "'");
+ }
+    ----------- end diff -----------
+
+Applied rules:
+ * NullToStrictStringFuncCallArgRector
+
+
+26) ../../original-src/web/htdocs/kimidev_ET/modules/initial/bankleitzahl.php:12
+
+    ---------- begin diff ----------
+@@ Line 12 @@
+ $can_create = App::$CURRENT->has_permission("bankleitzahl", "INS");
+ $show_delete = param("showDelete");
+
+-$sblz = ltrim(param("sblz"), NULL);
++$sblz = ltrim((string) param("sblz"), NULL);
+ $sbank = param("sbank", NULL);
+    ----------- end diff -----------
+
+Applied rules:
+ * NullToStrictStringFuncCallArgRector
+
+
+27) ../../original-src/web/htdocs/kimidev_ET/modules/initial/buchungen.php:194
+
+    ---------- begin diff ----------
+@@ Line 194 @@
+                 if ($anz - 1 == $n || $curr_sk->get_saldo() != "0,00") {
+                     //echo "<br> BUCH".$n;
+                     $curr_sk->set_saldo($aufteil['Saldo']);
+-                    if (strrpos($aufteil['Saldo'], "-") !== false) {
++                    if (strrpos((string) $aufteil['Saldo'], "-") !== false) {
+                         $curr_sk->set_m0($aufteil['Saldo']);
+                         $aufteil['M0'] = $aufteil['Saldo'];
+                     }
+@@ Line 324 @@
+                 if ($anz - 1 == $n || $curr_sk->get_saldo() != "0,00") {
+                     //echo "<br> BUCH".$n;
+                     $curr_sk->set_saldo($aufteil['Saldo']);
+-                    if (strrpos($aufteil['Saldo'], "-") !== false) {
++                    if (strrpos((string) $aufteil['Saldo'], "-") !== false) {
+                         $curr_sk->set_m0($aufteil['Saldo']);
+                         $aufteil['M0'] = $aufteil['Saldo'];
+                     }
+@@ Line 477 @@
+
+                     if ($anz - 1 == $n || $curr_sk->get_saldo() != "0,00") {
+                         $curr_sk->set_saldo($aufteil['Saldo']);
+-                        if (strrpos($aufteil['Saldo'], "-") !== false) {
++                        if (strrpos((string) $aufteil['Saldo'], "-") !== false) {
+                             $curr_sk->set_m0($aufteil['Saldo']);
+                             $aufteil['M0'] = $aufteil['Saldo'];
+                         }
+    ----------- end diff -----------
+
+Applied rules:
+ * NullToStrictStringFuncCallArgRector
+
+
+28) ../../original-src/web/htdocs/kimidev_ET/modules/initial/kunde.php:50
+
+    ---------- begin diff ----------
+@@ Line 50 @@
+ }
+
+ if (isset($search["kdnr"])) {
+-    $kdnr = ltrim($search["kdnr"], "0");
++    $kdnr = ltrim((string) $search["kdnr"], "0");
+ } else {
+     $kdnr = "";
+ }
+    ----------- end diff -----------
+
+Applied rules:
+ * NullToStrictStringFuncCallArgRector
+
+
+29) ../../original-src/web/htdocs/kimidev_ET/libs/application.php:50
+
+    ---------- begin diff ----------
+@@ Line 50 @@
+ // 20160710/Roni
+ require_once './libs/entities/anrufzeiten.php';
+
+-function throw_exception($message = null, $code = null) {
++function throw_exception($message = null, $code = null): never {
+     throw new Exception($message, $code);
+ }
+    ----------- end diff -----------
+
+Applied rules:
+ * ReturnNeverTypeRector
+
+
+30) ../../original-src/web/htdocs/kimidev_ET/libs/database.php:115
+
+    ---------- begin diff ----------
+@@ Line 115 @@
+         }
+
+         if (isset($identifier)) {
+-            return mysqli_real_escape_string($identifier, $string);
++            return mysqli_real_escape_string($identifier, (string) $string);
+         } else {
+             return $string;
+         }
+    ----------- end diff -----------
+
+Applied rules:
+ * NullToStrictStringFuncCallArgRector
+
+
+31) ../../original-src/web/htdocs/kimidev_ET/libs/entities/akt.php:82
+
+    ---------- begin diff ----------
+@@ Line 82 @@
+
+         }
+         elseif($this->isFormatDate($dtype)) {
+-            if (strlen($val) == 0 || strlen($val) == 0) {
++            if (strlen((string) $val) == 0 || strlen((string) $val) == 0) {
+                 $this->item[$key] = NULL;
+                 return;
+             }
+    ----------- end diff -----------
+
+Applied rules:
+ * NullToStrictStringFuncCallArgRector
+
+
+32) ../../original-src/web/htdocs/kimidev_ET/libs/entities/buchungen.php:94
+
+    ---------- begin diff ----------
+@@ Line 94 @@
+     }
+
+     public function set_buchungsdatum($val, $sql_valid = FALSE) { {
+-            if (strlen($val) == 0) {
++            if (strlen((string) $val) == 0) {
+                 $this->item["buchungsdatum"] = NULL;
+                 return;
+             }
+@@ Line 122 @@
+     }
+
+     public function set_valutadatum($val, $sql_valid = FALSE) { {
+-            if (strlen($val) == 0) {
++            if (strlen((string) $val) == 0) {
+                 $this->item["valutadatum"] = NULL;
+                 return;
+             }
+@@ Line 704 @@
+         $stamm->set_gesamtsaldo($gessaldo, TRUE);
+
+         $buchungsdatum = str_replace("'", "", $buchungsdatum);
+-        $datestamm = substr($stamm->get_dat_ltzt_buchung(FALSE), 6, 4) . substr($stamm->get_dat_ltzt_buchung(FALSE), 3, 2) . substr($stamm->get_dat_ltzt_buchung(FALSE), 0, 2);
++        $datestamm = substr((string) $stamm->get_dat_ltzt_buchung(FALSE), 6, 4) . substr((string) $stamm->get_dat_ltzt_buchung(FALSE), 3, 2) . substr((string) $stamm->get_dat_ltzt_buchung(FALSE), 0, 2);
+
+         $date = date_format(date_create($buchungsdatum), "Y-m-d H:i:s");
+    ----------- end diff -----------
+
+Applied rules:
+ * NullToStrictStringFuncCallArgRector
+
+
+33) ../../original-src/web/htdocs/kimidev_ET/libs/entities/customer.php:346
+
+    ---------- begin diff ----------
+@@ Line 346 @@
+     }
+
+     public function set_geburtsdatum($geburtsdatum) {
+-        if (strlen($geburtsdatum) == 0) {
++        if (strlen((string) $geburtsdatum) == 0) {
+             $this->item["geburtsdatum"] = NULL;
+             return;
+         }
+@@ Line 555 @@
+     }
+
+     public function set_geburtsdatum2($geburtsdatum2) {
+-        if (strlen($geburtsdatum2) == 0) {
++        if (strlen((string) $geburtsdatum2) == 0) {
+             $this->item["geburtsdatum2"] = NULL;
+             return;
+         }
+@@ Line 581 @@
+     }
+
+     public function set_anlagedatum($anlagedatum) {
+-        if (strlen($anlagedatum) == 0) {
++        if (strlen((string) $anlagedatum) == 0) {
+             $this->item["anlagedatum"] = NULL;
+             return;
+         }
+    ----------- end diff -----------
+
+Applied rules:
+ * NullToStrictStringFuncCallArgRector
+
+
+34) ../../original-src/web/htdocs/kimidev_ET/libs/entities/inkassoinformation.php:90
+
+    ---------- begin diff ----------
+@@ Line 90 @@
+     }
+
+     public function set_status_dat($val, $sql_valid = FALSE) { {
+-            if (strlen($val) == 0) {
++            if (strlen((string) $val) == 0) {
+                 $this->item["status_dat"] = NULL;
+                 return;
+             }
+@@ Line 146 @@
+     }
+
+     public function set_letzte_aenderung($val, $sql_valid = FALSE) { {
+-            if (strlen($val) == 0) {
++            if (strlen((string) $val) == 0) {
+                 $this->item["letzte_aenderung"] = NULL;
+                 return;
+             }
+@@ Line 219 @@
+     }
+
+     public function set_uebergabe_dat($val, $sql_valid = FALSE) { {
+-            if (strlen($val) == 0) {
++            if (strlen((string) $val) == 0) {
+                 $this->item["uebergabe_dat"] = NULL;
+                 return;
+             }
+@@ Line 284 @@
+     }
+
+     public function set_erl_du_dat($val, $sql_valid = FALSE) { {
+-            if (strlen($val) == 0) {
++            if (strlen((string) $val) == 0) {
+                 $this->item["erl_du_dat"] = NULL;
+                 return;
+             }
+@@ Line 326 @@
+     }
+
+     public function set_erl_dat($val, $sql_valid = FALSE) { {
+-            if (strlen($val) == 0) {
++            if (strlen((string) $val) == 0) {
+                 $this->item["erl_dat"] = NULL;
+                 return;
+             }
+    ----------- end diff -----------
+
+Applied rules:
+ * NullToStrictStringFuncCallArgRector
+
+
+35) ../../original-src/web/htdocs/kimidev_ET/kimibatch/okoexp.php:289
+
+    ---------- begin diff ----------
+@@ Line 289 @@
+ 		$email = $line['email']; 
+ 		$neuetelnr = $line['neuetelnr']; 
+ 		
+-		if (strlen($email)>0 OR strlen($neuetelnr)>0) {
++		if (strlen((string) $email)>0 OR strlen((string) $neuetelnr)>0) {
+ 	 	   $contactdata = '';
+-		   if (strlen($email)>0) {
++		   if (strlen((string) $email)>0) {
+ 			 // $contactdata = $contactdata.' email :'.$email;
+ 			 $vorlage = 91; /* Vorlage automatisch setzen */
+ 			 // ausgabe in eigener Zeile
+ 		   }
+-		   if (strlen($neuetelnr)>0) {
++		   if (strlen((string) $neuetelnr)>0) {
+ 			 $contactdata = $contactdata.' Telnr :'.$neuetelnr;
+ 			 $vorlage = 91; /* Vorlage automatisch setzen */
+ 		   }
+@@ Line 311 @@
+ 		$ag_nachname = $line['ag_nachname']; 	
+         $calldata = 'GesprDat: '.$gespraechsdatum.' GesprZeit: '.$gespraechszeit.' Agent: '.$ag_vorname.' '.$ag_nachname  ;		
+ 		// email 20170328
+-		if (strlen($email)>0 ) {
++		if (strlen((string) $email)>0 ) {
+ 	 	   $email01 = '';
+-		   if (strlen($email)>0) {
++		   if (strlen((string) $email)>0) {
+ 			 $email01 = $email01.'Mail: '.$email;
+ 		   }
+ 		   }  else {
+    ----------- end diff -----------
+
+Applied rules:
+ * NullToStrictStringFuncCallArgRector
+
+
+36) ../../original-src/web/htdocs/kimidev_ET/kimibatch/okoexp_ansi-roni.php:251
+
+    ---------- begin diff ----------
+@@ Line 251 @@
+ 		$email = $line['email']; 
+ 		$neuetelnr = $line['neuetelnr']; 
+ 		
+-		if (strlen($email)>0 OR strlen($neuetelnr)>0) {
++		if (strlen((string) $email)>0 OR strlen((string) $neuetelnr)>0) {
+ 	 	   $contactdata = '';
+-		   if (strlen($email)>0) {
++		   if (strlen((string) $email)>0) {
+ 			 // $contactdata = $contactdata.' email :'.$email;
+ 			 $vorlage = 91; /* Vorlage automatisch setzen */
+ 			 // ausgabe in eigener Zeile
+ 		   }
+-		   if (strlen($neuetelnr)>0) {
++		   if (strlen((string) $neuetelnr)>0) {
+ 			 $contactdata = $contactdata.' Telnr :'.$neuetelnr;
+ 			 $vorlage = 91; /* Vorlage automatisch setzen */
+ 		   }
+@@ Line 273 @@
+ 		$ag_nachname = $line['ag_nachname']; 	
+         $calldata = 'GesprDat: '.$gespraechsdatum.' GesprZeit: '.$gespraechszeit.' Agent: '.$ag_vorname.' '.$ag_nachname  ;		
+ 		// email 20170328
+-		if (strlen($email)>0 ) {
++		if (strlen((string) $email)>0 ) {
+ 	 	   $email01 = '';
+-		   if (strlen($email)>0) {
++		   if (strlen((string) $email)>0) {
+ 			 $email01 = $email01.'Mail: '.$email;
+ 		   }
+ 		   }  else {
+    ----------- end diff -----------
+
+Applied rules:
+ * NullToStrictStringFuncCallArgRector
+
+
+37) ../../original-src/web/htdocs/kimidev_ET/kimibatch/okoexp_ansi.php:287
+
+    ---------- begin diff ----------
+@@ Line 287 @@
+ 		$email = $line['email']; 
+ 		$neuetelnr = $line['neuetelnr']; 
+ 		
+-		if (strlen($email)>0 OR strlen($neuetelnr)>0) {
++		if (strlen((string) $email)>0 OR strlen((string) $neuetelnr)>0) {
+ 	 	   $contactdata = '';
+-		   if (strlen($email)>0) {
++		   if (strlen((string) $email)>0) {
+ 			 // $contactdata = $contactdata.' email :'.$email;
+ 			 $vorlage = 91; /* Vorlage automatisch setzen */
+ 			 // ausgabe in eigener Zeile
+ 		   }
+-		   if (strlen($neuetelnr)>0) {
++		   if (strlen((string) $neuetelnr)>0) {
+ 			 $contactdata = $contactdata.' Telnr :'.$neuetelnr;
+ 			 $vorlage = 91; /* Vorlage automatisch setzen */
+ 		   }
+@@ Line 309 @@
+ 		$ag_nachname = $line['ag_nachname']; 	
+         $calldata = 'GesprDat: '.$gespraechsdatum.' GesprZeit: '.$gespraechszeit.' Agent: '.$ag_vorname.' '.$ag_nachname  ;		
+ 		// email 20170328
+-		if (strlen($email)>0 ) {
++		if (strlen((string) $email)>0 ) {
+ 	 	   $email01 = '';
+-		   if (strlen($email)>0) {
++		   if (strlen((string) $email)>0) {
+ 			 $email01 = $email01.'Mail: '.$email;
+ 		   }
+ 		   }  else {
+    ----------- end diff -----------
+
+Applied rules:
+ * NullToStrictStringFuncCallArgRector
+
+
+38) ../../original-src/web/htdocs/kimidev_ET/kimibatch/okoexp_ansi2.php:287
+
+    ---------- begin diff ----------
+@@ Line 287 @@
+ 		$email = $line['email']; 
+ 		$neuetelnr = $line['neuetelnr']; 
+ 		
+-		if (strlen($email)>0 OR strlen($neuetelnr)>0) {
++		if (strlen((string) $email)>0 OR strlen((string) $neuetelnr)>0) {
+ 	 	   $contactdata = '';
+-		   if (strlen($email)>0) {
++		   if (strlen((string) $email)>0) {
+ 			 // $contactdata = $contactdata.' email :'.$email;
+ 			 $vorlage = 91; /* Vorlage automatisch setzen */
+ 			 // ausgabe in eigener Zeile
+ 		   }
+-		   if (strlen($neuetelnr)>0) {
++		   if (strlen((string) $neuetelnr)>0) {
+ 			 $contactdata = $contactdata.' Telnr :'.$neuetelnr;
+ 			 $vorlage = 91; /* Vorlage automatisch setzen */
+ 		   }
+@@ Line 309 @@
+ 		$ag_nachname = $line['ag_nachname']; 	
+         $calldata = 'GesprDat: '.$gespraechsdatum.' GesprZeit: '.$gespraechszeit.' Agent: '.$ag_vorname.' '.$ag_nachname  ;		
+ 		// email 20170328
+-		if (strlen($email)>0 ) {
++		if (strlen((string) $email)>0 ) {
+ 	 	   $email01 = '';
+-		   if (strlen($email)>0) {
++		   if (strlen((string) $email)>0) {
+ 			 $email01 = $email01.'Mail: '.$email;
+ 		   }
+ 		   }  else {
+    ----------- end diff -----------
+
+Applied rules:
+ * NullToStrictStringFuncCallArgRector
+
+
+39) ../../original-src/web/htdocs/kimidev_ET/kimibatch/okoexp_dev.php:287
+
+    ---------- begin diff ----------
+@@ Line 287 @@
+ 		$email = $line['email']; 
+ 		$neuetelnr = $line['neuetelnr']; 
+ 		
+-		if (strlen($email)>0 OR strlen($neuetelnr)>0) {
++		if (strlen((string) $email)>0 OR strlen((string) $neuetelnr)>0) {
+ 	 	   $contactdata = '';
+-		   if (strlen($email)>0) {
++		   if (strlen((string) $email)>0) {
+ 			 // $contactdata = $contactdata.' email :'.$email;
+ 			 $vorlage = 91; /* Vorlage automatisch setzen */
+ 			 // ausgabe in eigener Zeile
+ 		   }
+-		   if (strlen($neuetelnr)>0) {
++		   if (strlen((string) $neuetelnr)>0) {
+ 			 $contactdata = $contactdata.' Telnr :'.$neuetelnr;
+ 			 $vorlage = 91; /* Vorlage automatisch setzen */
+ 		   }
+@@ Line 309 @@
+ 		$ag_nachname = $line['ag_nachname']; 	
+         $calldata = 'GesprDat: '.$gespraechsdatum.' GesprZeit: '.$gespraechszeit.' Agent: '.$ag_vorname.' '.$ag_nachname  ;		
+ 		// email 20170328
+-		if (strlen($email)>0 ) {
++		if (strlen((string) $email)>0 ) {
+ 	 	   $email01 = '';
+-		   if (strlen($email)>0) {
++		   if (strlen((string) $email)>0) {
+ 			 $email01 = $email01.'Mail: '.$email;
+ 		   }
+ 		   }  else {
+    ----------- end diff -----------
+
+Applied rules:
+ * NullToStrictStringFuncCallArgRector
+
+
+40) ../../original-src/web/htdocs/kimidev_ET/kimibatch/okoexpzwb.php:152
+
+    ---------- begin diff ----------
+@@ Line 152 @@
+ 	// being transformed into a newline
+ 	$textzeile1 = $korrezeichen.' ';
+ 	$textzeile1 = str_pad($textzeile1, 70, ' ');   /* mit blank auffüllen */
+-	$textzeile2 = str_pad($textzeile2, 70, ' ');   /* mit blank auffüllen */
+-	$textzeile3 = str_pad($textzeile3, 70, ' ');   /* mit blank auffüllen */
++	$textzeile2 = str_pad((string) $textzeile2, 70, ' ');   /* mit blank auffüllen */
++	$textzeile3 = str_pad((string) $textzeile3, 70, ' ');   /* mit blank auffüllen */
+ 	$string= $aktnr.$vorlage.$textzeile1.$textzeile2.$textzeile3.'00000000 '."\n";
+     fwrite($fp, $string); // will proccess /n as newline ...
+    ----------- end diff -----------
+
+Applied rules:
+ * NullToStrictStringFuncCallArgRector
+
+
+41) ../../original-src/web/htdocs/kimidev_ET/libs/entities/stammdaten.php:80
+
+    ---------- begin diff ----------
+@@ Line 80 @@
+     }
+
+     public function set_datum_anlage($datum_anlage, $sql_valid = FALSE) {
+-        if (strlen($datum_anlage) == 0) {
++        if (strlen((string) $datum_anlage) == 0) {
+             $this->item["datum_anlage"] = NULL;
+             return;
+         }
+@@ Line 107 @@
+     }
+
+     public function set_stichtag($stichtag, $sql_valid = FALSE) {
+-        if (strlen($stichtag) == 0) {
++        if (strlen((string) $stichtag) == 0) {
+             $this->item["stichtag"] = NULL;
+             return;
+         }
+@@ Line 134 @@
+     }
+
+     public function set_zahltag($zahltag, $sql_valid = FALSE) {
+-        if (strlen($zahltag) == 0) {
++        if (strlen((string) $zahltag) == 0) {
+             $this->item["zahltag"] = NULL;
+             return;
+         }
+@@ Line 179 @@
+     }
+
+     public function set_mahnsperre_datum($mahnsperre_datum, $sql_valid = FALSE) {
+-        if (strlen($mahnsperre_datum) == 0) {
++        if (strlen((string) $mahnsperre_datum) == 0) {
+             $this->item["mahnsperre_datum"] = NULL;
+             return;
+         }
+@@ Line 440 @@
+     }
+
+     public function set_dat_einzbetrag($val, $sql_valid = FALSE) {
+-        if (strlen($val) == 0) {
++        if (strlen((string) $val) == 0) {
+             $this->item["dat_einzbetrag"] = NULL;
+             return;
+         }
+@@ Line 467 @@
+     }
+
+     public function set_dat_l_zahlung($dat_l_zahlung, $sql_valid = FALSE) {
+-        if (strlen($dat_l_zahlung) == 0) {
++        if (strlen((string) $dat_l_zahlung) == 0) {
+             $this->item["dat_l_zahlung"] = NULL;
+             return;
+         }
+@@ Line 516 @@
+     }
+
+     public function set_dat_l_auslagerung($dat_l_auslagerung, $sql_valid = FALSE) {
+-        if (strlen($dat_l_auslagerung) == 0) {
++        if (strlen((string) $dat_l_auslagerung) == 0) {
+             $this->item["dat_l_auslagerung"] = NULL;
+             return;
+         }
+@@ Line 565 @@
+     }
+
+     public function set_dat_l_kontoauszug($dat_l_kontoauszug, $sql_valid = FALSE) {
+-        if (strlen($dat_l_kontoauszug) == 0) {
++        if (strlen((string) $dat_l_kontoauszug) == 0) {
+             $this->item["dat_l_kontoauszug"] = NULL;
+             return;
+         }
+@@ Line 614 @@
+     }
+
+     public function set_dat_ltzt_buchung($dat_ltzt_buchung, $sql_valid = FALSE) {
+-        if (strlen($dat_ltzt_buchung) == 0) {
++        if (strlen((string) $dat_ltzt_buchung) == 0) {
+             $this->item["dat_ltzt_buchung"] = NULL;
+             return;
+         }
+@@ Line 641 @@
+     }
+
+     public function set_geaendert_am($geaendert_am, $sql_valid = FALSE) {
+-        if (strlen($geaendert_am) == 0) {
++        if (strlen((string) $geaendert_am) == 0) {
+             $this->item["geaendert_am"] = NULL;
+             return;
+         }
+@@ Line 668 @@
+     }
+
+     public function set_dat_l_mahnlauf($dat_l_mahnlauf, $sql_valid = FALSE) {
+-        if (strlen($dat_l_mahnlauf) == 0) {
++        if (strlen((string) $dat_l_mahnlauf) == 0) {
+             $this->item["dat_l_mahnlauf"] = NULL;
+             return;
+         }
+@@ Line 818 @@
+     }
+
+     public function set_letzter_stichtag($val, $sql_valid = FALSE) {
+-        if (strlen($val) == 0) {
++        if (strlen((string) $val) == 0) {
+             $this->item["letzter_stichtag"] = NULL;
+             return;
+         }
+@@ Line 845 @@
+     }
+
+     public function set_status_dat($val, $sql_valid = FALSE) {
+-        if (strlen($val) == 0) {
++        if (strlen((string) $val) == 0) {
+             $this->item["status_dat"] = NULL;
+             return;
+         }
+@@ Line 872 @@
+     }
+
+     public function set_letzter_zahltag($val, $sql_valid = FALSE) {
+-        if (strlen($val) == 0) {
++        if (strlen((string) $val) == 0) {
+             $this->item["letzter_zahltag"] = NULL;
+             return;
+         }
+@@ Line 899 @@
+     }
+
+     public function set_dat_ende_sonderzins($val, $sql_valid = FALSE) {
+-        if (strlen($val) == 0) {
++        if (strlen((string) $val) == 0) {
+             $this->item["dat_ende_sonderzins"] = NULL;
+             return;
+         }
+    ----------- end diff -----------
+
+Applied rules:
+ * NullToStrictStringFuncCallArgRector
+
+
+42) ../../original-src/web/htdocs/kimidev_ET/libs/entities/subkonto.php:91
+
+    ---------- begin diff ----------
+@@ Line 91 @@
+     }
+
+     public function set_eroeffnet_am($val, $sql_valid = FALSE) { {
+-            if (strlen($val) == 0) {
++            if (strlen((string) $val) == 0) {
+                 $this->item["eroeffnet_am"] = NULL;
+                 return;
+             }
+@@ Line 240 @@
+     }
+
+     public function set_buchungsdatum($val, $sql_valid = FALSE) {
+-        if (strlen($val) == 0) {
++        if (strlen((string) $val) == 0) {
+             $this->item["buchungsdatum"] = NULL;
+             return;
+         }
+@@ Line 267 @@
+     }
+
+     public function set_belegdatum($val, $sql_valid = FALSE) {
+-        if (strlen($val) == 0) {
++        if (strlen((string) $val) == 0) {
+             $this->item["belegdatum"] = NULL;
+             return;
+         }
+@@ Line 603 @@
+     }
+
+     public function set_zahlungsfrist($val, $sql_valid = FALSE) {
+-        if (strlen($val) == 0) {
++        if (strlen((string) $val) == 0) {
+             $this->item["zahlungsfrist"] = NULL;
+             return;
+         }
+@@ Line 676 @@
+     }
+
+     public function set_datum_l_tz_erm($val, $sql_valid = FALSE) {
+-        if (strlen($val) == 0) {
++        if (strlen((string) $val) == 0) {
+             $this->item["datum_l_tz_erm"] = NULL;
+             return;
+         }
+@@ Line 771 @@
+     }
+
+     public function set_datum_debsaldo($val, $sql_valid = FALSE) {
+-        if (strlen($val) == 0) {
++        if (strlen((string) $val) == 0) {
+             $this->item["datum_debsaldo"] = NULL;
+             return;
+         }
+@@ Line 1564 @@
+
+     public static function get_tage($dat_start, $dat_ende, $anz_total_tage, $ignore_first_day, $max_tage = CONF_TGZ_MAX_DAYS) {
+
+-        $result = floor((strtotime($dat_ende) - strtotime($dat_start)) / 86400);
++        $result = floor((strtotime((string) $dat_ende) - strtotime((string) $dat_start)) / 86400);
+
+         if ($ignore_first_day) {
+             $result -= 0;
+    ----------- end diff -----------
+
+Applied rules:
+ * NullToStrictStringFuncCallArgRector
+
+
+43) ../../original-src/web/htdocs/kimidev_ET/libs/entities/subkonto_1.php:87
+
+    ---------- begin diff ----------
+@@ Line 87 @@
+     }
+
+     public function set_eroeffnet_am($val) { {
+-            if (strlen($val) == 0) {
++            if (strlen((string) $val) == 0) {
+                 $this->item["eroeffnet_am"] = NULL;
+                 return;
+             }
+@@ Line 223 @@
+     }
+
+     public function set_buchungsdatum($val) {
+-        if (strlen($val) == 0) {
++        if (strlen((string) $val) == 0) {
+             $this->item["buchungsdatum"] = NULL;
+             return;
+         }
+@@ Line 250 @@
+     }
+
+     public function set_belegdatum($val) {
+-        if (strlen($val) == 0) {
++        if (strlen((string) $val) == 0) {
+             $this->item["belegdatum"] = NULL;
+             return;
+         }
+@@ Line 538 @@
+     }
+
+     public function set_zahlungsfrist($val) {
+-        if (strlen($val) == 0) {
++        if (strlen((string) $val) == 0) {
+             $this->item["zahlungsfrist"] = NULL;
+             return;
+         }
+@@ Line 605 @@
+     }
+
+     public function set_datum_l_tz_erm($val) {
+-        if (strlen($val) == 0) {
++        if (strlen((string) $val) == 0) {
+             $this->item["datum_l_tz_erm"] = NULL;
+             return;
+         }
+@@ Line 687 @@
+     }
+
+     public function set_datum_debsaldo($val) {
+-        if (strlen($val) == 0) {
++        if (strlen((string) $val) == 0) {
+             $this->item["datum_debsaldo"] = NULL;
+             return;
+         }
+@@ Line 1322 @@
+
+     public static function get_tage($dat_start, $dat_ende, $anz_total_tage, $ignore_first_day) {
+
+-        $result = floor((strtotime($dat_ende) - strtotime($dat_start)) / 86400);
++        $result = floor((strtotime((string) $dat_ende) - strtotime((string) $dat_start)) / 86400);
+         if ($ignore_first_day){
+             $result -= 1;
+             if (date_format(date_create($dat_start), 'd')==31) {
+    ----------- end diff -----------
+
+Applied rules:
+ * NullToStrictStringFuncCallArgRector
+
+
+44) ../../original-src/web/htdocs/kimidev_ET/libs/entities/subkonto_s.php:87
+
+    ---------- begin diff ----------
+@@ Line 87 @@
+     }
+
+     public function set_eroeffnet_am($val, $sql_valid = FALSE) { {
+-            if (strlen($val) == 0) {
++            if (strlen((string) $val) == 0) {
+                 $this->item["eroeffnet_am"] = NULL;
+                 return;
+             }
+@@ Line 232 @@
+     }
+
+     public function set_buchungsdatum($val, $sql_valid = FALSE) {
+-        if (strlen($val) == 0) {
++        if (strlen((string) $val) == 0) {
+             $this->item["buchungsdatum"] = NULL;
+             return;
+         }
+@@ Line 259 @@
+     }
+
+     public function set_belegdatum($val, $sql_valid = FALSE) {
+-        if (strlen($val) == 0) {
++        if (strlen((string) $val) == 0) {
+             $this->item["belegdatum"] = NULL;
+             return;
+         }
+@@ Line 583 @@
+     }
+
+     public function set_zahlungsfrist($val, $sql_valid = FALSE) {
+-        if (strlen($val) == 0) {
++        if (strlen((string) $val) == 0) {
+             $this->item["zahlungsfrist"] = NULL;
+             return;
+         }
+@@ Line 656 @@
+     }
+
+     public function set_datum_l_tz_erm($val, $sql_valid = FALSE) {
+-        if (strlen($val) == 0) {
++        if (strlen((string) $val) == 0) {
+             $this->item["datum_l_tz_erm"] = NULL;
+             return;
+         }
+@@ Line 744 @@
+     }
+
+     public function set_datum_debsaldo($val, $sql_valid = FALSE) {
+-        if (strlen($val) == 0) {
++        if (strlen((string) $val) == 0) {
+             $this->item["datum_debsaldo"] = NULL;
+             return;
+         }
+@@ Line 1400 @@
+
+     public static function get_tage($dat_start, $dat_ende, $anz_total_tage, $ignore_first_day) {
+
+-        $result = floor((strtotime($dat_ende) - strtotime($dat_start)) / 86400);
++        $result = floor((strtotime((string) $dat_ende) - strtotime((string) $dat_start)) / 86400);
+         if ($ignore_first_day) {
+             $result -= 1;
+ /*            if (date_format(date_create($dat_start), 'd') == 31) {
+    ----------- end diff -----------
+
+Applied rules:
+ * NullToStrictStringFuncCallArgRector
+
+
+45) ../../original-src/web/htdocs/kimidev_ET/libs/entities/ticket.php:253
+
+    ---------- begin diff ----------
+@@ Line 253 @@
+     }
+
+     public function set_aufwand($val) {
+-        if (strlen($val) == 0) {
++        if (strlen((string) $val) == 0) {
+             unset($this->item["aufwand"]);
+         } else {
+             $this->item["aufwand"] = $val;
+@@ Line 358 @@
+     }
+
+     public function set_mandant_id($mandant_id) {
+-        if (strlen($mandant_id) == 0) {
++        if (strlen((string) $mandant_id) == 0) {
+             unset($this->item["mandant_id"]);
+         } else {
+             $this->item["mandant_id"] = $mandant_id;
+@@ Line 520 @@
+     }
+
+     public function set_hausnummer($hausnummer) {
+-        if (strlen($hausnummer) == 0) {
++        if (strlen((string) $hausnummer) == 0) {
+             unset($this->item["hausnummer"]);
+         } else {
+             $this->item["hausnummer"] = $hausnummer;
+@@ Line 623 @@
+     }
+
+     public function set_geburtsdatum($geburtsdatum) {
+-        if (strlen($geburtsdatum) == 0 || strlen($geburtsdatum) == 0) {
++        if (strlen((string) $geburtsdatum) == 0 || strlen((string) $geburtsdatum) == 0) {
+             $this->item["geburtsdatum"] = NULL;
+             return;
+         }
+@@ Line 756 @@
+     }
+
+     public function set_wiedervorlage($geburtsdatum) {
+-        if (strlen($geburtsdatum) == 0 || strlen($geburtsdatum) == 0) {
++        if (strlen((string) $geburtsdatum) == 0 || strlen((string) $geburtsdatum) == 0) {
+             $this->item["wiedervorlage"] = NULL;
+             return;
+         }
+@@ Line 803 @@
+     }
+
+     public function set_letzte_wiedervorlage($value) {
+-        if (strlen($value) == 0 || strlen($value) == 0) {
++        if (strlen((string) $value) == 0 || strlen((string) $value) == 0) {
+             $this->item["letzte_wiedervorlage"] = NULL;
+             return;
+         }
+@@ Line 878 @@
+     }
+
+     public function set_letzter_anruf($value) {
+-        if (strlen($value) == 0 || strlen($value) == 0) {
++        if (strlen((string) $value) == 0 || strlen((string) $value) == 0) {
+             $this->item["letzter_anruf"] = NULL;
+             return;
+         }
+@@ Line 906 @@
+     }
+
+     public function set_beginn($geburtsdatum) {
+-        if (strlen($geburtsdatum) == 0 || strlen($geburtsdatum) == 0) {
++        if (strlen((string) $geburtsdatum) == 0 || strlen((string) $geburtsdatum) == 0) {
+             $this->item["beginn"] = NULL;
+             return;
+         }
+@@ Line 934 @@
+     }
+
+     public function set_ende($geburtsdatum) {
+-        if (strlen($geburtsdatum) == 0 || strlen($geburtsdatum) == 0) {
++        if (strlen((string) $geburtsdatum) == 0 || strlen((string) $geburtsdatum) == 0) {
+             $this->item["ende"] = NULL;
+             return;
+         }
+@@ Line 2201 @@
+
+     public function set_dummy_date1($val, $sql_valid = FALSE) {
+         {
+-            if (strlen($val) == 0) {
++            if (strlen((string) $val) == 0) {
+                 $this->item["dummy_date1"] = NULL;
+                 return;
+             }
+@@ Line 2229 @@
+
+     public function set_dummy_date2($val, $sql_valid = FALSE) {
+         {
+-            if (strlen($val) == 0) {
++            if (strlen((string) $val) == 0) {
+                 $this->item["dummy_date2"] = NULL;
+                 return;
+             }
+@@ Line 2257 @@
+
+     public function set_dummy_date3($val, $sql_valid = FALSE) {
+         {
+-            if (strlen($val) == 0) {
++            if (strlen((string) $val) == 0) {
+                 $this->item["dummy_date3"] = NULL;
+                 return;
+             }
+@@ Line 2285 @@
+
+     public function set_dummy_date4($val, $sql_valid = FALSE) {
+         {
+-            if (strlen($val) == 0) {
++            if (strlen((string) $val) == 0) {
+                 $this->item["dummy_date4"] = NULL;
+                 return;
+             }
+@@ Line 2313 @@
+
+     public function set_dummy_date5($val, $sql_valid = FALSE) {
+         {
+-            if (strlen($val) == 0) {
++            if (strlen((string) $val) == 0) {
+                 $this->item["dummy_date5"] = NULL;
+                 return;
+             }
+@@ Line 2341 @@
+
+     public function set_dummy_date6($val, $sql_valid = FALSE) {
+         {
+-            if (strlen($val) == 0) {
++            if (strlen((string) $val) == 0) {
+                 $this->item["dummy_date6"] = NULL;
+                 return;
+             }
+@@ Line 2369 @@
+
+     public function set_dummy_date7($val, $sql_valid = FALSE) {
+         {
+-            if (strlen($val) == 0) {
++            if (strlen((string) $val) == 0) {
+                 $this->item["dummy_date7"] = NULL;
+                 return;
+             }
+@@ Line 2397 @@
+
+     public function set_dummy_date8($val, $sql_valid = FALSE) {
+         {
+-            if (strlen($val) == 0) {
++            if (strlen((string) $val) == 0) {
+                 $this->item["dummy_date8"] = NULL;
+                 return;
+             }
+@@ Line 2425 @@
+
+     public function set_dummy_date9($val, $sql_valid = FALSE) {
+         {
+-            if (strlen($val) == 0) {
++            if (strlen((string) $val) == 0) {
+                 $this->item["dummy_date9"] = NULL;
+                 return;
+             }
+@@ Line 2453 @@
+
+     public function set_dummy_date10($val, $sql_valid = FALSE) {
+         {
+-            if (strlen($val) == 0) {
++            if (strlen((string) $val) == 0) {
+                 $this->item["dummy_date10"] = NULL;
+                 return;
+             }
+    ----------- end diff -----------
+
+Applied rules:
+ * NullToStrictStringFuncCallArgRector
+
+
+46) ../../original-src/web/htdocs/kimidev_ET/libs/entities/ticket_historie.php:119
+
+    ---------- begin diff ----------
+@@ Line 119 @@
+     }
+
+     public function set_aufwand($val) {
+-        if (strlen($val) == 0) {
++        if (strlen((string) $val) == 0) {
+             unset($this->item["aufwand"]);
+         } else {
+             $this->item["aufwand"] = $val;
+@@ Line 215 @@
+     }
+
+     public function set_mandant_id($mandant_id) {
+-        if (strlen($mandant_id) == 0) {
++        if (strlen((string) $mandant_id) == 0) {
+             unset($this->item["mandant_id"]);
+         } else {
+             $this->item["mandant_id"] = $mandant_id;
+@@ Line 341 @@
+     }
+
+     public function set_hausnummer($hausnummer) {
+-        if (strlen($hausnummer) == 0) {
++        if (strlen((string) $hausnummer) == 0) {
+             unset($this->item["hausnummer"]);
+         } else {
+             $this->item["hausnummer"] = $hausnummer;
+@@ Line 420 @@
+     }
+
+     public function set_geburtsdatum($geburtsdatum) {
+-        if (strlen($geburtsdatum) == 0 || strlen($geburtsdatum) == 0) {
++        if (strlen((string) $geburtsdatum) == 0 || strlen((string) $geburtsdatum) == 0) {
+             $this->item["geburtsdatum"] = NULL;
+             return;
+         }
+@@ Line 516 @@
+     }
+
+     public function set_wiedervorlage($geburtsdatum) {
+-        if (strlen($geburtsdatum) == 0 || strlen($geburtsdatum) == 0) {
++        if (strlen((string) $geburtsdatum) == 0 || strlen((string) $geburtsdatum) == 0) {
+             $this->item["wiedervorlage"] = NULL;
+             return;
+         }
+@@ Line 544 @@
+     }
+
+     public function set_beginn($geburtsdatum) {
+-        if (strlen($geburtsdatum) == 0 || strlen($geburtsdatum) == 0) {
++        if (strlen((string) $geburtsdatum) == 0 || strlen((string) $geburtsdatum) == 0) {
+             $this->item["beginn"] = NULL;
+             return;
+         }
+@@ Line 572 @@
+     }
+
+     public function set_ende($geburtsdatum) {
+-        if (strlen($geburtsdatum) == 0 || strlen($geburtsdatum) == 0) {
++        if (strlen((string) $geburtsdatum) == 0 || strlen((string) $geburtsdatum) == 0) {
+             $this->item["ende"] = NULL;
+             return;
+         }
+@@ Line 1548 @@
+     }
+
+     public function set_dummy_date1($val, $sql_valid = FALSE) { {
+-            if (strlen($val) == 0) {
++            if (strlen((string) $val) == 0) {
+                 $this->item["dummy_date1"] = NULL;
+                 return;
+             }
+@@ Line 1575 @@
+     }
+
+     public function set_dummy_date2($val, $sql_valid = FALSE) { {
+-            if (strlen($val) == 0) {
++            if (strlen((string) $val) == 0) {
+                 $this->item["dummy_date2"] = NULL;
+                 return;
+             }
+@@ Line 1602 @@
+     }
+
+     public function set_dummy_date3($val, $sql_valid = FALSE) { {
+-            if (strlen($val) == 0) {
++            if (strlen((string) $val) == 0) {
+                 $this->item["dummy_date3"] = NULL;
+                 return;
+             }
+@@ Line 1629 @@
+     }
+
+     public function set_dummy_date4($val, $sql_valid = FALSE) { {
+-            if (strlen($val) == 0) {
++            if (strlen((string) $val) == 0) {
+                 $this->item["dummy_date4"] = NULL;
+                 return;
+             }
+@@ Line 1656 @@
+     }
+
+     public function set_dummy_date5($val, $sql_valid = FALSE) { {
+-            if (strlen($val) == 0) {
++            if (strlen((string) $val) == 0) {
+                 $this->item["dummy_date5"] = NULL;
+                 return;
+             }
+@@ Line 1683 @@
+     }
+
+     public function set_dummy_date6($val, $sql_valid = FALSE) { {
+-            if (strlen($val) == 0) {
++            if (strlen((string) $val) == 0) {
+                 $this->item["dummy_date6"] = NULL;
+                 return;
+             }
+@@ Line 1710 @@
+     }
+
+     public function set_dummy_date7($val, $sql_valid = FALSE) { {
+-            if (strlen($val) == 0) {
++            if (strlen((string) $val) == 0) {
+                 $this->item["dummy_date7"] = NULL;
+                 return;
+             }
+@@ Line 1737 @@
+     }
+
+     public function set_dummy_date8($val, $sql_valid = FALSE) { {
+-            if (strlen($val) == 0) {
++            if (strlen((string) $val) == 0) {
+                 $this->item["dummy_date8"] = NULL;
+                 return;
+             }
+@@ Line 1764 @@
+     }
+
+     public function set_dummy_date9($val, $sql_valid = FALSE) { {
+-            if (strlen($val) == 0) {
++            if (strlen((string) $val) == 0) {
+                 $this->item["dummy_date9"] = NULL;
+                 return;
+             }
+@@ Line 1791 @@
+     }
+
+     public function set_dummy_date10($val, $sql_valid = FALSE) { {
+-            if (strlen($val) == 0) {
++            if (strlen((string) $val) == 0) {
+                 $this->item["dummy_date10"] = NULL;
+                 return;
+             }
+    ----------- end diff -----------
+
+Applied rules:
+ * NullToStrictStringFuncCallArgRector
+
+
+47) ../../original-src/web/htdocs/kimidev_ET/libs/entities/ticket_sich20150208.php:119
+
+    ---------- begin diff ----------
+@@ Line 119 @@
+     }
+
+     public function set_aufwand($val) {
+-        if (strlen($val) == 0) {
++        if (strlen((string) $val) == 0) {
+             unset($this->item["aufwand"]);
+         } else {
+             $this->item["aufwand"] = $val;
+@@ Line 215 @@
+     }
+
+     public function set_mandant_id($mandant_id) {
+-        if (strlen($mandant_id) == 0) {
++        if (strlen((string) $mandant_id) == 0) {
+             unset($this->item["mandant_id"]);
+         } else {
+             $this->item["mandant_id"] = $mandant_id;
+@@ Line 339 @@
+     }
+
+     public function set_hausnummer($hausnummer) {
+-        if (strlen($hausnummer) == 0) {
++        if (strlen((string) $hausnummer) == 0) {
+             unset($this->item["hausnummer"]);
+         } else {
+             $this->item["hausnummer"] = $hausnummer;
+@@ Line 418 @@
+     }
+
+     public function set_geburtsdatum($geburtsdatum) {
+-        if (strlen($geburtsdatum) == 0 || strlen($geburtsdatum) == 0) {
++        if (strlen((string) $geburtsdatum) == 0 || strlen((string) $geburtsdatum) == 0) {
+             $this->item["geburtsdatum"] = NULL;
+             return;
+         }
+@@ Line 514 @@
+     }
+
+     public function set_wiedervorlage($geburtsdatum) {
+-        if (strlen($geburtsdatum) == 0 || strlen($geburtsdatum) == 0) {
++        if (strlen((string) $geburtsdatum) == 0 || strlen((string) $geburtsdatum) == 0) {
+             $this->item["wiedervorlage"] = NULL;
+             return;
+         }
+@@ Line 542 @@
+     }
+
+     public function set_beginn($geburtsdatum) {
+-        if (strlen($geburtsdatum) == 0 || strlen($geburtsdatum) == 0) {
++        if (strlen((string) $geburtsdatum) == 0 || strlen((string) $geburtsdatum) == 0) {
+             $this->item["beginn"] = NULL;
+             return;
+         }
+@@ Line 570 @@
+     }
+
+     public function set_ende($geburtsdatum) {
+-        if (strlen($geburtsdatum) == 0 || strlen($geburtsdatum) == 0) {
++        if (strlen((string) $geburtsdatum) == 0 || strlen((string) $geburtsdatum) == 0) {
+             $this->item["ende"] = NULL;
+             return;
+         }
+    ----------- end diff -----------
+
+Applied rules:
+ * NullToStrictStringFuncCallArgRector
+
+
+48) ../../original-src/web/htdocs/kimidev_ET/libs/entities/user.php:120
+
+    ---------- begin diff ----------
+@@ Line 120 @@
+     }
+
+     public function set_default_belegdatum($val) {
+-        if (strlen($val) == 0) {
++        if (strlen((string) $val) == 0) {
+             $this->item->default_belegdatum = NULL;
+             return;
+         }
+@@ Line 132 @@
+     public static function login($name, $passwort) {
+
+         $passwort = self::encrypt($passwort);
+-        $passwort = substr($passwort, 0, 64);
++        $passwort = substr((string) $passwort, 0, 64);
+
+         $query = "SELECT * FROM benutzer WHERE (name = '$name' OR email = '$name') AND passwort = '$passwort'";
+    ----------- end diff -----------
+
+Applied rules:
+ * NullToStrictStringFuncCallArgRector
+
+
+49) ../../original-src/web/htdocs/kimidev_ET/libs/entities/user_sich20150208.php:107
+
+    ---------- begin diff ----------
+@@ Line 107 @@
+     }
+
+     public function set_default_belegdatum($val) {
+-        if (strlen($val) == 0) {
++        if (strlen((string) $val) == 0) {
+             $this->item->default_belegdatum = NULL;
+             return;
+         }
+@@ Line 119 @@
+     public static function login($name, $passwort) {
+
+         $passwort = self::encrypt($passwort);
+-        $passwort = substr($passwort, 0, 64);
++        $passwort = substr((string) $passwort, 0, 64);
+
+         $query = "SELECT * FROM benutzer WHERE (name = '$name' OR email = '$name') AND passwort = '$passwort'";
+    ----------- end diff -----------
+
+Applied rules:
+ * NullToStrictStringFuncCallArgRector
+
+
+50) ../../original-src/web/htdocs/kimidev_ET/libs/entities/versicherung.php:103
+
+    ---------- begin diff ----------
+@@ Line 103 @@
+     }
+
+     public function set_dat_abschluss($val) { {
+-            if (strlen($val) == 0) {
++            if (strlen((string) $val) == 0) {
+                 $this->item["dat_abschluss"] = NULL;
+                 return;
+             }
+@@ Line 148 @@
+     }
+
+     public function set_dat_storno($val) { {
+-            if (strlen($val) == 0) {
++            if (strlen((string) $val) == 0) {
+                 $this->item["dat_storno"] = NULL;
+                 return;
+             }
+@@ Line 193 @@
+     }
+
+     public function set_dat_meldung_abschluss($val) { {
+-            if (strlen($val) == 0) {
++            if (strlen((string) $val) == 0) {
+                 $this->item["dat_meldung_abschluss"] = NULL;
+                 return;
+             }
+@@ Line 220 @@
+     }
+
+     public function set_dat_info_aend_bed($val) { {
+-            if (strlen($val) == 0) {
++            if (strlen((string) $val) == 0) {
+                 $this->item["dat_info_aend_bed"] = NULL;
+                 return;
+             }
+    ----------- end diff -----------
+
+Applied rules:
+ * NullToStrictStringFuncCallArgRector
+
+
+51) ../../original-src/web/htdocs/kimidev_ET/libs/entities/verwaltungssatz.php:75
+
+    ---------- begin diff ----------
+@@ Line 75 @@
+
+    
+     public function set_buchungsdatum($val, $sql_valid = FALSE) { {
+-            if (strlen($val) == 0) {
++            if (strlen((string) $val) == 0) {
+                 $this->item["buchungsdatum"] = NULL;
+                 return;
+             }
+@@ Line 104 @@
+     }
+
+     public function set_stichtag1($val, $sql_valid = FALSE) { {
+-            if (strlen($val) == 0) {
++            if (strlen((string) $val) == 0) {
+                 $this->item["stichtag1"] = NULL;
+                 return;
+             }
+@@ Line 132 @@
+     }
+
+     public function set_stichtag2($val, $sql_valid = FALSE) { {
+-            if (strlen($val) == 0) {
++            if (strlen((string) $val) == 0) {
+                 $this->item["stichtag2"] = NULL;
+                 return;
+             }
+@@ Line 160 @@
+     }
+
+     public function set_stichtag3($val, $sql_valid = FALSE) { {
+-            if (strlen($val) == 0) {
++            if (strlen((string) $val) == 0) {
+                 $this->item["stichtag3"] = NULL;
+                 return;
+             }
+@@ Line 188 @@
+     }
+
+     public function set_stichtag4($val, $sql_valid = FALSE) { {
+-            if (strlen($val) == 0) {
++            if (strlen((string) $val) == 0) {
+                 $this->item["stichtag4"] = NULL;
+                 return;
+             }
+@@ Line 216 @@
+     }
+
+     public function set_stichtag5($val, $sql_valid = FALSE) { {
+-            if (strlen($val) == 0) {
++            if (strlen((string) $val) == 0) {
+                 $this->item["stichtag5"] = NULL;
+                 return;
+             }
+    ----------- end diff -----------
+
+Applied rules:
+ * NullToStrictStringFuncCallArgRector
+
+
+52) ../../original-src/web/htdocs/kimidev_ET/libs/init.php:7
+
+    ---------- begin diff ----------
+@@ Line 7 @@
+     $version = "";
+
+     //First get the platform?
+-    if (preg_match('/linux/i', $u_agent)) {
++    if (preg_match('/linux/i', (string) $u_agent)) {
+         $platform = 'linux';
+-    } elseif (preg_match('/macintosh|mac os x/i', $u_agent)) {
++    } elseif (preg_match('/macintosh|mac os x/i', (string) $u_agent)) {
+         $platform = 'mac';
+-    } elseif (preg_match('/windows|win32/i', $u_agent)) {
++    } elseif (preg_match('/windows|win32/i', (string) $u_agent)) {
+         $platform = 'windows';
+     }
+
+@@ Line 18 @@
+     $ub = "UNKNOWN";
+
+     // Next get the name of the useragent yes seperately and for good reason
+-    if ((preg_match('/MSIE/i', $u_agent) || preg_match('/Trident/i', $u_agent)) && !preg_match('/Opera/i', $u_agent)) {
++    if ((preg_match('/MSIE/i', (string) $u_agent) || preg_match('/Trident/i', (string) $u_agent)) && !preg_match('/Opera/i', (string) $u_agent)) {
+         $bname = 'Internet Explorer';
+         $ub = "MSIE";
+-    } elseif (preg_match('/Firefox/i', $u_agent)) {
++    } elseif (preg_match('/Firefox/i', (string) $u_agent)) {
+         $bname = 'Mozilla Firefox';
+         $ub = "Firefox";
+-    } elseif (preg_match('/Chrome/i', $u_agent)) {
++    } elseif (preg_match('/Chrome/i', (string) $u_agent)) {
+         $bname = 'Google Chrome';
+         $ub = "Chrome";
+-    } elseif (preg_match('/Safari/i', $u_agent)) {
++    } elseif (preg_match('/Safari/i', (string) $u_agent)) {
+         $bname = 'Apple Safari';
+         $ub = "Safari";
+-    } elseif (preg_match('/Opera/i', $u_agent)) {
++    } elseif (preg_match('/Opera/i', (string) $u_agent)) {
+         $bname = 'Opera';
+         $ub = "Opera";
+-    } elseif (preg_match('/Netscape/i', $u_agent)) {
++    } elseif (preg_match('/Netscape/i', (string) $u_agent)) {
+         $bname = 'Netscape';
+         $ub = "Netscape";
+-    } elseif (preg_match('/Moilla/i', $u_agent)) {
++    } elseif (preg_match('/Moilla/i', (string) $u_agent)) {
+         $bname = 'Mozila';
+         $ub = "Mozila";
+ }
+@@ Line 47 @@
+     $known = array('Version', $ub, 'other', 'rv');
+     $pattern = '#(?<browser>' . join('|', $known) .
+             ')[/ :]+(?<version>[0-9.|a-zA-Z.]*)#';
+-    if (!preg_match_all($pattern, $u_agent, $matches)) {
++    if (!preg_match_all($pattern, (string) $u_agent, $matches)) {
+         // we have no matching number just continue
+     }
+
+@@ Line 56 @@
+     if ( $i != 1) {
+         //we will have two since we are not using 'other' argument yet
+         //see if version is before or after the name
+-        if (strripos($u_agent, "Version") < strripos($u_agent, $ub)) {
++        if (strripos((string) $u_agent, "Version") < strripos((string) $u_agent, $ub)) {
+             $version = $matches['version'][0];
+         } else {
+             if (count($matches["version"]) >= 2) {
+@@ Line 106 @@
+ session_name('kimi_ET-P');
+ session_start();
+ if (isset($_SESSION["lang"])) {
+-    $lang = strtolower($_SESSION["lang"]);
++    $lang = strtolower((string) $_SESSION["lang"]);
+
+     $filename = './config/lang/' . strtolower($lang) . '.php';
+    ----------- end diff -----------
+
+Applied rules:
+ * NullToStrictStringFuncCallArgRector
+
+
+ [OK] 52 files would have been changed (dry-run) by Rector                      
+

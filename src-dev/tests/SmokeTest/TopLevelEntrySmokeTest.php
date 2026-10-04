@@ -51,8 +51,9 @@ class TopLevelEntrySmokeTest extends TestCase
             ['xhangup.php', $base . '/xhangup.php', 'xhangup'],
             ['testpost.php', $base . '/testpost.php', 'testpost'],
             ['validphone.php', $base . '/validphone.php', 'validphone'],
-            ['phpinfo.php', $base . '/phpinfo.php', 'phpinfo'],
-            ['adminer-4.8.1.php', $base . '/adminer-4.8.1.php', 'adminer'],
+            // phpinfo.php and adminer-4.8.1.php were removed from the document root:
+            // a configuration dump and a database administration tool, both answering
+            // HTTP 200 to anyone who could reach the server.
             ['web/htdocs/index.php', dirname($base) . '/index.php', 'root-index'],
         ];
     }

@@ -45,7 +45,6 @@ final class Quarantine
 
     /** §7 — bundled tool + telephony/outbound endpoints, not load-testable offline. */
     public const NON_APP_TOPLEVEL = [
-        'adminer-4.8.1.php',
         'setticketcallinfo.php',
         'xhangup.php',
         'testpost.php',

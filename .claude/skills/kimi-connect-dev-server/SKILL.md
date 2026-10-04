@@ -57,7 +57,7 @@ The live app `kimidev_ET` is a git clone of the private repo **`git@github.com:v
 | Server working copy | `/home/kimiportaldev.at/web/htdocs/kimidev_ET/` (repo root = app dir) |
 | Local working copy | `src-dev/original-src/web/htdocs/kimidev_ET/` (push here via `gh` auth) |
 | Deploy key (server→GitHub) | `/home/kimiportaldev.at/web/.deploy/github_kimi_deploy` (600) + `known_hosts` beside it |
-| Gitignored (never tracked, preserved on pull) | `**/config.php` (both `config/config.php` + `ajax/config/config.php`), `kimibatch/files/`, `log/`, `*.sql.gz` |
+| Gitignored (never tracked, preserved on pull) | `log/` (which also covers `ajax/log/`, holding a 109 MB file) and `*.sql.gz` — everything else is tracked, including `config/config.php`, `ajax/config/config.php`, `kimibatch/files/` and `kimibatch/vendor/`; see `memory-bank/git-tracking-policy-kimidev-et.md` |
 
 **Why the key lives in `web/.deploy/`:** the SSH user's `~/.ssh` is root-owned and not writable, so the deploy key + `known_hosts` sit in the writable, **above-docroot** `web/.deploy/` (not web-served). Git must be told to use them explicitly:
 
@@ -67,4 +67,4 @@ export GIT_SSH_COMMAND="ssh -i ~/web/.deploy/github_kimi_deploy -o IdentitiesOnl
 
 Run git from inside `kimidev_ET/` with that env set — e.g. verify auth: `git ls-remote git@github.com:viktarkruhlikau/kimi.git` (expect the `main` ref); deploy: `git pull`. This can also be pinned per-repo with `git config core.sshCommand '…'` so the env var isn't needed each time.
 
-**Do not** copy the deploy private key off the server or into the project. Environment-specific `config.php` files stay untracked so a `git pull` never overwrites the server's DB config.
+**Do not** copy the deploy private key off the server or into the project. The environment `config.php` files **are** tracked since 2026-10-03, so a `git pull` does overwrite the server's DB config — that is deliberate, because an untracked config file let the hosting provider's 2026-09-08 copy repoint the portal at a non-existent database without `git status` showing anything. See `memory-bank/git-tracking-policy-kimidev-et.md`.
