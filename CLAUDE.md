@@ -14,7 +14,9 @@ Migration and modernisation of the **KIMI Portal** — a legacy PHP 8.0 / MariaD
 
 
 # AI Agent instruction
+- **PII on local / test / dev environments — do NOT worry about it.** On the local docker stack and the `kimidev_ET` dev/test server, freely print, query, and decrypt customer data (names, phones, emails, `kimi_decrypt(...)` output, etc.) in diagnostics. Do not redact, hedge, or repeatedly raise PII concerns for these environments — the user has explicitly said so. (PII caution still applies only to PROD and to sending data to external/third-party services.)
 - Change nothing in the codebase without an approve\confirmation!
+- **Browser testing is ALWAYS done in a visible browser window — never headless.** Every browser action (opening a page, filling a form, clicking, reading a rendered value, taking a screenshot) must run in a browser window the user can watch, so the user sees what is being done at the moment it is done. Do not pass `--headless`, do not use a headless driver, and do not fall back to `curl` or an HTTP client and present the result as a browser test — a request made with `curl` is not an end-to-end test and must be described as what it is. If the only browser available cannot be driven in visible mode, say so and stop rather than switching to a headless run.
 - We implement Memory Bank pattern to handle the project information management:
   - See @memory-bank/ folder which consists of @memory-bank/index.md file - please read it to be able to navigate memory bank.
 - Two navigation index files exist — read them first to orient:
