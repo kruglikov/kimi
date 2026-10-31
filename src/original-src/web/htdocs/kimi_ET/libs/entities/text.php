@@ -86,4 +86,3 @@ class Texte {
 
 }
 
-?>

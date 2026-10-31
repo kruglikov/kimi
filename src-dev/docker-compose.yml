@@ -30,6 +30,12 @@ services:
       - ./original-src/web/htdocs:/var/www/html
       - ./tests:/opt/tests2
       - db_socket:/var/run/mysqld
+    # Run Apache as the host file owner (uid/gid 1001) so it can read the app's
+    # 660/770 files (e.g. modules/gui/templates/tickets/*), which www-data cannot.
+    # The dev server's php-fpm runs as the owner too, so this matches it.
+    environment:
+      APACHE_RUN_USER: "#1001"
+      APACHE_RUN_GROUP: "#1001"
     # Neutralize external endpoints so the smoke suite stays hermetic:
     # these hosts resolve to localhost, so validphone.php / telematica outbound
     # calls fail instantly instead of contacting real services (or leaking creds).

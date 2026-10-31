@@ -1133,5 +1133,3 @@ class Stammdaten {
     }
 
 }
-?>
-

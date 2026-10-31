@@ -28,3 +28,9 @@ src-dev-db-dumps/
 # Large local copies of the dev server, pulled for analysis — never committed
 tasks/*/updated-code-snapshot/
 tasks/*/live-docroot-snapshot-*/
+
+# Removed from git history on 2026-10-06: kept on disk, never tracked again.
+# The FortiClient installer exceeds GitHub's 100 MB per-file limit.
+docs/11-VPN-client/forticlient_vpn_7.4.3.5411_amd64.deb
+# Telephony log files - 301 MB across the source trees, regenerated at runtime.
+**/ajax/log/

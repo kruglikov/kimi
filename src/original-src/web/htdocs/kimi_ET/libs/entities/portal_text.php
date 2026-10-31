@@ -38,5 +38,3 @@ class Portal_Text {
     }
 
 }
-?>
-

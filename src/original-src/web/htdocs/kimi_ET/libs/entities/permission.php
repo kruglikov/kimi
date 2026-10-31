@@ -46,5 +46,3 @@ class Permission {
         return $permissions;
     }
 }
-?>
-

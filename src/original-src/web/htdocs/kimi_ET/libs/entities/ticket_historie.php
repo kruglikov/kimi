@@ -2431,4 +2431,3 @@ class Ticket_Historie {
     }
 
 }
-?>

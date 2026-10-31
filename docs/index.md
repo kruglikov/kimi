@@ -86,3 +86,15 @@ Franz's forwarded ANEXIA maintenance status and our verification of the test sys
 ### `14-update-from-Franz-about-the-database/` — DB import clarification
 Franz relaying Anexia (Bernhard Schreitl) on the database import.
 - `01-update-from-Franz-about-the-database.md` — `kimi_et` (PROD) imported into `kimidev_et` (test); `kimiportal` was empty on PROD; question about deleting the unused `kimiportal` / `kimiportaldev` databases.
+
+### `15-the-most-recent-estimate-excel-file/` — Current effort estimate
+The latest estimate spreadsheet for the deployment plus the requested fixes.
+- `Kimi-plus Estimate Deplymnet + Fixes.xlsx` — deployment + fixes estimate; the Google Sheets copy shared with the client is linked from `docs/16-additional-feedback-from-franz/franz-email-2026-08-23-en.md`.
+
+### `16-additional-feedback-from-franz/` — Franz's batch-test feedback (23 Aug 2026)
+Franz's first batch tests on the upgraded test server plus his Firefox session-cookie finding, forwarded by Darya Nestserava on 24 Aug 2026.
+- `franz-email-2026-08-23.md` — German original: answers entered in the Google Doc, batch-test log with OK/NOK verdicts (record counts not matching the input files: 29 vs 32, 4 vs 46, 28 vs 16), suspicion about the wrong `kimibatch/files` import directory, and the request for an alignment meeting.
+- `franz-email-2026-08-23-en.md` — English translation of the same message, including the quoted 19 Aug 2026 message (`#1 Session-Cookie` — cannot reach the campaign selection in Firefox) and the quoted 18/14/13 Aug 2026 context.
+- `franz-reported-problems-2026-08-23.md` — the problems extracted as an action list: P1–P3 the three import count mismatches, P4 the wrong upload directory as root-cause candidate, P5 the session-cookie item (already fixed, not repeated on 23 Aug), P6 his request for an afternoon alignment meeting.
+- `google-doc-preexisting-issues-with-franz-answers.md` — downloaded copy of the shared Google Doc "Pre-existing issues found during the PHP 8.5 upgrade" including Franz's five answers (insurance/claims modules obsolete; the 7 `mysql_*` batch scripts removable; backup/variant files deletable; Anexia/DBA informed about the missing stored routines and the trigger definers).
+- `attachments/` — 28 screenshots (`image001.png` … `image028.png`) referenced inline from the two email transcripts and from `franz-reported-problems-2026-08-23.md`.

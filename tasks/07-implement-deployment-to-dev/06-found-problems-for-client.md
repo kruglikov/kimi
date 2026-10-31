@@ -77,6 +77,81 @@ A few dated backup or experimental copies of files error on load. They look like
 
 ---
 
+## Problem 4 — The database was migrated without its stored functions/procedures
+
+When production `kimi_et` was imported into the dev database `kimidev_et`, the import ran **without stored routines** (`mysqldump --routines` was not used), so **all 37 stored functions/procedures are missing on the dev server** — including `kimi_decrypt` and `kimi_encrypt`, which the application uses to read its AES-encrypted columns.
+
+**Impact:** any screen or query that decrypts customer data fails with `FUNCTION kimidev_et.kimi_decrypt does not exist`. For example, **Ticketsuche shows the page count (e.g. "397 pages") but no ticket rows** — the row query that calls `kimi_decrypt(...)` errors, while the separate COUNT query (which does not decrypt) still returns a count.
+
+**The 37 missing routines** (verified: `information_schema.ROUTINES` for `kimidev_et` returns **0** on the dev server; the same schema from the client dump has **33 functions + 4 procedures**):
+
+*Encryption / date routines — the immediate blockers:*
+
+| # | Type     | Name                |
+|---|----------|---------------------|
+| 1 | FUNCTION | `kimi_decrypt`      |
+| 2 | FUNCTION | `kimi_encrypt`      |
+| 3 | FUNCTION | `kimi_decrypt_date` |
+| 4 | FUNCTION | `kimi_str_to_date`  |
+
+*Other functions:*
+
+| #   | Type     | Name                            | #  | Type     | Name                   |
+|-----|----------|---------------------------------|----|----------|------------------------|
+| 5   | FUNCTION | `getCleanPhoneNo`               | 20 | FUNCTION | `getNextUnterticketNr` |
+| 6   | FUNCTION | `getCleanPhoneNoN`              | 21 | FUNCTION | `getNextWorkDay`       |
+| 7   | FUNCTION | `getFirmenIdFromAnrufzeitpunkt` | 22 | FUNCTION | `getVorwahlFromTelNr`  |
+| 8   | FUNCTION | `getHauptTicketID`              | 23 | FUNCTION | `getVwHw`              |
+| 9   | FUNCTION | `getHauptTicketNrFromAktnummer` | 24 | FUNCTION | `getZeitpunktText`     |
+| 10  | FUNCTION | `getLetzterAnruf`               | 25 | FUNCTION | `get_log_last_user`    |
+| 11  | FUNCTION | `getLogAgentAnrede`             | 26 | FUNCTION | `isFeiertag`           |
+| 12  | FUNCTION | `getLogAgentNachname`           | 27 | FUNCTION | `isTimeDiffHours`      |
+| 13  | FUNCTION | `getLogAgentVorname`            | 28 | FUNCTION | `setAnrufTicket`       |
+| 14  | FUNCTION | `getLogAnrufVorhanden`          | 29 | FUNCTION | `testdate`             |
+| 15  | FUNCTION | `getLogAnzBearbeitungen`        | 30 | FUNCTION | `getLogEndGes`         |
+| 16  | FUNCTION | `getLogBenutzer`                | 31 | FUNCTION | `getLogStartGes`       |
+| 17  | FUNCTION | `getLogDauer`                   | 32 | FUNCTION | `getLogZeit`           |
+| 18  | FUNCTION | `getLogDauerInSec`              | 33 | FUNCTION | `getLogObjektId`       |
+| 19  | FUNCTION | `getLogLastUserFranz`           |    |          |                        |
+
+*Procedures:*
+
+| # | Type      | Name                          |
+|---|-----------|-------------------------------|
+| 34 | PROCEDURE | `readLogInfo`                 |
+| 35 | PROCEDURE | `setNextWiedervorlage`        |
+| 36 | PROCEDURE | `update_log`                  |
+| 37 | PROCEDURE | `update_ticket_anzahl_anrufe` |
+
+**Good news:** the encryption key still matches the data — `kimi_decrypt` with the key from the dump correctly decrypts **99.4%** of the server's `ticket.telefon` values — so the routines can be restored losslessly from the client-provided dump (`docs/08-…/2281845-0402-MYSQL-kimidev_et-2026-06-01.sql`; the extracted definitions are in `tasks/07-implement-deployment-to-dev/08-kimi_decrypt-source.sql`).
+
+**Action:** we can restore the 37 routines onto `kimidev_et` (additive `CREATE FUNCTION/PROCEDURE` only — no data change, reversible) so the app works. Please also ensure any **future or PROD database imports include the routines** (`mysqldump --routines`) so this does not recur.
+
+---
+
+## Problem 5 — The migration also left database triggers pointing at a non-existent (production) definer
+
+Closely related to Problem 4 (same migration gap): when production `kimi_et` was imported into `kimidev_et`, the 6 database **triggers** on the `ticket` / `log` tables were carried over with the **production** definer `` `sql_kimi_et`@`%` ``, which **does not exist on the dev server** (the dev database user is `sql_kimidev_et`). Because two of these triggers fire on **every ticket save** (`bu_ticket`, `bu_ticket_telnr` = `BEFORE UPDATE ON ticket`), **saving any ticket on the dev server currently fails** with:
+
+> The user specified as a definer ('sql_kimi_et'@'%') does not exist
+
+**The 6 affected triggers (and what they do — they must be kept, not removed):**
+
+| # | Trigger | Fires on | Purpose |
+|---|---------|----------|---------|
+| 1 | `bu_ticket` | BEFORE UPDATE `ticket` | writes an UPDATE `log` row and **archives the prior row into `ticket_historie`** (audit trail) |
+| 2 | `bu_ticket_telnr` | BEFORE UPDATE `ticket` | rebuilds the `search_telnr1/2` phone-search index (uses `kimi_decrypt` + `getCleanPhoneNoN`) |
+| 3 | `bi_ticket` | BEFORE INSERT `ticket` | writes an INSERT `log` row; computes `hauptticketnr` and the Wiedervorlage date / `firma_id` |
+| 4 | `bi_ticket_telnr` | BEFORE INSERT `ticket` | builds the `search_telnr1/2` phone-search index |
+| 5 | `bd_ticket` | BEFORE DELETE `ticket` | writes a DELETE `log` row and archives the row into `ticket_historie` |
+| 6 | `bi_log` | BEFORE INSERT `log` | links a call's end/close log row to its start row (`start_id`) |
+
+**Impact:** agents cannot save ticket edits on the dev server; ticket insert/delete are affected too (the `ticket_historie` audit trail and the phone-search index depend on these triggers). Note these triggers also depend on the stored routines from Problem 4, so both must be present for saving to work.
+
+**Action:** we recreate the 6 triggers with a valid definer (`` `sql_kimidev_et`@`%` `` — bodies unchanged; additive and reversible, no data change, no admin/root credential needed). Please also ensure any **future or PROD database imports recreate triggers (and views) with a definer that exists on the target server** — the same migration gap as Problem 4.
+
+---
+
 ## Not requiring your action (for context only)
 
 - **Local test-data artifacts** — a small number of failures (`Duplicate entry`, `Data too long`, `Can't find file …`) are caused by our **local subset of the database** and missing local batch input files, not by the code. They do not occur on the server with the full data.
